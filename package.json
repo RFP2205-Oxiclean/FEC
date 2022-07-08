@@ -35,5 +35,11 @@
   "bugs": {
     "url": "https://github.com/RFP2205-Oxiclean/FEC/issues"
   },
-  "homepage": "https://github.com/RFP2205-Oxiclean/FEC#readme"
+  "homepage": "https://github.com/RFP2205-Oxiclean/FEC#readme",
+  "dependencies": {
+    "dom": "^0.0.3",
+    "npm": "^8.13.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
