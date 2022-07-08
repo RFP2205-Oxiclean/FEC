@@ -12,38 +12,12 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedProductId: 40344,
-            relatedItems: [],
-            questionsAndAnswersData: [],
-            ratingsAndReviews: []
-
+            displayedProductId: 41314,
+            // relatedItems: [],
+            // questionsAndAnswersData: [],
+            // ratingsAndReviews: []
         };
     }
-
-    myDebugger() {
-        console.log(this.state);
-    }
-
-    getRatingsReviewsData() {
-        console.log('getting ratings and reviews');
-        let endPoint = `${url}/reviews`;
-        axios({
-            method: 'GET',
-            headers: {
-                Authorization: API_KEY
-            }
-        })
-
-    }
-
-
-
-
-
-
-
-
-
 
     render() {
         return (
@@ -51,22 +25,22 @@ class App extends React.Component {
                 <h1>
                     Welcome to React App thats build using Webpack and Babel separately
                 </h1>
-                <button onClick={this.myDebugger.bind(this)}>Debug</button>
-                <button onClick={this.getRatingsReviewsData}>Get Ratings/Reviews</button>
                 <div className='product-overview'>
-                    <ProductOverview />
+                    <ProductOverview
+                        product_id={this.state.displayedProductId}
+                    />
                 </div>
-                {/*
-                <div className = 'related-items'>
-                    <RelatedItems />
-                </div> */}
 
                 <div className='questions-and-answers'>
-                    <QuestionsAndAnswers />
+                    <QuestionsAndAnswers
+                        product_id={this.state.displayedProductId}
+                    />
                 </div>
 
                 <div className='ratings-reviews'>
-                    <RatingsReviews />
+                    <RatingsReviews
+                        product_id={this.state.displayedProductId}
+                    />
                 </div>
             </div>
 
