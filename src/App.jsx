@@ -1,9 +1,9 @@
 import React from "react";
 
 import ProductOverview from './components/overview/ProductOverview.jsx'
-import QuestionsAndAnswers from './components/QuestionsAndAnswers/QuestionsAndAnswers.jsx'
-import RatingsReviews from './components/RatingsReviews/RatingsReviews.jsx'
-import RelatedItems from './components/RelatedItems/RelatedItems.jsx'
+import QuestionsAndAnswers from './components/questionsAndAnswers/QuestionsAndAnswers.jsx'
+import RatingsReviews from './components/ratingsReviews/RatingsReviews.jsx'
+import RelatedItems from './components/relatedItems/RelatedItems.jsx'
 
 class App extends React.Component {
     constructor(props) {
