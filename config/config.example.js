@@ -1,5 +1,5 @@
 const API_KEY = '';
-const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/"
+const url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp"
 
 
 
