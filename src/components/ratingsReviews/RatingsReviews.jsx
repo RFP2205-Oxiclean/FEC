@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
+import ReviewList from './ReviewList.jsx'
 
 
 class RatingsReviews extends React.Component {
@@ -9,7 +10,6 @@ class RatingsReviews extends React.Component {
         this.state = {
           reviews: {},
           ratings: {}
-
         };
         this.getReviewList = this.getReviewList.bind(this);
         this.getRatingsList = this.getRatingsList.bind(this);
@@ -27,7 +27,7 @@ class RatingsReviews extends React.Component {
 
     updateReviewsState(reviews) {
       this.setState({
-        reviews: reviews
+        allReviews: reviews
       })
     }
 
@@ -36,6 +36,8 @@ class RatingsReviews extends React.Component {
         ratings: ratings
       })
     }
+
+    /* Calculate average ratings */
 
 
     /*------ HTTP requests below ------*/
@@ -136,10 +138,8 @@ class RatingsReviews extends React.Component {
 
     render() {
         return (
-          <div>
-            <h1>
-                Ratings and Reviews is working
-            </h1>
+          <div>Ratings and Reviews is working
+            <ReviewList reviews = {this.state.reviews}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getRatingsList}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>
