@@ -31,6 +31,25 @@
   text-align: center;
 }
 
+.overview-thumbnail-container {
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  background-color: transparent;
+  border: solid 2px;
+  border-color: black;
+}
+
+.overview-overlay-thumbnail {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 
 /* .related-items {
   height: 25%;
