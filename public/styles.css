@@ -11,11 +11,28 @@
 }
 
 .product-overview {
-  color: blue;
-  height: 25%;
+  height: 100%;
 }
 
-.related-items {
+.product-overview.container {
+
+}
+
+.overview-carousel-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  height: 900px;
+}
+
+.overview-product-info {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* .related-items {
   height: 25%;
 }
 
@@ -25,4 +42,4 @@
 
 .ratings-reviews {
   height: 25%;
-}
+} */
