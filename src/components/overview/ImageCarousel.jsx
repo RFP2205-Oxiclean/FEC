@@ -21,8 +21,7 @@ const ImageCarousel = ( {activeStyleObject} ) => {
 
   console.log(activeStyleObject)
   return <div style={{backgroundImage: `url(${x}`, width: "1200px", height: "900px"}}>
-    <ThumbnailContainer changeImage={changeImage}></ThumbnailContainer>
-    {/* <img styles={{position: "absolute", top: "0"}}src={createCloudinaryDisplayURL(activeStyleObject.photos[0].url)}></img> */}
+    <ThumbnailContainer activeImageIndex={activeImageIndex} photos={activeStyleObject.photos} changeImage={changeImage}></ThumbnailContainer>
     <button onClick = {() => {console.log(activeStyleObject.photos)}}></button>
   </div>
 }

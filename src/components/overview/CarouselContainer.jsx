@@ -28,9 +28,8 @@ const CarouselContainer = ( {product_id}) => {
 
 
 
-  return <div className="overview-carousel-container">
+  return <div style={{display: "flex"}} className="overview-carousel-container">
     <ImageCarousel activeStyleObject={styleObjects[activeDisplayIndex]}></ImageCarousel>
-    <ExpandedProductInfo></ExpandedProductInfo>
   </div>
 }
 
