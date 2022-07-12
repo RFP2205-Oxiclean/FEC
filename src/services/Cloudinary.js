@@ -15,7 +15,7 @@ import { adjust, improve } from "@cloudinary/url-gen/actions/adjust";
 
 const Cloud = new Cloudinary({
   cloud: {
-    cloudName: "demo",
+    cloudName: "drtqaxgfn",
   },
   url: {
     secure: false, // force https, set to false to force http

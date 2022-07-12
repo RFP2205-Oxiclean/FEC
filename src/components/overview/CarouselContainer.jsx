@@ -26,6 +26,8 @@ const CarouselContainer = ( {product_id}) => {
     setActiveIndex(index)
   }
 
+
+
   return <div className="overview-carousel-container">
     <ImageCarousel activeStyleObject={styleObjects[activeIndex]}></ImageCarousel>
     <ExpandedProductInfo></ExpandedProductInfo>
