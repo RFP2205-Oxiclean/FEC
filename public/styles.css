@@ -26,3 +26,20 @@
 .ratings-reviews {
   height: 25%;
 }
+
+.review-summary {
+  overflow-wrap: break-word;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.review-helpful-option {
+  text-decoration: underline;
+}
+
+.review-report-button {
+  text-decoration: underline;
+}
+
+
+

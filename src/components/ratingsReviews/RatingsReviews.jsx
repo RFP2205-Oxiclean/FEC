@@ -2,17 +2,20 @@ import React from 'react';
 import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
+import RatingsSection from './RatingsSection.jsx'
 
 
 class RatingsReviews extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          reviews: {},
+          reviews: [],
           ratings: {}
         };
         this.getReviewList = this.getReviewList.bind(this);
         this.getRatingsList = this.getRatingsList.bind(this);
+        this.handleMarkReviewHelpful = this.handleMarkReviewHelpful.bind(this);
+        this.handleReportReview = this.handleReportReview.bind(this);
         this.logState = this.logState.bind(this);
     }
 
@@ -27,7 +30,7 @@ class RatingsReviews extends React.Component {
 
     updateReviewsState(reviews) {
       this.setState({
-        allReviews: reviews
+        reviews: reviews.results
       })
     }
 
@@ -36,8 +39,6 @@ class RatingsReviews extends React.Component {
         ratings: ratings
       })
     }
-
-    /* Calculate average ratings */
 
 
     /*------ HTTP requests below ------*/
@@ -48,7 +49,8 @@ class RatingsReviews extends React.Component {
     let endPoint = `${url}/reviews`;
     axios.get(endPoint, {
       params: {
-        product_id: this.props.product_id
+        product_id: this.props.product_id,
+        count: 10000
       },
       headers: {
         Authorization: API_KEY
@@ -69,14 +71,15 @@ class RatingsReviews extends React.Component {
     let endPoint = `${url}/reviews/meta`;
     axios.get(endPoint, {
         params: {
-          product_id: this.props.product_id
+          product_id: this.props.product_id,
+          count: 10000
       },
         headers: {
           Authorization: API_KEY
       }
     })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         this.updateRatingsState(response.data);
       })
       .catch((err) => {
@@ -103,15 +106,20 @@ class RatingsReviews extends React.Component {
 
     //Marks a specific review as helpful. Takes in the review_id and creates a PUT request for that specific review
     //On success, calls getReviewsList to update with the latest info
-    markReviewHelpful(review_id) {
+    handleMarkReviewHelpful(review_id) {
       let endPoint = `${url}/reviews/${review_id}/helpful`;
       axios.put(endPoint, {
         params: {
           review_id: review_id
+        },
+        headers: {
+          Authorization: API_KEY
         }
       })
       .then((response) => {
         console.log('Review successfully marked as helpful!');
+        this.getRatingsList();
+        this.getReviewsList();
       })
       .catch((err) => {
         console.error('Errored in markReviewHelpful', err);
@@ -120,15 +128,19 @@ class RatingsReviews extends React.Component {
 
     //Reports a specific review. Takes in the review_id and creates a PUT request for that specific review
     //On success, calls getReviewsList to update with the latest info
-    reportReview(review_id) {
+    handleReportReview(review_id) {
       let endPoint = `${url}/reviews/${review_id}/report`
       axios.put(endPoint, {
         params: {
           review_id: review_id
+        },
+        headers: {
+          Authorization: API_KEY
         }
       })
       .then((response) => {
         console.log('Review successfully reported!');
+        this.getReviewList();
       })
       .catch((err) => {
         console.error('Errored in reportReview', err);
@@ -139,7 +151,8 @@ class RatingsReviews extends React.Component {
     render() {
         return (
           <div>Ratings and Reviews is working
-            <ReviewList reviews = {this.state.reviews}/>
+            <ReviewList reviews = {this.state.reviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
+            <RatingsSection ratings = {this.state.ratings}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getRatingsList}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>

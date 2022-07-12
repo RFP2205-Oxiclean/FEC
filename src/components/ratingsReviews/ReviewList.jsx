@@ -5,8 +5,7 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedReviews: [],
-      remainingReviews: []
+      numReviewsDisplayed: 0
     }
     this.addTwoReviewsToDisplay = this.addTwoReviewsToDisplay.bind(this);
   }
@@ -17,38 +16,25 @@ class ReviewList extends React.Component {
 
   debugButton() {
     console.log(this.state);
-    console.log('here is this.props.reviews.results', this.props.reviews.results)
+    console.log('here is this.props.reviews', this.props.reviews)
   }
 
   addTwoReviewsToDisplay() {
-    //If there is nothing in the displayedReviews (initial state), add the first two reviews, remove them from the remainingReviews, and set state
-    if (this.state.displayedReviews.length === 0) {
-      console.log('here')
-      let displayedReviewsCopy = this.props.reviews.results.slice(0, 2);
-      let remainingReviewsCopy = this.props.reviews.results.slice(2);
-    } else {
-      console.log('this.state.displayedReviews: ', this.state.displayedReviews);
-      console.log('this.state.remainingReviews: ', this.state.remainigReviews);
-      let displayedReviewsCopy = this.state.displayedReviews.slice();
-      let remainingReviewsCopy = this.state.remainingReviews.slice();
-      displayedReviewsCopy.push(remainingReviewsCopy.shift());
-      displayedReviewsCopy.push(remainingReviewsCopy.shift());
-    }
-
     this.setState({
-      displayedReviews: displayedReviewsCopy,
-      remainingReviews: remainingReviewsCopy
+      numReviewsDisplayed: this.state.numReviewsDisplayed + 2
     })
   }
 
 
   render() {
+    var reviewsToDisplay = this.props.reviews.slice(0, this.state.numReviewsDisplayed);
     return (
       <div>
-        {this.state.displayedReviews.map((review, index) =>
-          <ReviewListEntry review = {review} key = {index}/>
+        {reviewsToDisplay.map((review, index) =>
+          <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
         )}
         <button onClick = {this.debugButton.bind(this)}>Debug ReviewList</button>
+        {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay}>More Reviews</button> : ''}
       </div>
     )
   }
