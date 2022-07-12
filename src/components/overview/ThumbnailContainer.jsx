@@ -9,6 +9,7 @@ const ThumbnailContainer = (props) => {
     <OverlayThumbnail changeImage={props.changeImage} index={2}></OverlayThumbnail>
     <OverlayThumbnail changeImage={props.changeImage} index={3}></OverlayThumbnail>
     <OverlayThumbnail changeImage={props.changeImage} index={4}></OverlayThumbnail>
+    {/* <OverlayThumbnail changeImage={props.changeImage} index={5}></OverlayThumbnail> */}
 
   </div>
 }

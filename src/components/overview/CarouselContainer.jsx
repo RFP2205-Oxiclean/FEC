@@ -8,7 +8,7 @@ const CarouselContainer = ( {product_id}) => {
 
   let [productInfo, setProductInfo] = useState({});
   let [styleObjects, setStyleObjects] = useState([ {photos: [{url: '', thumbnail_url: ''}]}]);
-  let [activeIndex, setActiveIndex] = useState(0);
+  let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
 
     useEffect(() => {
         getProductById(product_id)
@@ -23,13 +23,13 @@ const CarouselContainer = ( {product_id}) => {
     }, []);
 
   let styleClickHandler = function(index) {
-    setActiveIndex(index)
+    setActiveDisplayIndex(index)
   }
 
 
 
   return <div className="overview-carousel-container">
-    <ImageCarousel activeStyleObject={styleObjects[activeIndex]}></ImageCarousel>
+    <ImageCarousel activeStyleObject={styleObjects[activeDisplayIndex]}></ImageCarousel>
     <ExpandedProductInfo></ExpandedProductInfo>
   </div>
 }
