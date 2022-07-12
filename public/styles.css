@@ -35,11 +35,24 @@
 
 .review-helpful-option {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .review-report-button {
   text-decoration: underline;
+  cursor: pointer;
 }
 
+.average-rating {
+  font-size: 50px;
+  font-weight: bold;
+}
 
+.star {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
 

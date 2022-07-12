@@ -3,6 +3,7 @@ import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
+import StarRating from '../commonComponents/StarRating.jsx'
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
@@ -11,18 +12,20 @@ class RatingsReviews extends React.Component {
         super(props);
         this.state = {
           reviews: [],
-          ratings: {}
+          metadata: {}
         };
         this.getReviewList = this.getReviewList.bind(this);
-        this.getRatingsList = this.getRatingsList.bind(this);
+        this.getMetadata = this.getMetadata.bind(this);
         this.handleMarkReviewHelpful = this.handleMarkReviewHelpful.bind(this);
         this.handleReportReview = this.handleReportReview.bind(this);
         this.logState = this.logState.bind(this);
+        this.updateMetadataState = this.updateMetadataState.bind(this);
+        this.updateReviewsState = this.updateReviewsState.bind(this);
     }
 
     componentDidMount() {
       this.getReviewList();
-      this.getRatingsList();
+      this.getMetadata();
     }
 
     logState() {
@@ -35,9 +38,9 @@ class RatingsReviews extends React.Component {
       })
     }
 
-    updateRatingsState(ratings) {
+    updateMetadataState(metadata) {
       this.setState({
-        ratings: ratings
+        metadata: metadata
       })
     }
 
@@ -65,7 +68,7 @@ class RatingsReviews extends React.Component {
 
     //Retrieves an array of all ratings associated with the current product
     //On success, updates the state of RatingsReviews.jsx
-    getRatingsList() {
+    getMetadata() {
     let endPoint = `${url}/reviews/meta`;
     axios.get(endPoint, {
         params: {
@@ -75,7 +78,7 @@ class RatingsReviews extends React.Component {
     })
       .then((response) => {
         console.log(response.data);
-        this.updateRatingsState(response.data);
+        this.updateMetadataState(response.data);
       })
       .catch((err) => {
         console.error('Error in getRatingsReviewsData response: ', err);
@@ -111,7 +114,7 @@ class RatingsReviews extends React.Component {
       })
       .then((response) => {
         console.log('Review successfully marked as helpful!');
-        this.getRatingsList();
+        this.getMetadata();
         this.getReviewList();
       })
       .catch((err) => {
@@ -142,9 +145,9 @@ class RatingsReviews extends React.Component {
         return (
           <div>Ratings and Reviews is working
             <ReviewList reviews = {this.state.reviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
-            <RatingsSection ratings = {this.state.ratings}/>
+            <RatingsSection metadata = {this.state.metadata}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
-            <button onClick = {this.getRatingsList}>Get Ratings List</button>
+            <button onClick = {this.getMetadata}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>
           </div>
 
