@@ -3,6 +3,7 @@ import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
+axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 class RatingsReviews extends React.Component {
@@ -51,9 +52,6 @@ class RatingsReviews extends React.Component {
       params: {
         product_id: this.props.product_id,
         count: 10000
-      },
-      headers: {
-        Authorization: API_KEY
       }
     })
       .then((response) => {
@@ -73,10 +71,7 @@ class RatingsReviews extends React.Component {
         params: {
           product_id: this.props.product_id,
           count: 10000
-      },
-        headers: {
-          Authorization: API_KEY
-      }
+        }
     })
       .then((response) => {
         console.log(response.data);
@@ -108,18 +103,16 @@ class RatingsReviews extends React.Component {
     //On success, calls getReviewsList to update with the latest info
     handleMarkReviewHelpful(review_id) {
       let endPoint = `${url}/reviews/${review_id}/helpful`;
+      console.log(endPoint);
       axios.put(endPoint, {
         params: {
           review_id: review_id
-        },
-        headers: {
-          Authorization: API_KEY
         }
       })
       .then((response) => {
         console.log('Review successfully marked as helpful!');
         this.getRatingsList();
-        this.getReviewsList();
+        this.getReviewList();
       })
       .catch((err) => {
         console.error('Errored in markReviewHelpful', err);
@@ -133,9 +126,6 @@ class RatingsReviews extends React.Component {
       axios.put(endPoint, {
         params: {
           review_id: review_id
-        },
-        headers: {
-          Authorization: API_KEY
         }
       })
       .then((response) => {
