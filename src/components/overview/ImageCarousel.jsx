@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {createCloudinaryDisplayURL} from '/src/services/Cloudinary.js';
 import ThumbnailContainer from './ThumbnailContainer.jsx';
 import axios from 'axios';
+import ExpandedProductInfo from './ExpandedProductInfo.jsx';
 
 
 const ImageCarousel = ( {activeStyleObject} ) => {
@@ -20,8 +21,9 @@ const ImageCarousel = ( {activeStyleObject} ) => {
   }
 
   console.log(activeStyleObject)
-  return <div style={{backgroundImage: `url(${x}`, width: "1200px", height: "900px"}}>
+  return <div style={{backgroundImage: `url(${x}`, width: "1200px", height: "900px"}} className="overview-image-container">
     <ThumbnailContainer activeImageIndex={activeImageIndex} photos={activeStyleObject.photos} changeImage={changeImage}></ThumbnailContainer>
+    <ExpandedProductInfo></ExpandedProductInfo>
     <button onClick = {() => {console.log(activeStyleObject.photos)}}></button>
   </div>
 }

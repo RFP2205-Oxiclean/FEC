@@ -18,7 +18,7 @@
 
 }
 
-.overview-carousel-container {
+.overview-image-container {
   margin-left: auto;
   margin-right: auto;
   width: 1200px;
@@ -32,10 +32,10 @@
 }
 
 .overview-thumbnail-container {
+  display: inline-block;
   height: 70%;
-  display: flex;
   flex-wrap: wrap;
-  width: 100px;
+  width: 10%;
   background-color: transparent;
   border-color: black;
 }
@@ -68,15 +68,35 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-.ExpandedProductInfo {
-  color: blue;
-}
-
 .overview-expanded-product-info {
+  float: right;
+  display: table;
   height: 100%;
   width: 30%;
-  background-color: transparent;
+  background-color: white;
+  box-shadow: inset 0px 0px 0px 5px black;
+  box-sizing: border-box;
 }
+
+.overview-expanded-product-info>div {
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.overview-expanded-product-info>div:first-child{
+  padding-top: 40px;
+}
+
+.stars-container {
+  height: 3%;
+}
+
+.overview-category {
+  height: 5%;
+}
+
+
 
 /* border: 2px solid #ddd;
 border-radius: 4px;
