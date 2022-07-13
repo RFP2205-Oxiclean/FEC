@@ -9,11 +9,7 @@ import axios from 'axios';
 const CarouselContainer = ( {product_id}) => {
 
   let [productInfo, setProductInfo] = useState({});
-  let [styleObjects, setStyleObjects] = useState([ {
-    photos: [{url: '', thumbnail_url: ''}],
-    name: '',
-
-  }]);
+  let [styleObjects, setStyleObjects] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
 
     useEffect(() => {
@@ -29,7 +25,7 @@ const CarouselContainer = ( {product_id}) => {
     }, []);
 
   useEffect(() => {
-    styleObjects[activeDisplayIndex].photos.forEach(function(stylePhotoObject) {
+    styleObjects[activeDisplayIndex]?.photos.forEach(function(stylePhotoObject) {
       axios.get(createCloudinaryDisplayURL(stylePhotoObject.url))
     })
   })
@@ -40,7 +36,7 @@ const CarouselContainer = ( {product_id}) => {
 
 
 
-  return <ImageCarousel styleObjects={styleObjects} productInfo={productInfo} activeStyleObject={styleObjects[activeDisplayIndex]}></ImageCarousel>
+  return <ImageCarousel styleClickHandler={styleClickHandler} styleObjects={styleObjects} productInfo={productInfo} activeStyleObject={styleObjects?.[activeDisplayIndex]}></ImageCarousel>
 
 }
 
