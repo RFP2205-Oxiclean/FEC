@@ -11,7 +11,8 @@ class RatingsReviews extends React.Component {
         super(props);
         this.state = {
           reviews: [],
-          metadata: {}
+          metadata: {},
+          filterRatings: []
         };
         this.getReviewList = this.getReviewList.bind(this);
         this.getMetadata = this.getMetadata.bind(this);
@@ -21,6 +22,8 @@ class RatingsReviews extends React.Component {
         this.updateMetadataState = this.updateMetadataState.bind(this);
         this.updateReviewsState = this.updateReviewsState.bind(this);
         this.handleFilterByRating = this.handleFilterByRating.bind(this);
+        this.filterReviews = this.filterReviews.bind(this);
+        this.handleFilterClear = this.handleFilterClear.bind(this);
     }
 
     componentDidMount() {
@@ -106,7 +109,6 @@ class RatingsReviews extends React.Component {
     //On success, calls getReviewsList to update with the latest info
     handleMarkReviewHelpful(review_id) {
       let endPoint = `${url}/reviews/${review_id}/helpful`;
-      console.log(endPoint);
       axios.put(endPoint, {
         params: {
           review_id: review_id
@@ -143,18 +145,53 @@ class RatingsReviews extends React.Component {
     /* Ratings handler functions */
 
     handleFilterByRating(rating) {
-      console.log('handleFilterByRating invoked with rating ', rating)
+      let filterRatingsCopy = this.state.filterRatings.slice();
+      if (filterRatingsCopy.indexOf(rating) === -1) {
+        filterRatingsCopy.push(rating);
+      } else {
+        filterRatingsCopy.splice(filterRatingsCopy.indexOf(rating), 1)
+      }
+      this.setState({
+        filterRatings: filterRatingsCopy
+      })
+    }
+
+    handleFilterClear() {
+      this.setState({
+        filterRatings: []
+      })
+    }
+
+    /* Method to filter reviews to pass down to ReviewList */
+    filterReviews() {
+      var filteredReviews = []
+      for (var i = 0; i < this.state.filterRatings.length; i++) {
+        for (var j = 0; j < this.state.reviews.length; j++) {
+          if (this.state.reviews[j].rating === this.state.filterRatings[i]) {
+            filteredReviews.push(this.state.reviews[j]);
+          }
+        }
+      }
+      if (this.state.filterRatings.length === 0) {
+        return this.state.reviews;
+      } else {
+
+        return filteredReviews;
+      }
+
     }
 
 
     render() {
+        let filteredReviews = this.filterReviews();
         return (
           <div>Ratings and Reviews is working
-            <ReviewList reviews = {this.state.reviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
-            <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating}/>
+            <ReviewList reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
+            <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getMetadata}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>
+            <button onClick = {this.filterReviews.bind(this)}>Filter Reviews</button>
           </div>
 
         )

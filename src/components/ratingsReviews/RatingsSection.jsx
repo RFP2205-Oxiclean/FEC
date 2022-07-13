@@ -3,7 +3,7 @@ import StarRatingUserInput from '../commonComponents/StarRatingUserInput.jsx'
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 import RatingsBarComponent from './RatingsBarComponent.jsx'
 
-const RatingsSection = ({metadata, handleFilterByRating}) => {
+const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFilterClear}) => {
 
 
   if (metadata.ratings !== undefined) {
@@ -86,6 +86,15 @@ const RatingsSection = ({metadata, handleFilterByRating}) => {
         />
       </span>
 
+      {filterRatings.length === 0 ? '' :
+        <div>Filters applied for:
+          {filterRatings.map((rating, index) => {
+            return <span> {rating} </span>
+          })
+          }
+          <button onClick = {handleFilterClear}>Clear Filters</button>
+        </div>
+      }
 
     </div>
   )
