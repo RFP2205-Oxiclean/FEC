@@ -3,7 +3,6 @@ import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
-import StarRating from '../commonComponents/StarRating.jsx'
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
 

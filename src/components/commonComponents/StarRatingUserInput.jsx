@@ -11,7 +11,7 @@ const StarRatingUserInput = () => {
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
-        <label>
+        <label key = {ratingValue}>
           <input
             type= "radio"
             name = "rating"
@@ -19,6 +19,7 @@ const StarRatingUserInput = () => {
             onClick = {() => setRating(ratingValue)}
           />
           <FaStar
+
             className = "stars-user-input"
             color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
             size = {100}

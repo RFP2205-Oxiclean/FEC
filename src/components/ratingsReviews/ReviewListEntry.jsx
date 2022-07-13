@@ -1,5 +1,6 @@
 import React from 'react';
-import {format} from 'date-fns'
+import {format} from 'date-fns';
+import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx';
 
 const ReviewListEntry = ({review, handleMarkReviewHelpful, handleReportReview}) => {
   const date = new Date(review.date)
@@ -22,7 +23,11 @@ const ReviewListEntry = ({review, handleMarkReviewHelpful, handleReportReview}) 
 
   return (
     <div>
-      <small className = 'review-username-time'>{review.reviewer_name},&nbsp;{convertDateFormat(date)}</small>
+      <div>
+        <StarRatingStatic rating= {review.rating}/>
+        <small className = 'review-username-time'>{review.reviewer_name},&nbsp;{convertDateFormat(date)}
+        </small>
+      </div>
       <br></br>
       <div className = 'review-summary'>{review.summary}</div>
       <br></br>

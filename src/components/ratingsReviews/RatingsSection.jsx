@@ -1,5 +1,7 @@
 import React from 'react';
+import StarRatingUserInput from '../commonComponents/StarRatingUserInput.jsx'
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
+import RatingsBarComponent from './RatingsBarComponent.jsx'
 
 const RatingsSection = ({metadata}) => {
 
@@ -17,22 +19,40 @@ const RatingsSection = ({metadata}) => {
     let numberRecommended = parseInt(metadata.recommended.true);
 
     var percentRecommended = Math.round(numberRecommended / totalRecommendations * 100);
+
+    /* finding the percent of each rating */
+    var oneRatingPercent = parseInt(metadata.ratings[1]) / totalRatings;
+    var twoRatingPercent = parseInt(metadata.ratings[2]) / totalRatings;
+    var threeRatingPercent = parseInt(metadata.ratings[3]) / totalRatings;
+    var fourRatingPercent = parseInt(metadata.ratings[4]) / totalRatings;
+    var fiveRatingPercent = parseInt(metadata.ratings[5]) / totalRatings;
+    console.log(oneRatingPercent, twoRatingPercent, threeRatingPercent, fourRatingPercent, fiveRatingPercent)
   }
 
 
 
 
   return (
-    <div>Ratings section {console.log('metadata', metadata)}
-      <div className = 'average-rating'>{roundedAverage}</div>
-
-      <div className = 'percent-recommended'>{percentRecommended}% of reviews recommend this product</div>
-
-      <StarRatingStatic/>
-
-      <div className = 'ratings-bar-chart'> 5 stars
-
+    <div>
+      <div>RATINGS & REVIEWS</div>
+      <div className = 'average-rating'>{roundedAverage}&nbsp;
+        <StarRatingStatic rating = {roundedAverage}/>
       </div>
+      <br></br>
+      <div className = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
+      </div>
+      <br></br>
+      <span>5 stars   </span> <RatingsBarComponent rating = {fiveRatingPercent}/>
+      <br></br>
+      <span>4 stars   </span> <RatingsBarComponent rating = {fourRatingPercent}/>
+      <br></br>
+      <span>3 stars   </span> <RatingsBarComponent rating = {threeRatingPercent}/>
+      <br></br>
+      <span>2 stars   </span> <RatingsBarComponent rating = {twoRatingPercent}/>
+      <br></br>
+      <span>1 stars   </span> <RatingsBarComponent rating = {oneRatingPercent}/>
+
+
     </div>
   )
 }

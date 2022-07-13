@@ -52,28 +52,46 @@
   cursor: pointer;
 }
 
-.stars-outer {
+.stars:before {
+  content: '★★★★★';
+  letter-spacing: 5px;
+  background: linear-gradient(
+    90deg,
+    gold var(--percent),
+    lightgrey var(--percent)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stars {
+  --percent: calc(var(--rating) / 5 * 100%);
   display: inline-block;
-  position: relative;
-  font-family: FontAwesome;
+  font-size: 15px;
+  font-family: Times;
+  line-height: 1;
 }
 
-.stars-outer::before {
-  content: "\f006 \f006 \f006 \f006 \f006";
+
+.bars:before {
+  content: '-----';
+  letter-spacing: 30px;
+  background: linear-gradient(
+    90deg,
+    #ace1af var(--percent),
+    lightgrey var(--percent)
+  );
+  -webkit-text-fill-color: transparent;
 }
 
-.stars-inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-}
-
-.stars-inner::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
-  color: #f8ce0b;
+.bars {
+  --percent: calc(var(--rating) * 100%);
+  margin-left: 5px;
+  display: inline-block;
+  font-size: 8px;
+  font-family: Times;
+  line-height: 1;
 }
 
 input[type="radio"] {
