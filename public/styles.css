@@ -75,7 +75,7 @@
 
 
 .bars:before {
-  content: '-----';
+  content: '-------';
   letter-spacing: 30px;
   background: linear-gradient(
     90deg,
@@ -85,6 +85,18 @@
   -webkit-text-fill-color: transparent;
 }
 
+.bars:hover {
+
+  /* background: linear-gradient(
+    90deg,
+    green var(--percent),
+    lightgrey var(--percent)
+  );
+  -webkit-text-fill-color: transparent; */
+}
+
+
+
 .bars {
   --percent: calc(var(--rating) * 100%);
   margin-left: 5px;
@@ -92,6 +104,16 @@
   font-size: 8px;
   font-family: Times;
   line-height: 1;
+}
+
+.rating-bar-label {
+  text-decoration: underline;
+}
+
+.rating-bar-label:hover {
+
+  cursor: pointer;
+  box-shadow: 0 4px 15px 0 rgba(26, 100, 53, 0.75);
 }
 
 input[type="radio"] {

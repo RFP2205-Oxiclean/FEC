@@ -20,6 +20,7 @@ class RatingsReviews extends React.Component {
         this.logState = this.logState.bind(this);
         this.updateMetadataState = this.updateMetadataState.bind(this);
         this.updateReviewsState = this.updateReviewsState.bind(this);
+        this.handleFilterByRating = this.handleFilterByRating.bind(this);
     }
 
     componentDidMount() {
@@ -139,12 +140,18 @@ class RatingsReviews extends React.Component {
       })
     }
 
+    /* Ratings handler functions */
+
+    handleFilterByRating(rating) {
+      console.log('handleFilterByRating invoked with rating ', rating)
+    }
+
 
     render() {
         return (
           <div>Ratings and Reviews is working
             <ReviewList reviews = {this.state.reviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
-            <RatingsSection metadata = {this.state.metadata}/>
+            <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getMetadata}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>

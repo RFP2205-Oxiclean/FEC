@@ -3,7 +3,7 @@ import StarRatingUserInput from '../commonComponents/StarRatingUserInput.jsx'
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 import RatingsBarComponent from './RatingsBarComponent.jsx'
 
-const RatingsSection = ({metadata}) => {
+const RatingsSection = ({metadata, handleFilterByRating}) => {
 
 
   if (metadata.ratings !== undefined) {
@@ -26,31 +26,65 @@ const RatingsSection = ({metadata}) => {
     var threeRatingPercent = parseInt(metadata.ratings[3]) / totalRatings;
     var fourRatingPercent = parseInt(metadata.ratings[4]) / totalRatings;
     var fiveRatingPercent = parseInt(metadata.ratings[5]) / totalRatings;
-    console.log(oneRatingPercent, twoRatingPercent, threeRatingPercent, fourRatingPercent, fiveRatingPercent)
   }
 
+  const starFilterClicked = (e) => {
+    e.preventDefault();
+    if (e.target.id === '5-star-filter' || e.target.parentNode.id === '5-star-filter') {
+      handleFilterByRating(5);
+    } else if (e.target.id === '4-star-filter'|| e.target.parentNode.id === '4-star-filter') {
+      handleFilterByRating(4);
+    } else if (e.target.id === '3-star-filter'|| e.target.parentNode.id === '3-star-filter') {
+      handleFilterByRating(3);
+    } else if (e.target.id === '2-star-filter'|| e.target.parentNode.id === '2-star-filter') {
+      handleFilterByRating(2);
+    } else if (e.target.id === '1-star-filter'|| e.target.parentNode.id === '1-star-filter') {
+      handleFilterByRating(1);
+    }
+  }
 
 
 
   return (
     <div>
+      <br></br>
       <div>RATINGS & REVIEWS</div>
-      <div className = 'average-rating'>{roundedAverage}&nbsp;
+      <div id = 'average-rating'>{roundedAverage}&nbsp;
         <StarRatingStatic rating = {roundedAverage}/>
       </div>
       <br></br>
-      <div className = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
+      <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
       </div>
       <br></br>
-      <span>5 stars   </span> <RatingsBarComponent rating = {fiveRatingPercent}/>
+      <span className = 'rating-bar-label' id = '5-star-filter' onClick = {starFilterClicked}> 5 stars
+        <RatingsBarComponent
+          rating = {fiveRatingPercent}
+        />
+      </span>
       <br></br>
-      <span>4 stars   </span> <RatingsBarComponent rating = {fourRatingPercent}/>
+      <span className = 'rating-bar-label' id = '4-star-filter' onClick = {starFilterClicked}> 4 stars
+        <RatingsBarComponent
+          rating = {fourRatingPercent}
+        />
+      </span>
       <br></br>
-      <span>3 stars   </span> <RatingsBarComponent rating = {threeRatingPercent}/>
+      <span className = 'rating-bar-label' id = '3-star-filter' onClick = {starFilterClicked}> 3 stars
+        <RatingsBarComponent
+          rating = {threeRatingPercent}
+        />
+      </span>
       <br></br>
-      <span>2 stars   </span> <RatingsBarComponent rating = {twoRatingPercent}/>
+      <span className = 'rating-bar-label' id = '2-star-filter' onClick = {starFilterClicked}> 2 stars
+        <RatingsBarComponent
+          rating = {twoRatingPercent}
+        />
+      </span>
       <br></br>
-      <span>1 stars   </span> <RatingsBarComponent rating = {oneRatingPercent}/>
+      <span className = 'rating-bar-label' id = '1-star-filter' onClick = {starFilterClicked}> 1 star &nbsp;
+        <RatingsBarComponent
+          rating = {oneRatingPercent}
+        />
+      </span>
 
 
     </div>

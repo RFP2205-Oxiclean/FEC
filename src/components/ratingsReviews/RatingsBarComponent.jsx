@@ -2,7 +2,7 @@ import React from 'react';
 
 const RatingsBarComponent = (props) => {
   return (
-    <div className = 'bars' style = {{'--rating': props.rating}}></div>
+    <span className = 'bars' style = {{'--rating': props.rating}}></span>
   )
 }
 
