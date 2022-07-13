@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRating from '../commonComponents/StarRating.jsx'
+import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 
 const RatingsSection = ({metadata}) => {
 
@@ -27,10 +27,12 @@ const RatingsSection = ({metadata}) => {
       <div className = 'average-rating'>{roundedAverage}</div>
 
       <div className = 'percent-recommended'>{percentRecommended}% of reviews recommend this product</div>
+
+      <StarRatingStatic/>
+
       <div className = 'ratings-bar-chart'> 5 stars
 
       </div>
-      <StarRating />
     </div>
   )
 }
