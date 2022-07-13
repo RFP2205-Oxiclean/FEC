@@ -46,8 +46,8 @@ const createCloudinaryDisplayURL = function (url) {
     image
       .resize(
         pad()
-          .height(900)
-          .width(1200)
+          .height(1200)
+          .width(1600)
           // .gravity(autoGravity())
           .background(predominantGradient())
       )

@@ -21,8 +21,8 @@
 .overview-image-container {
   margin-left: auto;
   margin-right: auto;
-  width: 1200px;
-  height: 900px;
+  width: 1600px;
+  height: 1000px;
 }
 
 .overview-product-info {
@@ -32,10 +32,11 @@
 }
 
 .overview-thumbnail-container {
+  padding-top: 100px;
   display: inline-block;
   height: 70%;
   flex-wrap: wrap;
-  width: 10%;
+  width: 6%;
   background-color: transparent;
   border-color: black;
 }
@@ -43,8 +44,6 @@
 .overview-overlay-thumbnail {
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   border: 2px solid black;
   padding: 5px;
@@ -68,34 +67,67 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-.overview-expanded-product-info {
+.overview-expanded-product-panel {
   float: right;
-  display: table;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 30%;
+  width: 33%;
   background-color: white;
   box-shadow: inset 0px 0px 0px 5px black;
   box-sizing: border-box;
 }
 
-.overview-expanded-product-info>div {
+.overview-expanded-product-panel>div {
   box-sizing: border-box;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+
 }
 
-.overview-expanded-product-info>div:first-child{
+.overview-expanded-product-panel>div:first-child{
   padding-top: 40px;
 }
 
+.overview-expanded-product-panel>div:last-child{
+  padding-bottom: 40px;
+}
+
 .stars-container {
-  height: 3%;
+  font-size: 20px;
+  font-weight: bold;
+  height: 10%;
 }
 
 .overview-category {
   height: 5%;
+  font-size: 30px;
+  font-weight: bold;
+
 }
 
+.overview-expanded-product-info {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  height: 25%;
+}
+
+.overview-expanded-product-info-name {
+  padding-left: 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 60px;
+
+}
+
+.overview-styles-container {
+  height: 40%;
+}
+
+.overview-purchase-info {
+  height: 25%;
+}
 
 
 /* border: 2px solid #ddd;

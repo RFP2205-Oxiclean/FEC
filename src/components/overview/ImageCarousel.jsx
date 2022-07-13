@@ -5,7 +5,7 @@ import axios from 'axios';
 import ExpandedProductInfo from './ExpandedProductInfo.jsx';
 
 
-const ImageCarousel = ( {activeStyleObject} ) => {
+const ImageCarousel = ( {activeStyleObject, productInfo} ) => {
 
   let [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -21,9 +21,9 @@ const ImageCarousel = ( {activeStyleObject} ) => {
   }
 
   console.log(activeStyleObject)
-  return <div style={{backgroundImage: `url(${x}`, width: "1200px", height: "900px"}} className="overview-image-container">
+  return <div style={{backgroundImage: `url(${x}`, width: "1600px", height: "800"}} className="overview-image-container">
     <ThumbnailContainer activeImageIndex={activeImageIndex} photos={activeStyleObject.photos} changeImage={changeImage}></ThumbnailContainer>
-    <ExpandedProductInfo></ExpandedProductInfo>
+    <ExpandedProductInfo productInfo={productInfo}></ExpandedProductInfo>
     <button onClick = {() => {console.log(activeStyleObject.photos)}}></button>
   </div>
 }
