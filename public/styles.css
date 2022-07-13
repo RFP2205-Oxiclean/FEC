@@ -176,13 +176,6 @@
   text-decoration: line-through;
 }
 
-.overview-expanded-product-info-different-price {
-  margin-left: 20px;
-  font-weight: bold;
-  font-size: 25px;
-  color: red;
-}
-
 .overview-overlay-thumbnail-active {
   margin-top: auto;
   margin-bottom: auto;
@@ -204,6 +197,21 @@ img {
   display:block;
   margin:auto;
 }
+
+.overview-expanded-product-info-prices {
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.overview-expanded-product-info-different-price {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  color: red;
+}
+
+
 /* border: 2px solid #ddd;
 border-radius: 4px;
 padding: 5px;

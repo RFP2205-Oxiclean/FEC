@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import StyleObjectThumbnail from './StyleObjectThumbnail.jsx';
+import Price from './Price.jsx';
 
 const ExpandedProductInfo = ( {resetActiveImageIndex, styleClickHandler, productInfo, styleObjects} ) => {
 
@@ -15,17 +16,18 @@ const ExpandedProductInfo = ( {resetActiveImageIndex, styleClickHandler, product
     }
   }
 
+
+
   return <div className="overview-expanded-product-panel">
     <div className="stars-container">STAR STAR STAR</div>
     <div className="overview-category">{productInfo.category}</div>
     {/* <div><span style={{fontWeight: "bold", fontSize: "30px"}}>{styleObjects[viewIndex]?.original_price}</span></div> */}
     <div className="overview-expanded-product-info">
-    <div style={{marginRight: "auto"}}>
-      <span className={(hoverInfo.sale_price !== null && onHover) || (hoverInfo.original_price !== styleObjects[viewIndex]?.original_price && onHover)
-         ? "overview-expanded-product-info-price-struck" : "overview-expanded-product-info-price"}>
-        {styleObjects[viewIndex]?.original_price}</span>
-        <span className="overview-expanded-product-info-different-price">{showDifferentPrice()}</span>
-      </div>
+      <Price
+        currentStyle={styleObjects[viewIndex]}
+        hoverInfo={hoverInfo}
+        onHover={onHover}>
+       </Price>
       <span className="overview-expanded-product-info-name">{productInfo.name}</span>
       <span className="overview-expanded-product-info-style">{onHover ? hoverInfo.name : styleObjects[viewIndex]?.name}</span>
     </div>
