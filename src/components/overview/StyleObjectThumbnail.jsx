@@ -29,7 +29,7 @@ const StyleObjectThumbnail = ( {setHoverInfo, setOnHover, setViewIndex, resetAct
   return <div
     onClick={() => {handleClick()}}
     className="style-object-thumbnail"
-    onMouseEnter={() => { setOnHover(true); setHoverInfo( { original_price: styleObject.original_price, name: styleObject.name })}}
+    onMouseEnter={() => { setOnHover(true); setHoverInfo( {sale_price: styleObject.sale_price, original_price: styleObject.original_price, name: styleObject.name })}}
     onMouseLeave={() => { setOnHover(false); }}
   >
     <img src={createCloudinaryThumbnailURL(styleObject.photos[0].thumbnail_url)}></img>
