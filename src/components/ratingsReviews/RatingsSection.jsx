@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatingUserInput from '../commonComponents/StarRatingUserInput.jsx'
+
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 import RatingsBarComponent from './RatingsBarComponent.jsx'
 
