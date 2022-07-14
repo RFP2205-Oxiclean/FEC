@@ -27,7 +27,7 @@ class AnswerList extends React.Component {
         return (
             <ul>
                 {this.state.answerItems.map((item, index) => {
-                    return <Answer info={this.props.answers[item]} key={index}/>
+                    return <Answer data={this.props.answers[item]} key={index}/>
                 })}
             </ul>)
     }

@@ -1,15 +1,15 @@
 import React from  'react';
+import UserInfo from './UserInfo/UserInfo.jsx';
 
 const Answer = (props) => {
   console.log("why")
 
     return (
         <li className="answer-content">
-          {console.log("but why")}
-            {/* <p className="a-id">A:</p>
-            <p className="a-text">{this.props.info.body}</p>
-            <Photos photos={this.props.data.photos}/>
-            <UserInfo data={this.props.data} /> */}
+            <p className="a-id">A:</p>
+            <p className="a-text">{props.data.body}</p>
+            {/* <Photos photos={props.data.photos}/> */}
+            <UserInfo data={props.data} />
         </li>)
 }
 
