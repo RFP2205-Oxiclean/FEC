@@ -27,6 +27,11 @@ class App extends React.Component {
                         product_id={this.state.displayedProductId}
                     />
                 </div>
+                <div className='ratings-reviews'>
+                    <RatingsReviews
+                        product_id={this.state.displayedProductId}
+                    />
+                </div>
 
                 {/* <div className='questions-and-answers'>
                     <QuestionsAndAnswers
@@ -34,11 +39,7 @@ class App extends React.Component {
                     />
                 </div>
 
-                <div className='ratings-reviews'>
-                    <RatingsReviews
-                        product_id={this.state.displayedProductId}
-                    />
-                </div> */}
+                */}
             </div>
 
         )
