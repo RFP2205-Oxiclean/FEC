@@ -31,7 +31,8 @@ class QuestionsAndAnswers extends React.Component {
         axios.get(endPoint, {
             params: {
             product_id: id,
-            page : pageNumber || 1
+            page : pageNumber || 1,
+            count : 2
             },
             headers: {
             Authorization: API_KEY
@@ -49,7 +50,7 @@ class QuestionsAndAnswers extends React.Component {
 
 
     searchQuestionList() {
-
+        //while results > 0 and have not found a match keep turning pages until we find it
     }
 
 

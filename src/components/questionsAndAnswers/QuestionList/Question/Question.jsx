@@ -1,5 +1,6 @@
 import React from 'react';
 import AnswerList from '../AnswerList/AnswerList.jsx';
+import InfoTab from './InfoTab/InfoTab.jsx';
 
 class Question extends React.Component {
   constructor(props) {
@@ -15,12 +16,7 @@ class Question extends React.Component {
             <div className="question-content">
                 <p className="q-id">Q:</p>
                 <p className="q-text">{this.props.question.question_body}</p>
-                <div className="info-tab">
-                Helpful?
-                    <p className="helpful-event" >Yes ({this.props.question.question_helpfulness})</p>
-                |
-                    <p className="add-answer-vent" >Add Answer</p>
-                </div>
+                <InfoTab question={this.props.question} />
             </div>
             <AnswerList answers={this.props.question.answers}/>
         </li>)
