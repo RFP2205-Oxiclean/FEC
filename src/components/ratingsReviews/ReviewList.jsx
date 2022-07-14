@@ -35,7 +35,16 @@ class ReviewList extends React.Component {
     })
   }
 
+  sortReviews() {
+    var reviewsCopy = this.props.reviews.slice();
+    if (this.state.sortOption === 'helpful') {
 
+    } else if (this.state.sortOption === 'newest') {
+
+    } else {
+
+    }
+  }
 
 
   render() {
