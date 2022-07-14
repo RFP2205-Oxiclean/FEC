@@ -3,10 +3,11 @@ import {createCloudinaryDisplayURL} from '/src/services/Cloudinary.js';
 import ThumbnailContainer from './ThumbnailContainer.jsx';
 import axios from 'axios';
 import ExpandedProductInfo from './ExpandedProductInfo.jsx';
-import CollapsePanelButton from './CollapsePanelButton.jsx'
+import CollapsePanelButton from './CollapsePanelButton.jsx';
+import {prefetch} from '/src/controllers.js';
 
 
-const ImageCarousel = ( {styleClickHandler, styleObjects, activeStyleObject, productInfo} ) => {
+const ImageCarousel = ( {product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo} ) => {
 
   let [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -16,6 +17,9 @@ const ImageCarousel = ( {styleClickHandler, styleObjects, activeStyleObject, pro
     setActiveImageIndex(index);
   }
 
+  if (styleObjects.length > 1) {
+    prefetch(styleObjects, product_id)
+  }
 
   // redundant?
   let resetActiveImageIndex = function(index=0) {

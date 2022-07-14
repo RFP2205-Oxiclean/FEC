@@ -1,5 +1,9 @@
 import axios from "axios";
 import { url, API_KEY } from "/config/config.js";
+import {
+  createCloudinaryDisplayURL,
+  createCloudinaryThumbnailURL,
+} from "/src/services/Cloudinary.js";
 
 let cachedProductById = {};
 
@@ -39,4 +43,29 @@ export function getProductStylesById(id) {
     cachedStylesById[id] = response.data.results;
     return cachedStylesById[id];
   });
+}
+
+let prefetchCache = {};
+
+export function prefetch(styleObjects, product_id) {
+  if (prefetchCache[product_id]) {
+    return;
+  } else {
+    styleObjects.forEach(function (styleObject) {
+      styleObject.photos.forEach(function (photoObject) {
+        axios
+          .get(createCloudinaryThumbnailURL(photoObject.thumbnail_url))
+          .then(() => {
+            prefetchCache[product_id] = true;
+          })
+          .catch();
+        axios
+          .get(createCloudinaryDisplayURL(photoObject.url))
+          .then(() => {
+            prefetchCache[product_id] = true;
+          })
+          .catch();
+      });
+    });
+  }
 }

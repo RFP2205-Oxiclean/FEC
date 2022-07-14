@@ -42,11 +42,12 @@
   width: 6%;
   background-color: transparent;
   border-color: black;
+  overflow: hidden;
 }
 
 .overview-overlay-thumbnail {
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto;
+  margin-top: 15px;
   display: flex;
   border: 2px solid black;
   padding: 5px;
@@ -67,7 +68,12 @@
 
 
 .overview-overlay-thumbnail:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  box-shadow: 0 0 0px 4px rgba(0, 140, 186, 0.5);
+}
+
+.collapse-and-info-container {
+  width: 40%;
+  display: flex;
 }
 
 .overview-expanded-product-panel {
@@ -205,12 +211,6 @@
   border-bottom: red solid 5px;
 }
 
-
-.overview-overlay-thumbnail:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-}
-
-
 img {
   display:block;
   margin:auto;
@@ -235,6 +235,11 @@ img {
   margin-left: 0;
 }
 
+.collapse-button-container {
+  height: 2%;
+  margin-right: 20px;
+  margin-top: 15px;
+}
 /* border: 2px solid #ddd;
 border-radius: 4px;
 padding: 5px;

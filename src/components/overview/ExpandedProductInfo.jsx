@@ -23,7 +23,7 @@ const ExpandedProductInfo = ( {resetActiveImageIndex, styleClickHandler, product
     </div>
   }
 
-  return <div style={{display: "flex"}}>
+  return <div className="collapse-and-info-container">
     <CollapsePanelButton isHidden={isHidden} setIsHidden={setIsHidden}></CollapsePanelButton>
     <div className="overview-expanded-product-panel">
     <div className="stars-container">STAR STAR STAR</div>

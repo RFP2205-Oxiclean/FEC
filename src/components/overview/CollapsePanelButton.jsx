@@ -6,7 +6,7 @@ const CollapsePanelButton = ({isHidden, setIsHidden}) => {
     setIsHidden(!isHidden)
   }
 
-  return <div style={{height: "2%", marginRight: "20px"}}>
+  return <div className="collapse-button-container">
     <button onClick={() => {handleClick()}} className="collapse-panel-button">COLLAPSE</button>
   </div>
 }
