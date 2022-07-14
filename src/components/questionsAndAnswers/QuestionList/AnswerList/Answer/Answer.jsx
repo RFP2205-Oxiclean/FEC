@@ -2,8 +2,7 @@ import React from  'react';
 import UserInfo from './UserInfo/UserInfo.jsx';
 
 const Answer = (props) => {
-  console.log("why")
-
+    console.log(props)
     return (
         <li className="answer-content">
             <p className="a-id">A:</p>

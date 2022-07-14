@@ -13,14 +13,26 @@ class AnswerList extends React.Component {
         this.loadAnswers(2);
     }
 
+    componentDidUpdate() {
+        this.answerChange(2)
+    }
+
     loadAnswers (amount) {
         let currentIndex = this.state.answerItems.length;
         let keys = Object.keys(this.props.answers);
         for (let i = currentIndex; i < amount || i > keys.length-1 ; i++) {
             this.state.answerItems[i] = keys[i];
         }
-        console.log(this.state)
+        console.log(this.state, 'loading answers')
         this.setState(this.state)
+    }
+
+    answerChange (amount) {
+        let currentIndex = this.state.answerItems.length;
+        let keys = Object.keys(this.props.answers);
+        for (let i = currentIndex; i < amount || i > keys.length-1 ; i++) {
+            this.state.answerItems[i] = keys[i];
+        }
     }
 
     render () {

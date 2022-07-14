@@ -12,40 +12,70 @@ class QuestionsAndAnswers extends React.Component {
 
         this.state = {
             questions : [],
+            allQuestions :[],
             page : null,
 
         };
     }
 
     componentDidMount() {
-        this.getQuestionList(this.props.product_id)
+        this.getAllQuestions(this.props.product_id)
     }
 
-    toggleDisplayImage() {
 
-    }
-
-    getQuestionList(id, pageNumber){
-        //get all questions
-       let endPoint = `${url}/qa/questions`;
+    getAllQuestions (id) {
+        let endPoint = `${url}/qa/questions`;
         axios.get(endPoint, {
             params: {
             product_id: id,
-            page : pageNumber || 1,
-            count : 2
+            page : 1,
+            count : 9999
             },
             headers: {
             Authorization: API_KEY
             }
         })
         .then((response) => {
-            console.log(response.data, 'data in questionList');
-            this.state.questions = response.data.results;
+            this.state.allQuestions = response.data.results;
+            this.sortQuestionsByHelpfulness()
+            console.log(this.state)
             this.setState(this.state);
         })
         .catch((err) => {
-            console.error('Error in questionList response: ', err);
+            console.error('error in getting all questions', err);
         })
+    };
+
+    sortQuestionsByHelpfulness() {
+        let results = []
+        this.state.allQuestions.sort((a,b)=>{
+                if (a.question_helpfulness > b.question_helpfulness) {
+                    results.push(a);
+                    return a;
+                } else {
+                    results.push(b)
+                    return b;
+                }
+            })
+        this.state.questions = results;
+    }
+
+
+    displayUnfilteredQuestions (filter) {
+        console.log(filter, 'filter')
+        if (filter.length >= 3) {
+            this.state.questions = this.state.allQuestions.filter((question)=>{
+                if (question.question_body.indexOf(filter) !== -1) {
+                    return true;
+                }
+                return false;
+            })
+        } else {
+            this.state.questions = this.state.allQuestions;
+        }
+        console.log(this.state, 'b4 reload')
+        debugger;
+       this.setState(this.state)
     }
 
 
@@ -60,7 +90,7 @@ class QuestionsAndAnswers extends React.Component {
                 <h1 id='title'>
                 QUESTIONS & ANSWERS
                 </h1>
-                <SearchBar />
+                <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>
                 <QuestionList questions={this.state.questions} />
 
             </div>
