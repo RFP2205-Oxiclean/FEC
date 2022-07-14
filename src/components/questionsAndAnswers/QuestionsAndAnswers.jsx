@@ -9,8 +9,8 @@ class QuestionsAndAnswers extends React.Component {
 
         this.state = {
             questions : [],
-            page : null
-            loadedAnswerCountByReview = []
+            page : null,
+            loadedAnswerCountByReview : []
 
         };
     }
@@ -47,6 +47,10 @@ class QuestionsAndAnswers extends React.Component {
         // unknown if search loaded or unloaded questions
     }
 
+    loadQuestions (questionId, ) {
+
+    }
+
     render() {
         return (
             <div>
@@ -66,9 +70,9 @@ class QuestionsAndAnswers extends React.Component {
                                 <p className="q-text">{question.question_body}</p>
                                 <div className="info-tab">
                                     <p className="helpful-num">Helpful?
-                                        <p className="helpfulEvent" >Yes ({question.question_helpfulness})</p>
+                                        <p className="helpful-event" >Yes ({question.question_helpfulness})</p>
                                     |
-                                        <p className="addAnswerEvent" >Add Answer</p>
+                                        <p className="add-answer-vent" >Add Answer</p>
                                     </p>
                                 </div>
                             </div>
@@ -82,7 +86,7 @@ class QuestionsAndAnswers extends React.Component {
                                         <p className="user-info">by {question.answers[key].user} - {question.answers[key].date}</p>
                                         |
                                         <p className="helpful-num">Helpful?
-                                            <p className="helpful-event" >Yes ({question.question_helpfulness})</p>
+                                            <p className="helpful-event" >Yes ({question.answers[key].question_helpfulness})</p>
                                         |
                                             <p className="report-event" > Report </p>
                                         </p>
