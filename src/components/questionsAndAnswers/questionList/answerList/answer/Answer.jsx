@@ -1,5 +1,5 @@
 import React from  'react';
-import UserInfo from './userInfo/UserInfo.jsx';
+import UserInfo from './UserInfo/UserInfo.jsx';
 
 const Answer = (props) => {
     console.log(props, "in ans")

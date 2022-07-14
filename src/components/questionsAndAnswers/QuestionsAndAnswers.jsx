@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import SearchBar from './SearchBar/SearchBar.jsx'
-import AnswerList from './QuestionList/AnswerList/AnswerList.jsx';
-import QuestionList from './QuestionList/QuestionList.jsx';
+import SearchBar from './searchBar/SearchBar.jsx'
+import AnswerList from './questionList/answerList/AnswerList.jsx';
+import QuestionList from './questionList/QuestionList.jsx';
 import { url } from "../../../config/config.js";
 import { API_KEY } from "../../../config/config.js";
 
@@ -14,6 +14,7 @@ class QuestionsAndAnswers extends React.Component {
             questions : [],
             allQuestions :[],
             page : null,
+            filtered : false
 
         };
     }
@@ -70,11 +71,13 @@ class QuestionsAndAnswers extends React.Component {
                 }
                 return false;
             })
-        } else {
+            this.setState(this.state);
+        } else if (this.state.filtered = true) {
             this.state.questions = this.state.allQuestions;
+            this.state.filtered = false;
+            this.setState(this.state);
         }
-        console.log(this.state, 'b4 reload')
-       this.setState(this.state)
+
     }
 
 

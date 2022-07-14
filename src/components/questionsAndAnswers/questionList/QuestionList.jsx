@@ -1,5 +1,5 @@
 import React from 'react';
-import Question from  './question/Question.jsx';
+import Question from  './Question/Question.jsx'
 
 
 class QuestionList extends React.Component {

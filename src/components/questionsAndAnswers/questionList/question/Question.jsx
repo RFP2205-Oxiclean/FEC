@@ -1,6 +1,6 @@
 import React from 'react';
-import AnswerList from '../answerList/AnswerList.jsx';
-import InfoTab from './infoTab/InfoTab.jsx';
+import AnswerList from '../AnswerList/AnswerList.jsx';
+import InfoTab from './InfoTab/InfoTab.jsx';
 
 class Question extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Question extends React.Component {
   }
 
   render () {
-    {console.log(props, "in quews")}
+    {console.log(this.props, "in quews")}
     return (
         <li className="question">
             <div className="question-content">
