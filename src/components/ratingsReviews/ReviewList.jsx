@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewListEntry from './ReviewListEntry.jsx'
+import SortDropdown from './SortDropdown.jsx'
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class ReviewList extends React.Component {
       numReviewsDisplayed: 0
     }
     this.addTwoReviewsToDisplay = this.addTwoReviewsToDisplay.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
   }
 
   componentDidMount() {
@@ -25,12 +27,19 @@ class ReviewList extends React.Component {
     })
   }
 
+  sortReviews(sortOption) {
+    console.log(sortOption);
+
+  }
+
+
 
 
   render() {
     var reviewsToDisplay = this.props.reviews.slice(0, this.state.numReviewsDisplayed);
     return (
       <div>
+        <SortDropdown sortReviews = {this.sortReviews} numReviews = {this.props.totalNumReviews}/>
         {reviewsToDisplay.map((review, index) =>
           <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
         )}

@@ -206,8 +206,9 @@ class RatingsReviews extends React.Component {
     render() {
         let filteredReviews = this.filterReviews();
         return (
-          <div>Ratings and Reviews is working
-            <ReviewList reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
+          <div>
+            <h1>Ratings & Reviews</h1>
+            <ReviewList totalNumReviews = {this.state.reviews.length} reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
             <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getMetadata}>Get Ratings List</button>
