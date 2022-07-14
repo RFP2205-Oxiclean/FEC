@@ -9,7 +9,7 @@ const ThumbnailContainer = (props) => {
         active={ i === props.activeImageIndex ? true : false}
         index={i}
         changeImage={props.changeImage}
-        key={photoObject?.thumbnail_url}
+        key={i}
         image={photoObject?.thumbnail_url}>
       </OverlayThumbnail>
     })}
