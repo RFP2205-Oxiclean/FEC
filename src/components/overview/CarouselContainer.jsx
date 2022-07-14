@@ -26,14 +26,14 @@ const CarouselContainer = ( {product_id}) => {
         })
         getProductStylesById(product_id)
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             setStyleObjects(data)
             return data
         })
     }, []);
 
 
-  console.log(getProductStylesById(product_id))
+  // console.log(getProductStylesById(product_id))
 
   let styleClickHandler = function(index) {
     setActiveDisplayIndex(index)

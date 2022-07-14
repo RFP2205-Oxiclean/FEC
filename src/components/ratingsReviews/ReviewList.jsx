@@ -11,6 +11,7 @@ class ReviewList extends React.Component {
     }
     this.addTwoReviewsToDisplay = this.addTwoReviewsToDisplay.bind(this);
     this.handleSortReviewsChange = this.handleSortReviewsChange.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
   }
 
   componentDidMount() {
@@ -38,24 +39,33 @@ class ReviewList extends React.Component {
   sortReviews() {
     var reviewsCopy = this.props.reviews.slice();
     if (this.state.sortOption === 'helpful') {
-
+      reviewsCopy.sort((firstReview, secondReview) => secondReview.helpfulness - firstReview.helpfulness);
+      console.log('sorted by helpfulness', reviewsCopy);
     } else if (this.state.sortOption === 'newest') {
-
+      reviewsCopy.sort(function(firstReview, secondReview) {
+        return (firstReview.date > secondReview.date) ? -1 : ((firstReview.date < secondReview.date) ? 1: 0)
+      });
+      console.log('sorted by newest', reviewsCopy);
     } else {
-
+      reviewsCopy.sort(function(firstReview, secondReview) {
+        return (firstReview.date > secondReview.date) ? -1 : ((firstReview.date < secondReview.date) ? 1: 0)
+      });
+      reviewsCopy.sort((firstReview, secondReview) => secondReview.helpfulness - firstReview.helpfulness);
+      console.log('sorted by relevance', reviewsCopy);
     }
+    return reviewsCopy;
   }
 
 
   render() {
-    var reviewsToDisplay = this.props.reviews.slice(0, this.state.numReviewsDisplayed);
+    var reviewsToDisplay = this.sortReviews().slice(0, this.state.numReviewsDisplayed);
     return (
       <div>
         <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
         {reviewsToDisplay.map((review, index) =>
           <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
         )}
-        <button onClick = {this.debugButton.bind(this)}>Debug ReviewList</button>
+        <button onClick = {this.sortReviews.bind(this)}>Debug ReviewList</button>
         {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay}>More Reviews</button> : ''}
       </div>
     )
