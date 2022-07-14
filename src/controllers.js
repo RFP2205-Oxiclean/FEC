@@ -1,7 +1,12 @@
 import axios from "axios";
 import { url, API_KEY } from "/config/config.js";
 
+let cachedProductById = {};
+
 export function getProductById(id, count = 5) {
+  if (cachedProductById[id]) {
+    return cachedProductById[id];
+  }
   return axios({
     method: "GET",
     url: url + `/products/${id}`,
@@ -13,11 +18,17 @@ export function getProductById(id, count = 5) {
       page: 1,
     },
   }).then((response) => {
-    return response.data;
+    cachedProductById[id] = response.data;
+    return cachedProductById[id];
   });
 }
 
+let cachedStylesById = {};
+
 export function getProductStylesById(id) {
+  if (cachedStylesById[id]) {
+    return cachedStylesById[id];
+  }
   return axios({
     method: "GET",
     url: url + `/products/${id}/styles`,
@@ -25,6 +36,7 @@ export function getProductStylesById(id) {
       Authorization: API_KEY,
     },
   }).then((response) => {
-    return response.data.results;
+    cachedStylesById[id] = response.data.results;
+    return cachedStylesById[id];
   });
 }

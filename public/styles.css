@@ -21,6 +21,8 @@
 .overview-image-container {
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  justify-content: space-between;
   width: 1600px;
   height: 1000px;
 }
@@ -32,8 +34,9 @@
 }
 
 .overview-thumbnail-container {
+  margin-left: 20px;
   padding-top: 100px;
-  display: inline-block;
+  display: flex;
   height: 70%;
   flex-wrap: wrap;
   width: 6%;
@@ -68,11 +71,10 @@
 }
 
 .overview-expanded-product-panel {
-  float: right;
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   height: 100%;
-  width: 33%;
+  width: 100%;
   background-color: white;
   box-shadow: inset 0px 0px 0px 5px black;
   box-sizing: border-box;
@@ -158,11 +160,26 @@
 
 
 .style-object-thumbnail {
-  margin-top: auto;
+  margin: auto;
+  margin-top: "auto";
+  width: 74px;
+  height: 74px;
   margin-left: 0;
-  display: flex;
-  border-radius: 4px;
-  width: 25%
+  border-radius: 50%;
+}
+
+.style-object-thumbnail-active {
+  margin: auto;
+  margin-top: "auto";
+  width: 74px;
+  height: 74px;
+  margin-left: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0px 3px red;
+}
+
+.style-object-thumbnail:hover {
+  box-shadow: 0 0 6px 1px rgb(0, 139, 186);
 }
 
 .overview-expanded-product-info-price {
@@ -193,6 +210,7 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+
 img {
   display:block;
   margin:auto;
@@ -211,6 +229,11 @@ img {
   color: red;
 }
 
+.style-object-thumbnail-container {
+  width: 25%;
+  margin-top: auto;
+  margin-left: 0;
+}
 
 /* border: 2px solid #ddd;
 border-radius: 4px;

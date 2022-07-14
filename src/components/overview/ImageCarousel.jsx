@@ -3,6 +3,7 @@ import {createCloudinaryDisplayURL} from '/src/services/Cloudinary.js';
 import ThumbnailContainer from './ThumbnailContainer.jsx';
 import axios from 'axios';
 import ExpandedProductInfo from './ExpandedProductInfo.jsx';
+import CollapsePanelButton from './CollapsePanelButton.jsx'
 
 
 const ImageCarousel = ( {styleClickHandler, styleObjects, activeStyleObject, productInfo} ) => {
@@ -15,17 +16,15 @@ const ImageCarousel = ( {styleClickHandler, styleObjects, activeStyleObject, pro
     setActiveImageIndex(index);
   }
 
-  // change on
 
-
-  let resetActiveImageIndex = function() {
-    setActiveImageIndex(0);
+  // redundant?
+  let resetActiveImageIndex = function(index=0) {
+    setActiveImageIndex(index);
   }
 
-  return <div style={{backgroundImage: `url(${cloud_url}`, width: "1600px", height: "800"}} className="overview-image-container">
+  return <div style={{backgroundImage: `url(${cloud_url}`, width: "1600px", height: "1200"}} className="overview-image-container">
     <ThumbnailContainer  activeImageIndex={activeImageIndex} photos={activeStyleObject?.photos} changeImage={changeImage}></ThumbnailContainer>
     <ExpandedProductInfo resetActiveImageIndex={resetActiveImageIndex} styleClickHandler={styleClickHandler} productInfo={productInfo} styleObjects={styleObjects}></ExpandedProductInfo>
-    <button onClick = {() => {console.log(activeStyleObject?.photos)}}></button>
   </div>
 }
 

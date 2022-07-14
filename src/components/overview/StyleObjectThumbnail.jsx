@@ -2,23 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {createCloudinaryThumbnailURL, createCloudinaryDisplayURL} from '/src/services/Cloudinary.js';
 import axios from 'axios';
 
-const StyleObjectThumbnail = ( {setHoverInfo, setOnHover, setViewIndex, resetActiveImageIndex, index, styleClickHandler, styleObject} ) => {
-
-  useEffect(() => {
-    styleObject.photos.forEach(function(photoObject) {
-      axios.get(createCloudinaryDisplayURL(photoObject.url))
-      .then(() => {
-        axios.get(createCloudinaryDisplayURL(photoObject.thumbnail_url))
-
-      })
-    })
-  }, [])
-
-  // useEffect(() => {
-  //   return () => {
-  //     props.resetActiveImageIndex();
-  //   }
-  // })
+const StyleObjectThumbnail = ( {viewIndex, setHoverInfo, setOnHover, setViewIndex, resetActiveImageIndex, index, styleClickHandler, styleObject} ) => {
 
   let handleClick = function() {
     setViewIndex(index);
@@ -26,13 +10,15 @@ const StyleObjectThumbnail = ( {setHoverInfo, setOnHover, setViewIndex, resetAct
     resetActiveImageIndex()
   }
 
-  return <div
+  return <div className="style-object-thumbnail-container">
+    <div
     onClick={() => {handleClick()}}
-    className="style-object-thumbnail"
-    onMouseEnter={() => { setOnHover(true); setHoverInfo( {sale_price: styleObject.sale_price, original_price: styleObject.original_price, name: styleObject.name })}}
-    onMouseLeave={() => { setOnHover(false); }}
+    className={viewIndex === index ? "style-object-thumbnail-active" : "style-object-thumbnail"}
+    onMouseEnter={() => { styleClickHandler(index); setOnHover(true); setHoverInfo( {sale_price: styleObject.sale_price, original_price: styleObject.original_price, name: styleObject.name })}}
+    onMouseLeave={() => { styleClickHandler(viewIndex); setOnHover(false); }}
   >
-    <img src={createCloudinaryThumbnailURL(styleObject.photos[0].thumbnail_url)}></img>
+    <img style={{borderRadius: "50%"}} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+  </div>
   </div>
 }
 

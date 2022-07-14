@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ImageCarousel from './ImageCarousel.jsx';
 import ExpandedProductInfo from './ExpandedProductInfo.jsx';
-import { createCloudinaryDisplayURL } from '/src/services/Cloudinary.js';
+import { createCloudinaryDisplayURL, createCloudinaryThumbnailURL } from '/src/services/Cloudinary.js';
 import {getProductById, getProductStylesById} from '../../controllers.js';
 import axios from 'axios';
 
@@ -21,14 +21,10 @@ const CarouselContainer = ( {product_id}) => {
         .then((data) => {
             console.log(data);
             setStyleObjects(data)
+            return data
         })
     }, []);
 
-  useEffect(() => {
-    styleObjects[activeDisplayIndex]?.photos.forEach(function(stylePhotoObject) {
-      axios.get(createCloudinaryDisplayURL(stylePhotoObject.url))
-    })
-  })
 
   let styleClickHandler = function(index) {
     setActiveDisplayIndex(index)
@@ -42,3 +38,14 @@ const CarouselContainer = ( {product_id}) => {
 
 
 export default CarouselContainer;
+
+
+// useEffect(() => {
+//   styleObject?.photos.forEach(function(photoObject) {
+//     axios.get(createCloudinaryDisplayURL(photoObject.url))
+//     .then(() => {
+//       axios.get(createCloudinaryDisplayURL(photoObject.thumbnail_url))
+
+//     })
+//   })
+// }, [])
