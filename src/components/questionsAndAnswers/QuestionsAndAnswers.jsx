@@ -8,8 +8,9 @@ class QuestionsAndAnswers extends React.Component {
         super(props);
 
         this.state = {
-            questions : null,
+            questions : [],
             page : null
+            loadedAnswerCountByReview = []
 
         };
     }
@@ -33,7 +34,7 @@ class QuestionsAndAnswers extends React.Component {
         })
         .then((response) => {
             console.log(response.data, 'data in questionList');
-            this.state.questions = response.data;
+            this.state.questions = response.data.results;
             this.setState(this.state);
         })
         .catch((err) => {
@@ -57,12 +58,37 @@ class QuestionsAndAnswers extends React.Component {
                     <input type="submit"/>
                 </form>
                 <ul id ="question-list">
-                    {this.state.questions.map((question)=> {
-                        return
-                        (<li class="question">
-                            <p class="q-id">Q:</>
-                            <p class="q-content"></>
-                            <></>
+                   {this.state.questions.map((question, index)=> {
+                        return (
+                        <li className="question" key={index}>
+                            <div className="question-content">
+                                <p className="q-id">Q:</p>
+                                <p className="q-text">{question.question_body}</p>
+                                <div className="info-tab">
+                                    <p className="helpful-num">Helpful?
+                                        <p className="helpfulEvent" >Yes ({question.question_helpfulness})</p>
+                                    |
+                                        <p className="addAnswerEvent" >Add Answer</p>
+                                    </p>
+                                </div>
+                            </div>
+                            {Object.keys(question.answers).map((key , index)=>{
+                                if (index < )
+                                return (
+                                <div className="answer-content">
+                                    <p className="a-id">A:</p>
+                                    <p className="a-text">{question.answers[key].body}</p>
+                                    <div className="info-tab">
+                                        <p className="user-info">by {question.answers[key].user} - {question.answers[key].date}</p>
+                                        |
+                                        <p className="helpful-num">Helpful?
+                                            <p className="helpful-event" >Yes ({question.question_helpfulness})</p>
+                                        |
+                                            <p className="report-event" > Report </p>
+                                        </p>
+                                    </div>
+                                </div>)
+                            })}
                         </li>)
                     })}
                 </ul>
