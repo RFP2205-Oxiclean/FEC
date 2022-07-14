@@ -25,21 +25,6 @@ class ReviewList extends React.Component {
     })
   }
 
-  filterReviews() {
-    var arrayCopy = [];
-    if (this.props.filteredRating === null) {
-      return this.props.reviews;
-    } else {
-      for (var i = 0; i < this.props.reviews.length; i++) {
-        for (var j = 0; j < this.props.filteredRating.length; j++) {
-          if (this.props.reviews[i].rating === this.props.filteredRating[j]) {
-            arrayCopy.push(this.props.reviews[i]);
-          }
-        }
-      }
-    }
-    return arrayCopy;
-  }
 
 
   render() {

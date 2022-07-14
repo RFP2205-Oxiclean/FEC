@@ -43,6 +43,25 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     }
   }
 
+  var filterOn = () => {
+    for (let rating in filterRatings) {
+      if (filterRatings[rating] === true) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  var activeFilters = () => {
+    let active = [];
+    for (let rating in filterRatings) {
+      if (filterRatings[rating] === true) {
+        active.push(rating)
+      }
+    }
+    return active;
+  }
+
 
 
   return (
@@ -86,10 +105,10 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
         />
       </span>
 
-      {filterRatings.length === 0 ? '' :
+      {!filterOn() ? '' :
         <div>Filters applied for:
-          {filterRatings.map((rating, index) => {
-            return <span> {rating} </span>
+          {activeFilters().map((rating, index) => {
+            return <span key = {index}> {rating} </span>
           })
           }
           <button onClick = {handleFilterClear}>Clear Filters</button>

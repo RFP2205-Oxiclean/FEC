@@ -82,19 +82,21 @@
     #ace1af var(--percent),
     lightgrey var(--percent)
   );
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.bars:before:hover {
-
+.bars:hover:before {
+  letter-spacing: 30px;
   background: linear-gradient(
     90deg,
-    blue var(--percent),
-    lightgrey var(--percent)
+    rgb(103, 214, 134) var(--percent),
+    rgb(177, 177, 177) var(--percent)
   );
-  /* -webkit-text-fill-color: transparent; */
+  cursor: pointer;
+  box-shadow: 0 4px 15px 0 rgba(68, 70, 69, 0.75);
+  -webkit-text-fill-color: transparent;
 }
-
 
 
 .bars {
@@ -111,14 +113,8 @@
 }
 
 .rating-bar-label:hover {
-
   cursor: pointer;
-  box-shadow: 0 4px 15px 0 rgba(68, 70, 69, 0.75);
-  /* background: linear-gradient(
-    90deg,
-    green var(--percent),
-    lightgrey var(--percent)
-  ); */
+
 }
 
 input[type="radio"] {

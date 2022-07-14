@@ -12,7 +12,13 @@ class RatingsReviews extends React.Component {
         this.state = {
           reviews: [],
           metadata: {},
-          filterRatings: []
+          filterRatings: {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false
+          }
         };
         this.getReviewList = this.getReviewList.bind(this);
         this.getMetadata = this.getMetadata.bind(this);
@@ -145,12 +151,10 @@ class RatingsReviews extends React.Component {
     /* Ratings handler functions */
 
     handleFilterByRating(rating) {
-      let filterRatingsCopy = this.state.filterRatings.slice();
-      if (filterRatingsCopy.indexOf(rating) === -1) {
-        filterRatingsCopy.push(rating);
-      } else {
-        filterRatingsCopy.splice(filterRatingsCopy.indexOf(rating), 1)
+      let filterRatingsCopy = {
+        ...this.state.filterRatings
       }
+      filterRatingsCopy[rating] = !filterRatingsCopy[rating]
       this.setState({
         filterRatings: filterRatingsCopy
       })
@@ -158,26 +162,43 @@ class RatingsReviews extends React.Component {
 
     handleFilterClear() {
       this.setState({
-        filterRatings: []
+        filterRatings: {
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: false
+        }
       })
     }
 
-    /* Method to filter reviews to pass down to ReviewList */
+    /* Methods to filter and sort reviews to pass down to ReviewList */
     filterReviews() {
-      var filteredReviews = []
-      for (var i = 0; i < this.state.filterRatings.length; i++) {
-        for (var j = 0; j < this.state.reviews.length; j++) {
-          if (this.state.reviews[j].rating === this.state.filterRatings[i]) {
-            filteredReviews.push(this.state.reviews[j]);
+      var filteredReviews = [];
+
+      var filterOn = false;
+
+      for (let rating in this.state.filterRatings) {
+        if (this.state.filterRatings[rating] === true) {
+          filterOn = true;
+        }
+      }
+
+      if (filterOn === false) {
+        return this.state.reviews;
+      } else {
+        for (var i = 0; i < this.state.reviews.length; i++) {
+          if (this.state.filterRatings[this.state.reviews[i].rating] === true) {
+            filteredReviews.push(this.state.reviews[i]);
           }
         }
       }
-      if (this.state.filterRatings.length === 0) {
-        return this.state.reviews;
-      } else {
 
-        return filteredReviews;
-      }
+      return filteredReviews;
+
+    }
+
+    sortReviews() {
 
     }
 
