@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import SearchBar from './SearchBar/SearchBar.jsx'
+import AnswerList from './AnswerList/AnswerList.jsx';
 import { url } from "../../../config/config.js";
 import { API_KEY } from "../../../config/config.js";
 
@@ -10,7 +12,6 @@ class QuestionsAndAnswers extends React.Component {
         this.state = {
             questions : [],
             page : null,
-            loadedAnswerCountByReview : []
 
         };
     }
@@ -19,13 +20,16 @@ class QuestionsAndAnswers extends React.Component {
         this.getQuestionList(this.props.product_id)
     }
 
+    toggleDisplayImage() {
+
+    }
+
     getQuestionList(id, pageNumber){
         //get all questions
        let endPoint = `${url}/qa/questions`;
         axios.get(endPoint, {
             params: {
             product_id: id,
-            count: 2,
             page : pageNumber || 1
             },
             headers: {
@@ -44,12 +48,9 @@ class QuestionsAndAnswers extends React.Component {
 
 
     searchQuestionList() {
-        // unknown if search loaded or unloaded questions
-    }
-
-    loadQuestions (questionId, ) {
 
     }
+
 
     render() {
         return (
@@ -57,10 +58,7 @@ class QuestionsAndAnswers extends React.Component {
                 <h1 id='title'>
                 QUESTIONS & ANSWERS
                 </h1>
-                <form>
-                    <input type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."/>
-                    <input type="submit"/>
-                </form>
+                <SearchBar />
                 <ul id ="question-list">
                    {this.state.questions.map((question, index)=> {
                         return (
@@ -69,30 +67,13 @@ class QuestionsAndAnswers extends React.Component {
                                 <p className="q-id">Q:</p>
                                 <p className="q-text">{question.question_body}</p>
                                 <div className="info-tab">
-                                    <p className="helpful-num">Helpful?
-                                        <p className="helpful-event" >Yes ({question.question_helpfulness})</p>
-                                    |
-                                        <p className="add-answer-vent" >Add Answer</p>
-                                    </p>
+                                Helpful?
+                                    <p className="helpful-event" >Yes ({question.question_helpfulness})</p>
+                                |
+                                    <p className="add-answer-vent" >Add Answer</p>
                                 </div>
                             </div>
-                            {Object.keys(question.answers).map((key , index)=>{
-                                if (index < )
-                                return (
-                                <div className="answer-content">
-                                    <p className="a-id">A:</p>
-                                    <p className="a-text">{question.answers[key].body}</p>
-                                    <div className="info-tab">
-                                        <p className="user-info">by {question.answers[key].user} - {question.answers[key].date}</p>
-                                        |
-                                        <p className="helpful-num">Helpful?
-                                            <p className="helpful-event" >Yes ({question.answers[key].question_helpfulness})</p>
-                                        |
-                                            <p className="report-event" > Report </p>
-                                        </p>
-                                    </div>
-                                </div>)
-                            })}
+                            <AnswerList answers={question.answers}/>
                         </li>)
                     })}
                 </ul>
