@@ -5,7 +5,7 @@ class AnswerList extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            answerItems : [],
+            answersLoaded : []
         }
     }
 
@@ -13,32 +13,29 @@ class AnswerList extends React.Component {
         this.loadAnswers(2);
     }
 
-    componentDidUpdate() {
-        this.answerChange(2)
+    componentWillUnmount(){
+        this.state = {
+            answersLoaded : []
+        }
+        this.setState(this.state);
     }
 
+
     loadAnswers (amount) {
-        let currentIndex = this.state.answerItems.length;
+        let currentIndex = this.props.answers.length;
         let keys = Object.keys(this.props.answers);
         for (let i = currentIndex; i < amount || i > keys.length-1 ; i++) {
-            this.state.answerItems[i] = keys[i];
+            this.state.answersLoaded[keys[i]] += 1;
         }
         console.log(this.state, 'loading answers')
         this.setState(this.state)
     }
 
-    answerChange (amount) {
-        let currentIndex = this.state.answerItems.length;
-        let keys = Object.keys(this.props.answers);
-        for (let i = currentIndex; i < amount || i > keys.length-1 ; i++) {
-            this.state.answerItems[i] = keys[i];
-        }
-    }
 
     render () {
         return (
             <ul>
-                {this.state.answerItems.map((item, index) => {
+                {Object.keys(this.props.answers).map((item, index) => {
                     return <Answer data={this.props.answers[item]} key={index}/>
                 })}
             </ul>)

@@ -74,7 +74,6 @@ class QuestionsAndAnswers extends React.Component {
             this.state.questions = this.state.allQuestions;
         }
         console.log(this.state, 'b4 reload')
-        debugger;
        this.setState(this.state)
     }
 
