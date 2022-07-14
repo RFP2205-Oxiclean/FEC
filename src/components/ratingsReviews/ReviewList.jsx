@@ -6,10 +6,11 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numReviewsDisplayed: 0
+      numReviewsDisplayed: 0,
+      sortOption: ''
     }
     this.addTwoReviewsToDisplay = this.addTwoReviewsToDisplay.bind(this);
-    this.sortReviews = this.sortReviews.bind(this);
+    this.handleSortReviewsChange = this.handleSortReviewsChange.bind(this);
   }
 
   componentDidMount() {
@@ -27,9 +28,11 @@ class ReviewList extends React.Component {
     })
   }
 
-  sortReviews(sortOption) {
-    console.log(sortOption);
-
+  handleSortReviewsChange(sortOption) {
+    console.log('changing the sort option to ', sortOption)
+    this.setState({
+      sortOption: sortOption
+    })
   }
 
 
@@ -39,7 +42,7 @@ class ReviewList extends React.Component {
     var reviewsToDisplay = this.props.reviews.slice(0, this.state.numReviewsDisplayed);
     return (
       <div>
-        <SortDropdown sortReviews = {this.sortReviews} numReviews = {this.props.totalNumReviews}/>
+        <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
         {reviewsToDisplay.map((review, index) =>
           <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
         )}
