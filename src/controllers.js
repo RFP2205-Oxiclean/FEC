@@ -1,9 +1,9 @@
 import axios from "axios";
-import { url, API_KEY } from "/config/config.js";
+import { url, API_KEY } from "../config/config.js";
 import {
   createCloudinaryDisplayURL,
   createCloudinaryThumbnailURL,
-} from "/src/services/Cloudinary.js";
+} from "./services/Cloudinary.js";
 
 let cachedProductById = {};
 

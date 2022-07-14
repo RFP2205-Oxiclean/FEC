@@ -7,7 +7,7 @@ const CollapsePanelButton = ({isHidden, setIsHidden}) => {
   }
 
   return <div className="collapse-button-container">
-    <button onClick={() => {handleClick()}} className="collapse-panel-button">COLLAPSE</button>
+    <button data-testid='collapseButton' onClick={() => {handleClick()}} className="collapse-panel-button">COLLAPSE</button>
   </div>
 }
 

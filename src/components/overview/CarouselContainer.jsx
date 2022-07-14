@@ -9,14 +9,14 @@ import axios from 'axios';
 const CarouselContainer = ( {product_id}) => {
 
   let [productInfo, setProductInfo] = useState({});
-  let [styleObjects, setStyleObjects] = useState(([
+  let [styleObjects, setStyleObjects] = useState([
     {
       style_id: '',
       photos: [
         {url: '', thumbnail_url: ''}
       ]
     }
-  ]));
+  ]);
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
 
     useEffect(() => {
@@ -32,6 +32,8 @@ const CarouselContainer = ( {product_id}) => {
         })
     }, []);
 
+
+  console.log(getProductStylesById(product_id))
 
   let styleClickHandler = function(index) {
     setActiveDisplayIndex(index)
