@@ -43,18 +43,31 @@ const createCloudinaryDisplayURL = function (url) {
   if (!cached_urls[url]) {
     let image = Cloud.image(url);
     image.setDeliveryType("fetch");
-    image
-      .resize(
-        pad()
-          .height(1200)
-          .width(1600)
-          // .gravity(autoGravity())
-          .background(predominantGradient())
-      )
-      .adjust(improve());
+    image.resize(
+      pad()
+        .height(1200)
+        .width(1600)
+        // .gravity(autoGravity())
+        .background(predominantGradient())
+    );
+    // .adjust(improve());
     cached_urls[url] = image.toURL();
   }
   return cached_urls[url];
+};
+
+const createCloudinaryReviewURL = function (url) {
+  let reviewURL = Cloud.image(url);
+  image.setDeliveryType("fetch");
+  image
+    .resize(
+      pad()
+        .height(1200)
+        .width(1600)
+        // .gravity(autoGravity())
+        .background(predominantGradient())
+    )
+    .adjust(improve());
 };
 
 export { createCloudinaryThumbnailURL, createCloudinaryDisplayURL };

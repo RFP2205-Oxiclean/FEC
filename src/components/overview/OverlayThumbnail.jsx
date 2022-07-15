@@ -1,19 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import { createCloudinaryThumbnailURL} from '/src/services/Cloudinary.js';
+import React, { useState, useEffect } from "react";
+import {
+  createCloudinaryThumbnailURL,
+  createCloudinaryDisplayURL,
+} from "/src/services/Cloudinary.js";
 
-const OverlayThumbnail = ( {active, changeImage, index, image} ) => {
+const OverlayThumbnail = ({ active, changeImage, index, images }) => {
+  let [defaultImage, setDefaultImage] = useState(images?.thumbnail_url);
 
-  let handleClick = function() {
-    changeImage(index)
+  let handleError = function () {
+    if (defaultImage !== images?.url) {
+      setDefaultImage(images?.url);
+    }
+  };
+
+  let handleClick = function () {
+    changeImage(index);
     setActiveCSS(!clicked);
-  }
+  };
 
-  let [clicked, setActiveCSS] = useState(false)
+  let [clicked, setActiveCSS] = useState(false);
 
-  return <div onClick={() => {handleClick()}} className={active ? "overview-overlay-thumbnail-active" : "overview-overlay-thumbnail"}>
-    <img height="74px" width="74px" src={createCloudinaryThumbnailURL(image)}></img>
-  </div>
-}
-
+  return (
+    <div
+      onClick={() => {
+        handleClick();
+      }}
+      className={
+        active
+          ? "overview-overlay-thumbnail-active"
+          : "overview-overlay-thumbnail"
+      }
+    >
+      <img
+        onError={handleError()}
+        height="74px"
+        width="74px"
+        src={createCloudinaryThumbnailURL(defaultImage)}
+      ></img>
+    </div>
+  );
+};
 
 export default OverlayThumbnail;

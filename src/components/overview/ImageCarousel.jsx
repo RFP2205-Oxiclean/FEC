@@ -43,7 +43,9 @@ const ImageCarousel = ({
     >
       <ThumbnailContainer
         activeImageIndex={activeImageIndex}
-        photos={activeStyleObject?.photos}
+        photos={activeStyleObject?.photos?.map(function (obj, i) {
+          return { ...obj, trueIndex: i };
+        })}
         changeImage={changeImage}
       ></ThumbnailContainer>
       <ExpandedProductInfo
