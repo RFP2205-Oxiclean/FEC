@@ -66,6 +66,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
   return (
     <div>
+      {metadata.ratings!== undefined ? <div>
       <br></br>
       <div>RATINGS & REVIEWS</div>
       <div id = 'average-rating'>{roundedAverage}&nbsp;
@@ -115,7 +116,9 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
         </div>
       }
 
+    </div> : ''}
     </div>
+
   )
 }
 

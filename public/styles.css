@@ -348,7 +348,62 @@ width: 150px; */
 
 }
 
+.review-list {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+#average-rating {
+  font-size: 30px;
+  font-weight: bold;
+}
+
 input[type="radio"] {
   display: none;
+}
+
+/* .modal-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+} */
+
+.review-image-thumbnail {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin-left: 10px;
+  float: left;
+  margin-bottom: 10px;
+
+}
+
+.review-recommend {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.review-helpful-text-block {
+  margin-top: 20px;
+
 }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
+import AddReviewModal from './AddReviewModal.jsx';
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
@@ -12,6 +13,8 @@ class RatingsReviews extends React.Component {
         this.state = {
           reviews: [],
           metadata: {},
+          product_name: '',
+          displayAddReviewModal: false,
           filterRatings: {
             1: false,
             2: false,
@@ -27,14 +30,18 @@ class RatingsReviews extends React.Component {
         this.logState = this.logState.bind(this);
         this.updateMetadataState = this.updateMetadataState.bind(this);
         this.updateReviewsState = this.updateReviewsState.bind(this);
+        this.updateProductName = this.updateProductName.bind(this);
         this.handleFilterByRating = this.handleFilterByRating.bind(this);
         this.filterReviews = this.filterReviews.bind(this);
         this.handleFilterClear = this.handleFilterClear.bind(this);
+        this.showAddReviewModal = this.showAddReviewModal.bind(this);
+        this.closeAddReviewModal = this.closeAddReviewModal.bind(this);
     }
 
     componentDidMount() {
       this.getReviewList();
       this.getMetadata();
+      this.getProductInformation();
     }
 
     logState() {
@@ -50,6 +57,12 @@ class RatingsReviews extends React.Component {
     updateMetadataState(metadata) {
       this.setState({
         metadata: metadata
+      })
+    }
+
+    updateProductName(product_name) {
+      this.setState({
+        product_name: product_name
       })
     }
 
@@ -78,19 +91,32 @@ class RatingsReviews extends React.Component {
     //Retrieves an array of all ratings associated with the current product
     //On success, updates the state of RatingsReviews.jsx
     getMetadata() {
-    let endPoint = `${url}/reviews/meta`;
-    axios.get(endPoint, {
-        params: {
-          product_id: this.props.product_id,
-          count: 10000
-        }
-    })
+      let endPoint = `${url}/reviews/meta`;
+      axios.get(endPoint, {
+          params: {
+            product_id: this.props.product_id,
+            count: 10000
+          }
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.updateMetadataState(response.data);
+        })
+        .catch((err) => {
+          console.error('Error in getRatingsReviewsData response: ', err);
+        })
+      }
+
+    getProductInformation() {
+      let endPoint = `${url}/products/${this.props.product_id}`
+      axios.get(endPoint)
       .then((response) => {
-        console.log(response.data);
-        this.updateMetadataState(response.data);
+        console.log('product information: ', response.data)
+        this.updateProductName(response.data.name)
+
       })
       .catch((err) => {
-        console.error('Error in getRatingsReviewsData response: ', err);
+        console.error('Error in getProductInformation', err);
       })
     }
 
@@ -172,6 +198,23 @@ class RatingsReviews extends React.Component {
       })
     }
 
+    /* Pops up the Add Review Modal */
+    showAddReviewModal(e) {
+      e.preventDefault();
+      console.log('showAddReviewModal was invoked')
+      this.setState({
+        displayAddReviewModal: true
+      })
+    }
+
+    /* Closes the Add Review Modal (passed down as prop) */
+    closeAddReviewModal() {
+      console.log('closing modal')
+      this.setState({
+        displayAddReviewModal: false
+      })
+    }
+
     /* Methods to filter and sort reviews to pass down to ReviewList */
     filterReviews() {
       var filteredReviews = [];
@@ -198,22 +241,20 @@ class RatingsReviews extends React.Component {
 
     }
 
-    sortReviews() {
-
-    }
-
-
     render() {
         let filteredReviews = this.filterReviews();
         return (
           <div>
+            <div>{this.state.displayAddReviewModal && <AddReviewModal product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal}/>}</div>
             <h1>Ratings & Reviews</h1>
             <ReviewList totalNumReviews = {this.state.reviews.length} reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
+            <button className = 'add-review-button' onClick = {this.showAddReviewModal}>ADD A REVIEW +</button>
             <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getMetadata}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>
-            <button onClick = {this.filterReviews.bind(this)}>Filter Reviews</button>
+            <button onClick = {this.getProductInformation.bind(this)}>Get product information</button>
+
           </div>
 
         )
