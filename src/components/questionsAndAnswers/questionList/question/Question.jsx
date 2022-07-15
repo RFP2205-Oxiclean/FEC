@@ -25,7 +25,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
             .then((res) => {
                 console.log("marked helpful");
                 this.state.active = false;
-                this.setState(this.state);
+                this.setState(JSON.parse(JSON.stringify(this.state)));
             })
             .catch((err) => {
                 console.error("err in helpful marking infoTab", err)

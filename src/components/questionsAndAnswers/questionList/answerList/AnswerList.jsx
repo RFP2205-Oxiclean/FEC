@@ -18,7 +18,7 @@ class AnswerList extends React.Component {
         this.state = {
             answersLoaded : []
         }
-        this.setState(this.state);
+        this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
 
@@ -29,7 +29,7 @@ class AnswerList extends React.Component {
             this.state.answersLoaded[keys[i]] += 1;
         }
         console.log(this.state, 'loading answers')
-        this.setState(this.state)
+        this.setState(JSON.parse(JSON.stringify(this.state)))
     }
 
 

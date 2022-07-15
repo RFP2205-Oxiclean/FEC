@@ -36,7 +36,7 @@ class QuestionsAndAnswers extends React.Component {
             this.state.allQuestions = response.data.results;
             this.sortQuestionsByHelpfulness()
             //console.log(this.state)
-            this.setState(this.state);
+            this.setState(JSON.parse(JSON.stringify(this.state)));
         })
         .catch((err) => {
             console.error('error in getting all questions', err);
@@ -50,7 +50,7 @@ class QuestionsAndAnswers extends React.Component {
                     results.push(a);
                     return a;
                 } else {
-                    results.push(b)
+                    results.push(b);
                     return b;
                 }
             })
@@ -67,11 +67,11 @@ class QuestionsAndAnswers extends React.Component {
                 }
                 return false;
             })
-            this.setState(this.state);
+            this.setState(JSON.parse(JSON.stringify(this.state)));
         } else if (this.state.filtered = true) {
             this.state.questions = this.state.allQuestions;
             this.state.filtered = false;
-            this.setState(this.state);
+            this.setState(JSON.parse(JSON.stringify(this.state)));
         }
 
     }

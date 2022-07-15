@@ -16,26 +16,32 @@ class InfoTab extends React.Component {
 
 
     toggleModal = () => {
-        let endPoint = `${url}/product/${this.props.productId}`
-        axios.get(endPoint ,{
-            params: {
-            product_id:this.props.productId
-            },
-        })
-        .then((res)=>{
+        // console.log()
+        // let endPoint = `${url}/products/${this.props.productId}`
+        // axios.get(endPoint)                               // dont set current state create a new one
+        // .then((res)=>{
+        //
+        //     console.log(res)
+        // })
+        // .catch((err)=>{
+        //     console.error("error in getting product", err)
+        // })
+
+        let endPoint = `${url}/products/${this.props.productId}`
+        console.log(endPoint)
+        axios.get(endPoint)
+        .then((res) => {
             this.state.productName = res;
             if (this.state.activeModal) {
                 this.state.activeModal =  false;
             } else {
                     this.state.activeModal =  true;
             }
-            this.setState(this.state);
-            console.log(res)
+            this.setState(JSON.parse(JSON.stringify(this.state)));
         })
-        .catch((err)=>{
-            console.error("error in getting product", err)
+        .catch((err) => {
+          console.error('Error in getProductInformation', err);
         })
-
     }
 
     render() {
