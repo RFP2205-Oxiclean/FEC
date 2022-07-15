@@ -3,8 +3,7 @@ import axios from 'axios';
 import SearchBar from './searchBar/SearchBar.jsx'
 import AnswerList from './questionList/answerList/AnswerList.jsx';
 import QuestionList from './questionList/QuestionList.jsx';
-import { url } from "../../../config/config.js";
-import { API_KEY } from "../../../config/config.js";
+import { url, API_KEY } from "../../../config/config.js";
 
 class QuestionsAndAnswers extends React.Component {
     constructor(props) {
@@ -31,9 +30,6 @@ class QuestionsAndAnswers extends React.Component {
             product_id: id,
             page : 1,
             count : 9999
-            },
-            headers: {
-            Authorization: API_KEY
             }
         })
         .then((response) => {
@@ -93,7 +89,7 @@ class QuestionsAndAnswers extends React.Component {
                 QUESTIONS & ANSWERS
                 </h1>
                 <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>
-                <QuestionList questions={this.state.questions} />
+                <QuestionList questions={this.state.questions} productId={this.props.product_id} />
 
             </div>
         )

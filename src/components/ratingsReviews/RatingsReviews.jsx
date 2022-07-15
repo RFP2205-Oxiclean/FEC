@@ -13,9 +13,6 @@ class RatingsReviews extends React.Component {
     axios.get(endPoint, {
       params: {
         product_id: this.state.displayedProductId
-      },
-      headers: {
-        Authorization: API_KEY
       }
     })
     .then((response) => {

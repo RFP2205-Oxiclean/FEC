@@ -12,10 +12,11 @@ class QuestionList extends React.Component {
 
 
     render () {
+        {console.log(this.props.productId, "this is in ql")}
         return (
             <ul id ="question-list">
                 {this.props.questions.map((question, index)=> {
-                    return <Question question={question} key={index}/>
+                    return <Question question={question} key={index} productId={this.props.productId}/>
                 })}
             </ul>)
     }

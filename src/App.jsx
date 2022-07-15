@@ -2,6 +2,8 @@ import React from "react";
 import { url } from "../config/config.js";
 import { API_KEY } from "../config/config.js";
 import axios from "axios";
+axios.defaults.headers.common['Authorization'] = API_KEY;
+
 
 import ProductOverview from './components/overview/ProductOverview.jsx'
 import QuestionsAndAnswers from './components/questionsAndAnswers/QuestionsAndAnswers.jsx'

@@ -101,6 +101,18 @@
   display:inline;
 }
 
+.questions-and-answers #question-list .info-tab .add-answer-modal {
+  display:block;
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background-color: black;
+  z-index:999;
+  opacity:.8;
+}
+
 .questions-and-answers .answer-list
 {
   display: block;

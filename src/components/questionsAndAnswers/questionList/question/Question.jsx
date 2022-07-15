@@ -8,7 +8,8 @@ import { API_KEY, url } from "../../../../../config/config.js";
     constructor(props) {
         super(props)
         this.state = {
-            active: true
+            active: true,
+            answerActive: false
         }
     }
 
@@ -19,9 +20,6 @@ import { API_KEY, url } from "../../../../../config/config.js";
             axios.put(endPoint, {
                 params: {
                     question_id:this.props.question.question_id,
-                },
-                headers: {
-                    Authorization:API_KEY
                 }
             })
             .then((res) => {
@@ -41,16 +39,16 @@ import { API_KEY, url } from "../../../../../config/config.js";
     }
 
     render () {
-        {console.log(this.props, "in quews")}
-        return (
+       return (
             <li className="question">
                 <div className="question-content">
                     <p className="q-id">Q:</p>
                     <p className="q-text">{this.props.question.question_body}</p>
-                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} />
+                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId}/>
                 </div>
                 <AnswerList answers={this.props.question.answers}/>
             </li>)
+
     }
 
     }
