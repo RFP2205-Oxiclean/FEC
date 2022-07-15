@@ -1,6 +1,6 @@
 import React from 'react';
-import AnswerList from '../AnswerList/AnswerList.jsx';
-import InfoTab from './InfoTab/InfoTab.jsx';
+import AnswerList from '../answerList/AnswerList.jsx';
+import InfoTab from './infoTab/InfoTab.jsx';
 
 class Question extends React.Component {
   constructor(props) {

@@ -1,11 +1,11 @@
 import React from 'react';
-import Answer from './Answer/Answer.jsx'
+import Answer from './answer/Answer.jsx'
 
 class AnswerList extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            answersLoaded : []
+            answersLoaded : [],
             defaultItems : 2
         }
     }
