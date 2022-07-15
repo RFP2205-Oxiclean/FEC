@@ -34,15 +34,9 @@
 }
 
 .overview-thumbnail-container {
-  margin-left: 20px;
-  padding-top: 100px;
-  display: inline-block;
-  height: 75%;
-  flex-wrap: wrap;
-  width: 6%;
-  background-color: transparent;
-  border-color: black;
-  overflow: hidden;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .overview-overlay-thumbnail {
@@ -240,6 +234,49 @@ img {
   margin-right: 20px;
   margin-top: 15px;
 }
+
+.thumbnail-scroll-button-up {
+  height: 10px;
+  width: 100%;
+  background: white;
+  text-align: "center";
+  margin-bottom: "auto";
+}
+
+.thumbnail-scroll-button-down {
+  height: 10px;
+  width: 100%;
+  background: white;
+  text-align: "center";
+  margin-top: "auto";
+}
+
+.button-thumbnails-container {
+  margin-left: 20px;
+  padding-top: 100px;
+  display: inline-block;
+  height: 80%;
+  width: 6%;
+  background-color: transparent;
+  border-color: black;
+  overflow: hidden;
+}
+
+.button-thumbnails-container>div:first-child {
+  text-align: center;
+}
+
+.button-thumbnails-container>div:last-child {
+  text-align: center;
+}
+
+
+
+
+
+
+
+
 /* border: 2px solid #ddd;
 border-radius: 4px;
 padding: 5px;

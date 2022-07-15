@@ -1,16 +1,6 @@
 import { Cloudinary } from "@cloudinary/url-gen";
-import {
-  Resize,
-  fillPad,
-  fill,
-  thumbnail,
-  pad,
-} from "@cloudinary/url-gen/actions/resize";
-import {
-  color,
-  blurred,
-  predominantGradient,
-} from "@cloudinary/url-gen/qualifiers/background";
+import { Resize, fillPad, fill, thumbnail, pad } from "@cloudinary/url-gen/actions/resize";
+import { color, blurred, predominantGradient } from "@cloudinary/url-gen/qualifiers/background";
 import { adjust, improve } from "@cloudinary/url-gen/actions/adjust";
 
 const Cloud = new Cloudinary({
@@ -54,20 +44,6 @@ const createCloudinaryDisplayURL = function (url) {
     cached_urls[url] = image.toURL();
   }
   return cached_urls[url];
-};
-
-const createCloudinaryReviewURL = function (url) {
-  let reviewURL = Cloud.image(url);
-  image.setDeliveryType("fetch");
-  image
-    .resize(
-      pad()
-        .height(1200)
-        .width(1600)
-        // .gravity(autoGravity())
-        .background(predominantGradient())
-    )
-    .adjust(improve());
 };
 
 export { createCloudinaryThumbnailURL, createCloudinaryDisplayURL };

@@ -12,8 +12,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedProductId: 40346,
+      displayedProductId: 40344,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(id) {
+    this.setState({
+      displayedProductId: id,
+    });
+  }
+
+  myDebugger() {
+    console.log(this.state);
   }
 
   render() {
@@ -23,8 +34,9 @@ class App extends React.Component {
                     Welcome to React App thats build using Webpack and Babel separately
                 </h1> */}
         <div className="product-overview">
-          <ProductOverview product_id={this.state.displayedProductId} />
+          <ProductOverview handleSubmit={this.handleSubmit} product_id={this.state.displayedProductId} />
         </div>
+        <button onClick={this.myDebugger.bind(this)}>DEBUG</button>
         <div className="ratings-reviews">
           <RatingsReviews product_id={this.state.displayedProductId} />
         </div>

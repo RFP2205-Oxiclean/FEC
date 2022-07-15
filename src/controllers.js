@@ -1,9 +1,8 @@
 import axios from "axios";
 import { url, API_KEY } from "../config/config.js";
-import {
-  createCloudinaryDisplayURL,
-  createCloudinaryThumbnailURL,
-} from "./services/Cloudinary.js";
+import { createCloudinaryDisplayURL, createCloudinaryThumbnailURL } from "./services/Cloudinary.js";
+
+let newAxios = axios.create({});
 
 let cachedProductById = {};
 
@@ -48,23 +47,16 @@ export function getProductStylesById(id) {
 let prefetchCache = {};
 
 export function prefetch(styleObjects, product_id) {
+  axios.defaults.headers.common["Authorization"] = "";
   if (prefetchCache[product_id]) {
     return;
   } else {
     styleObjects.forEach(function (styleObject) {
       styleObject.photos.forEach(function (photoObject) {
-        axios
-          .get(createCloudinaryThumbnailURL(photoObject.thumbnail_url))
-          .then(() => {
-            prefetchCache[product_id] = true;
-          })
-          .catch();
-        axios
-          .get(createCloudinaryDisplayURL(photoObject.url))
-          .then(() => {
-            prefetchCache[product_id] = true;
-          })
-          .catch();
+        newAxios.get(createCloudinaryDisplayURL(photoObject.url)).then(() => {
+          prefetchCache[product_id] = true;
+        });
+        newAxios.get(createCloudinaryThumbnailURL(photoObject.thumbnail_url));
       });
     });
   }

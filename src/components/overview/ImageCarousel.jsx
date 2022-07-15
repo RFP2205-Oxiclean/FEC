@@ -6,26 +6,18 @@ import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
 import CollapsePanelButton from "./CollapsePanelButton.jsx";
 import { prefetch } from "/src/controllers.js";
 
-const ImageCarousel = ({
-  product_id,
-  styleClickHandler,
-  styleObjects,
-  activeStyleObject,
-  productInfo,
-}) => {
+const ImageCarousel = ({ product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo }) => {
   let [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  let cloud_url = createCloudinaryDisplayURL(
-    activeStyleObject?.photos[activeImageIndex].url
-  );
+  let cloud_url = createCloudinaryDisplayURL(activeStyleObject?.photos[activeImageIndex].url);
 
   let changeImage = function (index) {
     setActiveImageIndex(index);
   };
 
-  // if (styleObjects.length > 1) {
-  //   prefetch(styleObjects, product_id)
-  // }
+  if (styleObjects.length > 1) {
+    prefetch(styleObjects, product_id);
+  }
 
   // redundant?
   let resetActiveImageIndex = function (index = 0) {
@@ -39,21 +31,20 @@ const ImageCarousel = ({
         width: "1600px",
         height: "1200",
       }}
-      className="overview-image-container"
-    >
-      <ThumbnailContainer
-        activeImageIndex={activeImageIndex}
-        photos={activeStyleObject?.photos?.map(function (obj, i) {
-          return { ...obj, trueIndex: i };
-        })}
-        changeImage={changeImage}
-      ></ThumbnailContainer>
+      className="overview-image-container">
+      <div className="button-thumbnails-container">
+        <ThumbnailContainer
+          activeImageIndex={activeImageIndex}
+          photos={activeStyleObject?.photos?.map(function (obj, i) {
+            return { ...obj, trueIndex: i };
+          })}
+          changeImage={changeImage}></ThumbnailContainer>
+      </div>
       <ExpandedProductInfo
         resetActiveImageIndex={resetActiveImageIndex}
         styleClickHandler={styleClickHandler}
         productInfo={productInfo}
-        styleObjects={styleObjects}
-      ></ExpandedProductInfo>
+        styleObjects={styleObjects}></ExpandedProductInfo>
     </div>
   );
 };
