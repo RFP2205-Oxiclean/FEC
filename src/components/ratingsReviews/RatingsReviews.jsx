@@ -249,7 +249,7 @@ class RatingsReviews extends React.Component {
             <h1>Ratings & Reviews</h1>
             <ReviewList totalNumReviews = {this.state.reviews.length} reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
             <button className = 'add-review-button' onClick = {this.showAddReviewModal}>ADD A REVIEW +</button>
-            <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear}/>
+            <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear} setAverageRating = {this.props.setAverageRating}/>
             <button onClick = {this.getReviewList}>Get Review List</button>
             <button onClick = {this.getMetadata}>Get Ratings List</button>
             <button onClick = {this.logState}>Show current state</button>

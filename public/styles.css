@@ -359,7 +359,7 @@ width: 150px; */
   font-weight: bold;
 }
 
-input[type="radio"] {
+.star-rating-user-input-radio {
   display: none;
 }
 

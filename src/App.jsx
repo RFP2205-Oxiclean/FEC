@@ -13,7 +13,15 @@ class App extends React.Component {
         super(props);
         this.state = {
             displayedProductId: 40351,
+            averageRating: null,
         };
+        this.setAverageRating = this.setAverageRating.bind(this);
+    }
+
+    setAverageRating(rating) {
+        this.setState({
+            averageRating: rating
+        })
     }
 
     render() {
@@ -30,6 +38,7 @@ class App extends React.Component {
                 <div className='ratings-reviews'>
                     <RatingsReviews
                         product_id={this.state.displayedProductId}
+                        setAverageRating = {this.setAverageRating}
                     />
                 </div>
 

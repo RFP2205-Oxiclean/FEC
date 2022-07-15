@@ -18,10 +18,11 @@ const StarRatingUserInput = (props) => {
         const ratingValue = i + 1;
         return (
         <label key = {ratingValue}>
-          <input className = ""
+          <input className = "star-rating-user-input-radio"
             type= "radio"
             name = "rating"
             value = {ratingValue}
+            visibility = "hidden"
             onClick = {() => ratingChange(ratingValue)}
           />
           <FaStar
