@@ -39,7 +39,7 @@ class QuestionsAndAnswers extends React.Component {
         .then((response) => {
             this.state.allQuestions = response.data.results;
             this.sortQuestionsByHelpfulness()
-            console.log(this.state)
+            //console.log(this.state)
             this.setState(this.state);
         })
         .catch((err) => {
