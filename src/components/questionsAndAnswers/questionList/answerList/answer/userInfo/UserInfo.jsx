@@ -9,7 +9,7 @@ const UserInfo = (props) => {
     let report = <p className="report-event" > Report </p>
 
     return(
-        <div className="info-tab"> {user} | Helpful? {yes} | {report}</div>)
+        <div className="user-tab"> {user} | Helpful? {yes} | {report}</div>)
 }
 
 

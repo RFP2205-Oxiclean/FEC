@@ -35,7 +35,7 @@ class AnswerList extends React.Component {
 
     render () {
         return (
-            <ul>
+            <ul className="answer-list">
                 {Object.keys(this.props.answers).map((item, index) => {
                     return <Answer data={this.props.answers[item]} key={index}/>
                 })}

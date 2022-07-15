@@ -88,8 +88,8 @@ class QuestionsAndAnswers extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1 id='title'>
+            <div id="qa-container">
+                <h1 className='qa-title'>
                 QUESTIONS & ANSWERS
                 </h1>
                 <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>

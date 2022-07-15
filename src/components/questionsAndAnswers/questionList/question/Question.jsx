@@ -30,9 +30,13 @@ import { API_KEY, url } from "../../../../../config/config.js";
                 this.setState(this.state);
             })
             .catch((err) => {
-                console.error("err in helpful marking infoTab",)
+                console.error("err in helpful marking infoTab", err)
             })
         }
+
+    }
+
+    addAnswer(){
 
     }
 

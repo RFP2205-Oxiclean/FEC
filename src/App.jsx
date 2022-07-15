@@ -37,11 +37,11 @@ class App extends React.Component {
                     />
                 </div>
 
-                <div className='ratings-reviews'>
+                {/* <div className='ratings-reviews'>
                     <RatingsReviews
                         product_id={this.state.displayedProductId}
                     />
-                </div>
+                </div> */}
             </div>
 
         )
