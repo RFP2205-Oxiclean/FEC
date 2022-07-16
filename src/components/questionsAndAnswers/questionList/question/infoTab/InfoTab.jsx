@@ -18,7 +18,6 @@ class InfoTab extends React.Component {
     toggleModal = () => {
 
         let endPoint = `${url}/products/${this.props.productId}`
-        console.log(endPoint)
         axios.get(endPoint)
         .then((res) => {
             this.state.product = res.data;
