@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-const SizeMenu = ({ changeHandler, side, width, activeStyle, defaultText, list, size }) => {
-  let [option, setOption] = useState("");
-  let style = {
-    float: side,
-    width: width,
-  };
+const SizeMenu = ({ stock, changeHandler, activeStyle }) => {
+  let [size, setSize] = useState("");
 
-  let handleChange = (e) => {
-    console.log(typeof e.target.value);
-    if (changeHandler) {
-      changeHandler(e.target.value);
-    }
-  };
+  useEffect(() => {
+    setSize("");
+  }, [activeStyle]);
 
   return (
-    <div>
-      <select defaultValue={defaultText} onChange={handleChange} style={style}>
-        <option disabled hidden>
-          {defaultText}
-        </option>
-        {list?.map(function (item, i) {
-          return (
-            <option value={item} key={activeStyle.style_id + item}>
-              {item}
-            </option>
-          );
+    <div style={{ float: "left" }}>
+      <select
+        defaultValue={"Select a Size!"}
+        onChange={(e) => {
+          changeHandler(e.target.value);
+        }}
+        defaultValue={"Hello"}
+        style={{ width: "250px" }}>
+        <option hidden>Select a Size!</option>
+        {stock.map(function (n, i) {
+          return <option key={n.id + n.size + ""}>{n.size}</option>;
         })}
       </select>
     </div>

@@ -166,6 +166,7 @@
   height: 74px;
   margin-left: 0;
   border-radius: 50%;
+  box-shadow: 10px 2px 5px -2px rgb(148, 147, 147);
 }
 
 .style-object-thumbnail-active {
@@ -176,10 +177,11 @@
   margin-left: 0;
   border-radius: 50%;
   box-shadow: 0 0 0px 3px red;
+  z-index: 1
 }
 
 .style-object-thumbnail:hover {
-  box-shadow: 0 0 6px 1px rgb(0, 139, 186);
+  box-shadow: 10px 2px 5px -2px rgb(98, 98, 98);
 }
 
 .overview-expanded-product-info-price {
@@ -208,6 +210,7 @@
 img {
   display:block;
   margin:auto;
+  z-index: 0;
 }
 
 .overview-expanded-product-info-prices {
@@ -310,8 +313,28 @@ img {
 select {
   height: 40px;
   text-align: center;
-  box-shadow: 0 0 6px 1px rgb(0, 139, 186),
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background: -moz-linear-gradient(
+		top,
+		#ffcb69 0%,
+		#f0a733 50%,
+		#f2a324 92%,
+		#ffb730);
+  box-shadow: 10px 8px 5px -2px rgb(148, 147, 147);
+}
 
+select:focus {
+  outline: none;
+}
+
+select:active {
+  padding: 0 0 0px 6px;
+}
+
+.select:focus:visited {
+  outline: none;
+  box-shadow: none;
 }
 
 

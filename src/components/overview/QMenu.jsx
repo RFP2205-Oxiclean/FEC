@@ -1,38 +1,31 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ size, quantity, activeStyle, sizeQuantityPairs }) => {
-  let [sizeCount, setSizeCount] = useState(0);
+const QMenu = ({ available, activeStyle }) => {
+  let [arr, setArr] = useState([]);
 
-  let newArr = [];
   useEffect(() => {
-    sizeQuantityPairs.forEach(function (qs) {
-      if (qs.size === size) {
-        setSizeCount(qs.quantity);
-      }
+    let x = Math.min(15, available);
+    let newArr = Array(x).fill(0);
+    newArr = newArr.map(function (n, i) {
+      return i + 1;
     });
-  }, []);
+    setArr(newArr);
+  }, [available]);
 
-  for (let i = 1; i <= Math.min(15, size); i++) {
-    newArr.push(i);
-  }
+  useEffect(() => {
+    setArr([]);
+  }, [activeStyle]);
 
-  if (quantity) {
-    return (
-      <div style={{ float: "right" }}>
-        <select style={{ width: "100px" }} defaultValue={"words"}>
-          {newArr.map(function (n) {
-            return <option key={activeStyle.style_id + n + ""}>{n}</option>;
-          })}
-        </select>
-      </div>
-    );
-  } else {
-    return (
-      <div style={{ float: "right" }}>
-        <select style={{ width: "100px" }} defaultValue={"words"}></select>
-      </div>
-    );
-  }
+  return (
+    <div className="size-select-button" style={{ float: "right" }}>
+      <select style={{ width: "150px" }}>
+        <option defaultValue={"Hello"} hidden></option>
+        {arr.map(function (n) {
+          return <option key={n}>{n}</option>;
+        })}
+      </select>
+    </div>
+  );
 };
 
 export default QMenu;

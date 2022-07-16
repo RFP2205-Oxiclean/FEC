@@ -4,58 +4,48 @@ import SizeMenu from "./SizeMenu.jsx";
 import QMenu from "./QMenu.jsx";
 
 const PurchaseInfo = ({ activeStyle }) => {
-  let [size, setSize] = useState("");
-  let [sizeCount, setSizeCount] = useState(0);
+  let [selectedSize, selectSize] = useState(null);
+  let [stock, setStockArr] = useState([]);
+  let [available, setAvailable] = useState(0);
 
-  let sizeQuantityPairs = [];
-  for (var k in activeStyle.skus) {
-    sizeQuantityPairs.forEach(function (pair) {
-      if (pair.size === activeStyle.skus[k].size) {
-      }
-    });
-    sizeQuantityPairs.push(activeStyle.skus[k]);
-  }
-
-  let consolidate = function (arr) {
-    // combine objects
-    let newArr = [];
-    arr.forEach(function (qs) {
+  useEffect(() => {
+    let stockArr = [];
+    for (let k in activeStyle.skus) {
       let flag = false;
-      newArr.forEach(function (old_qs, i) {
-        if (old_qs.size === qs.size) {
-          newArr[i] = {
-            quantity: qs.quantity + old_qs.quantity,
-            size: qs.size,
-          };
+      stockArr.forEach(function (sizePair, i) {
+        if (activeStyle.skus[k].size === stockArr[i].size) {
           flag = true;
+          stockArr[i].quantity = stockArr[i].quantity + activeStyle.skus[k].quantity;
         }
       });
       if (!flag) {
-        newArr.push(qs);
+        stockArr.push({ ...activeStyle.skus[k], id: k });
+      }
+    }
+    setStockArr(stockArr);
+  }, [activeStyle]);
+
+  let myDebugger = function () {
+    console.log(stock);
+    console.log(selectedSize);
+  };
+
+  useEffect(() => {
+    stock.forEach(function (pair) {
+      if (pair.size === selectedSize) {
+        setAvailable(pair.quantity);
       }
     });
-    return newArr;
-  };
+  }, [selectedSize]);
 
   return (
     <div className="overview-purchase-info">
       <div style={{ display: "inline-block", textAlign: "center", width: "100%" }}>
         <span className="purchase-style-name">{activeStyle.name}</span>
       </div>
-      <div className="purchase-buttons-container1">
-        <SizeMenu
-          list={consolidate(sizeQuantityPairs).map(function (qs) {
-            return qs.size;
-          })}
-          changeHandler={setSize}
-          key={activeStyle.style_id + "1"}
-          side={"left"}
-          target={"size"}
-          width={"200px"}
-          activeStyle={activeStyle}
-          defaultText={"Select a Size"}></SizeMenu>
-        <QMenu size={size} activeStyle={activeStyle} quantity={sizeCount} sizeQuantityPairs={consolidate(sizeQuantityPairs)}></QMenu>
-      </div>
+      <div className="purchase-buttons-container1"></div>
+      <SizeMenu activeStyle={activeStyle} changeHandler={selectSize} stock={stock}></SizeMenu>
+      <QMenu activeStyle={activeStyle} available={available}></QMenu>
     </div>
   );
   //side, width, handleChange, size, defaultText, activeStyle
