@@ -6,9 +6,12 @@ const ThumbnailContainer = (props) => {
   let [startEnd, setStartEnd] = useState([0, 7]);
 
   useEffect(() => {
-    if (props.activeImageIndex + 7 <= props.photos.length) {
-      setStartEnd([props.activeImageIndex, props.activeImageIndex + 7]);
-    } else if (props.activeImageIndex + 7 > props.photos.length) {
+    let activeThumbnail = props.activeStyleObject.activeDisplayThumbnail;
+    if (activeThumbnail < 7) {
+      setStartEnd([0, Math.min(7, props.photos?.length)]);
+    } else if (activeThumbnail + 7 <= props.photos.length) {
+      setStartEnd([activeThumbnail, activeThumbnail + 7]);
+    } else if (activeThumbnail + 7 > props.photos.length) {
       setStartEnd([Math.max(0, props.photos.length - 7), props.photos.length]);
     }
   }, [props.photos]);
@@ -32,7 +35,9 @@ const ThumbnailContainer = (props) => {
         {activeThumbnails2(props.photos)?.map(function (photoObject, i) {
           return (
             <OverlayThumbnail
-              active={photoObject.trueIndex === props.activeImageIndex ? true : false}
+              activeStyleObject={props.activeStyleObject}
+              changeActiveThumbnail={props.changeActiveThumbnail}
+              active={photoObject.trueIndex === props.activeStyleObject.activeDisplayThumbnail ? true : false}
               index={photoObject.trueIndex}
               changeImage={props.changeImage}
               key={i}

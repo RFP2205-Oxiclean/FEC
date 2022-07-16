@@ -6,7 +6,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [entry, setEntry] = useState("");
 
   let handleClick = function () {
-    console.log("firing", entry);
     handleSubmit(entry);
   };
 

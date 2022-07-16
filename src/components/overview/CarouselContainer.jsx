@@ -9,8 +9,10 @@ const CarouselContainer = ({ product_id }) => {
   let [productInfo, setProductInfo] = useState({});
   let [styleObjects, setStyleObjects] = useState([
     {
+      activeDisplayThumbnail: 0,
       style_id: "",
       photos: [{ url: "", thumbnail_url: "" }],
+      skus: [],
     },
   ]);
 
@@ -21,9 +23,11 @@ const CarouselContainer = ({ product_id }) => {
       setProductInfo(infoObject);
     });
     getProductStylesById(product_id).then((data) => {
+      data = data.map(function (styleObject) {
+        return { ...styleObject, activeDisplayThumbnail: 0 };
+      });
       console.log(data);
       setStyleObjects(data);
-      return data;
     });
   }, []);
 
@@ -31,8 +35,21 @@ const CarouselContainer = ({ product_id }) => {
     setActiveDisplayIndex(index);
   };
 
+  let changeActiveThumbnail = function (activeStyleObject, thumbnailTrueIndex) {
+    let newActiveStyleObject = { ...activeStyleObject };
+    newActiveStyleObject.activeDisplayThumbnail = thumbnailTrueIndex;
+    let newStyleObjects = [...styleObjects].slice();
+    for (let i = 0; i < newStyleObjects.length; i++) {
+      if (newActiveStyleObject.style_id === newStyleObjects[i].style_id) {
+        newStyleObjects[i] = newActiveStyleObject;
+      }
+    }
+    setStyleObjects(newStyleObjects);
+  };
+
   return (
     <ImageCarousel
+      changeActiveThumbnail={changeActiveThumbnail}
       product_id={product_id}
       styleClickHandler={styleClickHandler}
       styleObjects={styleObjects}

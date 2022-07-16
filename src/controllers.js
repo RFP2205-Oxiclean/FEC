@@ -8,7 +8,9 @@ let cachedProductById = {};
 
 export function getProductById(id, count = 5) {
   if (cachedProductById[id]) {
-    return cachedProductById[id];
+    return new Promise((resolve, reject) => {
+      resolve(cachedProductById[id]);
+    });
   }
   return axios({
     method: "GET",
@@ -30,7 +32,9 @@ let cachedStylesById = {};
 
 export function getProductStylesById(id) {
   if (cachedStylesById[id]) {
-    return cachedStylesById[id];
+    return new Promise((resolve, reject) => {
+      resolve(cachedStylesById[id]);
+    });
   }
   return axios({
     method: "GET",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createCloudinaryThumbnailURL, createCloudinaryDisplayURL } from "/src/services/Cloudinary.js";
 
-const OverlayThumbnail = ({ active, changeImage, index, images }) => {
+const OverlayThumbnail = ({ changeActiveThumbnail, activeStyleObject, active, changeImage, index, images }) => {
   let [defaultImage, setDefaultImage] = useState(images?.thumbnail_url);
 
   let handleError = function () {
@@ -11,7 +11,8 @@ const OverlayThumbnail = ({ active, changeImage, index, images }) => {
   };
 
   let handleClick = function () {
-    changeImage(index);
+    changeActiveThumbnail(activeStyleObject, index);
+    // changeImage(index);
     setActiveCSS(!clicked);
   };
 

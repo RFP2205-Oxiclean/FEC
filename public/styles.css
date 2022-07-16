@@ -270,7 +270,49 @@ img {
   text-align: center;
 }
 
+.overview-purchase-info {
+  padding: 20px;
+  display: table;
+  width: 100%;
+}
 
+.purchase-style-name {
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.purchase-buttons-container1 {
+  padding-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.size-selector {
+  float: left;
+  width: 50%;
+  height: 40px;
+  background: black;
+}
+
+.quantity-selector {
+  float: right;
+  border: 2px black solid;
+  line-height: 40px;
+  color: black;
+  height: 40px;
+  font-size: 25px;
+  width: 120px;
+  text-align: center;
+
+}
+
+select {
+  height: 40px;
+  text-align: center;
+  box-shadow: 0 0 6px 1px rgb(0, 139, 186),
+
+}
 
 
 

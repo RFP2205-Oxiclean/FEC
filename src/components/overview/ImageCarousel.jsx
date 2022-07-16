@@ -6,10 +6,10 @@ import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
 import CollapsePanelButton from "./CollapsePanelButton.jsx";
 import { prefetch } from "/src/controllers.js";
 
-const ImageCarousel = ({ product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo }) => {
+const ImageCarousel = ({ changeActiveThumbnail, product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo }) => {
   let [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  let cloud_url = createCloudinaryDisplayURL(activeStyleObject?.photos[activeImageIndex].url);
+  let cloud_url = createCloudinaryDisplayURL(activeStyleObject?.photos[activeStyleObject.activeDisplayThumbnail].url);
 
   let changeImage = function (index) {
     setActiveImageIndex(index);
@@ -34,7 +34,9 @@ const ImageCarousel = ({ product_id, styleClickHandler, styleObjects, activeStyl
       className="overview-image-container">
       <div className="button-thumbnails-container">
         <ThumbnailContainer
+          changeActiveThumbnail={changeActiveThumbnail}
           activeImageIndex={activeImageIndex}
+          activeStyleObject={activeStyleObject}
           photos={activeStyleObject?.photos?.map(function (obj, i) {
             return { ...obj, trueIndex: i };
           })}
