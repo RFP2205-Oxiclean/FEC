@@ -36,7 +36,6 @@ class QuestionsAndAnswers extends React.Component {
         })
         .then((response) => {
             this.state.allQuestions = response.data.results;
-            this.sortQuestionsByHelpfulness()
             //console.log(this.state)
             this.setState(JSON.parse(JSON.stringify(this.state)));
         })
@@ -45,19 +44,6 @@ class QuestionsAndAnswers extends React.Component {
         })
     };
 
-    sortQuestionsByHelpfulness() {
-        let results = []
-        this.state.allQuestions.sort((a,b)=>{
-                if (a.question_helpfulness > b.question_helpfulness) {
-                    results.push(a);
-                    return a;
-                } else {
-                    results.push(b);
-                    return b;
-                }
-            })
-        this.state.questions = results;
-    }
 
 
     displayUnfilteredQuestions (filter) {
@@ -79,9 +65,6 @@ class QuestionsAndAnswers extends React.Component {
     }
 
 
-    searchQuestionList() {
-        //while results > 0 and have not found a match keep turning pages until we find it
-    }
 
 
     render() {
@@ -91,7 +74,7 @@ class QuestionsAndAnswers extends React.Component {
                 QUESTIONS & ANSWERS
                 </h1>
                 <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>
-                <QuestionList questions={this.state.questions} productId={this.props.product_id} />
+                <QuestionList questions={this.state.allQuestions} productId={this.props.product_id} />
 
             </div>
         )

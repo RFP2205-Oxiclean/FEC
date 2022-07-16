@@ -6,12 +6,15 @@ import MoreQuestions from './moreQuestions/MoreQuestions.jsx';
 class QuestionList extends React.Component {
     constructor(props) {
         super(props);
+        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
+        console.log(this.props.questions, 'qqqq');
         this.state = this.initialStateValues();
+
     }
 
     initialStateValues () {
         return {
-            oldQuestions: JSON.stringify(this.props.questions),
+            oldQuestions: JSON.stringify(this.sortedByHelpful),
             loadedQuestions : [],
             loadMoreState: 'nonexistant',
             amountOfQuestionsLoaded : 0,
@@ -20,10 +23,25 @@ class QuestionList extends React.Component {
         }
     }
 
+    sortQuestionsByHelpfulness(questions = []) {
+        let results = []
+        questions.sort((a,b)=>{
+                if (a.question_helpfulness > b.question_helpfulness) {
+                    results.push(a);
+                    return a;
+                } else {
+                    results.push(b);
+                    return b;
+                }
+            })
+        return results;
+    }
+
 
 
     componentDidUpdate() {
-        let propsString = JSON.stringify(this.props.questions);
+        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
+        let propsString = JSON.stringify(this.sortedByHelpful);
         if(this.state.amountOfQuestionsLoaded < 1 || propsString  !== this.state.oldQuestions) {
             console.log('rerender')
             this.state.oldQuestions = propsString;
@@ -33,16 +51,16 @@ class QuestionList extends React.Component {
 
     loadMoreGone() {
         this.state.loadMoreState = this.state.loadMoreStateList[0];
-        this.state.loadedQuestions = this.props.questions;
-        if (this.props.questions.length !== 0 ) {
+        this.state.loadedQuestions = this.sortedByHelpful;
+        if (this.sortedByHelpful.length !== 0 ) {
             this.setState(JSON.parse(JSON.stringify(this.state)));
         }
     }
 
     loadMoreDecrease() {
         this.state.loadMoreState = this.state.loadMoreStateList[1];
-        this.state.loadedQuestions = this.props.questions;
-        this.state.amountOfQuestionsLoaded = this.props.questions.length;
+        this.state.loadedQuestions = this.sortedByHelpful;
+        this.state.amountOfQuestionsLoaded = this.sortedByHelpful.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
@@ -52,7 +70,7 @@ class QuestionList extends React.Component {
     }
 
     loadMoreIncrease() {
-        let newSlice = this.props.questions.slice(0,this.state.amountOfQuestionsLoaded + this.state.questionsToLoad);
+        let newSlice = this.sortedByHelpful.slice(0,this.state.amountOfQuestionsLoaded + this.state.questionsToLoad);
         this.state.loadMoreState = this.state.loadMoreStateList[2];
         this.state.amountOfQuestionsLoaded = newSlice.length;
         this.state.loadedQuestions = newSlice;
@@ -64,15 +82,15 @@ class QuestionList extends React.Component {
 
 
     loadMoreQuestions() {
-        if (this.props.questions.length <= this.state.questionsToLoad) { //dont exist
+        if (this.sortedByHelpful.length <= this.state.questionsToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.props.questions.length - this.state.amountOfQuestionsLoaded <= this.state.questionsToLoad) { // decrease
+        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded <= this.state.questionsToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.props.questions.length - this.state.amountOfQuestionsLoaded > this.state.questionsToLoad) { //increase
+        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded > this.state.questionsToLoad) { //increase
             this.loadMoreIncrease();
         }
     }
