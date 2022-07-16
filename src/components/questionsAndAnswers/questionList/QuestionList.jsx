@@ -94,7 +94,7 @@ class QuestionList extends React.Component {
             <div>
                 <ul id ="question-list">
                     {this.state.loadedQuestions.map((question, index)=> {
-                        return <Question question={question} key={index} productId={this.props.productId}/>
+                        return <Question question={question} key={index} productId={this.props.productId} />
                     })}
                 </ul>
                 <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>

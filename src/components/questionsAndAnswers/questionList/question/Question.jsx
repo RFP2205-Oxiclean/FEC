@@ -7,13 +7,14 @@ import { API_KEY, url } from "../../../../../config/config.js";
     class Question extends React.Component {
     constructor(props) {
         super(props)
+        console.log(this.props, 'in indiv ques')
         this.state = {
             active: true,
             answerActive: false
         }
     }
 
-    sendHelpful = () => {
+    sendHelpful () {
         console.log(this.props.question.question_id);
         if (this.state.active) {
             let endPoint = `${url}/qa/questions/${this.props.question.question_id}/helpful`;
@@ -46,7 +47,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
                     <p className="q-text">{this.props.question.question_body}</p>
                     <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId}/>
                 </div>
-                <AnswerList answers={this.props.question.answers}/>
+                <AnswerList answers={this.props.question.answers} />
             </li>)
 
     }

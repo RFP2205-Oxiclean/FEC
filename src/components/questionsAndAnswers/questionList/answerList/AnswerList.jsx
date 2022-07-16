@@ -108,7 +108,7 @@ class AnswerList extends React.Component {
             <div>
                 <ul className="answer-list">
                     {this.state.loadedAnswers.map((item, index) => {
-                        return <Answer data={item} key={index}/>
+                        return <Answer data={item} key={index} />
                     })}
                 </ul>
                 <MoreAnswers loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreAnswers.bind(this)} />

@@ -27,7 +27,7 @@ class AnswerModal extends React.Component {
 
     render() {
         return (
-              <div className="add-answer-modal" onClick={this.props.clickHandler}>
+              <div className="add-answer-modal" >
                     <div className="aa-modal-container" >
                       <h1>Submit your Answer</h1>
                       <h3>{this.props.product.name} : {this.props.question.question_body}</h3>
@@ -52,7 +52,7 @@ class AnswerModal extends React.Component {
 
 
 
-
+//onClick={this.props.clickHandler}
 
 
 
