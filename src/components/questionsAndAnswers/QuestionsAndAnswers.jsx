@@ -36,6 +36,7 @@ class QuestionsAndAnswers extends React.Component {
         })
         .then((response) => {
             this.state.allQuestions = response.data.results;
+            this.displayUnfilteredQuestions('');
             console.log(response, 'get qs')
             this.setState(JSON.parse(JSON.stringify(this.state)));
         })
@@ -48,6 +49,7 @@ class QuestionsAndAnswers extends React.Component {
 
     displayUnfilteredQuestions (filter) {
         console.log(filter, 'filter')
+        console.log(this.state.allQuestions, 'what')
         if (filter.length >= 3) {
             this.state.questions = this.state.allQuestions.filter((question)=>{
                 if (question.question_body.indexOf(filter) !== -1) {
@@ -74,7 +76,7 @@ class QuestionsAndAnswers extends React.Component {
                 QUESTIONS & ANSWERS
                 </h1>
                 <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>
-                <QuestionList questions={this.state.allQuestions} productId={this.props.product_id} />
+                <QuestionList questions={this.state.questions} productId={this.props.product_id} />
 
             </div>
         )
