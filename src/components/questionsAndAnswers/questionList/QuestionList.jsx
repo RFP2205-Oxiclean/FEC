@@ -24,7 +24,8 @@ class QuestionList extends React.Component {
 
     componentDidUpdate() {
         let propsString = JSON.stringify(this.props.questions);
-        if((this.state.amountOfQuestionsLoaded < 1 || propsString  !== this.state.oldQuestions) && this.props.questions.length > 0) {
+        if(this.state.amountOfQuestionsLoaded < 1 || propsString  !== this.state.oldQuestions) {
+            console.log('rerender')
             this.state.oldQuestions = propsString;
             this.loadMoreQuestions();
         }

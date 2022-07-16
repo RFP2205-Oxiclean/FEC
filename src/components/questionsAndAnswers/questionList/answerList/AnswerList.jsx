@@ -97,26 +97,6 @@ class AnswerList extends React.Component {
 
 
 
-
-
-
-    // componentDidMount() {
-    //     this.loadAnswers(this.state.answersToLoad);
-    //     console.log(this.state, 'mounted answers', this.props.answers)
-    // }
-    // componentDidUpdate() {
-    //     console.log(this.state, 'a state', this.props.answers)
-    // }
-
-
-        // componentWillUnmount(){
-        //     this.state = {
-        //         loadedAnswers : []
-        //     }
-        //     this.setState(JSON.parse(JSON.stringify(this.state)));
-        // }
-
-
     render () {
         return (
             <div>
