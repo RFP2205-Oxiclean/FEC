@@ -9,14 +9,14 @@ import { API_KEY, url } from "../../../../../config/config.js";
         super(props)
         console.log(this.props, 'in indiv ques')
         this.state = {
-            active: true,
+            activeHelpful: true,
             answerActive: false
         }
     }
 
     sendHelpful () {
         console.log(this.props.question.question_id);
-        if (this.state.active) {
+        if (this.state.activeHelpful) {
             let endPoint = `${url}/qa/questions/${this.props.question.question_id}/helpful`;
             axios.put(endPoint, {
                 params: {
@@ -25,7 +25,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
             })
             .then((res) => {
                 console.log("marked helpful");
-                this.state.active = false;
+                this.state.activeHelpful = false;
                 this.setState(JSON.parse(JSON.stringify(this.state)));
             })
             .catch((err) => {
@@ -45,9 +45,9 @@ import { API_KEY, url } from "../../../../../config/config.js";
                 <div className="question-content">
                     <p className="q-id">Q:</p>
                     <p className="q-text">{this.props.question.question_body}</p>
-                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId}/>
+                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId} activeHelpful={this.state.activeHelpful} />
                 </div>
-                <AnswerList answers={this.props.question.answers} />
+                <AnswerList answers={this.props.question.answers}  />
             </li>)
 
     }

@@ -18,6 +18,7 @@ class AnswerList extends React.Component {
         return {
             oldAnswers: JSON.stringify(this.sortedByHelpful),
             loadedAnswers : [],
+            loadState : true,
             loadMoreState: 'nonexistant',
             amountOfAnswersLoaded : 0,
             answersToLoad : 2,
@@ -48,18 +49,17 @@ class AnswerList extends React.Component {
         this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifyAnswers(this.props.answers));
         let ansString = JSON.stringify(this.sortedByHelpful)
         console.log(this.sortedByHelpful.length, 'here');
-        if(this.state.amountOfAnswersLoaded < 1  && this.sortedByHelpful.length > 0) {
+        if(this.state.amountOfAnswersLoaded < 1  && this.sortedByHelpful.length > 0 && this.state.loadState) {
             this.state.oldAnswers = ansString;
             this.loadMoreAnswers();
         }
     }
 
-    loadMoreGone() { //array FN is a function to turn whatever you have into an array
+    loadMoreGone() {
         this.state.loadMoreState = this.state.loadMoreStateList[0];
         this.state.loadedAnswers = this.sortedByHelpful;
-        if (this.sortedByHelpful.length !== 0 ) {
-            this.setState(JSON.parse(JSON.stringify(this.state)));
-        }
+        this.state.loadState = false;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
     loadMoreDecrease() {
@@ -89,8 +89,9 @@ class AnswerList extends React.Component {
     loadMoreAnswers() {
         console.log(this.sortedByHelpful.length, 'current ans',this.state.answersToLoad, 'ans to load' )
         if (this.sortedByHelpful.length <= this.state.answersToLoad) { //dont exist
+                console.log("hi")
                 this.loadMoreGone();
-        } else if (this.sortedByHelpful.length - this.state.amountOfAnswersLoaded <= this.state.answersToLoad) { // decrease
+        } else if (this.sortedByHelpful.length - this.state.amountOfAnswersLoaded < this.state.answersToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {

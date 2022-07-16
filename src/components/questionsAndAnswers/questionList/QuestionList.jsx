@@ -44,9 +44,7 @@ class QuestionList extends React.Component {
     loadMoreGone() {
         this.state.loadMoreState = this.state.loadMoreStateList[0];
         this.state.loadedQuestions = this.sortedByHelpful;
-        if (this.sortedByHelpful.length !== 0 ) {
             this.setState(JSON.parse(JSON.stringify(this.state)));
-        }
     }
 
     loadMoreDecrease() {

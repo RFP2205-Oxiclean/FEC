@@ -27,11 +27,17 @@
   box-sizing:border-box;
 }
 
+
+
 .questions-and-answers #qa-container {
   height:100%;
   width: 100%;
   position: absolute;
   box-sizing:border-box;
+}
+
+.questions-and-answers #qa-container .qa-nav-bar{
+  width:100%;
 }
 
 .questions-and-answers  {

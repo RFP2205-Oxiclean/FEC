@@ -10,7 +10,7 @@ class InfoTab extends React.Component {
         super(props)
         this.state = {
             activeModal: false,
-            product : null
+            product : null,
         }
     }
 
@@ -34,7 +34,9 @@ class InfoTab extends React.Component {
     }
 
     render() {
-        let yes = <p className="helpful-event"  >Yes ({this.props.question.question_helpfulness})</p>;
+        console.log(this.props.activeHelpful, 'this here')
+        let yesData = this.props.activeHelpful ? this.props.question.question_helpfulness : this.props.question.question_helpfulness + 1;
+        let yes = <p className="helpful-event"  >Yes ({yesData})</p>;
         let add = <p className="add-answer-vent" onClick={this.toggleModal.bind(this)}>Add Answer</p>;
         if (this.state.activeModal) {
             return (

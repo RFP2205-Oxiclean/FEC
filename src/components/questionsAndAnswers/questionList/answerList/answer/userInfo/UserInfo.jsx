@@ -57,11 +57,13 @@ class UserInfo extends React.Component  {
 
 
     render() {
-        console.log()
+
         let theDate = new Date( this.props.data.date.substr(0,4), this.props.data.date.substr(5,2), this.props.data.date.substr(8,2) )
         let user = <p className="user-info">by {this.props.data.answerer_name} - {format(theDate ,'MMMM d, Y')}</p>
-        let yes  = <p className="helpful-event" onClick={this.sendHelpful.bind(this)} >Yes ({this.props.data.helpfulness})</p>
-        let report = <p className="report-event"  onClick={this.sendReport.bind(this)}> {this.state.reportActive ? 'Report' : 'Reported' } </p>
+        let yesData = this.state.helpfulActive ? this.props.data.helpfulness : this.props.data.helpfulness + 1
+        let reportedData = this.state.reportActive ? 'Report' : 'Reported'
+        let yes  = <p className="helpful-event" onClick={this.sendHelpful.bind(this)} >Yes ({yesData})</p>
+        let report = <p className="report-event"  onClick={this.sendReport.bind(this)}> {reportedData} </p>
 
         return(
             <div className="user-tab"> {user} | Helpful? {yes} | {report}</div>)

@@ -15,7 +15,6 @@ class QuestionsAndAnswers extends React.Component {
             questions : [],
             allQuestions :[],
             page : null,
-            filtered : false
 
         };
     }
@@ -48,21 +47,24 @@ class QuestionsAndAnswers extends React.Component {
 
 
     displayUnfilteredQuestions (filter) {
+        let tooSmallFilterLength = 3;
         console.log(filter, 'filter')
         console.log(this.state.allQuestions, 'what')
-        if (filter.length >= 3) {
+        if (filter.length >= tooSmallFilterLength) {
             this.state.questions = this.state.allQuestions.filter((question)=>{
                 if (question.question_body.indexOf(filter) !== -1) {
+                    console.log("calling me ");
                     return true;
+
                 }
                 return false;
             })
             this.setState(JSON.parse(JSON.stringify(this.state)));
-        } else if (this.state.filtered = true) {
+        } else {
             this.state.questions = this.state.allQuestions;
-            this.state.filtered = false;
             this.setState(JSON.parse(JSON.stringify(this.state)));
         }
+
 
     }
 
