@@ -23,18 +23,10 @@ class QuestionList extends React.Component {
         }
     }
 
-    sortQuestionsByHelpfulness(questions = []) {
-        let results = []
-        questions.sort((a,b)=>{
-                if (a.question_helpfulness > b.question_helpfulness) {
-                    results.push(a);
-                    return a;
-                } else {
-                    results.push(b);
-                    return b;
-                }
-            })
-        return results;
+    sortQuestionsByHelpfulness(questions) {
+        let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness));
+        console.log(result, 'resxsult', this.props.questions)
+        return result;
     }
 
 

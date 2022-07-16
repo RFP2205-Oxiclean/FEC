@@ -5,15 +5,18 @@ import MoreAnswers from  './moreAnswers/MoreAnswers.jsx';
 class AnswerList extends React.Component {
     constructor(props) {
         super(props);
+
+        this.arrayifiedAnswers = this.arrayifyAnswers(this.props.answers);
+        this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifiedAnswers);
+        console.log(this.sortedByHelpful, 'in ans lis')
         this.state =  this.initialStateValues();
-        this.currentAnswers = null;
     }
 
     pushAnswersIntoArray
 
     initialStateValues () {
         return {
-            oldAnswers: JSON.stringify(this.arrayifyAnswers(this.props.answers)),
+            oldAnswers: JSON.stringify(this.sortedByHelpful),
             loadedAnswers : [],
             loadMoreState: 'nonexistant',
             amountOfAnswersLoaded : 0,
@@ -30,8 +33,11 @@ class AnswerList extends React.Component {
         return result;
     }
 
+    sortAnswersByHelpfulness(answers) {
+        return answers.sort((a,b)=>(b.helpfulness - a.helpfulness) )
+    }
+
     componentDidMount() {
-        this.currentAnswers = this.arrayifyAnswers(this.props.answers);
         this.loadMoreAnswers();
         //console.log(this.props.answers.length)
     }
@@ -39,10 +45,10 @@ class AnswerList extends React.Component {
 
 
     componentDidUpdate() {
-        this.currentAnswers = this.arrayifyAnswers(this.props.answers);
-        let ansString = JSON.stringify(this.currentAnswers)
-        console.log(this.currentAnswers.length, 'here');
-        if(this.state.amountOfAnswersLoaded < 1  && this.currentAnswers.length > 0) {
+        this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifyAnswers(this.props.answers));
+        let ansString = JSON.stringify(this.sortedByHelpful)
+        console.log(this.sortedByHelpful.length, 'here');
+        if(this.state.amountOfAnswersLoaded < 1  && this.sortedByHelpful.length > 0) {
             this.state.oldAnswers = ansString;
             this.loadMoreAnswers();
         }
@@ -50,16 +56,16 @@ class AnswerList extends React.Component {
 
     loadMoreGone() { //array FN is a function to turn whatever you have into an array
         this.state.loadMoreState = this.state.loadMoreStateList[0];
-        this.state.loadedAnswers = this.currentAnswers;
-        if (this.currentAnswers.length !== 0 ) {
+        this.state.loadedAnswers = this.sortedByHelpful;
+        if (this.sortedByHelpful.length !== 0 ) {
             this.setState(JSON.parse(JSON.stringify(this.state)));
         }
     }
 
     loadMoreDecrease() {
         this.state.loadMoreState = this.state.loadMoreStateList[1];
-        this.state.loadedAnswers = this.currentAnswers;
-        this.state.amountOfAnswersLoaded = this.currentAnswers.length;
+        this.state.loadedAnswers = this.sortedByHelpful;
+        this.state.amountOfAnswersLoaded = this.sortedByHelpful.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
@@ -69,7 +75,7 @@ class AnswerList extends React.Component {
     }
 
     loadMoreIncrease() {
-        let newSlice = this.currentAnswers.slice(0,this.state.amountOfAnswersLoaded + this.state.answersToLoad);
+        let newSlice = this.sortedByHelpful.slice(0,this.state.amountOfAnswersLoaded + this.state.answersToLoad);
         this.state.loadMoreState = this.state.loadMoreStateList[2];
         this.state.amountOfAnswersLoaded = newSlice.length;
         this.state.loadedAnswers = newSlice;
@@ -81,16 +87,16 @@ class AnswerList extends React.Component {
 
 
     loadMoreAnswers() {
-        console.log(this.currentAnswers.length, 'current ans',this.state.answersToLoad, 'ans to load' )
-        if (this.currentAnswers.length <= this.state.answersToLoad) { //dont exist
+        console.log(this.sortedByHelpful.length, 'current ans',this.state.answersToLoad, 'ans to load' )
+        if (this.sortedByHelpful.length <= this.state.answersToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.currentAnswers.length - this.state.amountOfAnswersLoaded <= this.state.answersToLoad) { // decrease
+        } else if (this.sortedByHelpful.length - this.state.amountOfAnswersLoaded <= this.state.answersToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.currentAnswers.length - this.state.amountOfAnswersLoaded > this.state.answersToLoad) { //increase
+        } else if (this.sortedByHelpful.length - this.state.amountOfAnswersLoaded > this.state.answersToLoad) { //increase
             this.loadMoreIncrease();
         }
     }
