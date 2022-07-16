@@ -23,7 +23,6 @@ class AnswerModal extends React.Component {
 
     }
 
-    onChange(item, )
 
 
     render() {
@@ -33,12 +32,12 @@ class AnswerModal extends React.Component {
                       <h1>Submit your Answer</h1>
                       <h3>{this.props.product.name} : {this.props.question.question_body}</h3>
                       <form className="aa-form">
-                          <textarea className="aa-user-input" type="text" maxlength="1000" placeholder="Please, enter your question here" />
+                          <textarea className="aa-user-input" type="text" maxLength="1000" placeholder="Please, enter your question here" />
 
-                          NickName : <input className="aa-user-name" type="text" maxlength="60" placeholder="Example: jackson541!" />
+                          NickName : <input className="aa-user-name" type="text" maxLength="60" placeholder="Example: jackson541!" />
                           <b className="aa-disclaimer-n">For privacy reasons, do not use your full name or email address</b>
 
-                          Email : <input className="aa-user-email" type="email" maxlength="60" placeholder="Example: jack@email.com" />
+                          Email : <input className="aa-user-email" type="email" maxLength="60" placeholder="Example: jack@email.com" />
                           <b className="aa-disclaimer-e">For authentication reasons, you will not be emailed</b>
 
                           <input className="aa-user-photos" type="file" accepts="image/*" />
