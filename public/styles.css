@@ -76,7 +76,7 @@
   height: 100%;
   width: 100%;
   background-color: white;
-  box-shadow: inset 0px 0px 0px 5px black;
+  box-shadow: 6px 4px 5px -2px black;
   box-sizing: border-box;
 }
 
@@ -149,7 +149,6 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-grow: 4;
-  box-shadow: inset 0px 0px 0px 5px black;
   box-sizing: border-box;
   padding-bottom: 20px;
 }
