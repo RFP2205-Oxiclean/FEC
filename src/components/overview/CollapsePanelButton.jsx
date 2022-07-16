@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const CollapsePanelButton = ({ setIsHiding, isHiding, isHidden, setIsHidden }) => {
   let handleClick = function () {
-    console.log(isHiding);
     setIsHiding(!isHiding);
   };
 

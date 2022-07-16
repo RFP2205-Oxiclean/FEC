@@ -3,12 +3,23 @@ import React, { useState, useEffect } from "react";
 const SizeMenu = ({ stock, changeHandler, activeStyle }) => {
   let [size, setSize] = useState("");
 
+  let style = {
+    float: "left",
+  };
+
   useEffect(() => {
     setSize("");
   }, [activeStyle]);
 
+  let clicked = function () {
+    style = {
+      float: "left",
+      paddingLeft: "5px",
+    };
+  };
+
   return (
-    <div style={{ float: "left" }}>
+    <div style={style}>
       <select
         defaultValue={"Select a Size!"}
         onChange={(e) => {

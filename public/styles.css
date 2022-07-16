@@ -89,6 +89,7 @@
   box-sizing: border-box;
   z-index: 1;
   transition: transform 2.0s ease;
+  /* transform: translate(102%, 0) */
 }
 
 .overview-expanded-product-panel-slide {
@@ -105,9 +106,9 @@
   transform: translate(102%, 0)
 }
 
-.overview-expanded-product-panel-slide-out {
+/* .overview-expanded-product-panel-slide-out {
   transform: translate(100%, 0)
-}
+} */
 
 
 .overview-expanded-product-panel>div {
@@ -369,6 +370,16 @@ select:active {
   outline: none;
   box-shadow: none;
 }
+
+select {
+  background-color: #ffffff;
+  border: 1px solid #8ca4c8;
+}
+
+select option:checked {
+  background-color: #c4e3ff;
+}
+
 
 
 
