@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-const CollapsePanelButton = ({isHidden, setIsHidden}) => {
+const CollapsePanelButton = ({ setIsHiding, isHiding, isHidden, setIsHidden }) => {
+  let handleClick = function () {
+    console.log(isHiding);
+    setIsHiding(!isHiding);
+  };
 
-  let handleClick = function() {
-    setIsHidden(!isHidden)
-  }
-
-  return <div className="collapse-button-container">
-    <button data-testid='collapseButton' onClick={() => {handleClick()}} className="collapse-panel-button">COLLAPSE</button>
-  </div>
-}
-
+  return (
+    <div className="collapse-button-container">
+      <button
+        data-testid="collapseButton"
+        onClick={() => {
+          handleClick();
+        }}
+        className="collapse-panel-button">
+        COLLAPSE
+      </button>
+    </div>
+  );
+};
 
 export default CollapsePanelButton;
