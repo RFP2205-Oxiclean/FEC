@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ available, activeStyle }) => {
+const QMenu = ({ available, activeStyle, id }) => {
   let [arr, setArr] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const QMenu = ({ available, activeStyle }) => {
       <select style={{ width: "150px" }}>
         <option defaultValue={"Hello"} hidden></option>
         {arr.map(function (n) {
-          return <option key={n}>{n}</option>;
+          return <option key={id + n}>{n}</option>;
         })}
       </select>
     </div>

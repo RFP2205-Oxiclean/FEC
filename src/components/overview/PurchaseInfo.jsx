@@ -7,6 +7,7 @@ const PurchaseInfo = ({ activeStyle }) => {
   let [selectedSize, selectSize] = useState(null);
   let [stock, setStockArr] = useState([]);
   let [available, setAvailable] = useState(0);
+  let [id, setId] = useState(0);
 
   useEffect(() => {
     let stockArr = [];
@@ -34,6 +35,7 @@ const PurchaseInfo = ({ activeStyle }) => {
     stock.forEach(function (pair) {
       if (pair.size === selectedSize) {
         setAvailable(pair.quantity);
+        setId(pair.id);
       }
     });
   }, [selectedSize]);
@@ -45,7 +47,7 @@ const PurchaseInfo = ({ activeStyle }) => {
       </div>
       <div className="purchase-buttons-container1"></div>
       <SizeMenu activeStyle={activeStyle} changeHandler={selectSize} stock={stock}></SizeMenu>
-      <QMenu activeStyle={activeStyle} available={available}></QMenu>
+      <QMenu id={id} activeStyle={activeStyle} available={available}></QMenu>
     </div>
   );
   //side, width, handleChange, size, defaultText, activeStyle

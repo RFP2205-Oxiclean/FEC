@@ -85,14 +85,22 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1.0);
   box-sizing: border-box;
   z-index: 1;
   transition: transform 2.0s ease;
 }
 
 .overview-expanded-product-panel-slide {
-  background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 1.0);
+  box-sizing: border-box;
+  z-index: 1;
   transition: transform 2.0s ease;
   transform: translate(102%, 0)
 }
