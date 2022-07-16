@@ -10,32 +10,22 @@ class InfoTab extends React.Component {
         super(props)
         this.state = {
             activeModal: false,
-            productName : ''
+            product : null
         }
     }
 
 
     toggleModal = () => {
-        // console.log()
-        // let endPoint = `${url}/products/${this.props.productId}`
-        // axios.get(endPoint)                               // dont set current state create a new one
-        // .then((res)=>{
-        //
-        //     console.log(res)
-        // })
-        // .catch((err)=>{
-        //     console.error("error in getting product", err)
-        // })
 
         let endPoint = `${url}/products/${this.props.productId}`
         console.log(endPoint)
         axios.get(endPoint)
         .then((res) => {
-            this.state.productName = res;
+            this.state.product = res.data;
             if (this.state.activeModal) {
                 this.state.activeModal =  false;
             } else {
-                    this.state.activeModal =  true;
+                this.state.activeModal =  true;
             }
             this.setState(JSON.parse(JSON.stringify(this.state)));
         })
@@ -46,18 +36,18 @@ class InfoTab extends React.Component {
 
     render() {
         let yes = <p className="helpful-event"  >Yes ({this.props.question.question_helpfulness})</p>;
-        let add = <p className="add-answer-vent" onClick={()=>this.toggleModal()}>Add Answer</p>;
+        let add = <p className="add-answer-vent" onClick={this.toggleModal.bind(this)}>Add Answer</p>;
         if (this.state.activeModal) {
             return (
             <div className="info-tab"> Helpful?
-                <div onClick={()=>this.props.sendHelpful()}>{yes}
+                <div onClick={this.props.sendHelpful.bind(this)}>{yes}
                 </div> | {add}
-                <AnswerModal question={this.props.question} clickHandler={this.toggleModal.bind(this) } />
+                <AnswerModal question={this.props.question} clickHandler={this.toggleModal.bind(this)} product={this.state.product} />
             </div>)
         } else {
             return (
                 <div className="info-tab"> Helpful?
-                    <div onClick={()=>this.props.sendHelpful()}>{yes}
+                    <div onClick={this.props.sendHelpful.bind(this)}> {yes}
                     </div> | {add}
                 </div>)
         }

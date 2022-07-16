@@ -96,6 +96,7 @@
 .questions-and-answers #question-list .info-tab {
   position:relative;
   float:right;
+  font-size: 12px;
 }
 .questions-and-answers #question-list .info-tab div {
   display:inline;
@@ -108,9 +109,8 @@
   width:100%;
   top:0;
   left:0;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.466);
   z-index:999;
-  opacity:.8;
 }
 
 .questions-and-answers .answer-list
@@ -132,8 +132,45 @@
   position:absolute;
   font-weight:bold;
 }
+.questions-and-answers .user-tab {
+  padding-top:10px;
+  font-size: 12px;
+}
 
+.questions-and-answers #question-list .info-tab .aa-modal-container {
+  display:block;
+  opacity:1.0;
+  background-color: white;
+  width:80%;
+  left:10%;
+  top:25%;
+  height:50%;
+  position:absolute;
+  border-radius:2px;
+  border-width:2px;
+  border-style:dashed;
+}
 
+.questions-and-answers #question-list .info-tab .aa-modal-container h1 {
+  padding-left:10px;
+}
+.questions-and-answers #question-list .info-tab .aa-modal-container h3 {
+  padding-left:10px;
+}
+
+.questions-and-answers #question-list .info-tab .aa-modal-container .aa-user-input {
+  resize: none;
+  box-sizing: border-box;
+  box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  left:5%;
+  width:80%;
+  min-height:200px;
+  position:relative;
+  border-radius:2px;
+  border-width:2px;
+  border-style:dashed;
+  display:block;
+}
 
 .ratings-reviews {
   height: 25%;

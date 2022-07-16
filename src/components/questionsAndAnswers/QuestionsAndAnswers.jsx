@@ -4,6 +4,8 @@ import SearchBar from './searchBar/SearchBar.jsx'
 import AnswerList from './questionList/answerList/AnswerList.jsx';
 import QuestionList from './questionList/QuestionList.jsx';
 import { url, API_KEY } from "../../../config/config.js";
+axios.defaults.headers.common['Authorization'] = API_KEY;
+
 
 class QuestionsAndAnswers extends React.Component {
     constructor(props) {
