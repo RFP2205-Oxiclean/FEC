@@ -20,9 +20,6 @@ class QuestionList extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-    }
 
 
     componentDidUpdate() {
@@ -33,34 +30,51 @@ class QuestionList extends React.Component {
         }
     }
 
+    loadMoreGone() {
+        this.state.loadMoreState = this.state.loadMoreStateList[0];
+        this.state.loadedQuestions = this.props.questions;
+        if (this.props.questions.length !== 0 ) {
+            this.setState(JSON.parse(JSON.stringify(this.state)));
+        }
+    }
+
+    loadMoreDecrease() {
+        this.state.loadMoreState = this.state.loadMoreStateList[1];
+        this.state.loadedQuestions = this.props.questions;
+        this.state.amountOfQuestionsLoaded = this.props.questions.length;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+    resetState() {
+        this.state = this.initialStateValues()
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+    loadMoreIncrease() {
+        let newSlice = this.props.questions.slice(0,this.state.amountOfQuestionsLoaded + this.state.questionsToLoad);
+        this.state.loadMoreState = this.state.loadMoreStateList[2];
+        this.state.amountOfQuestionsLoaded = newSlice.length;
+        this.state.loadedQuestions = newSlice;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+
+
+
 
     loadMoreQuestions() {
         if (this.props.questions.length <= this.state.questionsToLoad) { //dont exist
-                this.state.loadMoreState = this.state.loadMoreStateList[0];
-                this.state.loadedQuestions = this.props.questions;
-                if (this.props.questions.length !== 0 ) {
-                    this.setState(JSON.parse(JSON.stringify(this.state)));
-                }
-
+                this.loadMoreGone();
         } else if (this.props.questions.length - this.state.amountOfQuestionsLoaded <= this.state.questionsToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
-                this.state.loadMoreState = this.state.loadMoreStateList[1];
-                this.state.loadedQuestions = this.props.questions;
-                this.state.amountOfQuestionsLoaded = this.props.questions.length;
-                this.setState(JSON.parse(JSON.stringify(this.state)));
+                this.loadMoreDecrease();
             } else {
-                this.state = this.initialStateValues()
-                this.setState(JSON.parse(JSON.stringify(this.state)));
+                this.resetState();
             }
         } else if (this.props.questions.length - this.state.amountOfQuestionsLoaded > this.state.questionsToLoad) { //increase
-
-            let newSlice = this.props.questions.slice(0,this.state.amountOfQuestionsLoaded + this.state.questionsToLoad);
-            this.state.loadMoreState = this.state.loadMoreStateList[2];
-            this.state.amountOfQuestionsLoaded = newSlice.length;
-            this.state.loadedQuestions = newSlice;
-            this.setState(JSON.parse(JSON.stringify(this.state)));
+            this.loadMoreIncrease();
         }
-        }
+    }
 
 
 
