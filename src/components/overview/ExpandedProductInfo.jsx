@@ -27,39 +27,43 @@ const ExpandedProductInfo = ({ resetActiveImageIndex, styleClickHandler, product
   //   );
   // }
 
+  //isHiding ? "overview-expanded-product-panel-slide" :
+
   return (
     <div className="collapse-and-info-container">
       <CollapsePanelButton setIsHiding={setIsHiding} isHiding={isHiding} setIsHidden={setIsHidden}></CollapsePanelButton>
-      <div className={isHiding ? "overview-expanded-product-panel-slide" : "overview-expanded-product-panel"}>
-        <StarRatingStatic rating={5}></StarRatingStatic>
-        <div className="overview-category">{productInfo.category}</div>
-        {/* <div><span style={{fontWeight: "bold", fontSize: "30px"}}>{styleObjects[viewIndex]?.original_price}</span></div> */}
-        <div className="overview-expanded-product-info">
-          <Price currentStyle={styleObjects[viewIndex]} hoverInfo={hoverInfo} onHover={onHover}></Price>
-          <span className="overview-expanded-product-info-name">{productInfo.name}</span>
-          <span className="overview-expanded-product-info-style">{onHover ? hoverInfo.name : styleObjects[viewIndex]?.name}</span>
+      <div className={isHiding ? "slide-panel" : "unslide-panel"}>
+        <div className={"overview-expanded-product-panel"}>
+          <StarRatingStatic rating={5}></StarRatingStatic>
+          <div className="overview-category">{productInfo.category}</div>
+          {/* <div><span style={{fontWeight: "bold", fontSize: "30px"}}>{styleObjects[viewIndex]?.original_price}</span></div> */}
+          <div className="overview-expanded-product-info">
+            <Price currentStyle={styleObjects[viewIndex]} hoverInfo={hoverInfo} onHover={onHover}></Price>
+            <span className="overview-expanded-product-info-name">{productInfo.name}</span>
+            <span className="overview-expanded-product-info-style">{onHover ? hoverInfo.name : styleObjects[viewIndex]?.name}</span>
+          </div>
+          <div className="overview-styles-container">
+            {styleObjects.length ? (
+              styleObjects?.map(function (styleObject, i) {
+                return (
+                  <StyleObjectThumbnail
+                    setViewIndex={setViewIndex}
+                    resetActiveImageIndex={resetActiveImageIndex}
+                    styleClickHandler={styleClickHandler}
+                    styleObject={styleObject}
+                    key={styleObject.style_id}
+                    index={i}
+                    setHoverInfo={setHoverInfo}
+                    setOnHover={setOnHover}
+                    viewIndex={viewIndex}></StyleObjectThumbnail>
+                );
+              })
+            ) : (
+              <div></div>
+            )}
+          </div>
+          <PurchaseInfo activeStyle={styleObjects[viewIndex]}></PurchaseInfo>
         </div>
-        <div className="overview-styles-container">
-          {styleObjects.length ? (
-            styleObjects?.map(function (styleObject, i) {
-              return (
-                <StyleObjectThumbnail
-                  setViewIndex={setViewIndex}
-                  resetActiveImageIndex={resetActiveImageIndex}
-                  styleClickHandler={styleClickHandler}
-                  styleObject={styleObject}
-                  key={styleObject.style_id}
-                  index={i}
-                  setHoverInfo={setHoverInfo}
-                  setOnHover={setOnHover}
-                  viewIndex={viewIndex}></StyleObjectThumbnail>
-              );
-            })
-          ) : (
-            <div></div>
-          )}
-        </div>
-        <PurchaseInfo activeStyle={styleObjects[viewIndex]}></PurchaseInfo>
       </div>
     </div>
   );
