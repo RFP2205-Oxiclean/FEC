@@ -57,19 +57,4 @@ class InfoTab extends React.Component {
 }
 
 
-
-
-// const InfoTab = (props) => {
-//     let yes = <p className="helpful-event"  >Yes ({props.question.question_helpfulness})</p>;
-//     let addOriginal = <p className="add-answer-vent" onClick={()=>toggleModal()}>Add Answer</p>;
-
-//     let addAlternate = (<p className="add-answer-vent" onClick={()=>toggleModal()} >
-//         Add An
-
-//     </p>);
-
-//     return (
-
-// }
-
 export default InfoTab;
