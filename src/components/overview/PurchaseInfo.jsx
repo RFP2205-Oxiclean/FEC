@@ -9,14 +9,11 @@ import { addToCart } from "/src/controllers.js";
 axios.defaults.headers.common["Authorization"] = API_KEY;
 
 const PurchaseInfo = ({ activeStyle }) => {
-  let [stock, setStockArr] = useState([]);
-  let [sizeObject, selectSizeObject] = useState({});
-
-  let [quantity, selectQuantity] = useState(0);
-  let [selectSizePrompt, setSelectSizePrompt] = useState(false);
-  let [selectedSize, selectSize] = useState(null);
-  let [available, setAvailable] = useState(null);
-  let [id, setId] = useState(0);
+  let [selectQ, handleSelectQ] = useState(0);
+  let [noItems, setNoItems] = useState(false);
+  let [prompt, setPrompt] = useState(false);
+  let [stock, setStock] = useState([]);
+  let [selectedSizeId, setSelectedSizeId] = useState(null);
 
   useEffect(() => {
     let stockArr = [];
@@ -24,7 +21,7 @@ const PurchaseInfo = ({ activeStyle }) => {
       let flag = false;
       stockArr.forEach(function (sizePair, i) {
         if (activeStyle.skus[k].quantity !== 0 && activeStyle.skus[k].quantity !== null) {
-          setAvailable(0);
+          // setAvailable(0);
         }
         if (activeStyle.skus[k].size === stockArr[i].size) {
           flag = true;
@@ -35,63 +32,42 @@ const PurchaseInfo = ({ activeStyle }) => {
         stockArr.push({ ...activeStyle.skus[k], id: k });
       }
     }
-    setId(null);
-    selectSize(null);
-    setStockArr(stockArr);
+    setStock(stockArr);
   }, [activeStyle]);
 
-  useEffect(() => {
-    stock.forEach(function (pair) {
-      if (pair.size === selectedSize) {
-        setAvailable(pair.quantity);
-        setId(pair.id);
-      }
-    });
-  }, [selectedSize]);
-
   let myDebugger = function () {
-    axios
-      .get(`${url}/cart`, {
-        headers: {
-          Authorization: API_KEY,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
-    console.log("avaialble: ", available);
-    console.log("stock array: ", stock);
-    console.log(selectedSize);
-    console.log(quantity);
-    console.log(id);
-    setSelectSizePrompt(!selectSizePrompt);
+    console.log(stock);
+    console.log(noItems);
+    console.log(selectedSizeId);
+    console.log("=============");
+    console.log(selectQ, selectedSizeId);
   };
 
   let handleCartClick = function () {
-    if (selectedSize === null) {
-      setSelectSizePrompt(true);
+    if (selectedSizeId === null) {
+      setPrompt(true);
     } else {
-      console.log("QUANTITY: ", quantity);
-      addToCart(id, quantity)
+      for (let i = 0; i < stock.length; i++) {
+        if (stock[i].id === selectedSizeId && selectQ > stock[i].quantity) {
+          setPrompt(true);
+          return;
+        }
+      }
+      addToCart(selectedSizeId, selectQ)
         .then(() => {
           console.log("success!");
         })
         .then(() => {
           let newStock = stock.slice();
           newStock.forEach(function (pairObj, i) {
-            if (pairObj.id === id) {
-              newStock[i] = { quantity: pairObj.quantity - quantity, size: pairObj.size, id: id };
-              setAvailable(newStock[i].quantity);
+            if (pairObj.id === selectedSizeId) {
+              newStock[i] = { quantity: pairObj.quantity - selectQ, size: pairObj.size, id: selectedSizeId };
             }
           });
-          setStockArr(newStock);
+          setStock(newStock);
         });
     }
   };
-
-  useEffect(() => {
-    setSelectSizePrompt(false);
-  }, [selectedSize, activeStyle]);
 
   return (
     <div className="overview-purchase-info">
@@ -100,21 +76,20 @@ const PurchaseInfo = ({ activeStyle }) => {
       </div>
       <div style={{ display: "flex", height: "40px", alignItems: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", width: "250px", textAlign: "center", fontSize: "20px", color: "red" }}>
-          {selectSizePrompt ? <span>Please Select a Size! </span> : <span></span>}
+          {prompt ? <span>Please Select a Size! </span> : <span></span>}
         </div>
       </div>
       <div className="purchase-buttons-container1">
-        <SizeMenu available={available} activeStyle={activeStyle} changeHandler={selectSize} stock={stock}></SizeMenu>
-        <QMenu
-          selectedSize={selectedSize}
-          changeHandler={selectQuantity}
-          id={id}
-          activeStyle={activeStyle}
-          available={available}
-          stock={stock}></QMenu>
-        <button onClick={myDebugger}>Debug</button>
+        <SizeMenu setPrompt={setPrompt} stock={stock} setNoItems={setNoItems} noItems={noItems} setSelectedSizeId={setSelectedSizeId}></SizeMenu>
+        <QMenu handleSelectQ={handleSelectQ} setStock={setStock} selectedSizeId={selectedSizeId} stock={stock}></QMenu>
       </div>
-      <div className="purchase-buttons-container2">{quantity !== 0 ? <AddToCart handleCartClick={handleCartClick}></AddToCart> : <div></div>}</div>
+      <div className="purchase-buttons-container2">{noItems ? <div></div> : <AddToCart handleCartClick={handleCartClick}></AddToCart>}</div>
+      <button
+        onClick={() => {
+          myDebugger();
+        }}>
+        Debug
+      </button>
     </div>
   );
   //side, width, handleChange, size, defaultText, activeStyle

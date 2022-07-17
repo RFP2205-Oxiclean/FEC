@@ -67,22 +67,26 @@ export function prefetch(styleObjects, product_id) {
 }
 
 export function addToCart(id, quantity) {
-  let arr = Array(parseInt(quantity)).fill(0);
-  return Promise.all(
-    arr.map((el) => {
-      console.log("post request");
-      return axios.post(
-        `${url}/cart`,
-        {
-          sku_id: id,
-          count: 5,
-        },
-        {
-          headers: {
-            Authorization: API_KEY,
+  if (Number.isInteger(quantity) && quantity > 0) {
+    let arr = Array(parseInt(quantity)).fill(0);
+    return Promise.all(
+      arr.map((el) => {
+        console.log("post request");
+        return axios.post(
+          `${url}/cart`,
+          {
+            sku_id: id,
+            count: 5,
           },
-        }
-      );
-    })
-  );
+          {
+            headers: {
+              Authorization: API_KEY,
+            },
+          }
+        );
+      })
+    );
+  } else {
+    return;
+  }
 }

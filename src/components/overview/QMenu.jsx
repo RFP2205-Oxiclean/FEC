@@ -1,37 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, setStock } from "react";
 
-const QMenu = ({ selectedSize, changeHandler, available, activeStyle, id }) => {
-  let [arr, setArr] = useState([]);
-  let [selected, select] = useState(0);
+const QMenu = ({ stock, selectedSizeId, handleSelectQ }) => {
+  let [selected, select] = useState(null);
+  let [available, setAvailable] = useState(0);
+  let [optionsArr, setOptionsArr] = useState([]);
 
   useEffect(() => {
-    if (available !== null && selectedSize !== null) {
-      let x = Math.min(15, available);
-      let newArr = Array(x).fill(0);
-      newArr = newArr.map(function (n, i) {
-        return i + 1;
+    if (selectedSizeId !== null) {
+      stock.forEach(function (quantityObject) {
+        if (quantityObject.id === selectedSizeId) {
+          let newArr = Array(Math.min(15, parseInt(quantityObject.quantity)))
+            .fill(0)
+            .map(function (e, i) {
+              return i + 1;
+            });
+          handleSelectQ(1);
+          setOptionsArr(newArr);
+          setAvailable(quantityObject.quantity);
+        }
       });
-      changeHandler(1);
-      setArr(newArr);
     }
-  }, [available, selectedSize, available]);
+  }, [stock, selectedSizeId]);
 
-  useEffect(() => {
-    setArr([]);
-  }, [activeStyle]);
+  let myDebugger = function () {
+    console.log("available ", available);
+    console.log("options: ", optionsArr);
+    console.log("selected, ", selected);
+  };
 
-  let handleChange = function (e) {
-    select(parseInt(e.target.value));
-    changeHandler(selected);
+  let handleSelect = function (e) {
+    handleSelectQ(parseInt(e.target.value));
   };
 
   return (
-    <select className="quantity-selector" onChange={handleChange}>
-      {arr.map(function (n) {
-        return <option key={id + n}>{n}</option>;
-      })}
-    </select>
+    <>
+      <select onChange={handleSelect} className="quantity-selector">
+        {optionsArr.map(function (n) {
+          return <option key={selectedSizeId + available + n + ""}>{n}</option>;
+        })}
+      </select>
+      <button onClick={myDebugger}>QMenu State</button>
+    </>
   );
 };
 
 export default QMenu;
+
+// let [arr, setArr] = useState([]);
+// let [selected, select] = useState(0);
+
+// useEffect(() => {
+//   if (available !== null && selectedSize !== null) {
+//     let x = Math.min(15, available);
+//     let newArr = Array(x).fill(0);
+//     newArr = newArr.map(function (n, i) {
+//       return i + 1;
+//     });
+//     changeHandler(1);
+//     setArr(newArr);
+//   }
+// }, [available, selectedSize, available]);
+
+// useEffect(() => {
+//   setArr([]);
+// }, [activeStyle]);
+
+// let handleChange = function (e) {
+//   select(parseInt(e.target.value));
+//   changeHandler(selected);
+// };
