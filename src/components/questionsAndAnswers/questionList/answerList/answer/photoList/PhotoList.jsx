@@ -4,9 +4,13 @@ import Photo from './photo/Photo.jsx'
 
 const PhotoList = (props) => {
     return (
-        props.photos.map((photoUrl)=> {
-            return <Photo url={photoUrl}/>
-        }))
+        <div className="photolist-container">
+            {props.photos.map((photoUrl, index)=> {
+                return <Photo url={photoUrl} key={index}/>
+            })}
+        </div>)
+
+
 }
 
 

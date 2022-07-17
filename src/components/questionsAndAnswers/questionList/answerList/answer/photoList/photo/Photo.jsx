@@ -13,12 +13,13 @@ class Photo extends React.Component {
     }
 
     render() {
-      <div className="photo-container">
-        <img src={this.props.url}>
+        return (
+            <div className="photo-container">
+                <img src={this.props.url} className="photo">
 
-        </img>
-      </div>
-    }
+                </img>
+            </div>)
+      }
 
 }
 

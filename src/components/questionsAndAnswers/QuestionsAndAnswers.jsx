@@ -48,11 +48,13 @@ class QuestionsAndAnswers extends React.Component {
 
     displayUnfilteredQuestions (filter) {
         let tooSmallFilterLength = 3;
+        let lowerCaseFilter = filter.toLowerCase()
         console.log(filter, 'filter')
         console.log(this.state.allQuestions, 'what')
         if (filter.length >= tooSmallFilterLength) {
             this.state.questions = this.state.allQuestions.filter((question)=>{
-                if (question.question_body.indexOf(filter) !== -1) {
+                console.log(typeof question.question_body, "qbbbbbb")
+                if (question.question_body.toLowerCase().indexOf(lowerCaseFilter) !== -1) {
                     console.log("calling me ");
                     return true;
 
