@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from  './question/Question.jsx';
 import MoreQuestions from './moreQuestions/MoreQuestions.jsx';
+import AddQuestion from './addQuestion/AddQuestion.jsx';
 
 
 class QuestionList extends React.Component {
@@ -87,10 +88,12 @@ class QuestionList extends React.Component {
 
 
 
+
+
     render () {
         return (
             <div>
-                <div class="qc-wrapper">
+                <div className="qc-wrapper">
                     <div id="question-container">
                         <ul id ="question-list">
                             {this.state.loadedQuestions.map((question, index)=> {
@@ -100,6 +103,7 @@ class QuestionList extends React.Component {
 
                     </div>
                     <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
+                    <AddQuestion productId={this.props.productId} />
                 </div>
 
             </div>

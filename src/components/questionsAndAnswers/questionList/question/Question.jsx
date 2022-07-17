@@ -24,7 +24,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
                 }
             })
             .then((res) => {
-                console.log("marked helpful");
+                console.log(res);
                 this.state.activeHelpful = false;
                 this.setState(JSON.parse(JSON.stringify(this.state)));
             })
@@ -35,7 +35,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
 
     }
 
-    addAnswer(){
+    sendAnswer(){
 
     }
 

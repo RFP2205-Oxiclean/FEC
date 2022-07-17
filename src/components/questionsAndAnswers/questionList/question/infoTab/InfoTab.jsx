@@ -3,7 +3,7 @@ import AnswerModal from './AnswerModal';
 import axios from 'axios';
 import { url, API_KEY } from "../../../../../../config/config.js";
 
-//let original = <p className="add-answer-vent" >Add Answer</p>;
+//let original = <p className="add-answer-event" >Add Answer</p>;
 
 class InfoTab extends React.Component {
     constructor(props) {
@@ -37,12 +37,12 @@ class InfoTab extends React.Component {
         console.log(this.props.activeHelpful, 'this here')
         let yesData = this.props.activeHelpful ? this.props.question.question_helpfulness : this.props.question.question_helpfulness + 1;
         let yes = <p className="helpful-event"  >Yes ({yesData})</p>;
-        let add = <p className="add-answer-vent" onClick={this.toggleModal.bind(this)}>Add Answer</p>;
+        let add = <p className="add-answer-event " onClick={this.toggleModal.bind(this)}>Add Answer</p>;
         let answerModal = this.state.activeModal ? <AnswerModal question={this.props.question} clickHandler={this.toggleModal.bind(this)} product={this.state.product} /> : null
 
             return (
                 <div className="info-tab">Helpful?&nbsp;
-                    <div onClick={this.props.sendHelpful.bind(this)}> {yes}
+                    <div className="wrap" onClick={this.props.sendHelpful.bind(this)}> {yes}
                     </div>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{add}
                     {answerModal}
                 </div>)
