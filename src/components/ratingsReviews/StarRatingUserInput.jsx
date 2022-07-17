@@ -11,9 +11,11 @@ const StarRatingUserInput = (props) => {
 
   }
 
+  const ratingDescriptions = ['Poor', 'Fair', 'Average', 'Good', 'Great']
+
 
   return (
-    <div className = "star-rating-user-input"> Rating:&nbsp;
+    <span className = "star-rating-user-input"> Overall Rating:&nbsp;&nbsp;
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
@@ -22,7 +24,6 @@ const StarRatingUserInput = (props) => {
             type= "radio"
             name = "rating"
             value = {ratingValue}
-            visibility = "hidden"
             onClick = {() => ratingChange(ratingValue)}
           />
           <FaStar
@@ -36,7 +37,8 @@ const StarRatingUserInput = (props) => {
         )
       }
       )}
-    </div>
+      {rating ? <span>&nbsp;{ratingDescriptions[rating - 1]}</span> : ''}
+    </span>
   );
 };
 

@@ -1,77 +1,149 @@
 import React, {useState} from 'react';
 import {format} from 'date-fns';
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx';
+import ReviewImageModal from './ReviewImageModal.jsx'
 
-const ReviewListEntry = ({review, handleMarkReviewHelpful, handleReportReview}) => {
+class ReviewListEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showRemaining: false,
+      imageToShow: null,
+      displayFullImageModal: false
+    }
+    this.convertDateFormat = this.convertDateFormat.bind(this);
+    this.markReviewHelpful = this.markReviewHelpful.bind(this);
+    this.reportReview = this.reportReview.bind(this);
+    this.reviewBodyRender = this.reviewBodyRender.bind(this);
+    this.checkBodyLongerThan250 = this.checkBodyLongerThan250.bind(this);
+    this.showRemainingReviewBody = this.showRemainingReviewBody.bind(this);
+    this.showFullImage = this.showFullImage.bind(this);
+    this.showThumbnailPhotos = this.showThumbnailPhotos.bind(this);
+    this.closeImageModal = this.closeImageModal.bind(this);
+  }
 
-  const date = new Date(review.date)
+  date = new Date(this.props.review.date)
 
-  const convertDateFormat = (date) => {
+  checkBodyLongerThan250() {
+    let longBody = false;
+    console.log('in check body longer than 250')
+    if (this.props.review.body.length > 250) {
+      longBody = true;
+    }
+    console.log('long body: ', longBody);
+    this.setState({
+      bodyLongerThan250: longBody
+    })
+  }
+
+
+  convertDateFormat(date) {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   }
 
-  const markReviewHelpful = (e) => {
+  markReviewHelpful(e) {
     e.preventDefault();
-    handleMarkReviewHelpful(review.review_id);
+    this.props.handleMarkReviewHelpful(this.props.review.review_id);
   }
 
-  const reportReview = (e) => {
+  reportReview (e) {
     e.preventDefault();
-    handleReportReview(review.review_id)
+    this.props.handleReportReview(this.props.review.review_id)
   }
 
+  reviewBodyRender() {
+    if (this.props.review.body.length < 250) {
+      return <div>{this.props.review.body}</div>
+    } else {
+      if (this.state.showRemaining === false) {
+        return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp; <button onClick = {this.showRemainingReviewBody}>Show More</button>
+        <br></br>
 
+          </div>
+      } else {
+        return <div>{this.props.review.body}</div>
+      }
+    }
+  }
 
-  var showRemainingBody = false;
-
-  var showRemainingReview = (e) => {
-    console.log('showRemainingReview was invoked, reviewBody', reviewBody)
+  showRemainingReviewBody(e) {
     e.preventDefault();
-    showRemainingBody = true;
+    this.setState({
+      showRemaining: true
+    })
   }
 
-  var debugReviewListEntry = (e) => {
-    console.log(reviewBody)
+  showThumbnailPhotos() {
+    if (this.props.review.photos.length > 0) {
+      return (
+        <div className = "thumbnail-container">
+          {this.props.review.photos.map((photo, index) =>
+            <img className = 'review-thumbnail-image' src = {photo.url} onClick = {this.showFullImage} key = {index}></img>
+          )}
+        </div>
+      )
+    }
+  }
+
+  showFullImage(e) {
+    e.preventDefault();
+    console.log('show full image invoked')
+    console.log(e.target.src)
+    this.setState({
+      displayFullImageModal: true,
+      imageToShow: e.target.src
+    })
+  }
+
+  closeImageModal(e) {
+    e.preventDefault();
+    this.setState({
+      displayFullImageModal: false,
+      imageToShow: null
+    })
   }
 
 
+  debugReviewListEntry = (e) => {
+    console.log('state: ', this.state)
+  }
 
-  return (
-    <div>
+
+  render() {
+    return (
       <div>
-        <StarRatingStatic rating= {review.rating}/>
-        <small className = 'review-username-time'>{review.reviewer_name},&nbsp;{convertDateFormat(date)}
-        </small>
+        <div>
+          {this.state.displayFullImageModal && <ReviewImageModal image = {this.state.imageToShow} closeImageModal = {this.closeImageModal}/>}
+          <StarRatingStatic rating= {this.props.review.rating}/>
+          <small className = 'review-username-time'>{this.props.review.reviewer_name},&nbsp;{this.convertDateFormat(this.date)}
+          </small>
+        </div>
+        <br></br>
+        {/* <button onClick = {this.debugReviewListEntry.bind(this)}>Show state</button> */}
+        <div className = 'review-summary'>{this.props.review.summary}</div>
+
+        <div><br></br>{this.reviewBodyRender()}</div>
+
+        <div>{this.showThumbnailPhotos()}</div>
+
+
+        {this.props.review.recommend ? <div className = 'review-recommend'><br></br>✓ I recommend this product</div> : ''}
+
+        {this.props.review.response ? <div className = 'review-response'>Response goes here<br></br></div> : ''}
+
+        <div className = 'review-helpful-text-block'>Helpful?&nbsp;&nbsp;
+          <span className = 'review-helpful-option' onClick = {this.markReviewHelpful}>Yes</span>
+          <span>&nbsp;({this.props.review.helpfulness})</span>
+          <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+          <span className = 'review-report-button' onClick = {this.reportReview}>Report</span>
+        </div>
+        <hr></hr>
+
       </div>
-      <br></br>
-      {/* <button onClick = {debugReviewListEntry}>Show reviewBody</button> */}
-      <div className = 'review-summary'>{review.summary}</div>
+    )
+  }
 
-      <div><br></br>{review.body}<br></br></div>
-
-       <div>
-        {/* { review.photos.length > 0 ? review.photos.map((photo, index) => {
-          return (<div><img key = {index} className = "review-image-thumbnail" src = {photo.url}/>
-          </div>)
-        }) : ''} */}
-      </div>
-      <div>
-
-      {review.recommend ? <div className = 'review-recommend'><br></br>✓ I recommend this product</div> : ''}
-
-      {review.response ? <div className = 'review-response'>Response goes here<br></br></div> : ''}
-
-      <div className = 'review-helpful-text-block'>Helpful?&nbsp;&nbsp;
-        <span className = 'review-helpful-option' onClick = {markReviewHelpful}>Yes</span>
-        <span>&nbsp;({review.helpfulness})</span>
-        <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-        <span className = 'review-report-button' onClick = {reportReview}>Report</span>
-      </div>
-      <hr></hr>
-      </div>
-    </div>
-  )
 }
 
 export default ReviewListEntry;

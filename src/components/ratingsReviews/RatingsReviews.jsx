@@ -4,7 +4,9 @@ import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
 import AddReviewModal from './AddReviewModal.jsx';
-axios.defaults.headers.common['Authorization'] = API_KEY;
+import KeywordSearchFilter from './KeywordSearchFilter.jsx'
+let newAxios = axios.create({});
+newAxios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 class RatingsReviews extends React.Component {
@@ -73,7 +75,7 @@ class RatingsReviews extends React.Component {
     //On success, updates the state of RatingsReviews.jsx
     getReviewList() {
     let endPoint = `${url}/reviews`;
-    axios.get(endPoint, {
+    newAxios.get(endPoint, {
       params: {
         product_id: this.props.product_id,
         count: 10000
@@ -92,7 +94,7 @@ class RatingsReviews extends React.Component {
     //On success, updates the state of RatingsReviews.jsx
     getMetadata() {
       let endPoint = `${url}/reviews/meta`;
-      axios.get(endPoint, {
+      newAxios.get(endPoint, {
           params: {
             product_id: this.props.product_id,
             count: 10000
@@ -109,9 +111,8 @@ class RatingsReviews extends React.Component {
 
     getProductInformation() {
       let endPoint = `${url}/products/${this.props.product_id}`
-      axios.get(endPoint)
+      newAxios.get(endPoint)
       .then((response) => {
-        console.log('product information: ', response.data)
         this.updateProductName(response.data.name)
 
       })
@@ -124,7 +125,7 @@ class RatingsReviews extends React.Component {
     //On success, calls getReviewsList and getRatingsList to update with the latest info
     addReview(review) {
       let endPoint = `${url}/reviews`;
-      axios.post(endPoint, {
+      newAxios.post(endPoint, {
         product_id: this.props.product_id,
         rating: review.rating,
         summary: review.summary,
@@ -140,8 +141,9 @@ class RatingsReviews extends React.Component {
     //Marks a specific review as helpful. Takes in the review_id and creates a PUT request for that specific review
     //On success, calls getReviewsList to update with the latest info
     handleMarkReviewHelpful(review_id) {
+      console.log('marking review as helpful')
       let endPoint = `${url}/reviews/${review_id}/helpful`;
-      axios.put(endPoint, {
+      newAxios.put(endPoint, {
         params: {
           review_id: review_id
         }
@@ -160,7 +162,7 @@ class RatingsReviews extends React.Component {
     //On success, calls getReviewsList to update with the latest info
     handleReportReview(review_id) {
       let endPoint = `${url}/reviews/${review_id}/report`
-      axios.put(endPoint, {
+      newAxios.put(endPoint, {
         params: {
           review_id: review_id
         }
@@ -245,18 +247,19 @@ class RatingsReviews extends React.Component {
         let filteredReviews = this.filterReviews();
         return (
           <div>
-            <div>{this.state.displayAddReviewModal && <AddReviewModal product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal}/>}</div>
-            <h1>Ratings & Reviews</h1>
-            <ReviewList totalNumReviews = {this.state.reviews.length} reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview}/>
-            <button className = 'add-review-button' onClick = {this.showAddReviewModal}>ADD A REVIEW +</button>
+            <h1 className = 'ratings-reviews-title'>RATINGS & REVIEWS</h1>
+            <div className = "ratings-reviews-master-container">
+
+            <div>{this.state.displayAddReviewModal && <AddReviewModal product_id = {this.props.product_id} product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal}/>}</div>
+
+
+
             <RatingsSection metadata = {this.state.metadata} handleFilterByRating = {this.handleFilterByRating} filterRatings = {this.state.filterRatings} handleFilterClear = {this.handleFilterClear} setAverageRating = {this.props.setAverageRating}/>
-            <button onClick = {this.getReviewList}>Get Review List</button>
-            <button onClick = {this.getMetadata}>Get Ratings List</button>
-            <button onClick = {this.logState}>Show current state</button>
-            <button onClick = {this.getProductInformation.bind(this)}>Get product information</button>
+            <ReviewList totalNumReviews = {this.state.reviews.length} reviews = {filteredReviews} handleMarkReviewHelpful = {this.handleMarkReviewHelpful} handleReportReview = {this.handleReportReview} showAddReviewModal = {this.showAddReviewModal}/>
+
 
           </div>
-
+          </div>
         )
     }
 

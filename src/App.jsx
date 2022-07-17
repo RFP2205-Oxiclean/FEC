@@ -12,7 +12,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedProductId: 40351,
+            displayedProductId: 40344,
             averageRating: null,
         };
         this.setAverageRating = this.setAverageRating.bind(this);

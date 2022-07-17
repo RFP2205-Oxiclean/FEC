@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 import RatingsBarComponent from './RatingsBarComponent.jsx'
+import RatingsGraph from './RatingsGraph.jsx'
 
 const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFilterClear, setAverageRating}) => {
 
@@ -71,10 +72,8 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
 
   return (
-    <div>
+    <div className = "ratings-section-container">
       {metadata.ratings!== undefined ? <div>
-      <br></br>
-      <div>RATINGS & REVIEWS</div>
       <div id = 'average-rating'>{roundedAverage}&nbsp;
         <StarRatingStatic rating = {roundedAverage}/>
       </div>
@@ -82,6 +81,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
       <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
       </div>
       <br></br>
+
       <span className = 'rating-bar-label' id = '5-star-filter' onClick = {starFilterClicked}> 5 stars
         <RatingsBarComponent
           rating = {fiveRatingPercent}

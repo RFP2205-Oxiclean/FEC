@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewListEntry from './ReviewListEntry.jsx';
 import SortDropdown from './SortDropdown.jsx';
-
+import KeywordSearchFilter from './KeywordSearchFilter.jsx'
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -9,10 +9,12 @@ class ReviewList extends React.Component {
     this.state = {
       numReviewsDisplayed: 0,
       sortOption: '',
+      searchKeyword: ''
     }
     this.addTwoReviewsToDisplay = this.addTwoReviewsToDisplay.bind(this);
     this.handleSortReviewsChange = this.handleSortReviewsChange.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
+    this.handleKeywordChange = this.handleKeywordChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +39,12 @@ class ReviewList extends React.Component {
     })
   }
 
+  handleKeywordChange(word) {
+    this.setState({
+      searchKeyword: word
+    })
+  }
+
   sortReviews() {
     var reviewsCopy = this.props.reviews.slice();
     if (this.state.sortOption === 'helpful') {
@@ -46,32 +54,65 @@ class ReviewList extends React.Component {
         return (firstReview.date > secondReview.date) ? -1 : ((firstReview.date < secondReview.date) ? 1: 0)
       });
     } else {
-      reviewsCopy.sort(function(firstReview, secondReview) {
-        return (firstReview.date > secondReview.date) ? -1 : ((firstReview.date < secondReview.date) ? 1: 0)
-      });
-      reviewsCopy.sort((firstReview, secondReview) => secondReview.helpfulness - firstReview.helpfulness);
-    }
+      reviewsCopy.sort((firstReview, secondReview) => {
+        if (secondReview.helpfulness === firstReview.helpfulness) {
+          return (firstReview.date > secondReview.date) ? -1 : ((firstReview.date < secondReview.date) ? 1: 0)
+        }
+        return secondReview.helpfulness - firstReview.helpfulness});
+
+    };
     return reviewsCopy;
+  }
+
+  filterReviews(reviewsToFilter) {
+    var filteredReviews = [];
+    if (this.state.searchKeyword.length >= 3) {
+      for (var i = 0; i < reviewsToFilter.length; i++) {
+        if (reviewsToFilter[i].body.includes(this.state.searchKeyword) || reviewsToFilter[i].summary.includes(this.state.searchKeyword)) {
+          filteredReviews.push(reviewsToFilter[i]);
+        }
+      }
+      return filteredReviews;
+    } else {
+      return reviewsToFilter;
+    }
+  }
+
+  showKeyword() {
+    console.log(this.state.searchKeyword)
   }
 
 
   render() {
-    var reviewsToDisplay = this.sortReviews().slice(0, this.state.numReviewsDisplayed);
+    var reviewsToDisplay = this.filterReviews(this.sortReviews()).slice(0, this.state.numReviewsDisplayed);
 
-    if (reviewsToDisplay.length === 0) {
+    if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length > 3) {
       return (
-        <button>Add a Review</button>
+        <div className = "review-list-container">
+          <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
+          <div>No keywords matched that search, try again</div>
+        </div>
+      )
+
+    } else if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length < 3) {
+      return (
+        <div  className = "review-list-container">
+          <button>ADD A REVIEW +</button>
+        </div>
+
       )
     } else {
       return (
-        <div>
+        <div className = "review-list-container">
+          <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
           <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
           <div className = 'review-list'>
           {reviewsToDisplay.map((review, index) =>
             <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
           )}
           </div>
-          {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay}>MORE REVIEWS</button> : ''}
+          {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay} className = 'more-reviews-button'>MORE REVIEWS</button> : ''}
+          <button className = 'add-review-button' onClick = {this.props.showAddReviewModal}>ADD A REVIEW +</button>
         </div>
         )
     }
