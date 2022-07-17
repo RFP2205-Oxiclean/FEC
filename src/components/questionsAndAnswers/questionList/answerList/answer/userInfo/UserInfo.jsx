@@ -56,7 +56,7 @@ class UserInfo extends React.Component  {
     }
 
 
-    render() {
+    render() { //&nbsp; is a whitespace character
 
         let theDate = new Date( this.props.data.date.substr(0,4), this.props.data.date.substr(5,2), this.props.data.date.substr(8,2) )
         let user = <p className="user-info">by {this.props.data.answerer_name} - {format(theDate ,'MMMM d, Y')}</p>
@@ -66,7 +66,7 @@ class UserInfo extends React.Component  {
         let report = <p className="report-event"  onClick={this.sendReport.bind(this)}> {reportedData} </p>
 
         return(
-            <div className="user-tab"> {user} | Helpful? {yes} | {report}</div>)
+            <div className="user-tab"> {user}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Helpful? {yes}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{report}</div>)
     }
 
 }

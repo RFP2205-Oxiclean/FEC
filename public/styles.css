@@ -30,6 +30,7 @@
   overflow:hidden;
 }
 
+
 .questions-and-answers #qa-container .qa-title
 {
   color: #565656;
@@ -68,11 +69,16 @@
     margin-inline-end: 0px;
 }
 
+.questions-and-answers div::-webkit-scrollbar {
+  display: none;
+}
 .questions-and-answers #question-container {
   max-height: 50%;
-  position: absolute;
-  overflow-y: scroll;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   width: 100%;
+  overflow: scroll;
 }
 
 .questions-and-answers ul {
@@ -201,11 +207,11 @@
     box-shadow: 5px 5px 5px;
     -moz-box-shadow: 5px 5px 5px;
     -webkit-box-shadow: 5px 5px 5px;
+    max-height:95%;
+    max-width:95%;
   }
 
 .questions-and-answers .load-more {
-  position: absolute;
-  top: 67%;
 }
 .questions-and-answers .load-more-a {
   padding: 10px 0px 10px 20px;
