@@ -7,7 +7,7 @@ class QuestionList extends React.Component {
     constructor(props) {
         super(props);
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        console.log(this.props.questions, 'qqqq');
+        //console.log(this.props.questions, 'qqqq');
         this.state = this.initialStateValues();
 
     }
@@ -17,7 +17,6 @@ class QuestionList extends React.Component {
             oldQuestions: JSON.stringify(this.sortedByHelpful),
             loadedQuestions : [],
             loadMoreState: 'nonexistant',
-            amountOfQuestionsLoaded : 0,
             questionsToLoad : 2,
             loadMoreStateList : ['nonexistant','decrease','increase'],
         }
@@ -34,35 +33,35 @@ class QuestionList extends React.Component {
     componentDidUpdate() {
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
         let propsString = JSON.stringify(this.sortedByHelpful);
-        if(this.state.amountOfQuestionsLoaded < 1 || propsString  !== this.state.oldQuestions) {
-            console.log('rerender')
+        //console.log(propsString, this.state.oldQuestions)
+        if(propsString  !== this.state.oldQuestions) {
+            //console.log('rerender',this.state.amountOfQuestionsLoaded, this.state.loadedQuestions )
             this.state.oldQuestions = propsString;
             this.loadMoreQuestions();
-        }
+        } else {}
     }
 
     loadMoreGone() {
         this.state.loadMoreState = this.state.loadMoreStateList[0];
         this.state.loadedQuestions = this.sortedByHelpful;
-            this.setState(JSON.parse(JSON.stringify(this.state)));
+        this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
     loadMoreDecrease() {
         this.state.loadMoreState = this.state.loadMoreStateList[1];
         this.state.loadedQuestions = this.sortedByHelpful;
-        this.state.amountOfQuestionsLoaded = this.sortedByHelpful.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
     resetState() {
-        this.state = this.initialStateValues()
+        this.state = this.initialStateValues();
         this.setState(JSON.parse(JSON.stringify(this.state)));
+        this.loadMoreQuestions();
     }
 
     loadMoreIncrease() {
-        let newSlice = this.sortedByHelpful.slice(0,this.state.amountOfQuestionsLoaded + this.state.questionsToLoad);
+        let newSlice = this.sortedByHelpful.slice(0,this.state.loadedQuestions.length + this.state.questionsToLoad);
         this.state.loadMoreState = this.state.loadMoreStateList[2];
-        this.state.amountOfQuestionsLoaded = newSlice.length;
         this.state.loadedQuestions = newSlice;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
@@ -70,17 +69,18 @@ class QuestionList extends React.Component {
 
 
 
-
-    loadMoreQuestions() {
+    // main function
+    loadMoreQuestions(initialStep) {
         if (this.sortedByHelpful.length <= this.state.questionsToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded <= this.state.questionsToLoad) { // decrease
+        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length <= this.state.questionsToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded > this.state.questionsToLoad) { //increase
+        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length > this.state.questionsToLoad) { //increase
+            console.log("what does it mean ", this.sortedByHelpful.length , this.state.amountOfQuestionsLoaded,this.state.questionsToLoad )
             this.loadMoreIncrease();
         }
     }

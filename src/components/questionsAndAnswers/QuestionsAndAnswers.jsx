@@ -19,6 +19,11 @@ class QuestionsAndAnswers extends React.Component {
         };
     }
 
+    initialStateValues () {
+        return
+
+    }
+
     componentDidMount() {
         this.getAllQuestions(this.props.product_id)
     }
