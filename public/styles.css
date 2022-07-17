@@ -173,13 +173,18 @@
   padding: 10px 0px;
 }
 .questions-and-answers .answer-list .photo-container {
-  display:inline;
-  padding-right: 20px;
+  display: inline-block;
+  margin-right: 20px;
+  width: 117px;
+  height: 70px;
+  text-align: center;
+  background-color: black;
 
 }
 .questions-and-answers .answer-list .photo-container .photo {
-  height: 70px;
-  width: 113px;
+  max-height: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   display: inline;
   border: 2px solid black;
 
