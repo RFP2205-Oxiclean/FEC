@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ available, activeStyle, id }) => {
+const QMenu = ({ selectedSize, changeHandler, available, activeStyle, id }) => {
   let [arr, setArr] = useState([]);
+  let [selected, select] = useState(0);
 
   useEffect(() => {
-    let x = Math.min(15, available);
-    let newArr = Array(x).fill(0);
-    newArr = newArr.map(function (n, i) {
-      return i + 1;
-    });
-    setArr(newArr);
-  }, [available]);
+    if (available !== null && selectedSize !== null) {
+      let x = Math.min(15, available);
+      let newArr = Array(x).fill(0);
+      newArr = newArr.map(function (n, i) {
+        return i + 1;
+      });
+      changeHandler(1);
+      setArr(newArr);
+    }
+  }, [available, selectedSize, available]);
 
   useEffect(() => {
     setArr([]);
   }, [activeStyle]);
 
+  let handleChange = function (e) {
+    select(parseInt(e.target.value));
+    changeHandler(selected);
+  };
+
   return (
-    <div className="size-select-button" style={{ float: "right" }}>
-      <select style={{ width: "150px" }}>
-        <option defaultValue={"Hello"} hidden></option>
-        {arr.map(function (n) {
-          return <option key={id + n}>{n}</option>;
-        })}
-      </select>
-    </div>
+    <select className="quantity-selector" onChange={handleChange}>
+      {arr.map(function (n) {
+        return <option key={id + n}>{n}</option>;
+      })}
+    </select>
   );
 };
 

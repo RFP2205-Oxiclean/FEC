@@ -66,6 +66,8 @@
   box-shadow: 6px 4px 5px -2px black;
   padding: 5px;
   border-radius: 4px;
+  transition: transform .3s ease;
+  transform: translate(-10%, 0)
 }
 
 
@@ -74,8 +76,8 @@
 }
 
 .collapse-and-info-container {
+  width: 35%;
   position: relative;
-  width: 40%;
   display: flex;
 }
 
@@ -146,7 +148,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 35%;
+  min-height: 25%;
+  max-height: 35%;
 }
 
 .overview-expanded-product-info-name {
@@ -168,16 +171,13 @@
   margin-top: auto;
 }
 
-.overview-styles-container {
-  display: inline-flex;
-
-}
-
 .overview-purchase-info {
   height: 20%;
 }
 
 .overview-styles-container {
+  height: 35%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -257,12 +257,26 @@ img {
 }
 
 .style-object-thumbnail-container {
-  margin-left: 0;
-  width: 74px;
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
   border-radius: 50%;
   width: 25%;
 }
+
+.overview-overlay-thumbnail:active {
+  transform: scale(0.95);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+
+.style-object-thumbnail:active {
+  transform: scale(0.95);
+  box-shadow: 10px 2px 5px -2px rgb(98, 98, 98);
+}
+
 
 .collapse-button-container {
   height: 2%;
@@ -323,28 +337,36 @@ img {
 }
 
 .purchase-buttons-container1 {
-  padding-top: 20px;
   display: inline-block;
   width: 100%;
 }
 
-.size-selector {
-  float: left;
-  width: 50%;
-  height: 40px;
-  background: black;
+.purchase-buttons-container2 {
+  display: inline-block;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .quantity-selector {
   float: right;
-  border: 2px black solid;
-  line-height: 40px;
-  color: black;
   height: 40px;
-  font-size: 25px;
   width: 120px;
   text-align: center;
+}
 
+.add-to-cart {
+  display: flex;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: ffffff;
+  border: 1px solid #8ca4c8;
+  box-shadow: 10px 8px 5px -2px rgb(148, 147, 147);
 }
 
 select {
@@ -382,6 +404,7 @@ select:active {
 select {
   background-color: #ffffff;
   border: 1px solid #8ca4c8;
+  cursor: pointer;
 }
 
 select option:checked {
@@ -392,16 +415,32 @@ select option:checked {
   position: relative;
   display: inline-block;
   transition: transform 1.0s ease;
-  transform: translate(102%, 0);
-  z-index: 1
+  transform: translate(100%, 0);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
+
 
 .unslide-panel {
   position: relative;
   display: inline-block;
   transition: transform 1.0s ease;
-  /* transform: translate(-50%, 0); */
+  width: 100%;
+  height: 100%;
   z-index: 1
+}
+
+.size-selector {
+  width: 250px;
+}
+
+select:active {
+  transform: scale(0.98);
+}
+
+.add-to-cart:active {
+  transform: scale(.95);
 }
 
 

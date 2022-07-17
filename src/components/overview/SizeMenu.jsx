@@ -1,38 +1,39 @@
 import React, { useState, useEffect } from "react";
 
-const SizeMenu = ({ stock, changeHandler, activeStyle }) => {
+const SizeMenu = ({ stock, changeHandler, activeStyle, available }) => {
   let [size, setSize] = useState("");
-
-  let style = {
-    float: "left",
-  };
+  let [defaultValue, setDefaultValue] = useState("Select a Size!");
 
   useEffect(() => {
     setSize("");
   }, [activeStyle]);
 
-  let clicked = function () {
-    style = {
-      float: "left",
-      paddingLeft: "5px",
-    };
-  };
+  useEffect(() => {
+    let flag = false;
+    stock.forEach(function (stockObj) {
+      if (stockObj.quantity !== null && stockObj.quantity !== 0) {
+        flag = true;
+        setDefaultValue("Select a Size!");
+      }
+    });
+    if (!flag || available === 0) {
+      setDefaultValue("Out of Stock!");
+    }
+  }, [stock]);
 
   return (
-    <div style={style}>
-      <select
-        defaultValue={"Select a Size!"}
-        onChange={(e) => {
-          changeHandler(e.target.value);
-        }}
-        defaultValue={"Hello"}
-        style={{ width: "250px" }}>
-        <option hidden>Select a Size!</option>
-        {stock.map(function (n, i) {
-          return <option key={n.id + n.size + ""}>{n.size}</option>;
-        })}
-      </select>
-    </div>
+    <select
+      defaultValue={defaultValue}
+      onChange={(e) => {
+        changeHandler(e.target.value);
+      }}
+      className="nice-select"
+      style={{ width: "250px" }}>
+      <option hidden>{defaultValue}</option>
+      {stock.map(function (n, i) {
+        return <option key={n.id + n.size + ""}>{n.size}</option>;
+      })}
+    </select>
   );
 };
 
