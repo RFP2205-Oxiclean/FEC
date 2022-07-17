@@ -225,7 +225,7 @@
 }
 
 .style-object-thumbnail:hover {
-  box-shadow: -6px 5px 20px -2px rgb(0 0 0)
+  box-shadow: -6px 5px 15px -2px rgb(0 0 0)
 }
 
 .overview-expanded-product-info-price {
@@ -256,6 +256,7 @@ img {
 }
 
 .overview-expanded-product-info-prices {
+  height: 25px;
   margin-right: auto;
   font-weight: bold;
   font-size: 25px;

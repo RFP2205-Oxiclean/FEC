@@ -67,10 +67,11 @@ export function prefetch(styleObjects, product_id) {
 }
 
 export function addToCart(id, quantity) {
-  if (Number.isInteger(quantity) && quantity > 0) {
+  if (quantity > 0 && id !== 0) {
     let arr = Array(parseInt(quantity)).fill(0);
     return Promise.all(
       arr.map((el) => {
+        console.log(id);
         console.log("post request");
         return axios.post(
           `${url}/cart`,
@@ -87,6 +88,8 @@ export function addToCart(id, quantity) {
       })
     );
   } else {
-    return;
+    return new Promise((resolve, reject) => {
+      reject();
+    });
   }
 }

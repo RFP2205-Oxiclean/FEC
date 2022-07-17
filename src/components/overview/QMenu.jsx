@@ -6,9 +6,11 @@ const QMenu = ({ stock, selectedSizeId, handleSelectQ }) => {
   let [optionsArr, setOptionsArr] = useState([]);
 
   useEffect(() => {
+    let flag = false;
     if (selectedSizeId !== null) {
       stock.forEach(function (quantityObject) {
         if (quantityObject.id === selectedSizeId) {
+          flag = true;
           let newArr = Array(Math.min(15, parseInt(quantityObject.quantity)))
             .fill(0)
             .map(function (e, i) {
@@ -19,6 +21,9 @@ const QMenu = ({ stock, selectedSizeId, handleSelectQ }) => {
           setAvailable(quantityObject.quantity);
         }
       });
+    }
+    if (!flag) {
+      setOptionsArr([]);
     }
   }, [stock, selectedSizeId]);
 

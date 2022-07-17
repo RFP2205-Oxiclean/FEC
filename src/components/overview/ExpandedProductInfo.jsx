@@ -5,7 +5,7 @@ import CollapsePanelButton from "./CollapsePanelButton.jsx";
 import StarRatingStatic from "../commonComponents/StarRatingStatic.jsx";
 import PurchaseInfo from "./PurchaseInfo.jsx";
 
-const ExpandedProductInfo = ({ resetActiveImageIndex, styleClickHandler, productInfo, styleObjects }) => {
+const ExpandedProductInfo = ({ setActiveImageIndex, styleClickHandler, productInfo, styleObjects }) => {
   let [viewIndex, setViewIndex] = useState(0);
   let [hoverInfo, setHoverInfo] = useState({ name: "", original_price: "", sale_price: "" });
   let [onHover, setOnHover] = useState(false);
@@ -48,7 +48,7 @@ const ExpandedProductInfo = ({ resetActiveImageIndex, styleClickHandler, product
                 return (
                   <StyleObjectThumbnail
                     setViewIndex={setViewIndex}
-                    resetActiveImageIndex={resetActiveImageIndex}
+                    setActiveImageIndex={setActiveImageIndex}
                     styleClickHandler={styleClickHandler}
                     styleObject={styleObject}
                     key={styleObject.style_id}

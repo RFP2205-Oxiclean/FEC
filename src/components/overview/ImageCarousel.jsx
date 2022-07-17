@@ -20,9 +20,9 @@ const ImageCarousel = ({ changeActiveThumbnail, product_id, styleClickHandler, s
   }
 
   // redundant?
-  let resetActiveImageIndex = function (index = 0) {
-    setActiveImageIndex(index);
-  };
+  // let resetActiveImageIndex = function (index = 0) {
+  //   setActiveImageIndex(index);
+  // };
 
   return (
     <div
@@ -43,7 +43,7 @@ const ImageCarousel = ({ changeActiveThumbnail, product_id, styleClickHandler, s
           changeImage={changeImage}></ThumbnailContainer>
       </div>
       <ExpandedProductInfo
-        resetActiveImageIndex={resetActiveImageIndex}
+        setActiveImageIndex={setActiveImageIndex}
         styleClickHandler={styleClickHandler}
         productInfo={productInfo}
         styleObjects={styleObjects}></ExpandedProductInfo>

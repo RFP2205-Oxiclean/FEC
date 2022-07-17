@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import QuantityMenu from "./QuantityMenu.jsx";
 import SizeMenu from "./SizeMenu.jsx";
 import QMenu from "./QMenu.jsx";
 import AddToCart from "./AddToCart.jsx";
@@ -32,6 +31,8 @@ const PurchaseInfo = ({ activeStyle }) => {
         stockArr.push({ ...activeStyle.skus[k], id: k });
       }
     }
+    setSelectedSizeId(0);
+    handleSelectQ(0);
     setStock(stockArr);
   }, [activeStyle]);
 
@@ -68,7 +69,8 @@ const PurchaseInfo = ({ activeStyle }) => {
             }
           });
           setStock(newStock);
-        });
+        })
+        .catch((err) => setPrompt(true));
     }
   };
 
