@@ -41,6 +41,9 @@ const PurchaseInfo = ({ activeStyle }) => {
     console.log(selectedSizeId);
     console.log("=============");
     console.log(selectQ, selectedSizeId);
+    axios.get(`${url}/cart`, { headers: { Authorization: API_KEY } }).then((response) => {
+      console.log(response.data);
+    });
   };
 
   let handleCartClick = function () {
@@ -76,7 +79,11 @@ const PurchaseInfo = ({ activeStyle }) => {
       </div>
       <div style={{ display: "flex", height: "40px", alignItems: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", width: "250px", textAlign: "center", fontSize: "20px", color: "red" }}>
-          {prompt ? <span>Please Select a Size! </span> : <span></span>}
+          {prompt ? (
+            <span className="select-prompt-fadeIn">Please Select a Size!</span>
+          ) : (
+            <span className="select-prompt-fadeOut">Please Select a Size!</span>
+          )}
         </div>
       </div>
       <div className="purchase-buttons-container1">
