@@ -5,9 +5,9 @@ const MoreQuestions = (props) => {
     if (props.loadMoreState === props.loadMoreStateList[0]) {
       return null
     } else if (props.loadMoreState === props.loadMoreStateList[1]) {
-      return <div className="load-more" onClick={props.clickHandler}>less</div>
+      return <div className="load-more interactive-buttons" onClick={props.clickHandler}>COLLAPSE QUESTIONS</div>
     } else if (props.loadMoreState === props.loadMoreStateList[2]) {
-      return <div className="load-more" onClick={props.clickHandler}>more</div>
+      return <div className="load-more interactive-buttons" onClick={props.clickHandler}>MORE ANSWERED QUESTIONS</div>
     }
 }
 

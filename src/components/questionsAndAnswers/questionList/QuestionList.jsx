@@ -38,7 +38,7 @@ class QuestionList extends React.Component {
             //console.log('rerender',this.state.amountOfQuestionsLoaded, this.state.loadedQuestions )
             this.state.oldQuestions = propsString;
             this.loadMoreQuestions();
-        } else {}
+        }
     }
 
     loadMoreGone() {
@@ -90,15 +90,20 @@ class QuestionList extends React.Component {
     render () {
         return (
             <div>
-                <div id="question-container">
-                    <ul id ="question-list">
-                        {this.state.loadedQuestions.map((question, index)=> {
-                            return <Question question={question} key={index} productId={this.props.productId} />
-                        })}
-                    </ul>
+                <div class="qc-wrapper">
+                    <div id="question-container">
+                        <ul id ="question-list">
+                            {this.state.loadedQuestions.map((question, index)=> {
+                                return <Question question={question} key={index} productId={this.props.productId} />
+                            })}
+                        </ul>
+
+                    </div>
+                    <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
                 </div>
-                <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
-            </div>)
+
+            </div>
+            )
     }
 }
 

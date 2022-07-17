@@ -20,14 +20,11 @@
 }
 
 .questions-and-answers {
-  max-height: 100%;
-  height: 100%;
   width: 100%;
-  position: absolute;
-  box-sizing:border-box;
-  font-family:arial;
-  position: absolute;
-  overflow:hidden;
+  box-sizing: border-box;
+  font-family: arial;
+  position: relative;
+  overflow: hidden;
 }
 
 
@@ -42,10 +39,8 @@
 
 
 .questions-and-answers #qa-container {
-  height:100%;
   width: 100%;
-  position: absolute;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .questions-and-answers #qa-container .qa-nav-bar{
@@ -72,13 +67,32 @@
 .questions-and-answers div::-webkit-scrollbar {
   display: none;
 }
+
+.questions-and-answers .qc-wrapper {
+  position:relative;
+  max-height:50%;
+}
+
+.questions-and-answers .interactive-buttons:hover {
+  cursor:pointer;
+}
+.questions-and-answers .interactive-buttons {
+  padding: 14px;
+  font-size: 18px;
+  border: 1px solid;
+  font-weight: bold;
+  display: inline-block;
+}
+
+
+
 .questions-and-answers #question-container {
-  max-height: 50%;
   position: relative;
   -ms-overflow-style: none;
   scrollbar-width: none;
   width: 100%;
   overflow: scroll;
+  max-height: 50vh;
 }
 
 .questions-and-answers ul {
@@ -169,25 +183,33 @@
   font-size: 12px;
 }
 
+.questions-and-answers .answer-list .photolist-container .photo-container:hover {
+  cursor:pointer;
+}
 .questions-and-answers .answer-list .photolist-container {
   padding: 10px 0px;
+  width:100%;
+  height: 70px;
 }
 .questions-and-answers .answer-list .photo-container {
-  display: inline-block;
   margin-right: 20px;
   width: 117px;
   height: 70px;
-  text-align: center;
   background-color: black;
-
+  overflow:hidden;
+  align-items: center;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  float:left;
 }
+
 .questions-and-answers .answer-list .photo-container .photo {
   max-height: 100%;
   max-width: 100%;
   box-sizing: border-box;
   display: inline;
   border: 2px solid black;
-
 }
 
 .questions-and-answers .answer-list .photo-container .qa-image-modal {
