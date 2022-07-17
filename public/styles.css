@@ -206,7 +206,7 @@
   height: 74px;
   margin-left: 0;
   border-radius: 50%;
-  box-shadow: 10px 2px 5px -2px rgb(148, 147, 147);
+  box-shadow: -6px 5px 20px -2px rgb(0 0 0);
 }
 
 .style-object-thumbnail-active {
@@ -216,12 +216,16 @@
   height: 74px;
   margin-left: 0;
   border-radius: 50%;
-  box-shadow: 0 0 0px 3px red;
+  box-shadow: -6px 5px 20px -2px rgb(0 0 0);
   z-index: 1
 }
 
+.style-object-thumbnail-active:active {
+  transform: scale(0.95)
+}
+
 .style-object-thumbnail:hover {
-  box-shadow: 10px 2px 5px -2px rgb(98, 98, 98);
+  box-shadow: -6px 5px 20px -2px rgb(0 0 0)
 }
 
 .overview-expanded-product-info-price {
@@ -276,13 +280,11 @@ img {
 
 .overview-overlay-thumbnail:active {
   transform: scale(0.95);
-  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
 
 .style-object-thumbnail:active {
   transform: scale(0.95);
-  box-shadow: 10px 2px 5px -2px rgb(98, 98, 98);
 }
 
 
@@ -376,7 +378,7 @@ img {
   border-radius: 10px;
   background-color: RGB(239, 192, 80);
   border: 1px solid #8ca4c8;
-  box-shadow: 10px 8px 5px -2px rgb(148, 147, 147);
+  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
 select {
@@ -390,11 +392,11 @@ select {
 		#f0a733 50%,
 		#f2a324 92%,
 		#ffb730);
-  box-shadow: 10px 8px 5px -2px rgb(148, 147, 147);
+  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
 select>options {
-  box-shadow: 10px 8px 5px -2px rgb(148, 147, 147);
+  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 
 }
 
