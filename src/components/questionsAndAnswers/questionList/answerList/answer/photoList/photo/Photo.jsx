@@ -7,7 +7,7 @@ class Photo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            photo: null,
+            photo: undefined,
             modalActive: false
         }
     }
@@ -25,8 +25,6 @@ class Photo extends React.Component {
           let endPoint = this.props.url;
           axios.get(endPoint, {
               responseType:'arraybuffer',
-              photo:undefined,
-              modalActive : false
           })
           .then((res)=>{
               this.state.photo = Buffer.from(res.data,'binary').toString('base64');
