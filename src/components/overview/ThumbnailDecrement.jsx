@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-const ThumbnailDecrement = ({ callback, startEnd }) => {
+const ThumbnailDecrement = ({ callback, displayArr }) => {
   let [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    if (startEnd[0] === 0) {
+    if (displayArr[0] === 0) {
       setHidden(true);
     } else {
       setHidden(false);
     }
-  }, startEnd);
+  }, [displayArr]);
 
   return (
     <div style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }} className="thumbnail-decrement">

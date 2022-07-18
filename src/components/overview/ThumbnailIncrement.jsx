@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-const ThumbnailIncrement = ({ callback, startEnd, end }) => {
+const ThumbnailIncrement = ({ callback, startEnd, end, displayArr }) => {
   let [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    if (startEnd[1] === end) {
+    if (displayArr[displayArr.length - 1] + 1 === end) {
       setHidden(true);
     } else {
       setHidden(false);
     }
-  }, startEnd);
+  }, [displayArr]);
 
   return (
     <div style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }} className="thumbnail-increment">
