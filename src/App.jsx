@@ -14,8 +14,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedProductId: 40351,
+            displayedProductId: 40344,
+            averageRating: null,
         };
+        this.setAverageRating = this.setAverageRating.bind(this);
+    }
+
+    setAverageRating(rating) {
+        this.setState({
+            averageRating: rating
+        })
     }
 
     render() {
@@ -33,6 +41,7 @@ class App extends React.Component {
                 <div className='questions-and-answers'>
                     <QuestionsAndAnswers
                         product_id={this.state.displayedProductId}
+                        setAverageRating = {this.setAverageRating}
                     />
                 </div>
 

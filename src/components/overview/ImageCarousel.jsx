@@ -17,9 +17,9 @@ const ImageCarousel = ( {product_id, styleClickHandler, styleObjects, activeStyl
     setActiveImageIndex(index);
   }
 
-  if (styleObjects.length > 1) {
-    prefetch(styleObjects, product_id)
-  }
+  // if (styleObjects.length > 1) {
+  //   prefetch(styleObjects, product_id)
+  // }
 
   // redundant?
   let resetActiveImageIndex = function(index=0) {
