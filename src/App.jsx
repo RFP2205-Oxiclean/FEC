@@ -3,6 +3,8 @@ import { url } from "../config/config.js";
 import { API_KEY } from "../config/config.js";
 import axios from "axios";
 
+
+
 import ProductOverview from './components/overview/ProductOverview.jsx'
 import QuestionsAndAnswers from './components/questionsAndAnswers/QuestionsAndAnswers.jsx'
 import RatingsReviews from './components/ratingsReviews/RatingsReviews.jsx'
@@ -27,19 +29,20 @@ class App extends React.Component {
                         product_id={this.state.displayedProductId}
                     />
                 </div>
+
+                <div className='questions-and-answers'>
+                    <QuestionsAndAnswers
+                        product_id={this.state.displayedProductId}
+                    />
+                </div>
+
                 <div className='ratings-reviews'>
                     <RatingsReviews
                         product_id={this.state.displayedProductId}
                     />
                 </div>
 
-                {/* <div className='questions-and-answers'>
-                    <QuestionsAndAnswers
-                        product_id={this.state.displayedProductId}
-                    />
-                </div>
 
-                */}
             </div>
 
         )

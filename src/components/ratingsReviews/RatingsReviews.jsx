@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
+import {url, API_KEY} from './../../../config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
-axios.defaults.headers.common['Authorization'] = API_KEY;
+//axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 class RatingsReviews extends React.Component {
@@ -79,7 +79,10 @@ class RatingsReviews extends React.Component {
     //On success, updates the state of RatingsReviews.jsx
     getMetadata() {
     let endPoint = `${url}/reviews/meta`;
-    axios.get(endPoint, {
+    let newAxios = axios.create({
+      headers : {'Authorization' : API_KEY}
+    })
+    newAxios.get(endPoint, {
         params: {
           product_id: this.props.product_id,
           count: 10000
