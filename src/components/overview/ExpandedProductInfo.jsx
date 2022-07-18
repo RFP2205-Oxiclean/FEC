@@ -32,8 +32,6 @@ const ExpandedProductInfo = ({
     }
   };
 
-  console.log(end, activeThumbnailIndex);
-
   return (
     <div className="collapse-and-info-container">
       <div className="inner-div">

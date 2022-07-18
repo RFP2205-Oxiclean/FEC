@@ -59,10 +59,6 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <button
-            onClick={() => {
-              console.log(size, quantity);
-            }}></button>
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId}></QMenu>
         </div>
         <div className="purchase-buttons-container2">

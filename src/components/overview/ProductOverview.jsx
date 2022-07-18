@@ -57,7 +57,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   }, [product_id]);
 
   useEffect(() => {
-    console.log("prefetching");
     prefetch(styleObjects, product_id);
   }, [styleObjects]);
 
@@ -138,7 +137,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let handleAddToCart = function (stockId, quantity) {
-    console.log(stockId, quantity);
     if (!stockId || !quantity) {
       console.log("attempt failed");
       return;
@@ -155,7 +153,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         copyStock[getActiveDisplayId()] = newStock;
         setStock(copyStock);
       })
-      .catch((err) => console.log("something"));
+      .catch((err) => console.log("failed to post"));
   };
 
   return (
@@ -177,17 +175,19 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         styleObjects={styleObjects}
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
-      <input
-        onChange={(e) => {
-          setEntry(e.target.value);
-        }}></input>
-      <button
-        onClick={() => {
-          handleClick(entry);
-        }}>
-        New Product
-      </button>
-      <button onClick={masterState}>Master State</button>
+      <div style={{ position: "absolute", top: "0" }}>
+        <input
+          onChange={(e) => {
+            setEntry(e.target.value);
+          }}></input>
+        <button
+          onClick={() => {
+            handleClick(entry);
+          }}>
+          New Product
+        </button>
+        <button onClick={masterState}>Master State</button>
+      </div>
     </div>
   );
 };

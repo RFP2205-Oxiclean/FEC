@@ -12,7 +12,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   let [hideUp, setHideUp] = useState(false);
   let [displayArr, setDisplayArr] = useState([]);
   let prevActiveIndex = usePrevious(activeThumbnailIndex);
-  console.log("prevActiveIndex: ", prevActiveIndex);
 
   useEffect(() => {
     // if (activeThumbnailIndex > 6) {
@@ -49,7 +48,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
 
   useEffect(() => {
     if (displayArr[displayArr.length - 1] + 1 === photos.length) {
-      console.log(displayArr[displayArr.length - 1] + 1, photos.length);
       setHideDown(true);
     }
   }, [displayArr]);
@@ -107,7 +105,7 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
             return (
-              <CSSTransition in={true} appear={true} timeout={2000} classNames="fade">
+              <CSSTransition in={true} appear={true} timeout={300} classNames="fade" key={photos[i].thumbnail_url}>
                 <OverlayThumbnail
                   image={photos[i].thumbnail_url}
                   active={activeThumbnailIndex === photos[i].trueIndex}
@@ -121,12 +119,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
         }
       })}
       <ThumbnailIncrement end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
-      <button
-        onClick={() => {
-          myDebugger();
-        }}>
-        Display Arr
-      </button>
     </div>
   );
 };

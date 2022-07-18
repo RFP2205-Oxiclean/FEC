@@ -2,7 +2,8 @@ import axios from "axios";
 import { url, API_KEY } from "../config/config.js";
 import { createCloudinaryDisplayURL, createCloudinaryThumbnailURL } from "./services/Cloudinary.js";
 
-let newAxios = axios.create({});
+let controllerAxios = axios.create({});
+let controllerAxios2 = axios.create({});
 
 let cachedProductById = {};
 
@@ -12,7 +13,7 @@ export function getProductById(id, count = 5) {
       resolve(cachedProductById[id]);
     });
   }
-  return axios({
+  return controllerAxios2({
     method: "GET",
     url: url + `/products/${id}`,
     headers: {
@@ -36,7 +37,7 @@ export function getStylesById(id) {
       resolve(cachedStylesById[id]);
     });
   }
-  return axios({
+  return controllerAxios2({
     method: "GET",
     url: url + `/products/${id}/styles`,
     headers: {
@@ -51,7 +52,6 @@ export function getStylesById(id) {
 let prefetchCache = {};
 
 export function prefetch(styleObjects, product_id) {
-  axios.defaults.headers.common["Authorization"] = "";
   if (prefetchCache[product_id]) {
     return;
   } else {
@@ -60,10 +60,10 @@ export function prefetch(styleObjects, product_id) {
     }
     styleObjects.forEach(function (styleObject) {
       styleObject.photos.forEach(function (photoObject) {
-        newAxios.get(createCloudinaryDisplayURL(photoObject.url)).then(() => {
+        controllerAxios2.get(createCloudinaryDisplayURL(photoObject.url)).then(() => {
           prefetchCache[product_id] = true;
         });
-        newAxios.get(createCloudinaryThumbnailURL(photoObject.thumbnail_url));
+        controllerAxios2.get(createCloudinaryThumbnailURL(photoObject.thumbnail_url));
       });
     });
   }
@@ -74,7 +74,7 @@ export function addToCart(id, quantity) {
     let arr = Array(parseInt(quantity)).fill(0);
     return Promise.all(
       arr.map((el) => {
-        return axios.post(
+        return controllerAxios2.post(
           `${url}/cart`,
           {
             sku_id: id,

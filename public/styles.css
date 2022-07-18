@@ -18,8 +18,6 @@
   text-shadow: -3px 4px 3px rgba(0,0,0,0.3);
 }
 
-.product-overview.container {
-
 
 .overview-image-container {
   position: relative;
@@ -108,19 +106,8 @@
 }
 
 
-.overview-expanded-product-panel>div:first-child{
+.overview-expanded-product-panel>div:first-child {
   padding-top: 20px;
-}
-
-
-.overview-expanded-product-panel>div {
-
-}
-
-.stars-container {
-  font-size: 20px;
-  font-weight: bold;
-  height: 10%;
 }
 
 .overview-category {
@@ -130,7 +117,6 @@
   font-size: 30px;
   padding-top: 15px;
   font-weight: bold;
-
 }
 
 .unslide-panel>div {
