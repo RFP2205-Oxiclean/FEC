@@ -16,15 +16,32 @@ const ImageCarousel = ({
   setActiveDisplayIndex,
   stock,
   handleAddToCart,
+  incrementThumbnailIndex,
+  decrementThumbnailIndex,
 }) => {
   return (
     <div className="overview-image-container">
+      <button
+        onClick={() => {
+          decrementThumbnailIndex();
+        }}
+        style={
+          activeThumbnailIndex === 0
+            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
+            : { position: "absolute", top: "50%", left: "15%" }
+        }
+        className="scroll-left">
+        Left
+      </button>
       <img src={createCloudinaryDisplayURL(image)}></img>
       <ThumbnailContainer
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        incrementThumbnailIndex={incrementThumbnailIndex}
+        activeThumbnailIndex={activeThumbnailIndex}
+        end={photoObjects.length - 1}
         handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}

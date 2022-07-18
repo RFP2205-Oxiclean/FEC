@@ -14,6 +14,9 @@ const ExpandedProductInfo = ({
   setActiveDisplayIndex,
   stock,
   handleAddToCart,
+  end,
+  activeThumbnailIndex,
+  incrementThumbnailIndex,
 }) => {
   let [isHiding, setIsHiding] = useState(false);
   let [isShaking, setIsShaking] = useState(false);
@@ -29,11 +32,24 @@ const ExpandedProductInfo = ({
     }
   };
 
+  console.log(end, activeThumbnailIndex);
+
   return (
     <div className="collapse-and-info-container">
       <div className="inner-div">
         <CollapseButton isHiding={isHiding} setIsHiding={setIsHiding}></CollapseButton>
         <div className={isHiding ? "slide-panel" : "unslide-panel"}>
+          <button
+            onClick={() => {
+              incrementThumbnailIndex();
+            }}
+            style={
+              end === activeThumbnailIndex
+                ? { visibility: "hidden", position: "absolute" }
+                : { position: "absolute", top: "50%", left: "0", marginLeft: "-60px" }
+            }>
+            Right
+          </button>
           <div className={"overview-expanded-product-panel"}>
             <div>
               <StarRatingStatic rating={5}></StarRatingStatic>

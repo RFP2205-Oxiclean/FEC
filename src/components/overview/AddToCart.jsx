@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, toggleShakeCart }) => {
+const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, toggleShakeCart, setPrompt, size }) => {
   let [hidden, setHidden] = useState(false);
 
   let handleClick = function () {
+    let flag = false;
+    stock.forEach(function (quantityObj) {
+      if (quantityObj.id === stockId) {
+        if (quantityObj.quantity > 0) {
+          flag = true;
+        }
+      }
+    });
+    if (!flag) {
+      setPrompt(true);
+    }
     handleAddToCart(stockId, quantity);
     toggleShakeCart();
-    let flag = false;
+    flag = false;
     stock.forEach(function (stockObj) {
       if (stockObj.quantity > 0) {
         flag = true;

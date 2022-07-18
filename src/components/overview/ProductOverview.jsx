@@ -125,6 +125,18 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     return styleObjects[activeDisplayIndex].style_id;
   };
 
+  let incrementThumbnailIndex = function () {
+    let newIndices = { ...activeThumbnailIndices };
+    newIndices[getActiveDisplayId()]++;
+    setActiveThumbnailIndices(newIndices);
+  };
+
+  let decrementThumbnailIndex = function () {
+    let newIndices = { ...activeThumbnailIndices };
+    newIndices[getActiveDisplayId()]--;
+    setActiveThumbnailIndices(newIndices);
+  };
+
   let handleAddToCart = function (stockId, quantity) {
     console.log(stockId, quantity);
     if (!stockId || !quantity) {
@@ -149,6 +161,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div className="product-overview">
       <ImageCarousel
+        decrementThumbnailIndex={decrementThumbnailIndex}
+        incrementThumbnailIndex={incrementThumbnailIndex}
         handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}

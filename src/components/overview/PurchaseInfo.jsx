@@ -59,6 +59,10 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
+          <button
+            onClick={() => {
+              console.log(size, quantity);
+            }}></button>
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId}></QMenu>
         </div>
         <div className="purchase-buttons-container2">
@@ -103,6 +107,8 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
               <i className="fa-brands fa-pinterest"></i>
             </div>
             <AddToCart
+              size={size}
+              setPrompt={setPrompt}
               toggleShakeCart={toggleShakeCart}
               noItems={noItems}
               stock={stock}
