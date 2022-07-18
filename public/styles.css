@@ -96,7 +96,7 @@
 .overview-expanded-product-panel {
   padding: 20px;
   overflow: hidden;
-  display: inline-block;
+  display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
@@ -124,6 +124,8 @@
 }
 
 .overview-category {
+  position: relative;
+  display: flex;
   height: 5%;
   font-size: 30px;
   padding-top: 15px;
@@ -317,8 +319,8 @@ img {
 
 .overview-purchase-info {
   padding-top: 0;
-  display: table;
-  height: 15%;
+  display: inline-block;
+  height: 25%;
   width: 100%;
 }
 
@@ -369,12 +371,6 @@ select {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
-  background: -moz-linear-gradient(
-		top,
-		#ffcb69 0%,
-		#f0a733 50%,
-		#f2a324 92%,
-		#ffb730);
   box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
@@ -456,16 +452,7 @@ select:active {
   opacity: 0;
 } */
 
-i {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 3;
-  background: white;
-  color: green;
-  margin-top: -3px;
-  animation: fadeIn .5s;
-}
+
 
 @keyframes fadeIn {
   0% {opacity: 0;}

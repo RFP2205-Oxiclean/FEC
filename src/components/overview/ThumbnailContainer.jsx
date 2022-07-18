@@ -37,7 +37,7 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
           <OverlayThumbnail
             image={photoObject.thumbnail_url}
             active={activeThumbnailIndex === photoObject.trueIndex}
-            key={photoObject.thumbnail_url + photoObject.trueIndex}
+            key={photoObject.thumbnail_url + photoObject.thumbnail_url}
             trueIndex={photoObject?.trueIndex}
             setActiveThumbnailIndex={setActiveThumbnailIndex}
             backup={photoObject.url}></OverlayThumbnail>

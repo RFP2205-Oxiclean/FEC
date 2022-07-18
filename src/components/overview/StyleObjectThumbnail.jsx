@@ -23,7 +23,16 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
           <div style={{ position: "relative" }}>
             <i
               className="checkmark"
-              style={{ position: "absolute", top: "0", right: "0", zIndex: "3", background: "white", color: "green", marginTop: "-3px" }}
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "0",
+                zIndex: "3",
+                background: "white",
+                color: "green",
+                marginTop: "-3px",
+                borderRadius: "50%",
+              }}
               className="fa-solid fa-square-check"></i>
             <img
               style={{ borderRadius: "50%", position: "absolute", top: "0" }}

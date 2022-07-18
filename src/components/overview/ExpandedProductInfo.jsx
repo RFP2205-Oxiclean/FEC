@@ -16,6 +16,18 @@ const ExpandedProductInfo = ({
   handleAddToCart,
 }) => {
   let [isHiding, setIsHiding] = useState(false);
+  let [isShaking, setIsShaking] = useState(false);
+
+  let toggleShakeCart = function () {
+    console.log("shaking");
+    let x = isShaking;
+    if (!isShaking) {
+      setIsShaking(true);
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 900);
+    }
+  };
 
   return (
     <div className="collapse-and-info-container">
@@ -23,9 +35,19 @@ const ExpandedProductInfo = ({
         <CollapseButton isHiding={isHiding} setIsHiding={setIsHiding}></CollapseButton>
         <div className={isHiding ? "slide-panel" : "unslide-panel"}>
           <div className={"overview-expanded-product-panel"}>
-            <StarRatingStatic rating={5}></StarRatingStatic>
-            <span>Read All Reviews</span>
-            <div className="overview-category">{productInfo?.category}</div>
+            <div>
+              <StarRatingStatic rating={5}></StarRatingStatic>
+              <span>Read All Reviews</span>
+            </div>
+            <div className="overview-category">
+              {productInfo?.category}
+              <div style={isShaking ? { visibility: "hidden" } : { marginLeft: "auto", display: "flex" }}>
+                <i className="fa-solid fa-cart-arrow-down"></i>
+              </div>
+              <div style={!isShaking ? { visibility: "hidden", position: "absolute", right: "0" } : { position: "absolute", right: "0" }}>
+                <i className="fa-solid fa-cart-arrow-down fa-shake"></i>
+              </div>
+            </div>
             <div className="overview-expanded-product-info">
               <Price styleInfo={styleInfo}></Price>
               <span className="overview-expanded-product-info-name">{productInfo.name}</span>
@@ -39,6 +61,7 @@ const ExpandedProductInfo = ({
               activeDisplayIndex={activeDisplayIndex}
               styleObjects={styleObjects}></StylesContainer>
             <PurchaseInfo
+              toggleShakeCart={toggleShakeCart}
               handleAddToCart={handleAddToCart}
               stock={stock[styleObjects[activeDisplayIndex].style_id]}
               activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
