@@ -82,9 +82,9 @@ class AnswerModal extends React.Component {
 
     validateEmail() { // add more details later
         if (this.state.email.length < 1 || this.state.email.indexOf('@') === -1 || this.state.email.indexOf(' ') !== -1){
-          return false
+          return true;
         }
-        return true;
+        return false;
     }
 
     authenticateOrError () {
