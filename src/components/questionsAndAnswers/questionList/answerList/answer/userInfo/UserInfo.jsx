@@ -60,7 +60,7 @@ class UserInfo extends React.Component  {
 
     render() { //&nbsp; is a whitespace character
 
-        let theDate = new Date( this.props.data.date.substr(0,4), this.props.data.date.substr(5,2), this.props.data.date.substr(8,2) )
+        let theDate = new Date(this.props.data.date.substr(0,4), String(parseInt(this.props.data.date.substr(5,2)-1)),  this.props.data.date.substr(8,2) )
         let user = <p className="user-info">by {this.props.data.answerer_name} - {format(theDate ,'MMMM d, Y')}</p>
         let yesData = this.state.helpfulActive ? this.props.data.helpfulness : this.props.data.helpfulness + 1
         let reportedData = this.state.reportActive ? 'Report' : 'Reported'
