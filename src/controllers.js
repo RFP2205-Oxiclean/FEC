@@ -55,6 +55,9 @@ export function prefetch(styleObjects, product_id) {
   if (prefetchCache[product_id]) {
     return;
   } else {
+    if (styleObjects[0].style_id === null) {
+      return;
+    }
     styleObjects.forEach(function (styleObject) {
       styleObject.photos.forEach(function (photoObject) {
         newAxios.get(createCloudinaryDisplayURL(photoObject.url)).then(() => {

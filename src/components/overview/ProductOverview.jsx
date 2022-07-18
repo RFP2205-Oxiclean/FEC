@@ -40,45 +40,44 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   useEffect(() => {
     console.log("prefetching");
     prefetch(styleObjects, product_id);
-  }, [product_id]);
+  }, [styleObjects]);
 
   let handleClick = function () {
     handleSubmit(entry);
   };
 
   let masterState = function () {
+    console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
     console.log("styleObjects: ", styleObjects);
     console.log("activeThumbnailIndices: ", activeThumbnailIndices);
     console.log("activeDisplayIndex: ", activeDisplayIndex);
-    // console.log("productInfo: ", productInfo);
-    // console.log("hoverIndex: ", hoverIndex);
-    // console.log("displayImage: ", getDisplayImage());
-    // console.log("displayThumbnails: ", getDisplayThumbnails());
+    console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
+    console.log(hoverIndex);
   };
 
   let getActiveThumbnailIndex = function () {
-    for (let k in activeThumbnailIndices) {
-      if (k === styleObjects[activeDisplayIndex].style_id) {
-        return activeThumbnailIndices[k];
-      }
-    }
+    return activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id];
   };
 
-  let setActiveThumbnailIndex = function (index) {
-    for (let k in activeThumbnailIndices) {
-      if (k === styleObjects[activeDisplayIndex].style_id) {
-        let newIndices = { ...activeThumbnailIndices };
-        newIndices[k] = index;
-        setActiveThumbnailIndices(newIndices);
-      }
-    }
+  let setActiveThumbnailIndex = function (trueIndex) {
+    let copyObj = { ...activeThumbnailIndices };
+    copyObj[styleObjects[activeDisplayIndex].style_id] = trueIndex;
+    setActiveThumbnailIndices(copyObj);
   };
 
   let getActivePhotoObjects = function () {
+    if (hoverIndex) {
+      return styleObjects[hoverIndex].photos.map(function (photoObject) {
+        return photoObject.thumbnail_url;
+      });
+    }
     return styleObjects[activeDisplayIndex].photos;
   };
 
   let getDisplayStyle = function () {
+    if (hoverIndex) {
+      return styleObjects[hoverIndex];
+    }
     return styleObjects[activeDisplayIndex];
   };
 
@@ -95,12 +94,21 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let getDisplayImage = function () {
+    if (hoverIndex) {
+      return styleObjects[hoverIndex].photos[activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id]]?.url;
+    }
     return styleObjects[activeDisplayIndex].photos[activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id]]?.url;
   };
 
   return (
     <div className="product-overview">
       <ImageCarousel
+        setActiveDisplayIndex={setActiveDisplayIndex}
+        setHoverIndex={setHoverIndex}
+        activeDisplayIndex={activeDisplayIndex}
+        productInfo={productInfo}
+        styleInfo={getDisplayStyle()}
+        activeThumbnailIndices={activeThumbnailIndices}
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         activeThumbnailIndex={getActiveThumbnailIndex()}
         photoObjects={getActivePhotoObjects()}

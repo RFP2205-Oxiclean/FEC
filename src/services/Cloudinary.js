@@ -19,7 +19,7 @@ const createCloudinaryThumbnailURL = function (thumbnail_url) {
   if (!cachedThumbnail_urls[thumbnail_url]) {
     let thumbnail = Cloud.image(thumbnail_url);
     thumbnail.setDeliveryType("fetch");
-    thumbnail.resize(fill().height(74).width(74)).adjust(improve());
+    thumbnail.resize(fill().height(60).width(60)).adjust(improve());
     // thumbnail.roundCorners(max());
     let new_url = thumbnail.toURL();
     cachedThumbnail_urls[thumbnail_url] = new_url;

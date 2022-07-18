@@ -6,7 +6,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   let [startEnd, setStartEnd] = useState([0, 7]);
 
   useEffect(() => {
-    console.log("photos firing");
     if (activeThumbnailIndex < 7) {
       setStartEnd([0, Math.min(7, photos?.length)]);
     } else if (activeThumbnailIndex + 7 <= photos.length) {
@@ -28,8 +27,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     setStartEnd([startEnd[0] + 1, startEnd[1] + 1]);
   };
 
-  console.log("thumbnail container, ", photos);
-
   return (
     <div className="overview-thumbnail-container">
       {activeThumbnails(photos).map(function (photoObject, i) {
@@ -39,7 +36,8 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
             active={activeThumbnailIndex === photoObject.trueIndex}
             key={i}
             trueIndex={photoObject?.trueIndex}
-            setActiveThumbnailIndex={setActiveThumbnailIndex}></OverlayThumbnail>
+            setActiveThumbnailIndex={setActiveThumbnailIndex}
+            backup={photoObject.url}></OverlayThumbnail>
         );
       })}
       <button

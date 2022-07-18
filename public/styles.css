@@ -54,7 +54,7 @@
 
 .overview-overlay-thumbnail {
   margin: auto;
-  width: 75px;
+  width: 61px;
   margin-top: 15px;
   display: flex;
   border: 2px solid black;
@@ -66,7 +66,7 @@
 
 .overview-overlay-thumbnail-active {
   margin: auto;
-  width: 75px;
+  width: 61px;
   margin-top: 15px;
   display: flex;
   border: 2px solid black;
@@ -83,13 +83,18 @@
 }
 
 .collapse-and-info-container {
+  z-index: 1;
   width: 30%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  height: 100%;
   display: flex;
 }
 
 .overview-expanded-product-panel {
-  position: relative;
+  padding: 20px;
   overflow: hidden;
   display: inline-block;
   flex-direction: column;
@@ -102,38 +107,17 @@
   /* transform: translate(102%, 0) */
 }
 
-.overview-expanded-product-panel-slide {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background: rgba(255, 255, 255, 1.0);
-  box-sizing: border-box;
-  z-index: 1;
-  transition: transform 2.0s ease;
-  transform: translate(102%, 0)
-}
-
-/* .overview-expanded-product-panel-slide-out {
-  transform: translate(100%, 0)
-} */
-
-
-.overview-expanded-product-panel>div {
-  box-sizing: border-box;
-  padding-left: 40px;
-  padding-right: 40px;
-
-}
 
 .overview-expanded-product-panel>div:first-child{
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .overview-expanded-product-panel>div:last-child{
-  padding-bottom: 40px;
+  padding-bottom: 20px;
+}
+
+.overview-expanded-product-panel>div {
+  padding-top: 20px;
 }
 
 .stars-container {
@@ -156,13 +140,10 @@
 
 
 .overview-expanded-product-info {
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: block;
+  text-align: center;
   align-items: center;
-  min-height: 25%;
-  max-height: 35%;
+  height: 25%;
 }
 
 .overview-expanded-product-info-name {
@@ -176,9 +157,9 @@
 }
 
 .overview-expanded-product-info-style {
-  max-width: 40%;
+  max-width: 55%;
   font-size: 25px;
-  text-align: center;
+  display: inline-block;
   font-weight: bold;
   color: red;
   margin-top: auto;
@@ -190,7 +171,7 @@
 
 .overview-styles-container {
   height: 35%;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -207,8 +188,8 @@
 .style-object-thumbnail {
   margin: auto;
   margin-top: "auto";
-  width: 74px;
-  height: 74px;
+  width: 60px;
+  height: 60px;
   margin-left: 0;
   border-radius: 50%;
   box-shadow: -6px 5px 20px -2px rgb(0 0 0);
@@ -216,9 +197,9 @@
 
 .style-object-thumbnail-active {
   margin: auto;
-  margin-top: "auto";
-  width: 74px;
-  height: 74px;
+  margin-bottom: "auto";
+  width: 60px;
+  height: 60px;
   margin-left: 0;
   border-radius: 50%;
   box-shadow: -6px 5px 20px -2px rgb(0 0 0);
@@ -278,7 +259,8 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
+  margin-left: 0;
+  margin-bottom: auto;
   padding-top: 10px;
   border-radius: 50%;
   width: 25%;
@@ -294,8 +276,7 @@ img {
 }
 
 
-.collapse-button-container {
-  height: 2%;
+.collapse-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -487,6 +468,13 @@ select:active {
 @keyframes fadeOut {
   100% {opacity: 0;}
   0% {opacity: 1;}
+}
+
+.inner-div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: transparent;
 }
 
 
