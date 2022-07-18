@@ -257,6 +257,9 @@
   display: inline-block;
   font-weight: bold;
 }
+.questions-and-answers .load-more-a:hover{
+  cursor:pointer;
+}
 
 .questions-and-answers .modal-container {
   display: inline-block;
@@ -290,13 +293,19 @@
 }
 .questions-and-answers .modal .name-wrap {
   float: left;
-  max-width: 50%;
+  max-width: 42%;
   margin: 10px 0px 10px 20px;
 }
 .questions-and-answers .modal .email-wrap {
   float: right;
   margin: 10px 20px 10px 0px;
-  max-width: 50%;
+  max-width: 42%;
+}
+.questions-and-answers .modal .user-photos {
+  display:block;
+  clear:both;
+  margin-left:10px;
+  margin-bottom:10px;
 }
 .questions-and-answers .modal .user-submit {
   clear: both;
@@ -306,8 +315,10 @@
 }
 .questions-and-answers .modal .disclaimer-e {
   display:block;
+  padding-top:5px;
 }
 .questions-and-answers .modal .disclaimer-n {
+  padding-top:5px;
   display:block;
 }
 
@@ -316,6 +327,35 @@
 }
 .questions-and-answers .modal-container h3 {
   padding-left:10px;
+}
+.questions-and-answers .modal-container .user-photolist-container {
+  height: 100px;
+  clear: both;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  float: left;
+}
+
+.questions-and-answers .modal-container .user-photolist-container .upload-image-wrapper {
+  height: 80px;
+  width: 111px;
+  background-color: black;
+  box-sizing: border-box;
+  margin-right: 10px;
+  overflow: hidden;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.questions-and-answers .modal-container .user-photolist-container .upload-image {
+  max-height: 100%;
+  max-width: 100%;z
+  display: inline;
+  border: 2px solid black;
 }
 
 .questions-and-answers .modal-container .user-input {
@@ -332,6 +372,15 @@
   border-width:2px;
   border-style:dashed;
   display:block;
+}
+
+.questions-and-answers .modal-container .upload-msg {
+  clear:both;
+  display:block;
+  padding-left:10px;
+  padding-bottom:5px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .ratings-reviews {
