@@ -323,7 +323,16 @@ class AddReviewModal extends React.Component {
           </form>
 
           {/* Characteristics Radio Buttons */}
-          <CharacteristicsInputs metadata = {this.props.metadata} handleComfortSelect = {this.handleComfortSelect} handleFitSelect = {this.handleFitSelect} handleLengthSelect = {this.handleLengthSelect} handleQualitySelect = {this.handleQualitySelect} handleSizeSelect = {this.handleSizeSelect} handleWidthSelect = {this.handleWidthSelect} characteristicsState = {this.state.characteristics}/>
+          <CharacteristicsInputs
+           metadata = {this.props.metadata}
+           handleComfortSelect = {this.handleComfortSelect}
+           handleFitSelect = {this.handleFitSelect}
+           handleLengthSelect = {this.handleLengthSelect}
+           handleQualitySelect = {this.handleQualitySelect}
+           handleSizeSelect = {this.handleSizeSelect}
+           handleWidthSelect = {this.handleWidthSelect}
+           characteristicsState = {this.state.characteristics}
+           />
 
 
 
