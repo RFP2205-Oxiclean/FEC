@@ -3,8 +3,9 @@ import CollapseButton from "./CollapseButton.jsx";
 import StarRatingStatic from "../commonComponents/StarRatingStatic.jsx";
 import Price from "./Price.jsx";
 import StylesContainer from "./StylesContainer.jsx";
+import PurchaseInfo from "./PurchaseInfo.jsx";
 
-const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDisplayIndex, setHoverIndex, setActiveDisplayIndex }) => {
+const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDisplayIndex, setHoverIndex, setActiveDisplayIndex, stock }) => {
   let [isHiding, setIsHiding] = useState(false);
 
   return (
@@ -20,7 +21,7 @@ const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDispl
               <Price styleInfo={styleInfo}></Price>
               <span className="overview-expanded-product-info-name">{productInfo.name}</span>
             </div>
-            <div style={{ textAlign: "center", justifyContent: "center", minHeight: "12%" }}>
+            <div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}>
               <span className="overview-expanded-product-info-style">{styleInfo.name}</span>
             </div>
             <StylesContainer
@@ -28,6 +29,7 @@ const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDispl
               setHoverIndex={setHoverIndex}
               activeDisplayIndex={activeDisplayIndex}
               styleObjects={styleObjects}></StylesContainer>
+            <PurchaseInfo stock={stock[styleObjects[activeDisplayIndex].style_id]} activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
           </div>
         </div>
       </div>

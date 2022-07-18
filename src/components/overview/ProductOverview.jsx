@@ -19,6 +19,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [productInfo, setProductInfo] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
+  let [stock, setStock] = useState({});
 
   useEffect(() => {
     getProductById(product_id).then((data) => {
@@ -26,13 +27,30 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     });
     getStylesById(product_id).then((data) => {
       let activeThumbnails = {};
+      let newStock = {};
       data.forEach((styleObj) => {
         activeThumbnails[styleObj.style_id] = 0;
         styleObj.photos.forEach(function (photoObj, i) {
           photoObj.trueIndex = i;
         });
+        // consolidate stock
+        let stockArr = [];
+        for (let k in styleObj.skus) {
+          let flag = false;
+          stockArr.forEach(function (sizePair, i) {
+            if (styleObj.skus[k].size === stockArr[i].size) {
+              flag = true;
+              stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
+            }
+          });
+          if (!flag) {
+            stockArr.push({ ...styleObj.skus[k], id: k });
+          }
+        }
+        newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
       });
       setActiveThumbnailIndices(activeThumbnails);
+      setStock(newStock);
       setStyleObjects(data);
     });
   }, [product_id]);
@@ -52,10 +70,14 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     console.log("activeThumbnailIndices: ", activeThumbnailIndices);
     console.log("activeDisplayIndex: ", activeDisplayIndex);
     console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
+    console.log(stock);
     console.log(hoverIndex);
   };
 
   let getActiveThumbnailIndex = function () {
+    if (hoverIndex !== null) {
+      return activeThumbnailIndices[styleObjects[hoverIndex].style_id];
+    }
     return activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id];
   };
 
@@ -66,16 +88,14 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let getActivePhotoObjects = function () {
-    if (hoverIndex) {
-      return styleObjects[hoverIndex].photos.map(function (photoObject) {
-        return photoObject.thumbnail_url;
-      });
+    if (hoverIndex !== null) {
+      return styleObjects[hoverIndex].photos;
     }
     return styleObjects[activeDisplayIndex].photos;
   };
 
   let getDisplayStyle = function () {
-    if (hoverIndex) {
+    if (hoverIndex !== null) {
       return styleObjects[hoverIndex];
     }
     return styleObjects[activeDisplayIndex];
@@ -94,8 +114,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let getDisplayImage = function () {
-    if (hoverIndex) {
-      return styleObjects[hoverIndex].photos[activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id]]?.url;
+    if (hoverIndex !== null) {
+      return styleObjects[hoverIndex].photos[activeThumbnailIndices[styleObjects[hoverIndex].style_id]]?.url;
     }
     return styleObjects[activeDisplayIndex].photos[activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id]]?.url;
   };
@@ -103,6 +123,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div className="product-overview">
       <ImageCarousel
+        stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}
         activeDisplayIndex={activeDisplayIndex}

@@ -30,11 +30,14 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   return (
     <div className="overview-thumbnail-container">
       {activeThumbnails(photos).map(function (photoObject, i) {
+        if (photoObject.thumbnail_url === null) {
+          return;
+        }
         return (
           <OverlayThumbnail
             image={photoObject.thumbnail_url}
             active={activeThumbnailIndex === photoObject.trueIndex}
-            key={i}
+            key={photoObject.thumbnail_url + photoObject.trueIndex}
             trueIndex={photoObject?.trueIndex}
             setActiveThumbnailIndex={setActiveThumbnailIndex}
             backup={photoObject.url}></OverlayThumbnail>

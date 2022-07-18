@@ -31,7 +31,7 @@
   justify-content: space-between;
   box-shadow: -6px 4px 5px -2px black;
   width: 1100px;
-  height: 733;
+  height: 733px;
 
 }
 
@@ -112,12 +112,9 @@
   padding-top: 20px;
 }
 
-.overview-expanded-product-panel>div:last-child{
-  padding-bottom: 20px;
-}
 
 .overview-expanded-product-panel>div {
-  padding-top: 20px;
+
 }
 
 .stars-container {
@@ -129,6 +126,7 @@
 .overview-category {
   height: 5%;
   font-size: 30px;
+  padding-top: 15px;
   font-weight: bold;
 
 }
@@ -140,10 +138,12 @@
 
 
 .overview-expanded-product-info {
+  overflow-y: auto;
+  padding-top: 10px;
   display: block;
   text-align: center;
   align-items: center;
-  height: 25%;
+  height: 20%;
 }
 
 .overview-expanded-product-info-name {
@@ -152,21 +152,17 @@
   padding-left: 0;
   font-weight: bold;
   text-align: center;
-  font-size: 60px;
+  font-size: 45px;
   width: 100%;
 }
 
 .overview-expanded-product-info-style {
-  max-width: 55%;
+  max-width: 75%;
   font-size: 25px;
   display: inline-block;
   font-weight: bold;
   color: red;
   margin-top: auto;
-}
-
-.overview-purchase-info {
-  height: 20%;
 }
 
 .overview-styles-container {
@@ -177,7 +173,6 @@
   flex-wrap: wrap;
   flex-grow: 4;
   box-sizing: border-box;
-  padding-bottom: 20px;
 }
 
 .overview-styles-container>div:last-child {
@@ -260,7 +255,6 @@ img {
   justify-content: center;
   align-items: center;
   margin-left: 0;
-  margin-bottom: auto;
   padding-top: 10px;
   border-radius: 50%;
   width: 25%;
@@ -322,8 +316,9 @@ img {
 }
 
 .overview-purchase-info {
-  padding: 20px;
+  padding-top: 0;
   display: table;
+  height: 15%;
   width: 100%;
 }
 
@@ -355,7 +350,7 @@ img {
   text-shadow: 0 0 black;
   display: flex;
   float: right;
-  width: 200px;
+  width: 140px;
   height: 40px;
   border: 1px;
   text-align: center;
@@ -459,6 +454,17 @@ select:active {
 /* .select-prompt-fadeOut::after {
   opacity: 0;
 } */
+
+i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  background: white;
+  color: green;
+  margin-top: -3px;
+  animation: fadeIn .5s;
+}
 
 @keyframes fadeIn {
   0% {opacity: 0;}
