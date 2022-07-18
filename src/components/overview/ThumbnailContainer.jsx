@@ -4,6 +4,7 @@ import OverlayThumbnail from "./OverlayThumbnail.jsx";
 import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
 import usePrevious from "/src/components/commonComponents/usePreviousHook.jsx";
+import { CSSTransition } from "react-transition-group";
 
 const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex }) => {
   let [startEnd, setStartEnd] = useState([0, 7]);
@@ -106,13 +107,15 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
             return (
-              <OverlayThumbnail
-                image={photos[i].thumbnail_url}
-                active={activeThumbnailIndex === photos[i].trueIndex}
-                key={photos[i].thumbnail_url + photos[i].thumbnail_url}
-                trueIndex={photos[i]?.trueIndex}
-                setActiveThumbnailIndex={setActiveThumbnailIndex}
-                backup={photos[i].url}></OverlayThumbnail>
+              <CSSTransition in={true} appear={true} timeout={2000} classNames="fade">
+                <OverlayThumbnail
+                  image={photos[i].thumbnail_url}
+                  active={activeThumbnailIndex === photos[i].trueIndex}
+                  key={photos[i].thumbnail_url + photos[i].thumbnail_url}
+                  trueIndex={photos[i]?.trueIndex}
+                  setActiveThumbnailIndex={setActiveThumbnailIndex}
+                  backup={photos[i].url}></OverlayThumbnail>
+              </CSSTransition>
             );
           }
         }
