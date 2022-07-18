@@ -18,9 +18,10 @@ class InfoTab extends React.Component {
     toggleModal = () => {
 
         let endPoint = `${url}/products/${this.props.productId}`
-        axios.get(endPoint, {headers : {
-            'Authorization' : API_KEY
-        }})
+        let newAxios = axios.create({
+            headers : {'Authorization' : API_KEY}
+       })
+        newAxios.get(endPoint, )
         .then((res) => {
             this.state.product = res.data;
             if (this.state.activeModal) {

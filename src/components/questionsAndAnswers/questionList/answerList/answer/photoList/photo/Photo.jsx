@@ -22,8 +22,8 @@ class Photo extends React.Component {
 
     getImage() {
       if (this.props.url !== undefined) {
-          let endPoint = this.props.url;
-          axios.get(endPoint, {
+            let endPoint = this.props.url;
+            axios.get(endPoint, {
               responseType:'arraybuffer',
           })
           .then((res)=>{

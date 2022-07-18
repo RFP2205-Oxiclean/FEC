@@ -26,8 +26,10 @@ class QuestionModal extends React.Component {
            this.state.name,
            this.state.email, this.props.productId, 'request')
         let endPoint = `${url}/qa/questions`
-        axios.post(endPoint, {
-            headers : {'Authorization' : API_KEY},
+        let newAxios = axios.create({
+          headers : {'Authorization' : API_KEY}
+        })
+        newAxios.post(endPoint, {
             body:this.state.input,
             name:this.state.name,
             email:this.state.email,

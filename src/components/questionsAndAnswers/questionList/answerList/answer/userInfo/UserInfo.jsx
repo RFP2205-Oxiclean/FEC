@@ -19,12 +19,13 @@ class UserInfo extends React.Component  {
 
     sendHelpful () { // refactor to correct add
         if (this.state.helpfulActive) {
+            let newAxios = axios.create({
+                headers : {'Authorization' : API_KEY}
+           })
             let endPoint = `${url}/qa/answers/${this.props.data.id}/helpful`;
-            axios.put(endPoint, {
+            newAxios.put(endPoint, {
                 params: {
                     answer_id:this.props.data.id,
-                }, headers : {
-                    'Authorization' : API_KEY
                 }
             })
             .then((res) => {
@@ -41,7 +42,10 @@ class UserInfo extends React.Component  {
     sendReport () { // refactor to correct add
         if (this.state.reportActive) {
             let endPoint = `${url}/qa/answers/${this.props.data.id}/report`;
-            axios.put(endPoint, {
+            let newAxios = axios.create({
+                headers : {'Authorization' : API_KEY}
+            })
+            newAxios.put(endPoint, {
                 params: {
                     answer_id:this.props.data.id,
                 }

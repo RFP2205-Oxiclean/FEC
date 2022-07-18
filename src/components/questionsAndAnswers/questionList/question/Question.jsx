@@ -18,11 +18,12 @@ import { API_KEY, url } from "../../../../../config/config.js";
         console.log(this.props.question.question_id);
         if (this.state.activeHelpful) {
             let endPoint = `${url}/qa/questions/${this.props.question.question_id}/helpful`;
-            axios.put(endPoint, {
+            let newAxios = axios.create({
+                 headers : {'Authorization' : API_KEY}
+            })
+            newAxios.put(endPoint, {
                 params: {
                     question_id:this.props.question.question_id,
-                },headers : {
-                    'Authorization' : API_KEY
                 }
             })
             .then((res) => {

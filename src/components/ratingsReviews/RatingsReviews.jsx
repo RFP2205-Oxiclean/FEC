@@ -10,7 +10,10 @@ class RatingsReviews extends React.Component {
     }
     getReviewList(id) {
     let endPoint = `${url}/reviews/`;
-    axios.get(endPoint, {
+    let newAxios = axios.create({
+      headers : {'Authorization' : API_KEY}
+    })
+    newAxios.get(endPoint, {
       params: {
         product_id: this.state.displayedProductId
       }
@@ -25,7 +28,10 @@ class RatingsReviews extends React.Component {
 
     getRatingsList(id) {
     let endPoint = `${url}/reviews/meta`;
-    axios.get(endPoint, {
+    let newAxios = axios.create({
+      headers : {'Authorization' : API_KEY}
+    })
+    newAxios.get(endPoint, {
         params: {
           product_id: this.state.displayedProductId
       },

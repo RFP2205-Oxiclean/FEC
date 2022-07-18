@@ -22,7 +22,6 @@ class AnswerModal extends React.Component {
 
       let newAxios = axios.create();
       let reader = new FileReader()
-      delete axios.defaults.headers.common['Authorization']
       let loadPromise = new Promise ((res, rej) => {
       let data = reader.readAsDataURL(files[0])
 
@@ -79,7 +78,10 @@ class AnswerModal extends React.Component {
            this.state.email,
            this.state.photos[0], 'request')
         let endPoint = `${url}/qa/questions/${this.props.question.question_id}/answers`
-        axios.post(endPoint, {
+        let newAxios = axios.create({
+          headers : {'Authorization' : API_KEY}
+        })
+        newAxios.post(endPoint, {
             question_id:this.props.question.question_id,
             body:this.state.input,
             name:this.state.name,

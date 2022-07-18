@@ -16,7 +16,10 @@ class AddQuestion extends React.Component {
 
     toggleModal () {
         let endPoint = `${url}/products/${this.props.productId}`
-        axios.get(endPoint, {headers : {
+        let newAxios = axios.create({
+            headers : {'Authorization' : API_KEY}
+       })
+        newAxios.get(endPoint, {headers : {
             'Authorization' : API_KEY
         }})
         .then((res) => {

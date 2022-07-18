@@ -31,13 +31,14 @@ class QuestionsAndAnswers extends React.Component {
 
     getAllQuestions (id) {
         let endPoint = `${url}/qa/questions`;
-        axios.get(endPoint, {
+        let newAxios = axios.create({
+            headers : {'Authorization' : API_KEY}
+       })
+        newAxios.get(endPoint, {
             params: {
             product_id: id,
             page : 1,
             count : 9999
-            }, headers : {
-                'Authorization' : API_KEY
             }
         })
         .then((response) => {
