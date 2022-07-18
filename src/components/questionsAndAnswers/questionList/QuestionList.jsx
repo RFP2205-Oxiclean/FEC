@@ -8,7 +8,6 @@ class QuestionList extends React.Component {
     constructor(props) {
         super(props);
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        //console.log(this.props.questions, 'qqqq');
         this.state = this.initialStateValues();
 
     }
@@ -25,7 +24,6 @@ class QuestionList extends React.Component {
 
     sortQuestionsByHelpfulness(questions) {
         let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness));
-        console.log(result, 'resxsult', this.props.questions)
         return result;
     }
 
@@ -34,9 +32,7 @@ class QuestionList extends React.Component {
     componentDidUpdate() {
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
         let propsString = JSON.stringify(this.sortedByHelpful);
-        //console.log(propsString, this.state.oldQuestions)
         if(propsString  !== this.state.oldQuestions) {
-            //console.log('rerender',this.state.amountOfQuestionsLoaded, this.state.loadedQuestions )
             this.state.oldQuestions = propsString;
             this.loadMoreQuestions();
         }
@@ -81,7 +77,6 @@ class QuestionList extends React.Component {
                 this.resetState();
             }
         } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length > this.state.questionsToLoad) { //increase
-            console.log("what does it mean ", this.sortedByHelpful.length , this.state.amountOfQuestionsLoaded,this.state.questionsToLoad )
             this.loadMoreIncrease();
         }
     }

@@ -5,10 +5,8 @@ import MoreAnswers from  './moreAnswers/MoreAnswers.jsx';
 class AnswerList extends React.Component {
     constructor(props) {
         super(props);
-
         this.arrayifiedAnswers = this.arrayifyAnswers(this.props.answers);
         this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifiedAnswers);
-        console.log(this.sortedByHelpful, 'in ans lis')
         this.state =  this.initialStateValues();
     }
 
@@ -38,7 +36,6 @@ class AnswerList extends React.Component {
 
     componentDidMount() {
         this.loadMoreAnswers();
-        //console.log(this.props.answers.length)
     }
 
 
@@ -46,7 +43,6 @@ class AnswerList extends React.Component {
     componentDidUpdate() {
         this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifyAnswers(this.props.answers));
         let ansString = JSON.stringify(this.sortedByHelpful)
-        console.log(this.sortedByHelpful.length, 'here');
         if(ansString  !== this.state.oldAnswers) {
             this.state.oldAnswers = ansString;
             this.loadMoreAnswers();
@@ -83,9 +79,7 @@ class AnswerList extends React.Component {
 
 
     loadMoreAnswers() {
-        console.log(this.sortedByHelpful.length, 'current ans',this.state.answersToLoad, 'ans to load' )
         if (this.sortedByHelpful.length <= this.state.answersToLoad) { //dont exist
-                console.log("hi")
                 this.loadMoreGone();
         } else if (this.sortedByHelpful.length - this.state.loadedAnswers.length <= this.state.answersToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MoreQuestions = (props) => {
-    console.log(props)
     if (props.loadMoreState === props.loadMoreStateList[0]) {
         return null
     } else if (props.loadMoreState === props.loadMoreStateList[1]) {

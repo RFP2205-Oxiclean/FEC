@@ -57,30 +57,13 @@ class AnswerModal extends React.Component {
                   this.state.photos.push(res);
 
                   this.setState(JSON.parse(JSON.stringify(this.state)));
-                  console.log(this.state.photos)
               })
         }
 
 
-
-
-      // loadPromise.then((res, err)=>{
-      //   console.log("yo")
-      //   console.log("hi", reader.result)
-      // })
-
-
-
-
-
-
-      //console.log(file.target.files[0])
-
      }
 
     getURLsForUploadedFiles(files) { //returns promise array
-        //this.setState(JSON.parse(JSON.stringify(this.state)));
-        //this.authenticateOrError()
         let results = [];
         for (let i = 0 ; i < files.length; i++) {
             let newPromise = new Promise((resolve,reject)=>{
@@ -118,7 +101,6 @@ class AnswerModal extends React.Component {
                   this.state.uploadURLs.push(oneReq.data.url)
                 })
                 this.setState(JSON.parse(JSON.stringify(this.state)));
-                console.log(this.state.photoURLs, 'there are the urls')
                 this.sendForm();
             }).catch((err)=>{
                 console.error(err);
@@ -144,7 +126,7 @@ class AnswerModal extends React.Component {
             email:this.state.email,
             photos:this.state.uploadURLs
         })
-        .then((res)=>console.log(res))
+        .then((res)=>{alert("Form succesfully submitted!");this.props.clickHandler()})
         .catch((err)=>console.error(err))
     }
 
@@ -186,8 +168,6 @@ class AnswerModal extends React.Component {
 }
 
 
-
-//onClick={this.props.clickHandler}
 
 
 

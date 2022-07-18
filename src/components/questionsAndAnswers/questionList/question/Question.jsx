@@ -7,7 +7,6 @@ import { API_KEY, url } from "../../../../../config/config.js";
     class Question extends React.Component {
     constructor(props) {
         super(props)
-        console.log(this.props, 'in indiv ques')
         this.state = {
             activeHelpful: true,
             answerActive: false
@@ -15,7 +14,6 @@ import { API_KEY, url } from "../../../../../config/config.js";
     }
 
     sendHelpful () {
-        console.log(this.props.question.question_id);
         if (this.state.activeHelpful) {
             let endPoint = `${url}/qa/questions/${this.props.question.question_id}/helpful`;
             let newAxios = axios.create({
@@ -27,7 +25,6 @@ import { API_KEY, url } from "../../../../../config/config.js";
                 }
             })
             .then((res) => {
-                console.log(res);
                 this.state.activeHelpful = false;
                 this.setState(JSON.parse(JSON.stringify(this.state)));
             })

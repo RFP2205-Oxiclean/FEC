@@ -22,9 +22,6 @@ class QuestionModal extends React.Component {
       } else if (!this.state.input) {
         alert("You need to enter a answer")
       } else {
-        console.log(this.state.input,
-           this.state.name,
-           this.state.email, this.props.productId, 'request')
         let endPoint = `${url}/qa/questions`
         let newAxios = axios.create({
           headers : {'Authorization' : API_KEY}
@@ -35,7 +32,7 @@ class QuestionModal extends React.Component {
             email:this.state.email,
             product_id:this.props.productId,
         } )
-        .then((res)=>console.log(res))
+        .then(()=>{alert("Form succesfully submitted!");this.props.clickHandler()})
         .catch((err)=>console.error(err))
       }
 

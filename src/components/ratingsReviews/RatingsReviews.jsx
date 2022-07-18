@@ -40,7 +40,6 @@ class RatingsReviews extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response.data)
     })
     .catch((err) => {
       console.error('Error in getRatingsReviewsData response: ', err);

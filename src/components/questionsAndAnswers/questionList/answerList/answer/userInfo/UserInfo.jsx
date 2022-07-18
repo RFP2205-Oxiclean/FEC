@@ -29,7 +29,6 @@ class UserInfo extends React.Component  {
                 }
             })
             .then((res) => {
-                console.log("marked answer helpful");
                 this.state.helpfulActive = false;
                 this.setState(JSON.parse(JSON.stringify(this.state)));
             })
@@ -51,7 +50,6 @@ class UserInfo extends React.Component  {
                 }
             })
             .then((res) => {
-                console.log("reported answer");
                 this.state.reportActive = false;
                 this.setState(JSON.parse(JSON.stringify(this.state)));
             })
