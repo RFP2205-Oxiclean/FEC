@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getProductById, getStylesById, prefetch } from "/src/controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
+import { addToCart } from "/src/controllers.js";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
   let [entry, setEntry] = useState("");
@@ -120,9 +121,35 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     return styleObjects[activeDisplayIndex].photos[activeThumbnailIndices[styleObjects[activeDisplayIndex].style_id]]?.url;
   };
 
+  let getActiveDisplayId = function () {
+    return styleObjects[activeDisplayIndex].style_id;
+  };
+
+  let handleAddToCart = function (stockId, quantity) {
+    console.log(stockId, quantity);
+    if (!stockId || !quantity) {
+      console.log("attempt failed");
+      return;
+    }
+    addToCart(stockId, quantity)
+      .then(() => {
+        let copyStock = { ...stock };
+        let newStock = stock[getActiveDisplayId()].slice();
+        for (let i = 0; i < newStock.length; i++) {
+          if (newStock[i].id === stockId) {
+            newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
+          }
+        }
+        copyStock[getActiveDisplayId()] = newStock;
+        setStock(copyStock);
+      })
+      .catch((err) => console.log("something"));
+  };
+
   return (
     <div className="product-overview">
       <ImageCarousel
+        handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}

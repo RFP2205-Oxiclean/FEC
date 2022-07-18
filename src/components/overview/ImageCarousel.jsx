@@ -15,6 +15,7 @@ const ImageCarousel = ({
   setHoverIndex,
   setActiveDisplayIndex,
   stock,
+  handleAddToCart,
 }) => {
   return (
     <div className="overview-image-container">
@@ -24,6 +25,7 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}

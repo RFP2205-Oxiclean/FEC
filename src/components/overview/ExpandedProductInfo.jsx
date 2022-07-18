@@ -5,7 +5,16 @@ import Price from "./Price.jsx";
 import StylesContainer from "./StylesContainer.jsx";
 import PurchaseInfo from "./PurchaseInfo.jsx";
 
-const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDisplayIndex, setHoverIndex, setActiveDisplayIndex, stock }) => {
+const ExpandedProductInfo = ({
+  productInfo,
+  styleInfo,
+  styleObjects,
+  activeDisplayIndex,
+  setHoverIndex,
+  setActiveDisplayIndex,
+  stock,
+  handleAddToCart,
+}) => {
   let [isHiding, setIsHiding] = useState(false);
 
   return (
@@ -29,7 +38,10 @@ const ExpandedProductInfo = ({ productInfo, styleInfo, styleObjects, activeDispl
               setHoverIndex={setHoverIndex}
               activeDisplayIndex={activeDisplayIndex}
               styleObjects={styleObjects}></StylesContainer>
-            <PurchaseInfo stock={stock[styleObjects[activeDisplayIndex].style_id]} activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
+            <PurchaseInfo
+              handleAddToCart={handleAddToCart}
+              stock={stock[styleObjects[activeDisplayIndex].style_id]}
+              activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
           </div>
         </div>
       </div>
