@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL, createCloudinaryDisplayURL } from "/src/services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 
-const OverlayThumbnail = ({ changeActiveThumbnail, activeStyleObject, active, changeImage, index, images }) => {
-  let [defaultImage, setDefaultImage] = useState(images?.thumbnail_url);
-
-  let handleError = function () {
-    if (defaultImage !== images?.url) {
-      setDefaultImage(images?.url);
-    }
-  };
-
+const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex }) => {
   let handleClick = function () {
-    changeActiveThumbnail(activeStyleObject, index);
-    // changeImage(index);
-    setActiveCSS(!clicked);
+    setActiveThumbnailIndex(trueIndex);
   };
-
-  let [clicked, setActiveCSS] = useState(false);
 
   return (
     <div
@@ -24,7 +12,7 @@ const OverlayThumbnail = ({ changeActiveThumbnail, activeStyleObject, active, ch
         handleClick();
       }}
       className={active ? "overview-overlay-thumbnail-active" : "overview-overlay-thumbnail"}>
-      <img onError={handleError()} height="74px" width="74px" src={createCloudinaryThumbnailURL(defaultImage)}></img>
+      <img height="74px" width="74px" src={createCloudinaryThumbnailURL(image)}></img>
     </div>
   );
 };

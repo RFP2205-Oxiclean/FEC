@@ -30,7 +30,7 @@ export function getProductById(id, count = 5) {
 
 let cachedStylesById = {};
 
-export function getProductStylesById(id) {
+export function getStylesById(id) {
   if (cachedStylesById[id]) {
     return new Promise((resolve, reject) => {
       resolve(cachedStylesById[id]);

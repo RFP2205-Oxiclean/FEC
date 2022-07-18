@@ -23,14 +23,15 @@
 }
 
 .overview-image-container {
+  position: relative;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: space-between;
   box-shadow: -6px 4px 5px -2px black;
-  width: 1600px;
-  height: 1000px;
+  width: 1100px;
+  height: 733;
 
 }
 
@@ -41,10 +42,14 @@
 }
 
 .overview-thumbnail-container {
-  overflow: visible;
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 75%;
+  box-sizing: border-box;
+  margin-top: 30px;
+  margin-left: 30px;
 }
 
 .overview-overlay-thumbnail {

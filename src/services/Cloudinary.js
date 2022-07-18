@@ -35,8 +35,8 @@ const createCloudinaryDisplayURL = function (url) {
     image.setDeliveryType("fetch");
     image.resize(
       pad()
-        .height(1200)
-        .width(1600)
+        .height(733)
+        .width(1100)
         // .gravity(autoGravity())
         .background(predominantGradient())
     );
