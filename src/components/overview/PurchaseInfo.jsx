@@ -29,6 +29,15 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
       });
   };
 
+  useEffect(() => {
+    stock?.forEach(function (stockObj) {
+      setNoItems(false);
+      if (stockObj.quantity !== 0) {
+        setNoItems(true);
+      }
+    });
+  }, [stock]);
+
   return (
     <div className="overview-purchase-info">
       <div style={{ display: "inline-block", textAlign: "center", width: "100%" }}>
@@ -61,16 +70,14 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
               Purchase
             </button>
           </div>
-          {noItems ? (
-            <div></div>
-          ) : (
-            <AddToCart
-              stock={stock}
-              selectQuantity={selectQuantity}
-              handleAddToCart={handleAddToCart}
-              quantity={quantity}
-              stockId={stockId}></AddToCart>
-          )}
+          <i class="fa-brands fa-twitter"></i>
+          <AddToCart
+            noItems={noItems}
+            stock={stock}
+            selectQuantity={selectQuantity}
+            handleAddToCart={handleAddToCart}
+            quantity={quantity}
+            stockId={stockId}></AddToCart>
         </div>
       </div>
     </div>

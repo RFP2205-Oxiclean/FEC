@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity }) => {
+const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems }) => {
   let handleClick = function () {
     handleAddToCart(stockId, quantity);
     stock.forEach(function (stockObj) {
@@ -16,6 +16,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity }
 
   return (
     <div
+      style={noItems ? { visiblity: "hidden" } : { visibility: "visible" }}
       onClick={() => {
         handleClick();
       }}

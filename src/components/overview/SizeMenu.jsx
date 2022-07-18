@@ -7,9 +7,8 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
     let flag = false;
     stock?.forEach(function (stockObj) {
       if (stockObj.quantity !== null && stock.quantity !== 0) {
-        console.log("flipping flag");
+        console.log(stockObj.quantity !== null, stock.quantity !== 0);
         flag = true;
-        setNoItems(false);
         setDefaultValue("Select a Size!");
       }
     });
