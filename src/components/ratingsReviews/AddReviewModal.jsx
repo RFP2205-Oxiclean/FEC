@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRatingUserInput from './StarRatingUserInput.jsx'
-import {IMG_API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
+import {url, API_KEY, IMG_API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
 import axios from 'axios';
 import {Image} from 'cloudinary-react'
 
@@ -13,12 +13,7 @@ class AddReviewModal extends React.Component {
       rating: null,
       recommend: null,
       characteristics: {
-        Size: 0,
-        Width: 0,
-        Comfort: 0,
-        Quality: 0,
-        Length: 0,
-        Fit: 0
+
       },
       reviewSummary: '',
       reviewBody: '',
@@ -70,7 +65,7 @@ class AddReviewModal extends React.Component {
   handleSizeSelect(e) {
     console.log('size selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Size'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Size'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -79,7 +74,7 @@ class AddReviewModal extends React.Component {
   handleWidthSelect(e) {
     console.log('width selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Width'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Width'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -88,7 +83,7 @@ class AddReviewModal extends React.Component {
   handleComfortSelect(e) {
     console.log('comfort selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Comfort'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Comfort'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -97,7 +92,7 @@ class AddReviewModal extends React.Component {
   handleQualitySelect(e) {
     console.log('quality selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Quality'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Quality'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -106,7 +101,7 @@ class AddReviewModal extends React.Component {
   handleLengthSelect(e) {
     console.log('length selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Length'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Length'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -115,7 +110,7 @@ class AddReviewModal extends React.Component {
   handleFitSelect(e) {
     console.log('fit selected: ', e.target.value)
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy['Fit'] = e.target.value;
+    characteristicsCopy[`${this.props.metadata.characteristics['Fit'].id}`] = parseInt(e.target.value);
     this.setState({
       characteristics: characteristicsCopy
     })
@@ -188,6 +183,7 @@ class AddReviewModal extends React.Component {
     this.setState({
       photosURLs: photosURLsCopy
     })
+    return;
   }
 
 
@@ -229,12 +225,7 @@ class AddReviewModal extends React.Component {
         invalidEntries.push('recommendation')
       }
 
-      if(!this.state.characteristics['Size'] ||
-          !this.state.characteristics['Width'] ||
-          !this.state.characteristics['Comfort'] ||
-          !this.state.characteristics['Quality'] ||
-          !this.state.characteristics['Length'] ||
-          !this.state.characteristics['Fit']) {
+      if (Object.keys(this.state.characteristics).length !== Object.keys(this.props.metadata.characteristics).length) {
         invalidEntries.push('characteristics')
       }
 
@@ -255,17 +246,18 @@ class AddReviewModal extends React.Component {
         return;
       } else {
         console.log('Images were uploaded and review passes criteria, attempting to POST the review to server')
-        this.submitReviewToServer();
+        setTimeout(this.submitReviewToServer, 750);
         return;
       }
     })
     .catch((err) => {
-      console.error('errored in handleReviewSubmit')
+      console.error('errored in handleReviewSubmit', err)
     })
 
   }
 
   submitReviewToServer() {
+    let endPoint = `${url}/reviews`;
     let review = {
       product_id: this.props.product_id,
       rating: this.state.rating,
@@ -277,7 +269,7 @@ class AddReviewModal extends React.Component {
       photos: this.state.photosURLs,
       characteristics: this.state.characteristics
     }
-    console.log(review);
+    this.props.addReview(review);
   }
 
 
@@ -342,7 +334,7 @@ class AddReviewModal extends React.Component {
 
           {/* Characteristics Radio Buttons */}
           <br></br>
-          <span className = 'modal-characteristic-title'>Size: <i>{this.sizeDefinitions[this.state.characteristics['Size']]}</i></span>
+          {this.props.metadata.characteristics['Size'] ? <div><span className = 'modal-characteristic-title'>Size: <i>{this.sizeDefinitions[this.state.characteristics[`${this.props.metadata.characteristics['Size'].id}`]]}</i></span>
           <form className = "modal-size-form" onChange = {this.handleSizeSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>A size too small</label>
@@ -361,9 +353,9 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
-          <hr></hr>
+          <hr></hr> </div>: ''}
 
-          <span className = 'modal-characteristic-title'>Width: <i>{this.widthDefinitions[this.state.characteristics['Width']]}</i></span>
+          {this.props.metadata.characteristics['Width'] ? <div><span className = 'modal-characteristic-title'>Width: <i>{this.widthDefinitions[this.state.characteristics[`${this.props.metadata.characteristics['Width'].id}`]]}</i></span>
           <form onChange = {this.handleWidthSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Too narrow</label>
@@ -382,8 +374,9 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
+          <hr></hr></div> : ''}
 
-          <span className = 'modal-characteristic-title'>Comfort: <i>{this.comfortDefinitons[this.state.characteristics['Comfort']]}</i></span>
+          {this.props.metadata.characteristics['Comfort'] ? <div><span className = 'modal-characteristic-title'>Comfort: <i>{this.comfortDefinitons[this.state.characteristics[`${this.props.metadata.characteristics['Comfort'].id}`]]}</i></span>
           <form onChange = {this.handleComfortSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Uncomfortable</label>
@@ -402,7 +395,9 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
-          <span className = 'modal-characteristic-title'>Quality: <i>{this.qualityDefinitions[this.state.characteristics['Quality']]}</i></span>
+          <br></br></div> : ''}
+
+          {this.props.metadata.characteristics['Quality'] ? <div><span className = 'modal-characteristic-title'>Quality: <i>{this.qualityDefinitions[this.state.characteristics[`${this.props.metadata.characteristics['Quality'].id}`]]}</i></span>
           <form onChange = {this.handleQualitySelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Poor</label>
@@ -421,9 +416,9 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
+          <br></br></div> : ''}
 
-
-          <span className = 'modal-characteristic-title'>Length: <i> {this.lengthDefinitions[this.state.characteristics['Length']]}</i></span>
+          {this.props.metadata.characteristics['Length'] ? <div><span className = 'modal-characteristic-title'>Length: <i> {this.lengthDefinitions[this.state.characteristics[`${this.props.metadata.characteristics['Length'].id}`]]}</i></span>
           <form onChange = {this.handleLengthSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Runs short</label>
@@ -442,8 +437,9 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
+          <br></br></div> : ''}
 
-          <span className = 'modal-characteristic-title'>Fit: <i>{this.fitDefinitions[this.state.characteristics['Fit']]}</i></span>
+          {this.props.metadata.characteristics['Fit'] ? <div><span className = 'modal-characteristic-title'>Fit: <i>{this.fitDefinitions[this.state.characteristics[`${this.props.metadata.characteristics['Fit'].id}`]]}</i></span>
           <form onChange = {this.handleFitSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Runs tight</label>
@@ -461,7 +457,7 @@ class AddReviewModal extends React.Component {
               <input type = "radio" name = "size" value ="5"/><label>Runs long</label>
             </div>
 
-          </form>
+          </form></div> : ''}
 
 
 
@@ -481,7 +477,7 @@ class AddReviewModal extends React.Component {
           {/* Photo Upload */}
           <form>
           <br></br>
-            {this.state.photos.length < 5 ? <div>Submit Photos (optional): <br></br><input type="file" name="filename" text = {'Submit Photo(s)'}onChange = {this.handlePictureAdd} multiple/></div> : ''}
+            {this.state.photos.length < 5 ? <div>Submit Photos (optional): <br></br><input className="submit-photos-button" type="file" name="filename" text = {'Submit Photo(s)'}onChange = {this.handlePictureAdd} multiple/></div> : ''}
           </form>
           <span>
           {this.state.photosForDisplay[0] && <img className = 'thumbnail-image' src = {this.state.photosForDisplay[0]} height = '100px' align = "left"/>}
@@ -506,10 +502,9 @@ class AddReviewModal extends React.Component {
           </form>
           <br></br>
           <form>
-          <button onClick = {this.handleReviewSubmit}>Submit Review</button>
-          <button onClick = {this.showState.bind(this)}>Show state</button>
+          <button className = 'keyword-search-clear-button'onClick = {this.handleReviewSubmit}>Submit Review</button>
+          <button onClick = {this.showState.bind(this)}>Show State</button>
           </form>
-
 
 
         </div>

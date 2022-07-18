@@ -7,7 +7,7 @@ class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRemaining: false,
+      showRemainingReviewBody: false,
       imageToShow: null,
       displayFullImageModal: false
     }
@@ -42,24 +42,37 @@ class ReviewListEntry extends React.Component {
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   }
 
+  //Stores a user's helpful vote in local storage. If the user has already voted, it will check the hasMarkedHelpful array. If the review_id doesn't exist in the array, cast the vote. Otherwise, don't take an action.
   markReviewHelpful(e) {
     e.preventDefault();
-    this.props.handleMarkReviewHelpful(this.props.review.review_id);
+
+    var hasMarkedHelpful = JSON.parse(localStorage.getItem('hasMarkedHelpful')) || [];
+    if (hasMarkedHelpful === null) {
+      hasMarkedHelpful.push(this.props.review.review_id);
+      localStorage.setItem('hasMarkedHelpful', JSON.stringify(hasMarkedHelpful));
+      this.props.handleMarkReviewHelpful(this.props.review.review_id);
+    } else if (hasMarkedHelpful.indexOf(this.props.review.review_id) === -1){
+      hasMarkedHelpful.push(this.props.review.review_id);
+      localStorage.setItem('hasMarkedHelpful', JSON.stringify(hasMarkedHelpful))
+      this.props.handleMarkReviewHelpful(this.props.review.review_id);
+    }
   }
 
+  //Reports the review. This should remove the review from all reviews, so no additional logic necessary.
   reportReview (e) {
     e.preventDefault();
     this.props.handleReportReview(this.props.review.review_id)
   }
 
+  //Conditionally renders the review body. If the body is longer than 250 char, show a show-more button and display only the first 250 char by default. Once button is clicked, show the full review.
   reviewBodyRender() {
     if (this.props.review.body.length < 250) {
       return <div>{this.props.review.body}</div>
     } else {
-      if (this.state.showRemaining === false) {
+      if (this.state.showRemainingReviewBody === false) {
         return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
         <br></br>
-        <button className = 'show-more-review-body-button'onClick = {this.showRemainingReviewBody}>Show More</button>
+        <span><button className = 'show-more-review-body-button' onClick = {this.showRemainingReviewBody}>Show More</button></span>
           </div>
       } else {
         return <div>{this.props.review.body}</div>
@@ -70,10 +83,11 @@ class ReviewListEntry extends React.Component {
   showRemainingReviewBody(e) {
     e.preventDefault();
     this.setState({
-      showRemaining: true
+      showRemainingReviewBody: true
     })
   }
 
+  //shows the thumbnail photos if they exist
   showThumbnailPhotos() {
     if (this.props.review.photos.length > 0) {
       return (
@@ -88,8 +102,6 @@ class ReviewListEntry extends React.Component {
 
   showFullImage(e) {
     e.preventDefault();
-    console.log('show full image invoked')
-    console.log(e.target.src)
     this.setState({
       displayFullImageModal: true,
       imageToShow: e.target.src
@@ -106,7 +118,8 @@ class ReviewListEntry extends React.Component {
 
 
   debugReviewListEntry = (e) => {
-    console.log('state: ', this.state)
+    console.log('state: ', this.state),
+    console.log('photos: ', this.props.review.photos)
   }
 
 
@@ -120,7 +133,6 @@ class ReviewListEntry extends React.Component {
           </small>
         </div>
         <br></br>
-        {/* <button onClick = {this.debugReviewListEntry.bind(this)}>Show state</button> */}
         <div className = 'review-summary'>{this.props.review.summary}</div>
 
         <div><br></br>{this.reviewBodyRender()}</div>

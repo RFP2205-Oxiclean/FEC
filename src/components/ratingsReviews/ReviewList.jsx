@@ -68,7 +68,7 @@ class ReviewList extends React.Component {
     var filteredReviews = [];
     if (this.state.searchKeyword.length >= 3) {
       for (var i = 0; i < reviewsToFilter.length; i++) {
-        if (reviewsToFilter[i].body.includes(this.state.searchKeyword) || reviewsToFilter[i].summary.includes(this.state.searchKeyword)) {
+        if (reviewsToFilter[i].body.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) || reviewsToFilter[i].summary.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) {
           filteredReviews.push(reviewsToFilter[i]);
         }
       }

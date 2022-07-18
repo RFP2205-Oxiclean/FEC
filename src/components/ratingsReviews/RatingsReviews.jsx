@@ -38,6 +38,7 @@ class RatingsReviews extends React.Component {
         this.handleFilterClear = this.handleFilterClear.bind(this);
         this.showAddReviewModal = this.showAddReviewModal.bind(this);
         this.closeAddReviewModal = this.closeAddReviewModal.bind(this);
+        this.addReview = this.addReview.bind(this);
     }
 
     componentDidMount() {
@@ -125,16 +126,15 @@ class RatingsReviews extends React.Component {
     //On success, calls getReviewsList and getRatingsList to update with the latest info
     addReview(review) {
       let endPoint = `${url}/reviews`;
-      newAxios.post(endPoint, {
-        product_id: this.props.product_id,
-        rating: review.rating,
-        summary: review.summary,
-        body: review.body,
-        recommend: review.recommend,
-        name: review.name,
-        email: review.email,
-        photos: review.photos,
-        characteristics: review.characteristics
+      console.log('review to be posted: ', review)
+      newAxios.post(endPoint, review)
+        .then((response) => {
+        console.log('successfully posted review to server, closing modal window')
+        this.closeAddReviewModal();
+        this.getReviewList();
+      })
+      .catch((err) => {
+        console.error('errored in addReview', err)
       })
     }
 
@@ -250,7 +250,7 @@ class RatingsReviews extends React.Component {
             <h1 className = 'ratings-reviews-title'>RATINGS & REVIEWS</h1>
             <div className = "ratings-reviews-master-container">
 
-            <div>{this.state.displayAddReviewModal && <AddReviewModal product_id = {this.props.product_id} product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal}/>}</div>
+            <div>{this.state.displayAddReviewModal && <AddReviewModal product_id = {this.props.product_id} product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal} metadata = {this.state.metadata} addReview = {this.addReview}/>}</div>
 
 
 

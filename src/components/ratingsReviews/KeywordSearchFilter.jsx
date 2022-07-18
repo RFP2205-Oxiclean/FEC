@@ -10,7 +10,6 @@ const KeywordSearchFilter = (props) => {
 
   const clearKeyword = (e) => {
     e.preventDefault();
-    console.log(document.getElementsByClassName('keyword-searchbar'));
     document.getElementsByClassName('keyword-searchbar')[0].value = '';
     props.handleKeywordChange('')
   }

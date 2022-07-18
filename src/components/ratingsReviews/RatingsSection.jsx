@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx'
 import RatingsBarComponent from './RatingsBarComponent.jsx'
 import RatingsGraph from './RatingsGraph.jsx'
+import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFilterClear, setAverageRating}) => {
 
@@ -29,7 +30,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
       var threeRatingPercent = parseInt(metadata.ratings[3]) / totalRatings;
       var fourRatingPercent = parseInt(metadata.ratings[4]) / totalRatings;
       var fiveRatingPercent = parseInt(metadata.ratings[5]) / totalRatings;
-      // setAverageRating(roundedAverage);
+
     }
 
 
@@ -111,6 +112,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
           rating = {oneRatingPercent}
         />
       </span>
+      <ProductBreakdown characteristics = {metadata.characteristics}/>
 
       {!filterOn() ? '' :
         <div>Filters applied for:
