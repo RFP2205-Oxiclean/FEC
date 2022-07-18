@@ -1,26 +1,65 @@
-import React, {useState, useEffect} from 'react';
-import {createCloudinaryThumbnailURL, createCloudinaryDisplayURL} from '/src/services/Cloudinary.js';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 
-const StyleObjectThumbnail = ( {viewIndex, setHoverInfo, setOnHover, setViewIndex, resetActiveImageIndex, index, styleClickHandler, styleObject} ) => {
+const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHoverIndex, setActiveDisplayIndex }) => {
+  let handleClick = function () {
+    setActiveDisplayIndex(index);
+  };
 
-  let handleClick = function() {
-    setViewIndex(index);
-    styleClickHandler(index);
-    resetActiveImageIndex()
+  if (index === activeDisplayIndex) {
+    return (
+      <div className="style-object-thumbnail-container">
+        <div
+          className="style-object-thumbnail-active"
+          onMouseEnter={() => {
+            setHoverIndex(index);
+          }}
+          onMouseLeave={() => {
+            setHoverIndex(null);
+          }}
+          onClick={() => {
+            handleClick();
+          }}>
+          <div style={{ position: "relative" }}>
+            <i
+              className="checkmark"
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "0",
+                zIndex: "3",
+                background: "white",
+                color: "green",
+                marginTop: "-3px",
+                borderRadius: "50%",
+              }}
+              className="fa-solid fa-square-check"></i>
+            <img
+              style={{ borderRadius: "50%", position: "absolute", top: "0" }}
+              src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  return <div className="style-object-thumbnail-container">
-    <div
-    onClick={() => {handleClick()}}
-    className={viewIndex === index ? "style-object-thumbnail-active" : "style-object-thumbnail"}
-    onMouseEnter={() => { styleClickHandler(index); setOnHover(true); setHoverInfo( {sale_price: styleObject.sale_price, original_price: styleObject.original_price, name: styleObject.name })}}
-    onMouseLeave={() => { styleClickHandler(viewIndex); setOnHover(false); }}
-  >
-    <img style={{borderRadius: "50%"}} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
-  </div>
-  </div>
-}
-
+  return (
+    <div className="style-object-thumbnail-container">
+      <div
+        className="style-object-thumbnail"
+        onMouseEnter={() => {
+          setHoverIndex(index);
+        }}
+        onMouseLeave={() => {
+          setHoverIndex(null);
+        }}
+        onClick={() => {
+          handleClick();
+        }}>
+        <img style={{ borderRadius: "50%" }} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+      </div>
+    </div>
+  );
+};
 
 export default StyleObjectThumbnail;
