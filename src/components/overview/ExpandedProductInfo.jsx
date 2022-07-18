@@ -1,65 +1,89 @@
-import React, {useState, useEffect} from 'react';
-import StyleObjectThumbnail from './StyleObjectThumbnail.jsx';
-import Price from './Price.jsx';
-import CollapsePanelButton from './CollapsePanelButton.jsx';
+import React, { useState, useEffect } from "react";
+import CollapseButton from "./CollapseButton.jsx";
+import StarRatingStatic from "../commonComponents/StarRatingStatic.jsx";
+import Price from "./Price.jsx";
+import StylesContainer from "./StylesContainer.jsx";
+import PurchaseInfo from "./PurchaseInfo.jsx";
 
-const ExpandedProductInfo = ( {resetActiveImageIndex, styleClickHandler, productInfo, styleObjects} ) => {
+const ExpandedProductInfo = ({
+  productInfo,
+  styleInfo,
+  styleObjects,
+  activeDisplayIndex,
+  setHoverIndex,
+  setActiveDisplayIndex,
+  stock,
+  handleAddToCart,
+  end,
+  activeThumbnailIndex,
+  incrementThumbnailIndex,
+}) => {
+  let [isHiding, setIsHiding] = useState(false);
+  let [isShaking, setIsShaking] = useState(false);
 
-  let [viewIndex, setViewIndex] = useState(0);
-  let [hoverInfo, setHoverInfo] = useState({name: '', original_price: '', sale_price: ''})
-  let [onHover, setOnHover] = useState(false)
-  let [isHidden, setIsHidden] = useState(false);
-
-  let showDifferentPrice = function() {
-    if (onHover && hoverInfo.sale_price) {
-      return hoverInfo.sale_price;
-    } else if (onHover && hoverInfo.original_price !== styleObjects[viewIndex]?.original_price) {
-      return hoverInfo?.original_price
+  let toggleShakeCart = function () {
+    console.log("shaking");
+    let x = isShaking;
+    if (!isShaking) {
+      setIsShaking(true);
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 900);
     }
-  }
-  if (isHidden) {
-    return <div>
-      <CollapsePanelButton isHidden={isHidden} setIsHidden={setIsHidden}></CollapsePanelButton>
+  };
+
+  return (
+    <div className="collapse-and-info-container">
+      <div className="inner-div">
+        <CollapseButton isHiding={isHiding} setIsHiding={setIsHiding}></CollapseButton>
+        <div className={isHiding ? "slide-panel" : "unslide-panel"}>
+          <button
+            onClick={() => {
+              incrementThumbnailIndex();
+            }}
+            style={
+              end === activeThumbnailIndex
+                ? { visibility: "hidden", position: "absolute" }
+                : { position: "absolute", top: "50%", left: "0", marginLeft: "-60px" }
+            }>
+            Right
+          </button>
+          <div className={"overview-expanded-product-panel"}>
+            <div>
+              <StarRatingStatic rating={5}></StarRatingStatic>
+              <span>Read All Reviews</span>
+            </div>
+            <div className="overview-category">
+              {productInfo?.category}
+              <div style={isShaking ? { visibility: "hidden" } : { marginLeft: "auto", display: "flex" }}>
+                <i className="fa-solid fa-cart-arrow-down"></i>
+              </div>
+              <div style={!isShaking ? { visibility: "hidden", position: "absolute", right: "0" } : { position: "absolute", right: "0" }}>
+                <i className="fa-solid fa-cart-arrow-down fa-shake"></i>
+              </div>
+            </div>
+            <div className="overview-expanded-product-info">
+              <Price styleInfo={styleInfo}></Price>
+              <span className="overview-expanded-product-info-name">{productInfo.name}</span>
+            </div>
+            <div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}>
+              <span className="overview-expanded-product-info-style">{styleInfo.name}</span>
+            </div>
+            <StylesContainer
+              setActiveDisplayIndex={setActiveDisplayIndex}
+              setHoverIndex={setHoverIndex}
+              activeDisplayIndex={activeDisplayIndex}
+              styleObjects={styleObjects}></StylesContainer>
+            <PurchaseInfo
+              toggleShakeCart={toggleShakeCart}
+              handleAddToCart={handleAddToCart}
+              stock={stock[styleObjects[activeDisplayIndex].style_id]}
+              activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
+          </div>
+        </div>
+      </div>
     </div>
-  }
-
-  return <div className="collapse-and-info-container">
-    <CollapsePanelButton isHidden={isHidden} setIsHidden={setIsHidden}></CollapsePanelButton>
-    <div className="overview-expanded-product-panel">
-    <div className="stars-container">STAR STAR STAR</div>
-    <div className="overview-category">{productInfo.category}</div>
-    {/* <div><span style={{fontWeight: "bold", fontSize: "30px"}}>{styleObjects[viewIndex]?.original_price}</span></div> */}
-    <div className="overview-expanded-product-info">
-      <Price
-        currentStyle={styleObjects[viewIndex]}
-        hoverInfo={hoverInfo}
-        onHover={onHover}>
-       </Price>
-      <span className="overview-expanded-product-info-name">{productInfo.name}</span>
-      <span className="overview-expanded-product-info-style">{onHover ? hoverInfo.name : styleObjects[viewIndex]?.name}</span>
-    </div>
-    <div className="overview-styles-container">
-    {styleObjects.length ? styleObjects?.map(function(styleObject, i) {
-      return <StyleObjectThumbnail
-        setViewIndex={setViewIndex}
-        resetActiveImageIndex={resetActiveImageIndex}
-        styleClickHandler={styleClickHandler}
-        styleObject={styleObject}
-        key={styleObject.style_id}
-        index={i}
-        setHoverInfo={setHoverInfo}
-        setOnHover={setOnHover}
-        viewIndex={viewIndex}
-        >
-       </StyleObjectThumbnail>
-    }) : <div></div>}
-    </div>
-    <div className="overview-purchase-info"></div>
-  </div>
-  </div>
-}
-
-
-
+  );
+};
 
 export default ExpandedProductInfo;
