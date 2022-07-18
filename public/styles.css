@@ -582,7 +582,7 @@ width: 150px; */
 
 .questions-and-answers .modal-container .user-photolist-container .upload-image {
   max-height: 100%;
-  max-width: 100%;z
+  max-width: 100%;
   display: inline;
   border: 2px solid black;
 }
@@ -910,7 +910,7 @@ div.radio-box {
 }
 
 .ratings-reviews-title {
-  margin-left: 20%;
+  margin-left: 17.5%;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 20px;
 }
@@ -1015,7 +1015,7 @@ div.radio-box {
 .keyword-searchbar {
   margin-right: 5px;
   font-size: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 
