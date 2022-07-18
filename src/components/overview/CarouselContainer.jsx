@@ -42,6 +42,7 @@ const CarouselContainer = ({ product_id }) => {
     for (let i = 0; i < newStyleObjects.length; i++) {
       if (newActiveStyleObject.style_id === newStyleObjects[i].style_id) {
         newStyleObjects[i] = newActiveStyleObject;
+        break;
       }
     }
     setStyleObjects(newStyleObjects);

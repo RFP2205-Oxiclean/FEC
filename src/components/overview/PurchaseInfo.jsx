@@ -31,7 +31,7 @@ const PurchaseInfo = ({ activeStyle }) => {
         stockArr.push({ ...activeStyle.skus[k], id: k });
       }
     }
-    setSelectedSizeId(0);
+    setSelectedSizeId(null);
     handleSelectQ(0);
     setStock(stockArr);
   }, [activeStyle]);

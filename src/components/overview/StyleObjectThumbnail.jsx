@@ -9,9 +9,19 @@ const StyleObjectThumbnail = ({ viewIndex, setHoverInfo, setOnHover, setViewInde
     setActiveImageIndex(0);
   };
 
+  let style = { position: "absolute", top: "0", right: "0", zIndex: "3", background: "white", color: "green" };
+
+  useEffect(() => {
+    console.log("changing style");
+    if (viewIndex !== index) {
+      style = { ...style, display: "none" };
+    }
+  }, [viewIndex]);
+
   return (
     <div className="style-object-thumbnail-container">
       <div
+        style={{ position: "relative" }}
         onClick={() => {
           handleClick();
         }}
@@ -25,6 +35,7 @@ const StyleObjectThumbnail = ({ viewIndex, setHoverInfo, setOnHover, setViewInde
           styleClickHandler(viewIndex);
           setOnHover(false);
         }}>
+        <i style={style} class="fa-solid fa-square-check"></i>
         <img style={{ borderRadius: "50%" }} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
       </div>
     </div>

@@ -12,13 +12,13 @@ const ExpandedProductInfo = ({ setActiveImageIndex, styleClickHandler, productIn
   let [isHidden, setIsHidden] = useState(false);
   let [isHiding, setIsHiding] = useState(false);
 
-  let showDifferentPrice = function () {
-    if (onHover && hoverInfo.sale_price) {
-      return hoverInfo.sale_price;
-    } else if (onHover && hoverInfo.original_price !== styleObjects[viewIndex]?.original_price) {
-      return hoverInfo?.original_price;
-    }
-  };
+  // let showDifferentPrice = function () {
+  //   if (onHover && hoverInfo.sale_price) {
+  //     return hoverInfo.sale_price;
+  //   } else if (onHover && hoverInfo.original_price !== styleObjects[viewIndex]?.original_price) {
+  //     return hoverInfo?.original_price;
+  //   }
+  // };
   // if (isHidden) {
   //   return (
   //     <div>

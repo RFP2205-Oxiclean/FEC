@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const SizeMenu = ({ setPrompt, stock, setNoItems, noItems, setSelectedSizeId }) => {
-  let [size, setSize] = useState("");
   let [defaultValue, setDefaultValue] = useState("Select a Size!");
 
   useEffect(() => {
