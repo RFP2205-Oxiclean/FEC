@@ -5,13 +5,13 @@ const RatingsGraph = (props) => {
 
   return (
     <div>
-    <span className = 'rating-bar-label' id = '5-star-filter' onClick = {starFilterClicked}> 5 stars
+    <span className = 'rating-bar-label' id = '5-star-filter' onClick = {props.starFilterClicked}> 5 stars
         <RatingsBarComponent
           rating = {fiveRatingPercent}
         />
       </span>
       <br></br>
-      <span className = 'rating-bar-label' id = '4-star-filter' onClick = {starFilterClicked}> 4 stars
+      <span className = 'rating-bar-label' id = '4-star-filter' onClick = {props.starFilterClicked}> 4 stars
         <RatingsBarComponent
           rating = {fourRatingPercent}
         />

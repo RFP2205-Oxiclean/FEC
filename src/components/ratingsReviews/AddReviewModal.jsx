@@ -342,7 +342,7 @@ class AddReviewModal extends React.Component {
 
           {/* Characteristics Radio Buttons */}
           <br></br>
-          <span>Size: <i>{this.sizeDefinitions[this.state.characteristics['Size']]}</i></span>
+          <span className = 'modal-characteristic-title'>Size: <i>{this.sizeDefinitions[this.state.characteristics['Size']]}</i></span>
           <form className = "modal-size-form" onChange = {this.handleSizeSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>A size too small</label>
@@ -363,7 +363,7 @@ class AddReviewModal extends React.Component {
           </form>
           <hr></hr>
 
-          <span>Width: <i>{this.widthDefinitions[this.state.characteristics['Width']]}</i></span>
+          <span className = 'modal-characteristic-title'>Width: <i>{this.widthDefinitions[this.state.characteristics['Width']]}</i></span>
           <form onChange = {this.handleWidthSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Too narrow</label>
@@ -383,7 +383,7 @@ class AddReviewModal extends React.Component {
 
           </form>
 
-          <span>Comfort: <i>{this.comfortDefinitons[this.state.characteristics['Comfort']]}</i></span>
+          <span className = 'modal-characteristic-title'>Comfort: <i>{this.comfortDefinitons[this.state.characteristics['Comfort']]}</i></span>
           <form onChange = {this.handleComfortSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Uncomfortable</label>
@@ -402,7 +402,7 @@ class AddReviewModal extends React.Component {
             </div>
 
           </form>
-          <span>Quality: <i>{this.qualityDefinitions[this.state.characteristics['Quality']]}</i></span>
+          <span className = 'modal-characteristic-title'>Quality: <i>{this.qualityDefinitions[this.state.characteristics['Quality']]}</i></span>
           <form onChange = {this.handleQualitySelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Poor</label>
@@ -423,7 +423,7 @@ class AddReviewModal extends React.Component {
           </form>
 
 
-          <span>Length: <i> {this.lengthDefinitions[this.state.characteristics['Length']]}</i></span>
+          <span className = 'modal-characteristic-title'>Length: <i> {this.lengthDefinitions[this.state.characteristics['Length']]}</i></span>
           <form onChange = {this.handleLengthSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Runs short</label>
@@ -443,7 +443,7 @@ class AddReviewModal extends React.Component {
 
           </form>
 
-          <span>Fit: <i>{this.fitDefinitions[this.state.characteristics['Fit']]}</i></span>
+          <span className = 'modal-characteristic-title'>Fit: <i>{this.fitDefinitions[this.state.characteristics['Fit']]}</i></span>
           <form onChange = {this.handleFitSelect}>
             <div className = "radio-box">
               <input type = "radio" name = "size" value ="1"/><label>Runs tight</label>

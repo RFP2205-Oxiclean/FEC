@@ -118,7 +118,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
             return <span key = {index}> {rating} </span>
           })
           }
-          <button onClick = {handleFilterClear}>Clear Filters</button>
+          <button className = 'clear-filters-button'onClick = {handleFilterClear}>Clear Filters</button>
         </div>
       }
 

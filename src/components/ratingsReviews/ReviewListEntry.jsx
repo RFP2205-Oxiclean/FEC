@@ -57,9 +57,9 @@ class ReviewListEntry extends React.Component {
       return <div>{this.props.review.body}</div>
     } else {
       if (this.state.showRemaining === false) {
-        return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp; <button onClick = {this.showRemainingReviewBody}>Show More</button>
+        return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
         <br></br>
-
+        <button className = 'show-more-review-body-button'onClick = {this.showRemainingReviewBody}>Show More</button>
           </div>
       } else {
         return <div>{this.props.review.body}</div>

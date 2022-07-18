@@ -90,6 +90,7 @@ class ReviewList extends React.Component {
       return (
         <div className = "review-list-container">
           <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
+          <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
           <div>No keywords matched that search, try again</div>
         </div>
       )

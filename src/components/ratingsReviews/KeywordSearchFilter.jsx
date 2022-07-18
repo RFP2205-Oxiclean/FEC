@@ -4,6 +4,7 @@ const KeywordSearchFilter = (props) => {
 
 
   const updateKeyword = (e) => {
+    e.preventDefault();
     props.handleKeywordChange(e.target.value)
   }
 
@@ -18,7 +19,7 @@ const KeywordSearchFilter = (props) => {
     <div className = 'keyword-search-container'>
     <form>
       <input className = 'keyword-searchbar' type = "text" placeholder = "Search for a review..." onChange = {updateKeyword}/>
-      <button onClick = {clearKeyword}>Clear</button>
+      <button className = 'keyword-search-clear-button' onClick = {clearKeyword}>Clear</button>
     </form>
     </div>
   )
