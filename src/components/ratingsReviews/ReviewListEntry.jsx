@@ -1,51 +1,159 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {format} from 'date-fns';
 import StarRatingStatic from '../commonComponents/StarRatingStatic.jsx';
+import ReviewImageModal from './ReviewImageModal.jsx'
 
-const ReviewListEntry = ({review, handleMarkReviewHelpful, handleReportReview}) => {
-  const date = new Date(review.date)
+class ReviewListEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showRemainingReviewBody: false,
+      imageToShow: null,
+      displayFullImageModal: false
+    }
+    this.convertDateFormat = this.convertDateFormat.bind(this);
+    this.markReviewHelpful = this.markReviewHelpful.bind(this);
+    this.reportReview = this.reportReview.bind(this);
+    this.reviewBodyRender = this.reviewBodyRender.bind(this);
+    this.checkBodyLongerThan250 = this.checkBodyLongerThan250.bind(this);
+    this.showRemainingReviewBody = this.showRemainingReviewBody.bind(this);
+    this.showFullImage = this.showFullImage.bind(this);
+    this.showThumbnailPhotos = this.showThumbnailPhotos.bind(this);
+    this.closeImageModal = this.closeImageModal.bind(this);
+  }
 
-  const convertDateFormat = (date) => {
+  checkBodyLongerThan250() {
+    let longBody = false;
+    console.log('in check body longer than 250')
+    if (this.props.review.body.length > 250) {
+      longBody = true;
+    }
+    console.log('long body: ', longBody);
+    this.setState({
+      bodyLongerThan250: longBody
+    })
+  }
+
+
+  convertDateFormat(date) {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   }
 
-  const markReviewHelpful = (e) => {
+  //Stores a user's helpful vote in local storage. If the user has already voted, it will check the hasMarkedHelpful array. If the review_id doesn't exist in the array, cast the vote. Otherwise, don't take an action.
+  markReviewHelpful(e) {
     e.preventDefault();
-    handleMarkReviewHelpful(review.review_id);
+
+    var hasMarkedHelpful = JSON.parse(localStorage.getItem('hasMarkedHelpful')) || [];
+    if (hasMarkedHelpful === null) {
+      hasMarkedHelpful.push(this.props.review.review_id);
+      localStorage.setItem('hasMarkedHelpful', JSON.stringify(hasMarkedHelpful));
+      this.props.handleMarkReviewHelpful(this.props.review.review_id);
+    } else if (hasMarkedHelpful.indexOf(this.props.review.review_id) === -1){
+      hasMarkedHelpful.push(this.props.review.review_id);
+      localStorage.setItem('hasMarkedHelpful', JSON.stringify(hasMarkedHelpful))
+      this.props.handleMarkReviewHelpful(this.props.review.review_id);
+    }
   }
 
-  const reportReview = (e) => {
+  //Reports the review. This should remove the review from all reviews, so no additional logic necessary.
+  reportReview (e) {
     e.preventDefault();
-    handleReportReview(review.review_id)
+    this.props.handleReportReview(this.props.review.review_id)
+  }
+
+  //Conditionally renders the review body. If the body is longer than 250 char, show a show-more button and display only the first 250 char by default. Once button is clicked, show the full review.
+  reviewBodyRender() {
+    if (this.props.review.body.length < 250) {
+      return <div>{this.props.review.body}</div>
+    } else {
+      if (this.state.showRemainingReviewBody === false) {
+        return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
+        <br></br>
+        <span><button className = 'show-more-review-body-button' onClick = {this.showRemainingReviewBody}>Show More</button></span>
+          </div>
+      } else {
+        return <div>{this.props.review.body}</div>
+      }
+    }
+  }
+
+  showRemainingReviewBody(e) {
+    e.preventDefault();
+    this.setState({
+      showRemainingReviewBody: true
+    })
+  }
+
+  //shows the thumbnail photos if they exist
+  showThumbnailPhotos() {
+    if (this.props.review.photos.length > 0) {
+      return (
+        <div className = "thumbnail-container">
+          {this.props.review.photos.map((photo, index) =>
+            <img className = 'review-thumbnail-image' src = {photo.url} onClick = {this.showFullImage} key = {index}></img>
+          )}
+        </div>
+      )
+    }
+  }
+
+  showFullImage(e) {
+    e.preventDefault();
+    this.setState({
+      displayFullImageModal: true,
+      imageToShow: e.target.src
+    })
+  }
+
+  closeImageModal(e) {
+    e.preventDefault();
+    this.setState({
+      displayFullImageModal: false,
+      imageToShow: null
+    })
   }
 
 
-  return (
-    <div>
+  debugReviewListEntry = (e) => {
+    console.log('state: ', this.state),
+    console.log('photos: ', this.props.review.photos)
+  }
+
+
+  render() {
+    return (
       <div>
-        <StarRatingStatic rating= {review.rating}/>
-        <small className = 'review-username-time'>{review.reviewer_name},&nbsp;{convertDateFormat(date)}
-        </small>
+        <div>
+          {this.state.displayFullImageModal && <ReviewImageModal image = {this.state.imageToShow} closeImageModal = {this.closeImageModal}/>}
+          <StarRatingStatic rating= {this.props.review.rating}/>
+          <small className = 'review-username-time'>{this.props.review.reviewer_name} &nbsp;|&nbsp;{this.convertDateFormat(new Date(this.props.review.date))}
+          </small>
+        </div>
+        <br></br>
+        <div className = 'review-summary'>{this.props.review.summary}</div>
+
+        <div><br></br>{this.reviewBodyRender()}</div>
+
+        <div>{this.showThumbnailPhotos()}</div>
+
+
+        {this.props.review.recommend ? <div className = 'review-recommend'><br></br>✓ I recommend this product</div> : ''}
+
+        {this.props.review.response ? <div className = 'review-response'>Response goes here<br></br></div> : ''}
+
+        <div className = 'review-helpful-text-block'>Helpful?&nbsp;&nbsp;
+          <span className = 'review-helpful-option' onClick = {this.markReviewHelpful}>Yes</span>
+          <span>&nbsp;({this.props.review.helpfulness})</span>
+          <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+          <span className = 'review-report-button' onClick = {this.reportReview}>Report</span>
+        </div>
+        <hr></hr>
+
       </div>
-      <br></br>
-      <div className = 'review-summary'>{review.summary}</div>
-      <br></br>
-      <div className = 'review-body'>{review.body}</div>
-      <br></br>
-      {review.recommend ? <div className = 'review-recommend'>✓ I recommend this product</div> : ''}
-      <br></br>
-      {review.response ? <div className = 'review-response'>Response goes here</div> : ''}
-      <br></br>
-      <div>Helpful?&nbsp;&nbsp;
-        <span className = 'review-helpful-option' onClick = {markReviewHelpful}>Yes</span>
-        <span>&nbsp;({review.helpfulness})</span>
-        <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-        <span className = 'review-report-button' onClick = {reportReview}>Report</span>
-      </div>
-      <hr></hr>
-    </div>
-  )
+    )
+  }
+
 }
 
 export default ReviewListEntry;

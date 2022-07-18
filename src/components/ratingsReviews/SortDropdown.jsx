@@ -25,16 +25,20 @@ class SortDropdown extends React.Component {
 
   render() {
     return (
-      <form> {this.props.numReviews} reviews, sorted by &nbsp;
-        <select className="sort-options" onChange = {this.handleSortChange}>
-          <option value="relevance">relevance</option>
-          <option value="helpful">helpful</option>
-          <option value="newest">newest</option>
-        </select>
-      </form>
+      <div className = 'sort-dropdown-container'>
+        <form >
+          <span className = 'sort-dropdown-title'>{this.props.numReviews} reviews, sorted by </span>
+          <select className="sort-options" onChange = {this.handleSortChange}>
+            <option value="relevance">relevance</option>
+            <option value="helpful">helpful</option>
+            <option value="newest">newest</option>
+          </select>
+        </form>
+      </div>
     )
   }
 
 }
 
 export default SortDropdown;
+
