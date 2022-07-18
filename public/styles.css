@@ -349,6 +349,7 @@ img {
 .add-to-cart {
   text-shadow: 0 0 black;
   display: flex;
+  margin-left: auto;
   float: right;
   width: 140px;
   height: 40px;
@@ -483,6 +484,24 @@ i {
   background: transparent;
 }
 
+.invisible-cart {
+  visibility: hidden;
+  text-shadow: 0 0 black;
+  display: flex;
+  margin-left: auto;
+  float: right;
+  width: 140px;
+  height: 40px;
+  border: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: RGB(239, 192, 80);
+  border: 1px solid #8ca4c8;
+  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
+}
 
 
 /* .overview-expanded-product-panel-slide {

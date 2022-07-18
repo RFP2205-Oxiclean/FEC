@@ -74,8 +74,6 @@ export function addToCart(id, quantity) {
     let arr = Array(parseInt(quantity)).fill(0);
     return Promise.all(
       arr.map((el) => {
-        console.log(id);
-        console.log("post request");
         return axios.post(
           `${url}/cart`,
           {

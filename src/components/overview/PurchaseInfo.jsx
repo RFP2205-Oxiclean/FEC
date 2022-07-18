@@ -32,7 +32,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
   useEffect(() => {
     stock?.forEach(function (stockObj) {
       setNoItems(false);
-      if (stockObj.quantity !== 0) {
+      if (stockObj.quantity !== 0 && stockObj.quantity !== null) {
         setNoItems(true);
       }
     });
@@ -62,7 +62,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId}></QMenu>
         </div>
         <div className="purchase-buttons-container2">
-          <div style={{ width: "120px", height: "100%", background: "black" }}>
+          <div style={{ width: "120px", height: "100%", background: "black", position: "relative" }}>
             <button
               onClick={() => {
                 myDebugger();
@@ -70,14 +70,18 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
               Purchase
             </button>
           </div>
-          <i class="fa-brands fa-twitter"></i>
-          <AddToCart
-            noItems={noItems}
-            stock={stock}
-            selectQuantity={selectQuantity}
-            handleAddToCart={handleAddToCart}
-            quantity={quantity}
-            stockId={stockId}></AddToCart>
+          <div style={{ display: "flex", height: "40px" }}>
+            <div className="i-tag-container" style={{ width: "15%", height: "100%", background: "black", marginRight: "4px" }}></div>
+            <div className="i-tag-container" style={{ width: "15%", height: "100%", background: "black", marginRight: "4px" }}></div>
+            <div className="i-tag-container" style={{ width: "15%", height: "100%", background: "black", marginRight: "4px" }}></div>
+            <AddToCart
+              noItems={noItems}
+              stock={stock}
+              selectQuantity={selectQuantity}
+              handleAddToCart={handleAddToCart}
+              quantity={quantity}
+              stockId={stockId}></AddToCart>
+          </div>
         </div>
       </div>
     </div>
