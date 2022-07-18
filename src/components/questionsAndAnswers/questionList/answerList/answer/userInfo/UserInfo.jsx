@@ -23,6 +23,8 @@ class UserInfo extends React.Component  {
             axios.put(endPoint, {
                 params: {
                     answer_id:this.props.data.id,
+                }, headers : {
+                    'Authorization' : API_KEY
                 }
             })
             .then((res) => {

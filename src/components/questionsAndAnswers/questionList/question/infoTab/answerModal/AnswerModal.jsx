@@ -1,6 +1,7 @@
 import React from  'react';
 import axios from 'axios';
-import { url, API_KEY } from "../../../../../../config/config.js";
+import PhotoList from './PhotoList.jsx'
+import { url, API_KEY } from "../../../../../../../config/config.js";
 
 
 
@@ -11,14 +12,59 @@ class AnswerModal extends React.Component {
           name:'',
           email:'',
           input:'',
-          imageCount:0,
           photos : [],
+          photoLimit : 5,
         }
     }
 
-    // loadFile(file) {
+     loadFile(files) {
 
-    // }
+
+      let newAxios = axios.create();
+      let reader = new FileReader()
+      delete axios.defaults.headers.common['Authorization']
+      let loadPromise = new Promise ((res, rej) => {
+      let data = reader.readAsDataURL(files[0])
+
+        setTimeout(()=>{
+          if (reader.result) {
+            res(reader.result)
+          } else {
+            rej('failure')
+          }
+        },200)
+
+
+      })
+      .then((res) =>{
+          this.state.photos[0] = res
+          this.setState(JSON.parse(JSON.stringify(this.state)));
+          //this.authenticateOrError()
+          let form = new FormData();
+          form.append("file",this.state.photos[0])
+          form.append("upload_preset", "ct85fmvz")
+          newAxios.post('https://api.cloudinary.com/v1_1/dwldnydnb/image/upload',form)
+          .then((res)=>console.log(res))
+          .catch((err)=>console.error(err))
+
+      })
+      .catch((err)=>console.error(err))
+
+
+
+      // loadPromise.then((res, err)=>{
+      //   console.log("yo")
+      //   console.log("hi", reader.result)
+      // })
+
+
+
+
+
+
+      //console.log(file.target.files[0])
+
+     }
 
     authenticateOrError () {
       if(!this.state.name.length) {
@@ -30,13 +76,15 @@ class AnswerModal extends React.Component {
       } else {
         console.log(this.state.input,
            this.state.name,
-           this.state.email, 'request')
+           this.state.email,
+           this.state.photos[0], 'request')
         let endPoint = `${url}/qa/questions/${this.props.question.question_id}/answers`
         axios.post(endPoint, {
             question_id:this.props.question.question_id,
             body:this.state.input,
             name:this.state.name,
             email:this.state.email,
+            photos:this.state.photos
         })
         .then((res)=>console.log(res))
         .catch((err)=>console.error(err))
@@ -71,7 +119,8 @@ class AnswerModal extends React.Component {
                           </div>
 
 
-                          {/* <input className="aa-user-photos" type="file" accepts="image/*" /> */}
+                          <input className="user-photos" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFile(event.target.files)}/>
+                          {/* <PhotoList photos={this.state.photos}/> */}
                           <input className="user-submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
 
                       </form>

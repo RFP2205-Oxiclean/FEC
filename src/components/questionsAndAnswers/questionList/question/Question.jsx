@@ -21,6 +21,8 @@ import { API_KEY, url } from "../../../../../config/config.js";
             axios.put(endPoint, {
                 params: {
                     question_id:this.props.question.question_id,
+                },headers : {
+                    'Authorization' : API_KEY
                 }
             })
             .then((res) => {

@@ -4,7 +4,7 @@ import SearchBar from './searchBar/SearchBar.jsx'
 import AnswerList from './questionList/answerList/AnswerList.jsx';
 import QuestionList from './questionList/QuestionList.jsx';
 import { url, API_KEY } from "../../../config/config.js";
-axios.defaults.headers.common['Authorization'] = API_KEY;
+//axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 class QuestionsAndAnswers extends React.Component {
@@ -36,6 +36,8 @@ class QuestionsAndAnswers extends React.Component {
             product_id: id,
             page : 1,
             count : 9999
+            }, headers : {
+                'Authorization' : API_KEY
             }
         })
         .then((response) => {

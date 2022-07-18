@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerModal from './AnswerModal';
+import AnswerModal from './answerModal/AnswerModal';
 import axios from 'axios';
 import { url, API_KEY } from "../../../../../../config/config.js";
 
@@ -18,7 +18,9 @@ class InfoTab extends React.Component {
     toggleModal = () => {
 
         let endPoint = `${url}/products/${this.props.productId}`
-        axios.get(endPoint)
+        axios.get(endPoint, {headers : {
+            'Authorization' : API_KEY
+        }})
         .then((res) => {
             this.state.product = res.data;
             if (this.state.activeModal) {
