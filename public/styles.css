@@ -20,7 +20,6 @@
 
 .product-overview.container {
 
-}
 
 .overview-image-container {
   position: relative;
@@ -539,7 +538,367 @@ width: 150px; */
 }
 
 .questions-and-answers {
-  height: 25%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: arial;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.questions-and-answers #qa-container .qa-title
+{
+  color: #565656;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 15px 0px;
+  margin: 0;
+}
+
+
+.questions-and-answers #qa-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.questions-and-answers #qa-container .qa-nav-bar{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+::placeholder {
+  color:black;
+}
+
+
+.questions-and-answers p {
+    display: inline-block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.questions-and-answers p.report-event:hover {
+  cursor:pointer;
+}
+
+.questions-and-answers p.helpful-event:hover {
+  cursor:pointer;
+}
+.questions-and-answers p.helpful-event {
+  text-decoration: underline;
+}
+
+.questions-and-answers p.add-answer-event:hover {
+  cursor:pointer;
+}
+
+.questions-and-answers div::-webkit-scrollbar {
+  display: none;
+}
+
+.questions-and-answers .qc-wrapper {
+  position:relative;
+  max-height:50%;
+}
+
+.questions-and-answers .interactive-buttons:hover {
+  cursor:pointer;
+}
+
+.questions-and-answers .button-wrapper {
+  display:inline;
+}
+
+.questions-and-answers  .interactive-buttons.load-more, .questions-and-answers  .interactive-buttons.add-a {
+  padding: 14px;
+  border: 1px solid;
+  display: inline-block;
+  margin-right:15px;
+  font-weight:bold;
+}
+
+.questions-and-answers #question-container {
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+  overflow: scroll;
+  max-height: 50vh;
+}
+
+.questions-and-answers ul {
+    list-style: none;
+    margin: 0 0;
+    margin-block-start: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+
+.questions-and-answers #question-list li {
+  min-height: 100px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+
+.questions-and-answers #question-list .question-content {
+  display: block;
+  width: 100%;
+  position: relative;
+  float: left;
+  padding-left: 20px;
+  padding-top:10px;
+  box-sizing: border-box;
+}
+
+.questions-and-answers #question-list .q-id {
+  padding:0 0;
+  margin:0 0 0 -20px;
+  float:left;
+  height:100%;
+  position:absolute;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.questions-and-answers #question-list .q-text {
+  display:inline-block;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.questions-and-answers #question-list .info-tab {
+  position:relative;
+  float:right;
+  font-size: 12px;
+}
+
+.questions-and-answers #question-list .info-tab .wrap {
+  display:inline;
+}
+
+
+.questions-and-answers #question-list .modal div{
+  display:block;
+}
+
+
+
+
+.questions-and-answers .answer-list
+{
+  display: block;
+  width: 100%;
+  position: relative;
+  float: left;
+  padding-left: 20px;
+  box-sizing: border-box;
+  padding-top:10px;
+}
+
+.questions-and-answers  .a-id {
+  padding:0 0;
+  margin:0 0 0 -20px;
+  float:left;
+  height:100%;
+  position:absolute;
+  font-weight:bold;
+  font-size:18px;
+}
+.questions-and-answers .user-tab {
+  padding-top:10px;
+  font-size: 12px;
+}
+
+.questions-and-answers .answer-list .photolist-container .photo-container:hover {
+  cursor:pointer;
+}
+.questions-and-answers .answer-list .photolist-container {
+  padding: 10px 0px;
+  width:100%;
+  height: 70px;
+}
+.questions-and-answers .answer-list .photo-container {
+  margin-right: 20px;
+  width: 117px;
+  height: 70px;
+  background-color: black !important;
+  overflow:hidden;
+  display: flex !important;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  float:left;
+}
+
+.questions-and-answers .answer-list .photo-container .photo {
+  max-height: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: inline;
+  border: 2px solid black;
+}
+
+.questions-and-answers .answer-list .photo-container .qa-image-modal {
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.466);
+    text-align: center;
+    z-index: 999;
+    overflow:scroll;
+  }
+
+
+  .questions-and-answers .answer-list .photo-container .qa-image-modal .image {
+    display: inline-block;
+    opacity: 1.0;
+    position: relative;
+    border:3px black solid;
+    box-shadow: 5px 5px 5px;
+    -moz-box-shadow: 5px 5px 5px;
+    -webkit-box-shadow: 5px 5px 5px;
+    max-height:95%;
+    max-width:95%;
+  }
+
+.questions-and-answers .load-more-a {
+  padding: 10px 0px 10px 20px;
+  display: inline-block;
+  font-weight: bold;
+}
+.questions-and-answers .load-more-a:hover{
+  cursor:pointer;
+}
+
+.questions-and-answers .modal-container {
+  display: inline-block;
+  opacity: 1.0;
+  background-color: white;
+  width: 80%;
+  position: relative;
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: dashed;
+  max-height: 95%;
+  max-width:1000px;
+}
+
+.questions-and-answers .modal {
+  display:flex;
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background-color: rgba(0, 0, 0, 0.466);
+  z-index:999;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+.questions-and-answers .modal-exit {
+  position: relative;
+  float: right;
+  margin: 5px;
+}
+.questions-and-answers .modal .name-wrap {
+  float: left;
+  max-width: 42%;
+  margin: 10px 0px 10px 20px;
+}
+.questions-and-answers .modal .email-wrap {
+  float: right;
+  margin: 10px 20px 10px 0px;
+  max-width: 42%;
+}
+.questions-and-answers .modal .user-photos {
+  display:block;
+  clear:both;
+  margin-left:10px;
+  margin-bottom:10px;
+}
+.questions-and-answers .modal .user-submit {
+  clear: both;
+  padding: 3px;
+  float: right;
+  margin: 5px;
+}
+.questions-and-answers .modal .disclaimer-e {
+  display:block;
+  padding-top:5px;
+}
+.questions-and-answers .modal .disclaimer-n {
+  padding-top:5px;
+  display:block;
+}
+
+.questions-and-answers .modal-container h1 {
+  padding-left:10px;
+}
+.questions-and-answers .modal-container h3 {
+  padding-left:10px;
+}
+.questions-and-answers .modal-container .user-photolist-container {
+  height: 100px;
+  clear: both;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  float: left;
+}
+
+.questions-and-answers .modal-container .user-photolist-container .upload-image-wrapper {
+  height: 80px;
+  width: 111px;
+  background-color: black;
+  box-sizing: border-box;
+  margin-right: 10px;
+  overflow: hidden;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.questions-and-answers .modal-container .user-photolist-container .upload-image {
+  max-height: 100%;
+  max-width: 100%;z
+  display: inline;
+  border: 2px solid black;
+}
+
+.questions-and-answers .modal-container .user-input {
+  resize: none;
+  box-sizing: border-box;
+  box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  -moz-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  -webkit-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  left:5%;
+  width:80%;
+  min-height:200px;
+  position:relative;
+  border-radius:2px;
+  border-width:2px;
+  border-style:dashed;
+  display:block;
+}
+
+.questions-and-answers .modal-container .upload-msg {
+  clear:both;
+  display:block;
+  padding-left:10px;
+  padding-bottom:5px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .ratings-reviews {
@@ -594,7 +953,7 @@ width: 150px; */
 
 
 .bars:before {
-  content: '-------';
+  content: '--------';
   letter-spacing: 30px;
   background: linear-gradient(
     90deg,
@@ -636,7 +995,441 @@ width: 150px; */
 
 }
 
-input[type="radio"] {
+.review-list {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+#average-rating {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.star-rating-user-input-radio {
   display: none;
 }
 
+/* .modal-background {
+  width: 10000%;
+  height: 10000%;
+  top: 5%;
+  background-color: rgb(185, 185, 185);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+} */
+
+.modal-container {
+  width: 35%;
+  height: 90%;
+  border-radius: 12px;
+  top: 2.5%;
+  left: 35%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  float: left;
+  padding: 25px;
+  position: fixed;
+  overflow-y: scroll;
+  z-index: 1000;
+}
+
+.review-image-thumbnail {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-left: 10px;
+  float: left;
+  margin-bottom: 10px;
+
+}
+
+.review-recommend {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.review-helpful-text-block {
+  margin-top: 20px;
+
+}
+
+.exit-modal-button {
+  float: right;
+  cursor: pointer;
+}
+
+#modal-review-body {
+  height: 100px;
+  width: 400px;
+  resize: none;
+  font-family: Arial, Helvetica;
+}
+
+.thumbnail-image {
+  Display: flex;
+  Align-Items: left;
+  justify-content: center;
+  z-index: 1001
+}
+
+div.radio-box {
+  width: 100px;
+  display: inline-block;
+  margin: 5px;
+
+}
+
+.radio-box label {
+  display: block;
+  width: 100px;
+  text-align: center;
+  font-size: 12px;
+  height: 20px;
+}
+
+.radio-box input {
+  width: 10px;
+  display: block;
+  margin: 0px auto;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+#modal-recommend-yes {
+  cursor:pointer;
+}
+
+#modal-recommend-no {
+  cursor:pointer;
+}
+
+.modal-title {
+  font-size: 30px;
+}
+
+.modal-subtitle {
+  font-size: 20px;
+}
+
+.thumbnail-image {
+  margin-top: 5px;
+  margin-left: 5px;
+  outline: black;
+  height: 100px;
+  align-self: left;
+  /* display: block; */
+}
+
+.thumbnail-container {
+  display: flex;
+}
+
+
+.review-thumbnail-image {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 5px;
+  outline: black;
+  height: 100px;
+  align-self: left;
+  border: 2px solid #959DA5;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 12px;
+}
+
+
+.full-image-modal-container {
+  width: 60%;
+  height: 60%;
+  border-radius: 12px;
+  top: 20%;
+  left: 20%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  float: left;
+  padding: 25px;
+  position: fixed;
+  overflow-y: scroll;
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+
+.full-size-image {
+  width: 80%;
+  height: auto;
+}
+
+.ratings-section-container {
+  float: left;
+  /* width: 30%; */
+  display: flex;
+  margin-left: 2.5%;
+  margin-top: 0px;
+  margin-right: 5%;
+}
+
+.review-list-container {
+  width: 45%;
+  margin-right: 20%;
+  min-height: 300px;
+}
+
+
+.ratings-reviews-master-container {
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  display: flex;
+  padding: 0px;
+  margin-left: 15%;
+  width: 100%;
+  padding-bottom: 5%;
+}
+
+.ratings-reviews-title {
+  margin-left: 20%;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 20px;
+}
+
+.sort-dropdown-container {
+
+  font-style: italic, bold;
+  margin-bottom: 5%;
+}
+
+.sort-options {
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 25px;
+  font-style: italic;
+  border: none;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.bars {
+  margin-bottom: 10px;
+}
+
+.add-review-button {
+  font-size: 20px;
+}
+
+/* .more-reviews-button {
+  font-size: 20px;
+  margin-right: 5px;
+} */
+
+
+/* CSS */
+.more-reviews-button, .add-review-button {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin-right: 5px;
+}
+
+.more-reviews-button:hover, .add-review-button:hover{
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.more-reviews-button:disabled, .add-review-button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.more-reviews-button:active, .add-review-button:active{
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.more-reviews-button:focus, .add-review-button:focus {
+  outline: 1px transparent;
+}
+
+.more-reviews-button:before, .add-review-button:before {
+  display: none;
+}
+
+.more-reviews-button:-webkit-details-marker, .add-review-button:-webkit-details-marker{
+  display: none;
+}
+
+.sort-dropdown-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.modal-characteristic-title {
+  margin-bottom: 5px;
+}
+
+.keyword-searchbar {
+  margin-right: 5px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+
+.show-more-review-body-button, .keyword-search-clear-button, .clear-filters-button, .submit-photos-button::-webkit-file-upload-button {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin-right: 5px;
+}
+
+.show-more-review-body-button:hover, .keyword-search-clear-button:hover, .clear-filters-button:hover, .submit-photos-button::-webkit-file-upload-button:hover{
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.show-more-review-body-button:disabled, .keyword-search-clear-button:disabled, .clear-filters-button:disabled, .submit-photos-button::-webkit-file-upload-button:disabled{
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.show-more-review-body-button:active .keyword-search-clear-button:active, .clear-filters-button:active, .submit-photos-button::-webkit-file-upload-button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.show-more-review-body-button:focus .keyword-search-clear-button:focus, .clear-filters-button:focus, .submit-photos-button::-webkit-file-upload-button:focus {
+  outline: 1px transparent;
+}
+
+.show-more-review-body-button:before .keyword-search-clear-button:before, .clear-filters-button:before, .submit-photos-button::-webkit-file-upload-button:before {
+  display: none;
+}
+
+.show-more-review-body-button:-webkit-details-marker, .keyword-search-clear-button:-webkit-details-marker, .clear-filters-button:-webkit-details-marker, .submit-photos-button::-webkit-file-upload-button:-webkit-details-marker {
+  display: none;
+}
+
+.show-more-review-body-button {
+  z-index: 4;
+}
+
+.full-image-modal-container {
+  z-index: 1001;
+}
+
+/* input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+} */
+
+/* input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-image: url('https://ej2.syncfusion.com/demos/src/slider/images/thumb.png');
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders!
+}*/
+
+.product-breakdown-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  cursor: auto;
+
+}
+
+.product-breakdown-slider:hover {
+  cursor: auto;
+}
+
+.product-breakdown-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #62b166
+}
+
+.product-breakdown-slider::-webkit-slider-runnable-track {
+  background: rgb(211, 211, 211);
+  height: 8px;
+  width: 8px;
+}
+
+.left-characteristic-desc {
+  float: left;
+  font-size: 12px;
+}
+
+.right-characteristic-desc {
+  float: right;
+  font-size: 12px;
+}
+
+.review-username-time {
+  float: right;
+  font-style: italic;
+}
