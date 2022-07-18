@@ -83,7 +83,6 @@ class RatingsReviews extends React.Component {
       }
     })
       .then((response) => {
-        console.log(response.data)
         this.updateReviewsState(response.data);
       })
       .catch((err) => {
@@ -102,7 +101,6 @@ class RatingsReviews extends React.Component {
           }
       })
         .then((response) => {
-          console.log(response.data);
           this.updateMetadataState(response.data);
         })
         .catch((err) => {
@@ -129,7 +127,7 @@ class RatingsReviews extends React.Component {
       console.log('review to be posted: ', review)
       newAxios.post(endPoint, review)
         .then((response) => {
-        console.log('successfully posted review to server, closing modal window')
+        console.log('successfully posted review to server')
         this.closeAddReviewModal();
         this.getReviewList();
       })
@@ -141,7 +139,6 @@ class RatingsReviews extends React.Component {
     //Marks a specific review as helpful. Takes in the review_id and creates a PUT request for that specific review
     //On success, calls getReviewsList to update with the latest info
     handleMarkReviewHelpful(review_id) {
-      console.log('marking review as helpful')
       let endPoint = `${url}/reviews/${review_id}/helpful`;
       newAxios.put(endPoint, {
         params: {
@@ -203,7 +200,6 @@ class RatingsReviews extends React.Component {
     /* Pops up the Add Review Modal */
     showAddReviewModal(e) {
       e.preventDefault();
-      console.log('showAddReviewModal was invoked')
       this.setState({
         displayAddReviewModal: true
       })
@@ -250,7 +246,8 @@ class RatingsReviews extends React.Component {
             <h1 className = 'ratings-reviews-title'>RATINGS & REVIEWS</h1>
             <div className = "ratings-reviews-master-container">
 
-            <div>{this.state.displayAddReviewModal && <AddReviewModal product_id = {this.props.product_id} product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal} metadata = {this.state.metadata} addReview = {this.addReview}/>}</div>
+
+              {this.state.displayAddReviewModal && <AddReviewModal product_id = {this.props.product_id} product_name = {this.state.product_name} closeModal = {this.closeAddReviewModal} metadata = {this.state.metadata} addReview = {this.addReview}/>}
 
 
 

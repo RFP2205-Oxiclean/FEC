@@ -22,8 +22,6 @@ class ReviewListEntry extends React.Component {
     this.closeImageModal = this.closeImageModal.bind(this);
   }
 
-  date = new Date(this.props.review.date)
-
   checkBodyLongerThan250() {
     let longBody = false;
     console.log('in check body longer than 250')
@@ -129,7 +127,7 @@ class ReviewListEntry extends React.Component {
         <div>
           {this.state.displayFullImageModal && <ReviewImageModal image = {this.state.imageToShow} closeImageModal = {this.closeImageModal}/>}
           <StarRatingStatic rating= {this.props.review.rating}/>
-          <small className = 'review-username-time'>{this.props.review.reviewer_name},&nbsp;{this.convertDateFormat(this.date)}
+          <small className = 'review-username-time'>{this.props.review.reviewer_name} &nbsp;|&nbsp;{this.convertDateFormat(new Date(this.props.review.date))}
           </small>
         </div>
         <br></br>

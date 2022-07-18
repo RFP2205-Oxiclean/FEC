@@ -86,15 +86,17 @@ class ReviewList extends React.Component {
   render() {
     var reviewsToDisplay = this.filterReviews(this.sortReviews()).slice(0, this.state.numReviewsDisplayed);
 
+    //if there are no reviews to display and the user has entered a search keyword
     if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length > 3) {
       return (
         <div className = "review-list-container">
           <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
           <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
-          <div>No keywords matched that search, try again</div>
+          <div>No reviews match that phrase, try a different search term</div>
         </div>
       )
 
+    //if there are no reviews to display and there is no search term
     } else if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length < 3) {
       return (
         <div  className = "review-list-container">
@@ -102,6 +104,7 @@ class ReviewList extends React.Component {
         </div>
 
       )
+    //if there are reviews to display
     } else {
       return (
         <div className = "review-list-container">
@@ -112,6 +115,7 @@ class ReviewList extends React.Component {
             <ReviewListEntry key = {index} review = {review} handleMarkReviewHelpful = {this.props.handleMarkReviewHelpful} handleReportReview = {this.props.handleReportReview}/>
           )}
           </div>
+          <br></br>
           {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay} className = 'more-reviews-button'>MORE REVIEWS</button> : ''}
           <button className = 'add-review-button' onClick = {this.props.showAddReviewModal}>ADD A REVIEW +</button>
         </div>

@@ -528,7 +528,7 @@ div.radio-box {
   float: left;
   /* width: 30%; */
   display: flex;
-  margin-left: 5%;
+  margin-left: 2.5%;
   margin-top: 0px;
   margin-right: 5%;
 }
@@ -778,4 +778,9 @@ div.radio-box {
 .right-characteristic-desc {
   float: right;
   font-size: 12px;
+}
+
+.review-username-time {
+  float: right;
+  font-style: italic;
 }

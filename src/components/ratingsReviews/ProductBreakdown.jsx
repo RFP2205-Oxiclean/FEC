@@ -30,7 +30,6 @@ const ProductBreakdown = ({characteristics}) => {
 
   return (
     <div className = 'product-breakdown-container'>
-      {console.log(characteristicsValuesArray())}
       {characteristicsNamesArray().map((name, index) => {
         return (
           <div key = {index}> <br></br>{name}<br></br>
