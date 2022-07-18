@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="collapse-button-container"
+>
+  <button
+    className="collapse-panel-button"
+    data-testid="collapseButton"
+    onClick={[Function]}
+  >
+    COLLAPSE
+  </button>
+</div>
+`;

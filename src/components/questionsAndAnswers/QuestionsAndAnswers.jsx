@@ -90,6 +90,4 @@ class QuestionsAndAnswers extends React.Component {
 
 
 
-}
-
 export default QuestionsAndAnswers;

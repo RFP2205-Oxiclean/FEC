@@ -14,19 +14,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedProductId: 41314,
-            // relatedItems: [],
-            // questionsAndAnswersData: [],
-            // ratingsAndReviews: []
+            displayedProductId: 40351,
         };
     }
 
     render() {
         return (
             <div className='app'>
-                <h1>
+                {/* <h1>
                     Welcome to React App thats build using Webpack and Babel separately
-                </h1>
+                </h1> */}
                 <div className='product-overview'>
                     <ProductOverview
                         product_id={this.state.displayedProductId}
@@ -39,11 +36,13 @@ class App extends React.Component {
                     />
                 </div>
 
-                {/* <div className='ratings-reviews'>
+                <div className='ratings-reviews'>
                     <RatingsReviews
                         product_id={this.state.displayedProductId}
                     />
-                </div> */}
+                </div>
+
+
             </div>
 
         )
