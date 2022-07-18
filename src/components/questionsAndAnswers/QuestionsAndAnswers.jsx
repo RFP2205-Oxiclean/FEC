@@ -19,11 +19,6 @@ class QuestionsAndAnswers extends React.Component {
         };
     }
 
-    initialStateValues () {
-        return
-
-    }
-
     componentDidMount() {
         this.getAllQuestions(this.props.product_id)
     }
@@ -45,6 +40,7 @@ class QuestionsAndAnswers extends React.Component {
             this.state.allQuestions = response.data.results;
             this.displayUnfilteredQuestions('');
             this.setState(JSON.parse(JSON.stringify(this.state)));
+            console.log(this.state.allQuestions)
         })
         .catch((err) => {
             console.error('error in getting all questions', err);
@@ -83,11 +79,10 @@ class QuestionsAndAnswers extends React.Component {
                 </h1>
                 <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)}/>
                 <QuestionList questions={this.state.questions} productId={this.props.product_id} />
-
             </div>
         )
     }
 
 
-
+}
 export default QuestionsAndAnswers;

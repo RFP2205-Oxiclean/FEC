@@ -19,6 +19,7 @@ class AnswerList extends React.Component {
             loadMoreState: 'nonexistant',
             answersToLoad : 2,
             loadMoreStateList : ['nonexistant','decrease','increase'],
+            sellerStatus:false,
         }
     }
 
@@ -31,7 +32,16 @@ class AnswerList extends React.Component {
     }
 
     sortAnswersByHelpfulness(answers) {
-        return answers.sort((a,b)=>(b.helpfulness - a.helpfulness) )
+        return answers.sort((a,b)=>{
+            if((a.answerer_name === "Seller" && b.answerer_name === "Seller") || (a.answerer_name !== "Seller" && b.answerer_name !== "Seller") ) {
+                return b.helpfulness - a.helpfulness
+            }
+            if (a.answerer_name === "Seller"){
+                return -1
+            } else if (b.answerer_name === "Seller"){
+                return 1
+            }
+        })
     }
 
     componentDidMount() {
@@ -99,7 +109,7 @@ class AnswerList extends React.Component {
             <div>
                 <ul className="answer-list">
                     {this.state.loadedAnswers.map((item, index) => {
-                        return <Answer data={item} key={index} />
+                        return <Answer data={item} key={index}/>
                     })}
                 </ul>
                 <MoreAnswers loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreAnswers.bind(this)} />

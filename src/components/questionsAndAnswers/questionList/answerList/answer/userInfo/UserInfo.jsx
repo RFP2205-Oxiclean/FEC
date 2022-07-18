@@ -17,7 +17,7 @@ class UserInfo extends React.Component  {
         }
     }
 
-    sendHelpful () { // refactor to correct add
+    sendHelpful () {
         if (this.state.helpfulActive) {
             let newAxios = axios.create({
                 headers : {'Authorization' : API_KEY}
@@ -38,7 +38,7 @@ class UserInfo extends React.Component  {
         }
     }
 
-    sendReport () { // refactor to correct add
+    sendReport () {
         if (this.state.reportActive) {
             let endPoint = `${url}/qa/answers/${this.props.data.id}/report`;
             let newAxios = axios.create({
@@ -61,9 +61,11 @@ class UserInfo extends React.Component  {
 
 
     render() { //&nbsp; is a whitespace character
-
         let theDate = new Date(this.props.data.date.substr(0,4), String(parseInt(this.props.data.date.substr(5,2)-1)),  this.props.data.date.substr(8,2) )
-        let user = <p className="user-info">by {this.props.data.answerer_name} - {format(theDate ,'MMMM d, Y')}</p>
+        let user = this.props.data.answerer_name !== "Seller" ? <p className="user-info">by {this.props.data.answerer_name} - {format(theDate ,'MMMM d, Y')}</p> :<p className="user-info">by <b>{this.props.data.answerer_name}</b> - {format(theDate ,'MMMM d, Y')}</p>
+
+
+
         let yesData = this.state.helpfulActive ? this.props.data.helpfulness : this.props.data.helpfulness + 1
         let reportedData = this.state.reportActive ? 'Report' : 'Reported'
         let yes  = <p className="helpful-event" onClick={this.sendHelpful.bind(this)} >Yes ({yesData})</p>

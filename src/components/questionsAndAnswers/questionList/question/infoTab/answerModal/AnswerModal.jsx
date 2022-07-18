@@ -35,11 +35,11 @@ class AnswerModal extends React.Component {
                 let loop = (iteration) => {
                     setTimeout(()=>{
                         if (reader.result) {
-                          res(reader.result)
+                            res(reader.result)
                         } else if (iteration > maxIteration) {
-                          rej('failure')
+                            rej('failure')
                         } else {
-                          loop(iteration+1)
+                            loop(iteration+1)
                         }
                     },200)
               }
@@ -81,20 +81,23 @@ class AnswerModal extends React.Component {
     }
 
     validateEmail() { // add more details later
-        if (this.state.email.length < 1 || this.state.email.indexOf('@') === -1 || this.state.email.indexOf(' ') !== -1){
+        if (this.state.email.length < 4 || this.state.email.indexOf('@') === -1
+        || this.state.email.indexOf(' ') !== -1 || this.state.email.indexOf('.') === -1
+        || this.state.email.indexOf('.') === this.state.email.length-1
+        ){
           return true;
         }
         return false;
     }
 
     authenticateOrError () {
-        if(!this.state.name.length ) {
+        if(!this.state.name.length) {
             alert("Invalid Username")
         } else if (this.validateEmail(this.state.email)) {
             alert("Invalid Email")
         } else if (!this.state.input) {
             alert("You need to enter an answer")
-        } else {
+        } else if (this.state.photos.length > 0){
             Promise.all(this.getURLsForUploadedFiles(this.state.photos))
             .then((res)=>{
                 res.map((oneReq)=>{
@@ -106,6 +109,8 @@ class AnswerModal extends React.Component {
                 console.error(err);
                 alert("Failed to upload your files, please try again \b Acceptable Formats: PNG JPG JPEG");
             })
+        } else {
+          this.sendForm();
         }
 
     }

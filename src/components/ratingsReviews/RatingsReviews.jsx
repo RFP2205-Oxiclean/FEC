@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import {url, API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
+import {url, API_KEY} from './../../../config/config.js'
 import ReviewList from './ReviewList.jsx'
 import RatingsSection from './RatingsSection.jsx'
-axios.defaults.headers.common['Authorization'] = API_KEY;
+//axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 class RatingsReviews extends React.Component {
@@ -157,14 +157,6 @@ class RatingsReviews extends React.Component {
       let filterRatingsCopy = {
         ...this.state.filterRatings
       }
-<<<<<<< HEAD
-    })
-    .then((response) => {
-    })
-    .catch((err) => {
-      console.error('Error in getRatingsReviewsData response: ', err);
-    })
-=======
       filterRatingsCopy[rating] = !filterRatingsCopy[rating]
       this.setState({
         filterRatings: filterRatingsCopy
@@ -211,7 +203,6 @@ class RatingsReviews extends React.Component {
 
     sortReviews() {
 
->>>>>>> 379b5e14859a80cb5efea49de01e244a4d571475
     }
 
 
