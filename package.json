@@ -61,5 +61,12 @@
   "prettier": {
     "bracketSameLine": true,
     "printWidth": 150
+  },
+  "jest": {
+    "rootDir": "./",
+    "modulePaths": [
+      "<rootDir>"
+    ]
   }
+
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryDisplayURL } from "/src/services/Cloudinary.js";
+import { createCloudinaryDisplayURL } from "src/services/Cloudinary.js";
 import ThumbnailContainer from "./ThumbnailContainer.jsx";
 import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
 
@@ -21,7 +21,7 @@ const ImageCarousel = ({
   rating,
 }) => {
   return (
-    <div className="overview-image-container">
+    <div className="overview-image-container" data-testid="imageCarousel">
       <button
         onClick={() => {
           decrementThumbnailIndex();
@@ -34,7 +34,7 @@ const ImageCarousel = ({
         className="scroll-left">
         Left
       </button>
-      <img src={createCloudinaryDisplayURL(image)}></img>
+      <img data-testId="display-image" src={createCloudinaryDisplayURL(image)}></img>
       <ThumbnailContainer
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
