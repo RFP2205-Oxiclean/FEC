@@ -12,6 +12,7 @@ const root = createRoot(container);
 root.render(<div></div>);
 
 afterEach(cleanup);
+
 it("should test", () => {
   const { getByTestId } = render(<CollapsePanelButton isHidden={true}></CollapsePanelButton>);
   expect(getByTestId("collapseButton")).toHaveTextContent("Collapse");
