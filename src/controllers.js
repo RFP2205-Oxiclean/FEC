@@ -94,3 +94,47 @@ export function addToCart(id, quantity) {
     });
   }
 }
+
+let cachedStars = function () {};
+
+export function getStars(product_id) {
+  return controllerAxios2({
+    method: "GET",
+    url: `${url}/reviews/meta`,
+    params: {
+      product_id: product_id,
+    },
+    headers: {
+      Authorization: API_KEY,
+    },
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .then((metadata) => {
+      let sum =
+        parseInt(metadata.ratings[1]) +
+        2 * parseInt(metadata.ratings[2]) +
+        3 * parseInt(metadata.ratings[3]) +
+        4 * parseInt(metadata.ratings[4]) +
+        5 * parseInt(metadata.ratings[5]);
+
+      var totalRatings =
+        parseInt(metadata.ratings[1]) +
+        parseInt(metadata.ratings[2]) +
+        parseInt(metadata.ratings[3]) +
+        parseInt(metadata.ratings[4]) +
+        parseInt(metadata.ratings[5]);
+
+      var roundedAverage = Math.round((sum / totalRatings) * 10) / 10;
+
+      return roundedAverage;
+
+      // /* finding the recommended % */
+      // let totalRecommendations = parseInt(metadata.recommended.false) + parseInt(metadata.recommended.true);
+      // let numberRecommended = parseInt(metadata.recommended.true);
+
+      // var percentRecommended = Math.round((numberRecommended / totalRecommendations) * 100);
+      // return percentRecommended;
+    });
+}
