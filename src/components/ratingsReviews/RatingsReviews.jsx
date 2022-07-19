@@ -236,6 +236,7 @@ class RatingsReviews extends React.Component {
           filteredReviews.push(this.state.reviews[i]);
         }
       }
+      return filteredReviews;
     }
   }
 
