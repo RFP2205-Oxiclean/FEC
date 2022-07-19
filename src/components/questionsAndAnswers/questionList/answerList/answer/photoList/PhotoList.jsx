@@ -7,7 +7,7 @@ const PhotoList = (props) => {
       return (
         <div className="photolist-container">
             {props.photos.map((photoUrl, index)=> {
-                return <Photo url={photoUrl} key={index}/>
+               photoUrl === undefined ? null : <Photo url={photoUrl} key={index}/>
             })}
         </div>)
     } else {

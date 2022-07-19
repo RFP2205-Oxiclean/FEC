@@ -48,6 +48,7 @@ import { API_KEY, url } from "../../../../../config/config.js";
                     <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId} activeHelpful={this.state.activeHelpful} />
                 </div>
                 <AnswerList answers={this.props.question.answers}  />
+                <hr />
             </li>)
 
     }
