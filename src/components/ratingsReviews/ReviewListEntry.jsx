@@ -24,11 +24,9 @@ class ReviewListEntry extends React.Component {
 
   checkBodyLongerThan250() {
     let longBody = false;
-    console.log('in check body longer than 250')
     if (this.props.review.body.length > 250) {
       longBody = true;
     }
-    console.log('long body: ', longBody);
     this.setState({
       bodyLongerThan250: longBody
     })

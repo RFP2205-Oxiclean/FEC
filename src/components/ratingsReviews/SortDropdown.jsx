@@ -15,7 +15,6 @@ class SortDropdown extends React.Component {
 
   handleSortChange(e) {
     e.preventDefault();
-    console.log('handle sort change invoked', e.target.value)
     this.props.handleSortReviewsChange(e.target.value);
   }
 
