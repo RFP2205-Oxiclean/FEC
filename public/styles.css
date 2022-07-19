@@ -1,9 +1,6 @@
 
 .app {
   position: absolute;
-  height: 100%;
-  width: 100%;
-
 }
 
 .app > div {
@@ -30,6 +27,18 @@
   width: 1100px;
   height: 733px;
 
+}
+
+.overview-bottom-info {
+  background-color: #FBEAEB;
+  display: border-box;
+  width: 1100px;
+  height: 120px;
+  border: 2px black solid;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
 }
 
 .overview-product-info {
@@ -121,7 +130,8 @@
 
 .unslide-panel>div {
   box-shadow: -6px 4px 5px -2px black;
-  background: RGB(247, 202, 201)
+  /* background: RGB(247, 202, 201) */
+  background: #FBEAEB
 }
 
 
@@ -353,16 +363,6 @@ img {
 }
 
 
-select {
-  background-color: #ffffff;
-  border: 1px solid #8ca4c8;
-  cursor: pointer;
-}
-
-select option:checked {
-  background-color: #c4e3ff;
-}
-
 .slide-panel {
   box-shadow: -6px -4px 5px -2px black;
   position: relative;
@@ -375,7 +375,7 @@ select option:checked {
 }
 
 .slide-panel>div {
-  background-color: RGB(247, 202, 201);
+  background-color: #FBEAEB
 }
 
 .unslide-panel {

@@ -175,7 +175,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         styleObjects={styleObjects}
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
-      {/* <div style={{ position: "absolute", top: "0" }}>
+      <div className="overview-bottom-info"></div>
+      <div style={{ position: "absolute", top: "0" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
