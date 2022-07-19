@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CollapseButton from "./CollapseButton.jsx";
 import StarRatingStatic from "../commonComponents/StarRatingStatic.jsx";
+import { StarRatingStatic2 } from "../commonComponents/StarRatingStatic.jsx";
 import Price from "./Price.jsx";
 import StylesContainer from "./StylesContainer.jsx";
 import PurchaseInfo from "./PurchaseInfo.jsx";
@@ -49,9 +50,12 @@ const ExpandedProductInfo = ({
             Right
           </button>
           <div className={"overview-expanded-product-panel"}>
-            <div>
-              <StarRatingStatic rating={5}></StarRatingStatic>
-              <span>Read All Reviews</span>
+            <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
+              <StarRatingStatic2 rating={5}></StarRatingStatic2>
+              <a id="top-of-reviews" style={{ color: "rgb(92 92 211)", fontWeight: "bold", marginLeft: "10px", marginTop: "auto" }}>
+                Read All Reviews
+              </a>
+              {/* <a id="facebook_ads_example">This is the Facebook ad example I want to link to.</a> */}
             </div>
             <div className="overview-category">
               {productInfo?.category}
