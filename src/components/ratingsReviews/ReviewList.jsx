@@ -46,7 +46,10 @@ class ReviewList extends React.Component {
   }
 
   sortReviews() {
+    console.log('in sortReviews')
     var reviewsCopy = this.props.reviews.slice();
+    console.log('reviewsCopy at the beginning', reviewsCopy)
+
     if (this.state.sortOption === 'helpful') {
       reviewsCopy.sort((firstReview, secondReview) => secondReview.helpfulness - firstReview.helpfulness);
     } else if (this.state.sortOption === 'newest') {
@@ -61,7 +64,9 @@ class ReviewList extends React.Component {
         return secondReview.helpfulness - firstReview.helpfulness});
 
     };
+    console.log('reviewsCopy at the end', reviewsCopy)
     return reviewsCopy;
+
   }
 
   filterReviews(reviewsToFilter) {

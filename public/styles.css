@@ -352,31 +352,6 @@ img {
   box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
-select {
-  height: 40px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
-}
-
-select>options {
-  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
-
-}
-
-select:focus {
-  outline: none;
-}
-
-select:active {
-  padding: 0 0 0px 6px;
-}
-
-.select:focus:visited {
-  outline: none;
-  box-shadow: none;
-}
 
 select {
   background-color: #ffffff;
@@ -859,7 +834,7 @@ width: 150px; */
 
 .questions-and-answers .modal-container .user-photolist-container .upload-image {
   max-height: 100%;
-  max-width: 100%;z
+  max-width: 100%;
   display: inline;
   border: 2px solid black;
 }
@@ -1187,7 +1162,7 @@ div.radio-box {
 }
 
 .ratings-reviews-title {
-  margin-left: 20%;
+  margin-left: 17.5%;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 20px;
 }
@@ -1292,7 +1267,7 @@ div.radio-box {
 .keyword-searchbar {
   margin-right: 5px;
   font-size: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 

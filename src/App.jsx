@@ -15,14 +15,9 @@ class App extends React.Component {
       displayedProductId: 40344,
       averageRating: null,
     };
-    this.setAverageRating = this.setAverageRating.bind(this);
   }
 
-  setAverageRating(rating) {
-    this.setState({
-      averageRating: rating,
-    });
-  }
+
 
   handleSubmit(id) {
     id = parseInt(id);
@@ -40,7 +35,7 @@ class App extends React.Component {
         </div>
 
         <div className="questions-and-answers">
-          <QuestionsAndAnswers product_id={this.state.displayedProductId} setAverageRating={this.setAverageRating} />
+          <QuestionsAndAnswers product_id={this.state.displayedProductId}/>
         </div>
 
         <div className="ratings-reviews">
