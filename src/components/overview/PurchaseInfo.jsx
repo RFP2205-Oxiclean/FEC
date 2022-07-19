@@ -30,6 +30,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
   };
 
   useEffect(() => {
+    let flag = false;
     stock?.forEach(function (stockObj) {
       setNoItems(false);
       if (stockObj.quantity !== 0 && stockObj.quantity !== null) {
@@ -59,7 +60,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId}></QMenu>
+          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div className="purchase-buttons-container2">
           <div style={{ display: "flex", height: "40px" }}>
