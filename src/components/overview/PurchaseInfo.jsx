@@ -63,7 +63,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div className="purchase-buttons-container2">
-          <div style={{ display: "flex", height: "40px" }}>
+          <div>
             <AddToCart
               size={size}
               setPrompt={setPrompt}

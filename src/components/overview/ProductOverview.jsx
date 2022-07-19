@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProductById, getStylesById, prefetch, getStars } from "/src/controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
 import { addToCart } from "/src/controllers.js";
+import BottomInformation from "./BottomInformation.jsx";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
   let [rating, setRating] = useState(0);
@@ -180,7 +181,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         styleObjects={styleObjects}
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
-      <div className="overview-bottom-info"></div>
+      <div className="overview-bottom-info">
+        <BottomInformation></BottomInformation>
+      </div>
       <div style={{ position: "absolute", top: "0" }}>
         <input
           onChange={(e) => {

@@ -28,8 +28,9 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
 
   return (
     <select
+      className="overview-select"
       key={stockId + size + selectQuantity}
-      disabled={disabled}
+      disabled={!size}
       onChange={(e) => {
         selectQuantity(parseInt(e.target.value));
       }}

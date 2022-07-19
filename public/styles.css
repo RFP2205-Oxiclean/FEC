@@ -50,6 +50,21 @@
   line-height: 1;
 }
 
+.overview-select {
+  position: relative;
+    text-align: center;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #000;
+    line-height: 33px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    min-width: 35px;
+    min-height: 35px;
+    outline: 0;
+}
 
 
 .overview-bottom-info {
@@ -134,6 +149,7 @@
   box-sizing: border-box;
   z-index: 1;
   transition: transform 2.0s ease;
+  border: 2px solid black;
   /* transform: translate(102%, 0) */
 }
 
@@ -149,7 +165,7 @@
 .unslide-panel>div:not(:first-child) {
   box-shadow: -6px 4px 5px -2px black;
   /* background: RGB(247, 202, 201) */
-  /* background: #FBEAEB */
+  /* background: lightblue; */
   background: white;
 }
 
@@ -203,8 +219,7 @@
   width: 60px;
   height: 60px;
   margin-left: 0;
-  border-radius: 50%;
-  box-shadow: -6px 5px 20px -2px rgb(0 0 0);
+  box-shadow: -4px 3px 4px -2px rgb(0 0 0);
 }
 
 .style-object-thumbnail-active {
@@ -213,8 +228,7 @@
   width: 60px;
   height: 60px;
   margin-left: 0;
-  border-radius: 50%;
-  box-shadow: -6px 5px 20px -2px rgb(0 0 0);
+  box-shadow: -4px 3px 4px -2px rgb(0 0 0);
   z-index: 1
 }
 
@@ -223,7 +237,8 @@
 }
 
 .style-object-thumbnail:hover {
-  box-shadow: -6px 5px 15px -2px rgb(0 0 0)
+  box-shadow: -4px 3px 4px -2px rgb(0 0 0);
+
 }
 
 .overview-expanded-product-info-price {
@@ -235,6 +250,10 @@
   font-weight: bold;
   font-size: 25px;
   text-decoration: line-through;
+}
+
+.add-to-cart {
+  float: right;
 }
 
 .overview-overlay-thumbnail-active {
@@ -273,7 +292,6 @@ img {
   align-items: center;
   margin-left: 0;
   padding-top: 10px;
-  border-radius: 50%;
   width: 25%;
 }
 
@@ -361,24 +379,6 @@ img {
   height: 40px;
   width: 120px;
   text-align: center;
-}
-
-.add-to-cart {
-  text-shadow: 0 0 black;
-  display: flex;
-  margin-left: auto;
-  float: right;
-  width: 140px;
-  height: 40px;
-  border: 1px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  border-radius: 10px;
-  background-color: RGB(239, 192, 80);
-  border: 1px solid #8ca4c8;
-  box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
 img:hover {
@@ -1246,7 +1246,7 @@ div.radio-box {
 
 
 /* CSS */
-.more-reviews-button, .add-review-button {
+.more-reviews-button, .add-review-button, .add-to-cart {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
