@@ -98,6 +98,11 @@ export function addToCart(id, quantity) {
 let cachedStars = function () {};
 
 export function getStars(product_id) {
+  if (cachedStars[product_id]) {
+    return new Promise((resolve, reject) => {
+      resolve(cachedStars[product_id]);
+    });
+  }
   return controllerAxios2({
     method: "GET",
     url: `${url}/reviews/meta`,
@@ -128,7 +133,8 @@ export function getStars(product_id) {
 
       var roundedAverage = Math.round((sum / totalRatings) * 10) / 10;
 
-      return roundedAverage;
+      cachedStars[product_id] = roundedAverage;
+      return cachedStars[product_id];
 
       // /* finding the recommended % */
       // let totalRecommendations = parseInt(metadata.recommended.false) + parseInt(metadata.recommended.true);
