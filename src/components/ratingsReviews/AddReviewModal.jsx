@@ -1,11 +1,9 @@
-import React from 'react';
-import StarRatingUserInput from './StarRatingUserInput.jsx'
-import {url, API_KEY, IMG_API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
-import axios from 'axios';
-import {Image} from 'cloudinary-react'
-import CharacteristicsInputs from './CharacteristicsInputs.jsx'
-
-
+import React from "react";
+import StarRatingUserInput from "./StarRatingUserInput.jsx";
+import { url, API_KEY, IMG_API_KEY } from "/config/config.js";
+import axios from "axios";
+import { Image } from "cloudinary-react";
+import CharacteristicsInputs from "./CharacteristicsInputs.jsx";
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -279,7 +277,6 @@ class AddReviewModal extends React.Component {
     return false;
   }
 
-
   render() {
     return (
       <div className="modal-background" data-testid = 'add-review-modal'>
@@ -305,18 +302,15 @@ class AddReviewModal extends React.Component {
           </form>
           {/* Characteristics Radio Buttons */}
           <CharacteristicsInputs
-           metadata = {this.props.metadata}
-           handleComfortSelect = {this.handleComfortSelect}
-           handleFitSelect = {this.handleFitSelect}
-           handleLengthSelect = {this.handleLengthSelect}
-           handleQualitySelect = {this.handleQualitySelect}
-           handleSizeSelect = {this.handleSizeSelect}
-           handleWidthSelect = {this.handleWidthSelect}
-           characteristicsState = {this.state.characteristics}
-           />
-
-
-
+            metadata={this.props.metadata}
+            handleComfortSelect={this.handleComfortSelect}
+            handleFitSelect={this.handleFitSelect}
+            handleLengthSelect={this.handleLengthSelect}
+            handleQualitySelect={this.handleQualitySelect}
+            handleSizeSelect={this.handleSizeSelect}
+            handleWidthSelect={this.handleWidthSelect}
+            characteristicsState={this.state.characteristics}
+          />
           {/* Review summary and body */}
           <form>
             <br></br>

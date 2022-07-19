@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getProductById, getStylesById, prefetch } from "/src/controllers.js";
+import { getProductById, getStylesById, prefetch, getStars } from "/src/controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
 import { addToCart } from "/src/controllers.js";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
+  let [rating, setRating] = useState(0);
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
     {
@@ -53,6 +54,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       setActiveThumbnailIndices(activeThumbnails);
       setStock(newStock);
       setStyleObjects(data);
+      getStars(product_id).then((results) => {
+        setRating(results);
+      });
     });
   }, [product_id]);
 
@@ -159,6 +163,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div className="product-overview">
       <ImageCarousel
+        rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
         incrementThumbnailIndex={incrementThumbnailIndex}
         handleAddToCart={handleAddToCart}

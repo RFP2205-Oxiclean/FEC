@@ -18,6 +18,7 @@ const ExpandedProductInfo = ({
   end,
   activeThumbnailIndex,
   incrementThumbnailIndex,
+  rating,
 }) => {
   let [isHiding, setIsHiding] = useState(false);
   let [isShaking, setIsShaking] = useState(false);
@@ -63,7 +64,7 @@ const ExpandedProductInfo = ({
           </div>
           <div className={"overview-expanded-product-panel"}>
             <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
-              <StarRatingStatic2 rating={5}></StarRatingStatic2>
+              <StarRatingStatic2 rating={rating}></StarRatingStatic2>
               <a href="#top-of-reviews" style={{ color: "rgb(92 92 211)", fontWeight: "bold", marginLeft: "10px", marginTop: "auto" }}>
                 Read All Reviews
               </a>

@@ -64,45 +64,6 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
         </div>
         <div className="purchase-buttons-container2">
           <div style={{ display: "flex", height: "40px" }}>
-            <div
-              className="i-tag-container"
-              style={{
-                display: "flex",
-                width: "15%",
-                height: "100%",
-                fontSize: "30px",
-                justifyContent: "center",
-                marginRight: "4px",
-                color: "#1DA1F2",
-              }}>
-              <i className="fab fa-twitter"></i>
-            </div>
-            <div
-              className="i-tag-container"
-              style={{
-                display: "flex",
-                width: "15%",
-                height: "100%",
-                fontSize: "30px",
-                justifyContent: "center",
-                marginRight: "4px",
-                color: "#3b5998",
-              }}>
-              <i className="fa-brands fa-facebook-f"></i>
-            </div>
-            <div
-              className="i-tag-container"
-              style={{
-                display: "flex",
-                width: "15%",
-                height: "100%",
-                fontSize: "30px",
-                justifyContent: "center",
-                marginRight: "4px",
-                color: "#E60023",
-              }}>
-              <i className="fa-brands fa-pinterest"></i>
-            </div>
             <AddToCart
               size={size}
               setPrompt={setPrompt}

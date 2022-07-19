@@ -18,6 +18,7 @@ const ImageCarousel = ({
   handleAddToCart,
   incrementThumbnailIndex,
   decrementThumbnailIndex,
+  rating,
 }) => {
   return (
     <div className="overview-image-container">
@@ -39,6 +40,7 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        rating={rating}
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
         end={photoObjects.length - 1}

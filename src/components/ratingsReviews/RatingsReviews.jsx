@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { url, API_KEY } from "./../../../config/config.js";
+import { url, API_KEY } from "/config/config.js";
 import ReviewList from "./ReviewList.jsx";
 import RatingsSection from "./RatingsSection.jsx";
 import AddReviewModal from "./AddReviewModal.jsx";
