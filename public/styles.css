@@ -384,6 +384,16 @@ img:hover {
   cursor: "-webkit-zoom-in";
 }
 
+select {
+  background-color: #ffffff;
+  border: 1px solid #8ca4c8;
+  cursor: pointer;
+}
+
+select option:checked {
+  background-color: #c4e3ff;
+}
+
 .overview-image-container:hover {
   cursor: -webkit-zoom-in, auto;
 }
