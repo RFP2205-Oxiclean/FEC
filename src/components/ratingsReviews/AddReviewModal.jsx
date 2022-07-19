@@ -61,7 +61,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleSizeSelect(e) {
-    console.log("size selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -70,7 +69,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleWidthSelect(e) {
-    console.log("width selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -79,7 +77,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleComfortSelect(e) {
-    console.log("comfort selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -88,7 +85,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleQualitySelect(e) {
-    console.log("quality selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -97,7 +93,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleLengthSelect(e) {
-    console.log("length selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -106,7 +101,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleFitSelect(e) {
-    console.log("fit selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -130,8 +124,6 @@ class AddReviewModal extends React.Component {
 
   handlePictureAdd(e) {
     e.preventDefault();
-    console.log("handle picture add was invoked");
-    console.log(e.target.files);
     const photosCopy = this.state.photos.slice();
     const photosForDisplayCopy = this.state.photosForDisplay.slice();
     for (let key in e.target.files) {
@@ -152,7 +144,6 @@ class AddReviewModal extends React.Component {
   }
 
   submitImagesToCloudinary() {
-    console.log("Attempting to submit images to cloudinary", this.state.photos);
     const url = `https://api.cloudinary.com/v1_1/dky0ccpc4/image/upload`;
     return Promise.all(
       this.state.photos.map((photo, index) => {
@@ -393,7 +384,6 @@ class AddReviewModal extends React.Component {
             <button className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
-            <button onClick={this.showState.bind(this)}>Show State</button>
           </form>
         </div>
       </div>

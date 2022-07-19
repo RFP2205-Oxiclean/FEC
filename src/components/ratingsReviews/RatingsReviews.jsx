@@ -124,7 +124,6 @@ class RatingsReviews extends React.Component {
   //On success, calls getReviewsList and getRatingsList to update with the latest info
   addReview(review) {
     let endPoint = `${url}/reviews`;
-    console.log("review to be posted: ", review);
     newAxios
       .post(endPoint, review)
       .then((response) => {
@@ -210,7 +209,6 @@ class RatingsReviews extends React.Component {
 
   /* Closes the Add Review Modal (passed down as prop) */
   closeAddReviewModal() {
-    console.log("closing modal");
     this.setState({
       displayAddReviewModal: false,
     });
