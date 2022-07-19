@@ -380,6 +380,23 @@ img {
   box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
 
+img:hover {
+  cursor: "-webkit-zoom-in";
+}
+
+.overview-image-container:hover {
+  cursor: -webkit-zoom-in, auto;
+}
+
+div:hover {
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+}
+
+
+img.overview-image-container:hover {
+  cursor: -webkit-zoom-in;
+}
 
 .slide-panel {
   box-shadow: -6px -4px 5px -2px black;
@@ -411,6 +428,10 @@ img {
 
 select:active {
   transform: scale(0.98);
+}
+
+.add-to-cart:hover {
+  cursor: pointer;
 }
 
 .add-to-cart:active {

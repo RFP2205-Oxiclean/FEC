@@ -38,21 +38,33 @@ const ExpandedProductInfo = ({
       <div className="inner-div">
         <CollapseButton isHiding={isHiding} setIsHiding={setIsHiding}></CollapseButton>
         <div className={isHiding ? "slide-panel" : "unslide-panel"}>
-          <button
+          <div
             onClick={() => {
               incrementThumbnailIndex();
             }}
             style={
               end === activeThumbnailIndex
                 ? { visibility: "hidden", position: "absolute" }
-                : { position: "absolute", top: "50%", left: "0", marginLeft: "-60px" }
+                : {
+                    position: "absolute",
+                    display: "flex",
+                    top: "50%",
+                    height: "35px",
+                    width: "35px",
+                    overflow: "visible",
+                    left: "0",
+                    marginLeft: "-50px",
+                    fontSize: "40px",
+                    borderRadius: "20%",
+                    alignItems: "center",
+                  }
             }>
-            Right
-          </button>
+            <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-right"></i>
+          </div>
           <div className={"overview-expanded-product-panel"}>
             <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
               <StarRatingStatic2 rating={5}></StarRatingStatic2>
-              <a id="top-of-reviews" style={{ color: "rgb(92 92 211)", fontWeight: "bold", marginLeft: "10px", marginTop: "auto" }}>
+              <a href="#top-of-reviews" style={{ color: "rgb(92 92 211)", fontWeight: "bold", marginLeft: "10px", marginTop: "auto" }}>
                 Read All Reviews
               </a>
               {/* <a id="facebook_ads_example">This is the Facebook ad example I want to link to.</a> */}

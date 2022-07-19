@@ -244,6 +244,7 @@ class RatingsReviews extends React.Component {
     return (
       <div>
         <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
+        <a id="top-of-reviews"></a>
         <div className="ratings-reviews-master-container">
           {this.state.displayAddReviewModal && (
             <AddReviewModal
