@@ -105,15 +105,13 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
             return (
-              <CSSTransition in={true} appear={true} timeout={300} classNames="fade" key={photos[i].thumbnail_url}>
-                <OverlayThumbnail
-                  image={photos[i].thumbnail_url}
-                  active={activeThumbnailIndex === photos[i].trueIndex}
-                  key={photos[i].thumbnail_url + photos[i].thumbnail_url}
-                  trueIndex={photos[i]?.trueIndex}
-                  setActiveThumbnailIndex={setActiveThumbnailIndex}
-                  backup={photos[i].url}></OverlayThumbnail>
-              </CSSTransition>
+              <OverlayThumbnail
+                image={photos[i].thumbnail_url}
+                active={activeThumbnailIndex === photos[i].trueIndex}
+                key={photos[i].thumbnail_url + photos[i].thumbnail_url}
+                trueIndex={photos[i]?.trueIndex}
+                setActiveThumbnailIndex={setActiveThumbnailIndex}
+                backup={photos[i].url}></OverlayThumbnail>
             );
           }
         }
