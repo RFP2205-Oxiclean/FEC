@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, selectQuantity }) => {
+const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, selectQuantity, noItems }) => {
   let [defaultValue, setDefaultValue] = useState("Out of Stock!");
 
   useEffect(() => {
@@ -11,10 +11,14 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
         setDefaultValue("Select a Size!");
       }
     });
+    if (noItems) {
+      setDefaultValue("Out of Stock!");
+    }
   }, [stock]);
 
   return (
     <select
+      className="overview-select"
       onChange={(e) => {
         setPrompt(false);
         selectSize(e.target.value);

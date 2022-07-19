@@ -34,9 +34,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
                 borderRadius: "50%",
               }}
               className="fa-solid fa-square-check"></i>
-            <img
-              style={{ borderRadius: "50%", position: "absolute", top: "0" }}
-              src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+            <img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
           </div>
         </div>
       </div>
@@ -56,7 +54,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
         onClick={() => {
           handleClick();
         }}>
-        <img style={{ borderRadius: "50%" }} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+        <img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
       </div>
     </div>
   );
