@@ -9,7 +9,7 @@ class QuestionList extends React.Component {
         super(props);
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
         this.state = this.initialStateValues();
-
+        this.loadInitialQuestions();
     }
 
     initialStateValues () {
@@ -27,15 +27,23 @@ class QuestionList extends React.Component {
         return result;
     }
 
+    loadInitialQuestions () {
+        for(let i = 0; i < this.state.questionsToLoad; i++) {
+            this.state.loadedQuestions.push(this.sortedByHelpful[i]);
+        }
+        console.log(this.state.loadedQuestions)
+    }
 
 
     componentDidUpdate() {
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
         let propsString = JSON.stringify(this.sortedByHelpful);
-        if(propsString  !== this.state.oldQuestions) {
-            this.state.oldQuestions = propsString;
-            this.loadMoreQuestions();
-        }
+            if(propsString  !== this.state.oldQuestions) {
+                this.state.oldQuestions = propsString;
+                this.loadInitialQuestions();
+                this.setState(JSON.parse(JSON.stringify(this.state)));
+                console.log(this.props.questions)
+           }
     }
 
     loadMoreGone() {
@@ -90,12 +98,12 @@ class QuestionList extends React.Component {
             <div>
                 <div className="qc-wrapper">
                     <div id="question-container">
-                        <ul id ="question-list">
+                        <ul id="question-list">
                             {this.state.loadedQuestions.map((question, index)=> {
                                 return <Question question={question} key={index} productId={this.props.productId} />
                             })}
                         </ul>
-
+                            {console.log(this.props.questions)}
                     </div>
                     <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
                     <AddQuestion productId={this.props.productId} />

@@ -62,11 +62,13 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   render() {
+    console.log(this.state.questions)
+    let questionList = this.state.questions.length > 1 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} /> : null
     return (
       <div id="qa-container">
         <h1 className="qa-title">QUESTIONS & ANSWERS</h1>
         <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} />
-        <QuestionList questions={this.state.questions} productId={this.props.product_id} />
+        {questionList}
       </div>
     );
   }
