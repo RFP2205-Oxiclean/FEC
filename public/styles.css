@@ -438,9 +438,11 @@ select:active {
 
 .select-prompt-fadeIn {
   animation: fadeIn .5s;
+  padding-left: 10px;
 }
 
 .select-prompt-fadeOut {
+  padding-left: 10px;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s .3s, opacity .3s linear;
