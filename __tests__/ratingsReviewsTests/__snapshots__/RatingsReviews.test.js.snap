@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingsReviews tests renders correctly 1`] = `
+<div
+  data-testid="ratings-reviews"
+>
+  <h1
+    className="ratings-reviews-title"
+  >
+    RATINGS & REVIEWS
+  </h1>
+  <div
+    className="ratings-reviews-master-container"
+  >
+    <div
+      className="ratings-section-container"
+      data-testid="ratings-section"
+    />
+    <div
+      className="review-list-container"
+      data-testid="review-list-no-reviews"
+    >
+      <button>
+        ADD A REVIEW +
+      </button>
+    </div>
+  </div>
+  <button
+    className="jest-test-button"
+    data-testid="get-product-information"
+    onClick={[Function]}
+  >
+    Get Product Information
+  </button>
+</div>
+`;
