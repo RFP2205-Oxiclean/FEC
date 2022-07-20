@@ -12,7 +12,6 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       }
     });
     if (noItems) {
-      console.log("fires");
       setDefaultValue("Out of Stock!");
     }
   }, [stock, noItems]);

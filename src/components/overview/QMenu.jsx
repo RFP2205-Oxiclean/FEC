@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
   let [disabled, setDisabled] = useState(false);
-  console.log("stock:", stock);
 
   let makeOptions = function () {
     if (size && stockId) {

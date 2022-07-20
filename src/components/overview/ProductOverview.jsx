@@ -190,7 +190,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       <div className="overview-bottom-info">
         <BottomInformation></BottomInformation>
       </div>
-      <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
+      <div style={{ visibility: "hidden", position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
