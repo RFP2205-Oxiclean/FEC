@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 import OverlayThumbnail from "./OverlayThumbnail.jsx";
 import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
-import usePrevious from "../../components/commonComponents/usePreviousHook.jsx";
+import usePrevious from "/src/components/commonComponents/usePreviousHook.jsx";
 import { CSSTransition } from "react-transition-group";
 
 const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex }) => {
@@ -99,7 +99,7 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   };
 
   return (
-    <div className="overview-thumbnail-container" data-testid="thumbnail-container">
+    <div className="overview-thumbnail-container">
       <ThumbnailDecrement displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {

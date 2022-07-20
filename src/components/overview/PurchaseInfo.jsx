@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import QMenu from "./QMenu.jsx";
 import SizeMenu from "./SizeMenu.jsx";
 import AddToCart from "./AddToCart.jsx";
-import { addToCart } from "/src/controllers.js";
+import { addToCart } from "../../controllers.js";
 import axios from "axios";
-import { url, API_KEY } from "/config/config.js";
+import { url, API_KEY } from "../../../config/config.js";
 
 const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) => {
   let [quantity, selectQuantity] = useState(null);
@@ -40,16 +40,20 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
   }, [stock]);
 
   return (
-    <div className="overview-purchase-info">
+    <div data-testid="purchase-info" className="overview-purchase-info">
       <div style={{ display: "inline-block", textAlign: "center", width: "100%" }}>
         <span className="purchase-style-name">{activeStyle.name}</span>
       </div>
       <div>
-        <div>
+        <div data-testid="select-prompts">
           {prompt ? (
-            <span className="select-prompt-fadeIn">Please Select a Size!</span>
+            <span data-testid="select-fade-in" className="select-prompt-fadeIn">
+              Please Select a Size!
+            </span>
           ) : (
-            <span className="select-prompt-fadeOut">Please Select a Size!</span>
+            <span data-testid="select-fade-out" className="select-prompt-fadeOut">
+              Please Select a Size!
+            </span>
           )}
         </div>
         <div className="purchase-buttons-container1">
