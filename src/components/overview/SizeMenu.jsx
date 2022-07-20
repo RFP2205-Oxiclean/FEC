@@ -12,9 +12,10 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       }
     });
     if (noItems) {
+      console.log("fires");
       setDefaultValue("Out of Stock!");
     }
-  }, [stock]);
+  }, [stock, noItems]);
 
   return (
     <select
@@ -31,8 +32,15 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       }}
       style={{ float: "left", width: "150px" }}>
       <option hidden>{defaultValue}</option>
+      {stock?.length === 0 ? (
+        <option disabled hidden>
+          "Out of Stock!"
+        </option>
+      ) : (
+        <></>
+      )}
       {stock?.map(function (stockObj, i) {
-        if (stockObj.quantity === 0) {
+        if (stockObj.quantity === 0 || stockObj.quantity === null) {
           return (
             <option disabled key={stockObj.id + stockObj.size}>
               {stockObj.quantity !== 0 ? stockObj.size : "Out of Stock!"}

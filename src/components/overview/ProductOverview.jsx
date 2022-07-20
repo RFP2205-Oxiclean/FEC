@@ -162,7 +162,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   return (
-    <div className="product-overview">
+    <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
         rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
@@ -195,7 +195,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           New Product
         </button>
-        <button onClick={masterState}>Master State</button>
+        <button data-testid="master-state-change" onClick={masterState}>
+          Master State
+        </button>
       </div>
     </div>
   );

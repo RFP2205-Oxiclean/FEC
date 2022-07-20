@@ -8,10 +8,19 @@ import "@testing-library/jest-dom";
 import renderer from "react-test-renderer";
 import ProductOverview from "./ProductOverview.jsx";
 import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
+import LifecycleTest from "./LifecycleTest.jsx";
+
 // const ImageCarousel = ( {product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo} ) => {
 
 const container = document.createElement("div");
 const root = createRoot(container);
 root.render(<div></div>);
 
-it("should pass", () => {});
+it("should change data based on different input", () => {
+  const { getByTestId } = render(<ProductOverview></ProductOverview>);
+
+  const k = getByTestId("product-overview");
+  const z = getByTestId("master-state-change");
+
+  expect(z).not.toBe(null);
+});
