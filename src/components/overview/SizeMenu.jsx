@@ -6,7 +6,7 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
   useEffect(() => {
     let flag = false;
     stock?.forEach(function (stockObj) {
-      if (stockObj.quantity !== null && stock.quantity !== 0) {
+      if (stockObj.quantity !== null && stock.quantity !== 0 && stock.id !== null && stock.id !== "null") {
         flag = true;
         setDefaultValue("Select a Size!");
       }
