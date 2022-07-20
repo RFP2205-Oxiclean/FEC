@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const QMenu = ({ stock, size, selectQuantity, stockId }) => {
+const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
+  let [disabled, setDisabled] = useState(false);
+
   let makeOptions = function () {
     if (size && stockId) {
       let quantity = null;
@@ -23,8 +25,13 @@ const QMenu = ({ stock, size, selectQuantity, stockId }) => {
       }
     }
   };
+
   return (
     <select
+      data-testid="q-menu"
+      className="overview-select"
+      key={stockId + size + selectQuantity}
+      disabled={!size}
       onChange={(e) => {
         selectQuantity(parseInt(e.target.value));
       }}

@@ -5,8 +5,8 @@ import App from "./src/App";
 // import '/src/assets/fontawesome/js/solid'
 // import '/src/assets/fontawesome/js/regular'
 // import '/src/assets/fontawesome/js/brands'
-import "./src/assets/fontAwesome/js/all.js";
-import "./src/assets/fontAwesome/css/all.css";
+import "./src/assets/fontAwesome/js/all.min.js";
+import "./src/assets/fontAwesome/css/all.min.css";
 
 // reactDom.render(<App />, document.getElementById("root"));
 
