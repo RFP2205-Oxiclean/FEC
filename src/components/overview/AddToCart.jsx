@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, toggleShakeCart, setPrompt, size }) => {
+const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, setPrompt, size }) => {
   let [hidden, setHidden] = useState(false);
 
   let handleClick = function () {

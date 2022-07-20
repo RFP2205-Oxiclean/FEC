@@ -71,12 +71,19 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let masterState = function () {
     console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
     console.log("styleObjects: ", styleObjects);
+    console.log("photoObjects");
     console.log("activeThumbnailIndices: ", activeThumbnailIndices);
     console.log("activeDisplayIndex: ", activeDisplayIndex);
     console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
     console.log("productInfo: ", productInfo);
     console.log(stock);
     console.log(hoverIndex);
+    addToCart(1394865, 1).then((response) => {
+      console.log(response);
+    });
+    getStars(40344).then((data) => {
+      console.log(data);
+    });
   };
 
   let getActiveThumbnailIndex = function () {
@@ -143,7 +150,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
 
   let handleAddToCart = function (stockId, quantity) {
     if (!stockId || !quantity) {
-      console.log("attempt failed");
       return;
     }
     addToCart(stockId, quantity)

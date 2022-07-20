@@ -12,7 +12,10 @@ const ThumbnailDecrement = ({ callback, displayArr }) => {
   }, [displayArr]);
 
   return (
-    <div style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }} className="thumbnail-decrement">
+    <div
+      data-testid="thumbnail-decrement"
+      style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }}
+      className="thumbnail-decrement">
       <button
         onClick={() => {
           callback();

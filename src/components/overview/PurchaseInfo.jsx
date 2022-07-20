@@ -6,28 +6,12 @@ import { addToCart } from "../../controllers.js";
 import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 
-const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) => {
+const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
-
-  let myDebugger = function () {
-    console.log(prompt);
-    console.log(size, quantity);
-    console.log(stockId);
-    console.log("noItems: ", noItems);
-    return axios
-      .get(`${url}/cart`, {
-        headers: {
-          Authorization: API_KEY,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
-  };
 
   useEffect(() => {
     let flag = false;
@@ -71,7 +55,6 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, toggleShakeCart }) 
             <AddToCart
               size={size}
               setPrompt={setPrompt}
-              toggleShakeCart={toggleShakeCart}
               noItems={noItems}
               stock={stock}
               selectQuantity={selectQuantity}
