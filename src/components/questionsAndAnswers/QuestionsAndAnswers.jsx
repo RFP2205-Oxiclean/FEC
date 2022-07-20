@@ -14,12 +14,32 @@ class QuestionsAndAnswers extends React.Component {
     this.state = {
       questions: [],
       allQuestions: [],
+      product : null,
       page: null,
     };
   }
 
   componentDidMount() {
     this.getAllQuestions(this.props.product_id);
+    this.getProductInformation(this.props.product_id);
+  }
+
+  getProductInformation(id) {
+    let endPoint = `${url}/products/${this.props.product_id}`
+        let newAxios = axios.create({
+            headers : {'Authorization' : API_KEY}
+       })
+        newAxios.get(endPoint, {headers : {
+            'Authorization' : API_KEY
+        }})
+        .then((res) => {
+          this.state.product = res.data;
+          this.setState(JSON.parse(JSON.stringify(this.state)));
+          console.log(this.state.product)
+        })
+        .catch((err) => {
+            console.error('Error in get Product Information', err);
+        })
   }
 
   getAllQuestions(id) {
@@ -64,11 +84,11 @@ class QuestionsAndAnswers extends React.Component {
 
   render() {
     console.log(this.state.questions)
-    let questionList = this.state.questions.length > 1 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} /> : <AddQuestion productId={this.props.product_id} />
+    let questionList = this.state.questions.length > 1 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} product={this.state.product} /> : <AddQuestion productId={this.props.product_id} product={this.state.product} />
     return (
       <div id="qa-container">
         <h1 className="qa-title">QUESTIONS & ANSWERS</h1>
-        <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} />
+        <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} product={this.state.product}/>
         {questionList}
 
       </div>

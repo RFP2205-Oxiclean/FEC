@@ -1,16 +1,10 @@
-import 'jsdom-global/register';
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
-import { configure, mount, render } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom'
+import {render, fireEvent, screen} from '@testing-library/react'
 import QuestionList from './../../src/components/questionsAndAnswers/questionList/QuestionList.jsx';
-
-
-//preconfig for adaptor
-configure({ adapter: new Adapter() });
-
-
-//this is a live id to check modal
-const live_id = 40344;
 
 
 //these are fake questions to check without wasting get requests
@@ -127,9 +121,6 @@ let fakeQuestions = [{
 
 
 
-
-
-
   let fakeProductInfo = {
     "id": 40344,
     "campus": "hr-rfp",
@@ -153,33 +144,28 @@ let fakeQuestions = [{
 }
 
 
- const component = mount(<div className="who">
-      <QuestionList questions={fakeQuestions} productId={live_id} product={realProductInfo}/>
-    </div>);
+
 
 
 it('Should only load 2 questions on creation', () => {
+  render (<div className="who">
+        <QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />
+      </div>);
 
-
-  expect(component.find('#question-list').children().length).toBe(2);
-  //component.unmount();
+  expect(screen.getAllByTestId("individual-question").length).toBe(2);
 
 });
 
 it('Should load 3 questions on update', () => {
 
+  render (<div className="who">
+        <QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />
+      </div>);
 
-  expect(component.find('#question-list').children().length).toBe(3);
-  //component.unmount();
+    fireEvent.click()
+  expect().toBe(3);
 
 });
-
-
-
-
-
-
-
 
 
 

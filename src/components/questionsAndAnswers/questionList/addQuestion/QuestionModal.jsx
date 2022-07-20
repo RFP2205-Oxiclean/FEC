@@ -47,9 +47,9 @@ class QuestionModal extends React.Component {
 
     render() {
         return (
-              <div className="modal" >
+              <div className="modal" data-testid="question-modal" >
                     <div className="modal-container" >
-                      <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler}/>
+                      <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler} data-testid="q-exit" />
                       <h1>Ask your Question</h1>
                       <h3>About the {this.props.product.name}</h3>
                       <form className="form">

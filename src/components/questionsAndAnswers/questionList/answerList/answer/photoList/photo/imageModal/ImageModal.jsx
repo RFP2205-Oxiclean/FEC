@@ -2,8 +2,8 @@ import React from 'react';
 
 const ImageModal = (props) => {
   return (
-    <div className="qa-image-modal">
-      <img src={'data:image/jpeg;base64, '+props.photo} className="image" />
+    <div className="qa-image-modal" data-testid="photo-modal">
+      <img src={props.photo} className="image" />
     </div>
   )
 }

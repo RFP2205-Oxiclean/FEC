@@ -109,10 +109,10 @@ class AnswerList extends React.Component {
             <div>
                 <ul className="answer-list">
                     {this.state.loadedAnswers.map((item, index) => {
-                        return <Answer data={item} key={index}/>
+                        return <Answer data-testid="individual-answer" data={item} key={index}/>
                     })}
                 </ul>
-                <MoreAnswers loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreAnswers.bind(this)} />
+                <MoreAnswers loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} data-testid="more-answers-button" clickHandler={this.loadMoreAnswers.bind(this)} />
             </div>)
 
     }

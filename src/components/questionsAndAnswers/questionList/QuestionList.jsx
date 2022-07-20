@@ -40,7 +40,6 @@ class QuestionList extends React.Component {
         for(let i = 0; i < this.questionsToLoad; i++) {
             this.state.loadedQuestions.push(this.sortedByHelpful[i]);
         }
-        console.log(this.state.loadedQuestions)
     }
 
 
@@ -109,13 +108,12 @@ class QuestionList extends React.Component {
                     <div id="question-container">
                         <ul id="question-list">
                             {this.state.loadedQuestions.map((question, index)=> {
-                                return <Question question={question} key={index} productId={this.props.productId} />
+                                return <Question question={question} key={index} data-testid="individual-question" productId={this.props.productId} product={this.props.product}/>
                             })}
                         </ul>
-                            {console.log(this.props.questions)}
                     </div>
-                    <MoreQuestions loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
-                    <AddQuestion productId={this.props.productId} />
+                    <MoreQuestions data-testid="more-questions button" loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
+                    <AddQuestion data-testid="add-question-button" productId={this.props.productId} product={this.props.product} />
                 </div>
 
             </div>

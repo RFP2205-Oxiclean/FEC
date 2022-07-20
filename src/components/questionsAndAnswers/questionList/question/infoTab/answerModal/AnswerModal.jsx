@@ -144,9 +144,9 @@ class AnswerModal extends React.Component {
 
     render() {
         return (
-            <div className="modal" >
+            <div className="modal" data-testid="answer-modal" >
                   <div className="modal-container" >
-                      <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler}/>
+                      <input type="button" className="modal-exit" data-testid="a-exit" value="X" onClick={this.props.clickHandler}/>
                       <h1>Submit your Answer</h1>
                       <h3>{this.props.product.name} : {this.props.question.question_body}</h3>
                       <form className="form">
