@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { url, API_KEY } from "/config/config.js";
+import { url, API_KEY } from "./../../../config/config.js";
 import ReviewList from "./ReviewList.jsx";
 import RatingsSection from "./RatingsSection.jsx";
 import AddReviewModal from "./AddReviewModal.jsx";
@@ -43,6 +43,7 @@ class RatingsReviews extends React.Component {
     this.getProductInformation = this.getProductInformation.bind(this);
     this.getReviewList = this.getReviewList.bind(this);
     this.getMetadata = this.getMetadata.bind(this);
+
   }
 
   componentDidMount() {
@@ -251,9 +252,8 @@ class RatingsReviews extends React.Component {
   render() {
     let filteredReviews = this.filterReviews();
     return (
-      <div data-testid="ratings-reviews">
+      <div data-testid = 'ratings-reviews'>
         <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
-        <a id="top-of-reviews"></a>
         <div className="ratings-reviews-master-container">
           {this.state.displayAddReviewModal && (
             <AddReviewModal
@@ -280,12 +280,11 @@ class RatingsReviews extends React.Component {
             showAddReviewModal={this.showAddReviewModal}
           />
         </div>
-        <button data-testid="get-information" className="jest-test-button" onClick={this.invokeAllHTTPFunctions}>
-          Get Product Information
-        </button>
+        <button data-testid = 'get-information'className = 'jest-test-button' onClick = {this.invokeAllHTTPFunctions}>Get Product Information</button>
       </div>
     );
   }
+
 }
 
 export default RatingsReviews;

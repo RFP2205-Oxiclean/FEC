@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,7 +117,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,38 +126,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">110x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">110x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,7 +166,7 @@ import { Resize, fillPad, fill, thumbnail, pad } from "@cloudinary/url-gen/actio
 import { color, blurred, predominantGradient } from "@cloudinary/url-gen/qualifiers/background";
 import { adjust, improve } from "@cloudinary/url-gen/actions/adjust";
 &nbsp;
-const Cloud = new Cloudinary({
+const Cloud = <span class="cstat-no" title="statement not covered" >new Cloudinary({</span>
   cloud: {
     cloudName: "drtqaxgfn",
   },
@@ -175,28 +175,28 @@ const Cloud = new Cloudinary({
   },
 });
 &nbsp;
-const cachedThumbnail_urls = {};
+const cachedThumbnail_urls = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-const createCloudinaryThumbnailURL = function (thumbnail_url) {
+const createCloudinaryThumbnailURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (thumbnail_url) {</span>
   // in case fetch causes site usage?
-  if (!cachedThumbnail_urls[thumbnail_url]) {
-    let thumbnail = Cloud.image(thumbnail_url);
-    thumbnail.setDeliveryType("fetch");
-    thumbnail.resize(fill().height(60).width(60)).adjust(improve());
+<span class="cstat-no" title="statement not covered" >  if (!cachedThumbnail_urls[thumbnail_url]) {</span>
+    let thumbnail = <span class="cstat-no" title="statement not covered" >Cloud.image(thumbnail_url);</span>
+<span class="cstat-no" title="statement not covered" >    thumbnail.setDeliveryType("fetch");</span>
+<span class="cstat-no" title="statement not covered" >    thumbnail.resize(fill().height(60).width(60)).adjust(improve());</span>
     // thumbnail.roundCorners(max());
-    let new_url = thumbnail.toURL();
-    cachedThumbnail_urls[thumbnail_url] = new_url;
+    let new_url = <span class="cstat-no" title="statement not covered" >thumbnail.toURL();</span>
+<span class="cstat-no" title="statement not covered" >    cachedThumbnail_urls[thumbnail_url] = new_url;</span>
   }
-  return cachedThumbnail_urls[thumbnail_url];
+<span class="cstat-no" title="statement not covered" >  return cachedThumbnail_urls[thumbnail_url];</span>
 };
 &nbsp;
-const cached_urls = {};
+const cached_urls = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-const createCloudinaryDisplayURL = function (url) {
-  if (!cached_urls[url]) {
-    let image = Cloud.image(url);
-    image.setDeliveryType("fetch");
-    image.resize(
+const createCloudinaryDisplayURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (url) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!cached_urls[url]) {</span>
+    let image = <span class="cstat-no" title="statement not covered" >Cloud.image(url);</span>
+<span class="cstat-no" title="statement not covered" >    image.setDeliveryType("fetch");</span>
+<span class="cstat-no" title="statement not covered" >    image.resize(</span>
       pad()
         .height(733)
         .width(1100)
@@ -204,9 +204,9 @@ const createCloudinaryDisplayURL = function (url) {
         .background(predominantGradient())
     );
     // .adjust(improve());
-    cached_urls[url] = image.toURL();
+<span class="cstat-no" title="statement not covered" >    cached_urls[url] = image.toURL();</span>
   }
-  return cached_urls[url];
+<span class="cstat-no" title="statement not covered" >  return cached_urls[url];</span>
 };
 &nbsp;
 export { createCloudinaryThumbnailURL, createCloudinaryDisplayURL };
@@ -217,7 +217,7 @@ export { createCloudinaryThumbnailURL, createCloudinaryDisplayURL };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-20T08:42:35.156Z
+                at 2022-07-20T06:53:05.831Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

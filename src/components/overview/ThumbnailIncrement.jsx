@@ -12,10 +12,7 @@ const ThumbnailIncrement = ({ callback, startEnd, end, displayArr }) => {
   }, [displayArr]);
 
   return (
-    <div
-      data-testid="thumbnail-increment"
-      style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }}
-      className="thumbnail-increment">
+    <div style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }} className="thumbnail-increment">
       <button
         onClick={() => {
           callback();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 
 const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHoverIndex, setActiveDisplayIndex }) => {
   let handleClick = function () {
@@ -8,7 +8,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
 
   if (index === activeDisplayIndex) {
     return (
-      <div data-testid="style-object-thumbnail-active" className="style-object-thumbnail-container">
+      <div className="style-object-thumbnail-container">
         <div
           className="style-object-thumbnail-active"
           onMouseEnter={() => {
@@ -34,7 +34,9 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
                 borderRadius: "50%",
               }}
               className="fa-solid fa-square-check"></i>
-            <img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+            <img
+              style={{ borderRadius: "50%", position: "absolute", top: "0" }}
+              src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
           </div>
         </div>
       </div>
@@ -42,7 +44,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
   }
 
   return (
-    <div data-testid="style-object-thumbnail" className="style-object-thumbnail-container">
+    <div className="style-object-thumbnail-container">
       <div
         className="style-object-thumbnail"
         onMouseEnter={() => {
@@ -54,7 +56,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
         onClick={() => {
           handleClick();
         }}>
-        <img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
+        <img style={{ borderRadius: "50%" }} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
       </div>
     </div>
   );
