@@ -89,7 +89,7 @@ class ReviewListEntry extends React.Component {
       return (
         <div className = "thumbnail-container">
           {this.props.review.photos.map((photo, index) =>
-            <img className = 'review-thumbnail-image' src = {photo.url} onClick = {this.showFullImage} key = {index}></img>
+            <img data-testid = 'review-thumbnail-image' className = 'review-thumbnail-image' src = {photo.url} onClick = {this.showFullImage} key = {photo.id}></img>
           )}
         </div>
       )
@@ -121,7 +121,7 @@ class ReviewListEntry extends React.Component {
 
   render() {
     return (
-      <div>
+      <div data-testid = "review-tile">
         <div>
           {this.state.displayFullImageModal && <ReviewImageModal image = {this.state.imageToShow} closeImageModal = {this.closeImageModal}/>}
           <StarRatingStatic rating= {this.props.review.rating}/>
@@ -141,7 +141,7 @@ class ReviewListEntry extends React.Component {
         {this.props.review.response ? <div className = 'review-response'>Response goes here<br></br></div> : ''}
 
         <div className = 'review-helpful-text-block'>Helpful?&nbsp;&nbsp;
-          <span className = 'review-helpful-option' onClick = {this.markReviewHelpful}>Yes</span>
+          <span className = 'review-helpful-option' data-testid = "review-helpful-link" onClick = {this.markReviewHelpful}>Yes</span>
           <span>&nbsp;({this.props.review.helpfulness})</span>
           <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
           <span className = 'review-report-button' onClick = {this.reportReview}>Report</span>

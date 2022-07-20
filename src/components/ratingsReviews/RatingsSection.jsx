@@ -65,6 +65,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
   return (
     <div className = "ratings-section-container">
+      {console.log('metadata: ', metadata)}
       {metadata.ratings!== undefined ? <div>
       <div id = 'average-rating'>{roundedAverage}&nbsp;
         <StarRatingStatic rating = {roundedAverage}/>

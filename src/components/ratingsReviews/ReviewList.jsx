@@ -90,7 +90,7 @@ class ReviewList extends React.Component {
     //if there are no reviews to display and the user has entered a search keyword
     if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length > 3) {
       return (
-        <div className = "review-list-container">
+        <div className = "review-list-container" data-testid = "review-list-no-reviews-with-keyword">
           <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
           <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
           <div>No reviews match that phrase, try a different search term</div>
@@ -100,7 +100,7 @@ class ReviewList extends React.Component {
     //if there are no reviews to display and there is no search term
     } else if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length < 3) {
       return (
-        <div  className = "review-list-container">
+        <div  className = "review-list-container" data-testid = 'review-list-no-reviews'>
           <button>ADD A REVIEW +</button>
         </div>
 
@@ -108,7 +108,7 @@ class ReviewList extends React.Component {
     //if there are reviews to display
     } else {
       return (
-        <div className = "review-list-container">
+        <div className = "review-list-container" data-testid = "review-list-with-reviews">
           <KeywordSearchFilter handleKeywordChange = {this.handleKeywordChange}/>
           <SortDropdown handleSortReviewsChange = {this.handleSortReviewsChange} numReviews = {this.props.totalNumReviews}/>
           <div className = 'review-list'>
@@ -117,7 +117,7 @@ class ReviewList extends React.Component {
           )}
           </div>
           <br></br>
-          {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay} className = 'more-reviews-button'>MORE REVIEWS</button> : ''}
+          {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay} className = 'more-reviews-button' data-testid = "more-reviews-button">MORE REVIEWS</button> : ''}
           <button className = 'add-review-button' onClick = {this.props.showAddReviewModal}>ADD A REVIEW +</button>
         </div>
         )

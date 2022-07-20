@@ -240,6 +240,7 @@ class RatingsReviews extends React.Component {
 
   render() {
     let filteredReviews = this.filterReviews();
+    {console.log(filteredReviews)}
     return (
       <div>
         <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
