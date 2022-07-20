@@ -1,68 +1,70 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import renderer from "react-test-renderer";
-import { getProductById, getProductStylesById, addToCart } from "./controllers.js";
+import { getProductById, getStylesById, addToCart, getStars } from "./controllers.js";
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { createRoot } from "react-dom/client";
 import axios from "axios";
 import { API_KEY, url } from "../config/config.js";
+import { createCloudinaryDisplayURL, createCloudinaryThumbnailURL } from "./services/Cloudinary";
 let testAxios = axios.create({});
 
-// it("function getProductById returns an object", () => {
-//   getProductById(40344).then((data) => {
-//     expect(typeof data).toBe("object");
-//   });
-// });
+let cachedProductById = {};
 
-// it("function getProductStylesById returns an array", () => {
-//   getProductStylesById(40344).then((data) => {
-//     expect(Array.isArray(data)).toBe(true);
-//   });
-// });
+it("function getProductById returns an object", () => {
+  getProductById(40344).then((data) => {
+    expect(typeof data).toBe("object");
+  });
+});
 
-// it("function getProductStylesById returns that contains an object", () => {
-//   getProductStylesById(40344).then((data) => {
-//     expect(typeof data[0]).toBe("object");
-//   });
-// });
+let cachedStylesById = {};
 
-it("function addToCart adds 1 product to the cart", () => {
-  let x = 0;
-  testAxios({
-    url: `${url}/cart`,
-    params: {
-      product_id: 1394795,
-    },
-    headers: {
-      Authorization: API_KEY,
-    },
-  })
+it("function getStylesById returns an array", () => {
+  getStylesById(40344).then((data) => {
+    // console.log(data);
+    expect(Array.isArray(data)).toBe(true);
+  });
+});
+
+let prefetchCache = {};
+
+it("function getStylesById returns that contains an object", () => {
+  getStylesById(40344).then((data) => {
+    expect(typeof data[0]).toBe("object");
+  });
+});
+
+it("tests that addToCart increases user count from get request", () => {
+  addToCart(1394865, 2)
     .then((response) => {
-      x = response.data[0];
-      console.log(response);
+      expect(response[0].data).toBe("Created");
     })
-    .then(() => {
-      addToCart(1394795, 1);
-    })
-    .then(() => {
-      return testAxios({
-        url: `${url}/cart`,
-        params: {
-          product_id: 1394795,
-        },
-        headers: {
-          Authorization: API_KEY,
-        },
-      });
-    })
-    .then((response) => {
-      response.data.forEach(function (countObj) {
-        if (countObj.id === "1394795") {
-          expect(countObj.count).toBe(x + 2);
-        }
-      });
+    .catch((err) => {
+      console.log("error: ", err);
     });
+});
 
-  // addToCart(1394865, 2)
+it("tests that addToCart returns a rejected promise with a id of null", () => {
+  addToCart(null, 2)
+    .then((response) => {
+      fail("shouldnt get here");
+    })
+    .catch((err) => {
+      expect(err).not.toBe(null);
+    });
+});
+
+it("should return a string", () => {
+  expect(typeof createCloudinaryDisplayURL("someText.com")).toBe("string");
+});
+
+it("should return a string", () => {
+  expect(typeof createCloudinaryThumbnailURL("someText.com")).toBe("string");
+});
+
+it("should return a number less than 5", () => {
+  getStars(40344).then((rating) => {
+    expect(rating).toBe(3.7);
+  });
 });

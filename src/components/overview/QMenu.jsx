@@ -28,6 +28,7 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
 
   return (
     <select
+      data-testid="q-menu"
       className="overview-select"
       key={stockId + size + selectQuantity}
       disabled={!size}

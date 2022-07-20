@@ -710,8 +710,29 @@ it("should contain correct nested elements", () => {
   expect(k).toContainElement(y);
 });
 
-it("should see that the start is '1' after lifecycle render", () => {
-  const { getByTestId } = render(<LifecycleTest></LifecycleTest>);
+it("should contain correct nested elements", () => {
+  const { getByTestId } = render(
+    <ImageCarousel
+      productInfo={productInfo}
+      styleInfo={styleObjects[0]}
+      styleObjects={styleObjects}
+      activeDisplayIndex={0}
+      stock={stocks}
+      handleAddToCart={() => {}}
+      incrementThumbnailIndex={() => {}}
+      decrementThumbnailIndex={() => {}}
+      rating={5}
+      activeThumbnailIndex={0}
+      photoObjects={styleObjects[0].photos}
+      image={"someUrl.com"}></ImageCarousel>
+  );
 
-  expect(getByTestId("lifecycle-test")).not.toBe(null);
+  const x = getByTestId("image-carousel");
+  const z = getByTestId("thumbnail-container");
+  const y = getByTestId("style-object-thumbnail-active");
+  const k = getByTestId("collapse-and-info-container");
+
+  expect(x).toContainElement(z);
+  expect(x).toContainElement(k);
+  expect(k).toContainElement(y);
 });

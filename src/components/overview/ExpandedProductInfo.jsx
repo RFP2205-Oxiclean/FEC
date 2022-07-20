@@ -23,20 +23,6 @@ const ExpandedProductInfo = ({
   collapsePanel,
   setCollapsePanel,
 }) => {
-  let [isHiding, setIsHiding] = useState(false);
-  let [isShaking, setIsShaking] = useState(false);
-
-  let toggleShakeCart = function () {
-    console.log("shaking");
-    let x = isShaking;
-    if (!isShaking) {
-      setIsShaking(true);
-      setTimeout(() => {
-        setIsShaking(false);
-      }, 900);
-    }
-  };
-
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
       <div
@@ -70,15 +56,7 @@ const ExpandedProductInfo = ({
           </a>
           {/* <a id="facebook_ads_example">This is the Facebook ad example I want to link to.</a> */}
         </div>
-        <div className="overview-category">
-          {productInfo?.category}
-          <div style={isShaking ? { visibility: "hidden" } : { marginLeft: "auto", display: "flex" }}>
-            <i className="fa-solid fa-cart-arrow-down"></i>
-          </div>
-          <div style={!isShaking ? { visibility: "hidden", position: "absolute", right: "0" } : { position: "absolute", right: "0" }}>
-            <i className="fa-solid fa-cart-arrow-down fa-shake"></i>
-          </div>
-        </div>
+        <div className="overview-category">{productInfo?.category}</div>
         <div className="overview-expanded-product-info">
           <Price styleInfo={styleInfo}></Price>
           <span className="overview-expanded-product-info-name">{productInfo.name}</span>
@@ -92,7 +70,6 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
-          toggleShakeCart={toggleShakeCart}
           handleAddToCart={handleAddToCart}
           stock={stock[styleObjects[activeDisplayIndex].style_id]}
           activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>

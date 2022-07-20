@@ -71,6 +71,15 @@ it("should have 'Select a Size!' text", () => {
   expect(x).toHaveTextContent("Select a Size!");
 });
 
+it("should not have text in document", () => {
+  const myFn = jest.fn();
+  const { getByTestId } = render(<PurchaseInfo activeStyle={styles[0]} style={styles} stock={stock} handleAddToCart={myFn}></PurchaseInfo>);
+
+  const x = getByTestId("select-fade-out");
+
+  expect(x).toBeInTheDocument();
+});
+
 // it("should test that callback is called onClick", () => {
 //   const myFn = jest.fn();
 

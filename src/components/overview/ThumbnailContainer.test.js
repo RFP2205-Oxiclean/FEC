@@ -66,3 +66,16 @@ it("should have an active thumbnail", () => {
 
   expect(photos.length).toBeLessThan(8);
 });
+
+it("should move forward and backwards", () => {
+  let mySpy = jest.fn();
+
+  const { getByTestId } = render(<ThumbnailContainer activeThumbnailIndex={0} setActiveThumbnailIndex={mySpy} photos={photos}></ThumbnailContainer>);
+  const { getByTestId } = render(<ThumbnailIncrement></ThumbnailIncrement>);
+  const x = getByTestId("thumbnail-increment");
+  const y = getByTestId("thumbnail-decrement");
+
+  fireEvent.click(x);
+  fireEvent.click(y);
+  expect(mySpy).toHaveBeenCalledTimes(2);
+});

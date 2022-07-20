@@ -92,12 +92,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     setDisplayArr(newDisplay);
   };
 
-  let myDebugger = function () {
-    console.log(displayArr);
-    console.log(displayArr[displayArr.length - 1] + 1);
-    console.log(photos.length);
-  };
-
   return (
     <div className="overview-thumbnail-container" data-testid="thumbnail-container">
       <ThumbnailDecrement displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
