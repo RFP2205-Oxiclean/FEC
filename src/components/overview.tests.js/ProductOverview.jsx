@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getProductById, getStylesById, prefetch, getStars } from "/src/controllers.js";
+import { getProductById, getStylesById, prefetch, getStars } from "../../controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
-import { addToCart } from "/src/controllers.js";
+import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
@@ -9,7 +9,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
     {
-      style_id: 0,
       name: null,
       original_price: null,
       sale_price: null,
@@ -19,7 +18,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     },
   ]);
   let [activeThumbnailIndices, setActiveThumbnailIndices] = useState({});
-  let [productInfo, setProductInfo] = useState({ name: "" });
+  let [productInfo, setProductInfo] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
   let [stock, setStock] = useState({});
@@ -75,9 +74,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     console.log("activeThumbnailIndices: ", activeThumbnailIndices);
     console.log("activeDisplayIndex: ", activeDisplayIndex);
     console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
-    getProductById(product_id).then((data) => {
-      console.log("PRODUCT INFO: ", data);
-    });
+    console.log("productInfo: ", productInfo);
     console.log(stock);
     console.log(hoverIndex);
   };
@@ -199,7 +196,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           New Product
         </button>
         <button onClick={masterState}>Master State</button>
-      </div> */}
+      </div>
     </div>
   );
 };
