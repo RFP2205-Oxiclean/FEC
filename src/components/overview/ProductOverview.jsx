@@ -201,7 +201,11 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           New Product
         </button>
-        <button data-testid="master-state-change" onClick={masterState}>
+        <button
+          data-testid="master-state-change"
+          onClick={() => {
+            masterState();
+          }}>
           Master State
         </button>
       </div>

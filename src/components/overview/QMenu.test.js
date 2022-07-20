@@ -20,7 +20,7 @@ afterEach(cleanup);
 
 it("should always exist", () => {
   const { getByTestId } = render(
-    <Price
+    <QMenu
       size={"XS"}
       stock={{
         123456: [
@@ -28,9 +28,22 @@ it("should always exist", () => {
           { quantity: 10, size: "XS" },
           { quantity: 10, size: "XS" },
         ],
-      }}></Price>
+      }}></QMenu>
   );
   const k = getByTestId("q-menu");
   expect(k).not.toBe(null);
   expect(k);
+});
+
+it("should have no default option when size doesn't exist", () => {
+  const { getByTestId } = render(<QMenu size={null} stock={[{ id: 123456, quantity: 10, size: "XS" }]} stockId={123456} noItems={true}></QMenu>);
+  const k = getByTestId("q-menu");
+  expect(k).toHaveTextContent("");
+});
+
+it("should have default option 1 when size is selected", () => {
+  const { getByTestId } = render(<QMenu size={"XS"} stock={[{ quantity: 1, size: "XS", id: 123456 }]} stockId={123456} noItems={false}></QMenu>);
+
+  const k = getByTestId("default-q-menu");
+  expect(k).toHaveTextContent("1");
 });

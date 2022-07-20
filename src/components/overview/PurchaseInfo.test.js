@@ -8,6 +8,7 @@ import "@testing-library/jest-dom";
 import renderer from "react-test-renderer";
 import PurchaseInfo from "./PurchaseInfo.jsx";
 import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
+import AddToCart from "./AddToCart.jsx";
 // const ImageCarousel = ( {product_id, styleClickHandler, styleObjects, activeStyleObject, productInfo} ) => {
 
 const container = document.createElement("div");
@@ -78,6 +79,35 @@ it("should not have text in document", () => {
   const x = getByTestId("select-fade-out");
 
   expect(x).toBeInTheDocument();
+});
+
+it("should pass callback up chain", () => {
+  let mySpy = jest.fn();
+  let setNoItems = function (noItems) {
+    noItems = !noItems;
+  };
+  let setPrompt = function () {
+    console.log("passed");
+  };
+
+  const { getByTestId } = render(
+    <PurchaseInfo activeStyle={{ name: "Shannon", style_id: "1" }} stock={[{ id: 123456, quantity: 1, size: "XS" }]} handleAddToCart={mySpy}>
+      <AddToCart
+        stock={[{ id: 123456, quantity: 1, size: "XS" }]}
+        quantity={1}
+        selectQuantity={() => {}}
+        noItems={false}
+        handleAddToCart={mySpy}
+        setPrompt={setPrompt}
+        size={"XS"}>
+        <div></div>
+      </AddToCart>
+    </PurchaseInfo>
+  );
+
+  const k = getByTestId("add-to-cart");
+  fireEvent.click(k);
+  expect(mySpy).toHaveBeenCalled();
 });
 
 // it("should test that callback is called onClick", () => {

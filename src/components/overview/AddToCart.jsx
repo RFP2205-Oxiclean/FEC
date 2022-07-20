@@ -36,6 +36,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
   };
 
   useEffect(() => {
+    console.log("STOCK: ", stock);
     setHidden(true);
     stock?.forEach(function (stockObj) {
       if (stockObj.quantity > 0) {

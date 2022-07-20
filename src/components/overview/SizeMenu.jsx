@@ -17,6 +17,22 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
     }
   }, [stock, noItems]);
 
+  let makeOptions = function () {
+    stock.map(function (stockObj) {
+      if (stockObj.quantity === 0) {
+        return <option>Out of Stock!</option>;
+      } else {
+        return <option>{stockObj.size}</option>;
+      }
+    });
+
+    return (
+      <option disabled key={stockObj.id + stockObj.size}>
+        {stockObj.quantity !== 0 ? stockObj.size : "Out of Stock!"}
+      </option>
+    );
+  };
+
   return (
     <select
       className="overview-select"

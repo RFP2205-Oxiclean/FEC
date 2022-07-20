@@ -16,14 +16,24 @@ const root = createRoot(container);
 root.render(<div></div>);
 
 it("should change data based on different input", () => {
-  render(<ProductOverview product_id={40344}></ProductOverview>);
+  const { getbyTestId } = render(<ProductOverview product_id={40344}></ProductOverview>);
 
-  const z = getByTestId("master-state-change");
-  fireEvent.click(z);
+  let tree = component.toMatchSnapshot();
 
-  expect(z).not.toBe(null);
+  renderer(act());
 });
 
-it("should wait for mount lifecycle", async () => {
-  render(<ProductOverview product_id={40344}></ProductOverview>);
+it("imageCarousel should contain a ", async () => {
+  const { getByTestId } = render(<ProductOverview product_id={null}></ProductOverview>);
+
+  let tree = component.toJson();
+  expect(tree).toMatchSnapshot();
 });
+
+// it("should render an imageCarousel with information after mounting", () => {
+//   render(
+//     <ProductOverview>
+//       <ImageCarouseL></ImageCarouseL>
+//     </ProductOverview>
+//   );
+// });

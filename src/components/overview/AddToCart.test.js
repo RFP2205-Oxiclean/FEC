@@ -226,6 +226,32 @@ it("should invoke callback", () => {
   expect(k).toBeTruthy();
   fireEvent.click(k);
 });
+
+it("should be out of stock when buying last one", () => {
+  let noItems = false;
+  let mySpy = jest.fn();
+  let setNoItems = function (noItems) {
+    noItems = !noItems;
+  };
+
+  const { getByTestId } = render(
+    <AddToCart
+      stock={[{ id: 123456, quantity: 1, size: "XS" }]}
+      quantity={1}
+      selectQuantity={() => {}}
+      noItems={false}
+      handleAddToCart={mySpy}
+      setPrompt={setPrompt}
+      toggleShakeCart={toggleShakeCart}
+      size={size}>
+      <div></div>
+    </AddToCart>
+  );
+
+  const k = getByTestId("add-to-cart");
+  fireEvent.click(k);
+  expect(mySpy).toHaveBeenCalled();
+});
 // {
 //   stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, toggleShakeCart, setPrompt, size;
 // }

@@ -27,13 +27,12 @@ it("should have a sale price of have a span element for price with text content 
   const y = getByTestId("sale-price");
 
   expect(getByTestId("price1")).toContainElement(x);
-
-  expect(x).toHaveTextContent("$20");
+  expect(getByTestId("sale-price")).toHaveTextContent("$10");
 });
 
 it("should render a different element if there is no sale price", () => {
   const { getByTestId } = render(<Price styleInfo={{ original_price: "$20" }}></Price>);
   const x = getByTestId("original-price");
 
-  expect(x).not.toBe(null);
+  expect(x).toBeInTheDocument();
 });
