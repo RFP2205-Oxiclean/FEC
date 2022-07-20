@@ -17,8 +17,6 @@ class App extends React.Component {
     };
   }
 
-
-
   handleSubmit(id) {
     id = parseInt(id);
     this.setState({ displayedProductId: id });
@@ -35,7 +33,7 @@ class App extends React.Component {
         </div>
 
         <div className="questions-and-answers">
-          <QuestionsAndAnswers product_id={this.state.displayedProductId}/>
+          <QuestionsAndAnswers product_id={this.state.displayedProductId} />
         </div>
 
         <div className="ratings-reviews">

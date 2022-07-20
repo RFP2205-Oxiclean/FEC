@@ -16,7 +16,6 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
       setPrompt(true);
     }
     handleAddToCart(stockId, quantity);
-    toggleShakeCart();
     flag = false;
     stock.forEach(function (stockObj) {
       if (stockObj.quantity > 0) {
@@ -47,6 +46,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
 
   return (
     <div
+      data-testid="add-to-cart"
       onClick={() => {
         handleClick();
       }}

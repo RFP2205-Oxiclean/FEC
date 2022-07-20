@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 
 const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHoverIndex, setActiveDisplayIndex }) => {
   let handleClick = function () {
@@ -8,7 +8,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
 
   if (index === activeDisplayIndex) {
     return (
-      <div data-testid="style-object-thumbnail-active" className="style-object-thumbnail-container">
+      <div data-testid="style-object'thumbnail-active" className="style-object-thumbnail-container">
         <div
           className="style-object-thumbnail-active"
           onMouseEnter={() => {
@@ -42,7 +42,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
   }
 
   return (
-    <div data-testid="style-object-thumbnail" className="style-object-thumbnail-container">
+    <div className="style-object-thumbnail-container">
       <div
         className="style-object-thumbnail"
         onMouseEnter={() => {
