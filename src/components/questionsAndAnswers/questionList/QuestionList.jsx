@@ -7,18 +7,27 @@ import AddQuestion from './addQuestion/AddQuestion.jsx';
 class QuestionList extends React.Component {
     constructor(props) {
         super(props);
+        this.questionsToLoad  = 2;
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
         this.state = this.initialStateValues();
         this.loadInitialQuestions();
     }
 
     initialStateValues () {
-        return {
+        let initState = {
             oldQuestions: JSON.stringify(this.sortedByHelpful),
             loadedQuestions : [],
-            loadMoreState: 'nonexistant',
-            questionsToLoad : 2,
             loadMoreStateList : ['nonexistant','decrease','increase'],
+        }
+        initState.loadMoreState = this.getCurrentState();
+        return initState
+    }
+
+    getCurrentState() {
+        if (this.props.questions.length > 0 && this.props.questions.length - this.questionsToLoad > 0 ) {
+            return 'increase';
+        } else if (this.props.questions.length === this.questionsToLoad ) {
+            return 'nonexistant';
         }
     }
 
@@ -28,7 +37,7 @@ class QuestionList extends React.Component {
     }
 
     loadInitialQuestions () {
-        for(let i = 0; i < this.state.questionsToLoad; i++) {
+        for(let i = 0; i < this.questionsToLoad; i++) {
             this.state.loadedQuestions.push(this.sortedByHelpful[i]);
         }
         console.log(this.state.loadedQuestions)
@@ -65,7 +74,7 @@ class QuestionList extends React.Component {
     }
 
     loadMoreIncrease() {
-        let newSlice = this.sortedByHelpful.slice(0,this.state.loadedQuestions.length + this.state.questionsToLoad);
+        let newSlice = this.sortedByHelpful.slice(0,this.state.loadedQuestions.length + this.questionsToLoad);
         this.state.loadMoreState = this.state.loadMoreStateList[2];
         this.state.loadedQuestions = newSlice;
         this.setState(JSON.parse(JSON.stringify(this.state)));
@@ -76,15 +85,15 @@ class QuestionList extends React.Component {
 
     // main function
     loadMoreQuestions(initialStep) {
-        if (this.sortedByHelpful.length <= this.state.questionsToLoad) { //dont exist
+        if (this.sortedByHelpful.length <= this.questionsToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length <= this.state.questionsToLoad) { // decrease
+        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length <= this.questionsToLoad) { // decrease
             if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length > this.state.questionsToLoad) { //increase
+        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length > this.questionsToLoad) { //increase
             this.loadMoreIncrease();
         }
     }

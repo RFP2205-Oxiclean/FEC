@@ -595,6 +595,8 @@ width: 150px; */
 
 .questions-and-answers .interactive-buttons:hover {
   cursor:pointer;
+  color:white;
+  background-color:black;
 }
 
 .questions-and-answers .button-wrapper {
@@ -607,6 +609,7 @@ width: 150px; */
   display: inline-block;
   margin-right:15px;
   font-weight:bold;
+  margin-top:10px;
 }
 
 .questions-and-answers #question-container {

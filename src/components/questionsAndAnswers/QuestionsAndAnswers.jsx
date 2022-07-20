@@ -4,6 +4,7 @@ import SearchBar from "./searchBar/SearchBar.jsx";
 import AnswerList from "./questionList/answerList/AnswerList.jsx";
 import QuestionList from "./questionList/QuestionList.jsx";
 import { url, API_KEY } from "../../../config/config.js";
+import AddQuestion from './questionList/addQuestion/AddQuestion.jsx';
 //axios.defaults.headers.common['Authorization'] = API_KEY;
 
 class QuestionsAndAnswers extends React.Component {
@@ -63,12 +64,13 @@ class QuestionsAndAnswers extends React.Component {
 
   render() {
     console.log(this.state.questions)
-    let questionList = this.state.questions.length > 1 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} /> : null
+    let questionList = this.state.questions.length > 1 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} /> : <AddQuestion productId={this.props.product_id} />
     return (
       <div id="qa-container">
         <h1 className="qa-title">QUESTIONS & ANSWERS</h1>
         <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} />
         {questionList}
+
       </div>
     );
   }
