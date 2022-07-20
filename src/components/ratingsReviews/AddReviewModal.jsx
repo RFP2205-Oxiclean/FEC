@@ -283,7 +283,7 @@ class AddReviewModal extends React.Component {
   render() {
     return (
       <div className="modal-background" data-testid = 'add-review-modal'>
-        <div className="modal-container">
+        <div className="addreview-modal-container">
           <div>
             <button className="exit-modal-button" onClick={this.props.closeModal}>
               &times;

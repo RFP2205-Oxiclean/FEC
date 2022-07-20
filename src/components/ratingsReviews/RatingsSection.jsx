@@ -65,7 +65,7 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     <div className = "ratings-section-container" data-testid = 'ratings-section'>
       {console.log('metadata: ', metadata)}
       {metadata.ratings!== undefined ? <div>
-      <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
+      <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage.toFixed(1)}&nbsp;</span>
         <StarRatingStatic rating = {roundedAverage}/>
         <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
       </div>
