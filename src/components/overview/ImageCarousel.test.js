@@ -709,3 +709,9 @@ it("should contain correct nested elements", () => {
   expect(x).toContainElement(k);
   expect(k).toContainElement(y);
 });
+
+it("should see that the start is '1' after lifecycle render", () => {
+  const { getByTestId } = render(<LifecycleTest></LifecycleTest>);
+
+  expect(getByTestId("lifecycle-test")).not.toBe(null);
+});

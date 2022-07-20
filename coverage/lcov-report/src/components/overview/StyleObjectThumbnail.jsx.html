@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>1/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
@@ -126,18 +126,16 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,9 +169,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,16 +190,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
 &nbsp;
-const StyleObjectThumbnail = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> styleObject, activeDisplayIndex, index, setHoverIndex, setActiveDisplayIndex }) =&gt; {</span>
-  let handleClick = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHoverIndex, setActiveDisplayIndex }) =&gt; {
+  let handleClick = <span class="fstat-no" title="function not covered" >fu</span>nction () {
 <span class="cstat-no" title="statement not covered" >    setActiveDisplayIndex(index);</span>
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (index === activeDisplayIndex) {</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="style-object-thumbnail-container"&gt;
+  if (index === activeDisplayIndex) {
+    return (
+      &lt;div data-testid="style-object-thumbnail-active" className="style-object-thumbnail-container"&gt;
         &lt;div
           className="style-object-thumbnail-active"
           onMouseEnter={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
@@ -229,17 +225,15 @@ const StyleObjectThumbnail = <span class="cstat-no" title="statement not covered
                 borderRadius: "50%",
               }}
               className="fa-solid fa-square-check"&gt;&lt;/i&gt;
-            &lt;img
-              style={{ borderRadius: "50%", position: "absolute", top: "0" }}
-              src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}&gt;&lt;/img&gt;
+            &lt;img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}&gt;&lt;/img&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     );
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="style-object-thumbnail-container"&gt;
+  return (
+    &lt;div data-testid="style-object-thumbnail" className="style-object-thumbnail-container"&gt;
       &lt;div
         className="style-object-thumbnail"
         onMouseEnter={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
@@ -251,7 +245,7 @@ const StyleObjectThumbnail = <span class="cstat-no" title="statement not covered
         onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >          handleClick();</span>
         }}&gt;
-        &lt;img style={{ borderRadius: "50%" }} src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}&gt;&lt;/img&gt;
+        &lt;img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}&gt;&lt;/img&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );
@@ -265,7 +259,7 @@ export default StyleObjectThumbnail;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-20T06:53:05.831Z
+                at 2022-07-20T06:34:51.699Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
