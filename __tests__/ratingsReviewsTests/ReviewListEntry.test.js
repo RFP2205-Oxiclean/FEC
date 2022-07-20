@@ -287,39 +287,5 @@ describe('Review Tile Component', () => {
 
   })
 
-  it('should have a link to allow user to mark a review as helpful', () => {
-    const markReviewHelpfulSpy = jest.fn();
 
-    const {getByTestId} = render(<ReviewListEntry handleMarkReviewHelpful={markReviewHelpfulSpy} review = {
-      {
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a sollicitudin risus, sit amet commodo nulla. Aliquam pellentesque massa tellus, in ultrices ante facilisis sed. Sed ut feugiat est, vel interdum augue. In facilisis tristique lectus, eget tincidunt lacus faucibus at. Nullam sed elementum purus. Proin pellentesque vestibulum placerat. Nulla.',
-        date: '2022-07-19T00:00:00.000Z',
-        helpfulness: 1,
-        photos: [{url: 'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ'}],
-        rating: 1,
-        recommend: false,
-        response: null,
-        review_id: 1275683,
-        reviewer_name: 'React Test',
-        summary: 'This review is a test using React testing library'
-      }
-    }/>);
-
-    const localStorage = '[]';
-
-    const helpful = getByTestId('review-helpful-link')
-    expect(helpful).toBeTruthy();
-
-    fireEvent.click(helpful);
-    expect(markReviewHelpfulSpy).toHaveBeenCalled();
-  })
-
-  // //t("should test Collapse has an onClick event", () => {
-  // const closePanelSpy = jest.fn();
-
-  // const { getByTestId } = render(<CollapseButton setIsHiding={closePanelSpy}></CollapseButton>);
-
-  // fireEvent.click(getByTestId("collapseButton"));
-
-  // expect(closePanelSpy).toHaveBeenCalled();
 })

@@ -1411,3 +1411,11 @@ div.radio-box {
   margin-left: 15%;
   margin-right: 15%;
 }
+
+.total-num-ratings {
+  font-size: 10px;
+}
+
+.ratings-bar-num-ratings {
+  text-decoration: none;
+}

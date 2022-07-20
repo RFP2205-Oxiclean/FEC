@@ -28,7 +28,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app" data-testid = 'app'>
         {/* <h1>
                     Welcome to React App thats build using Webpack and Babel separately
                 </h1> */}

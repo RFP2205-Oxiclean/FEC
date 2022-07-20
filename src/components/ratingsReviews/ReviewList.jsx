@@ -118,7 +118,7 @@ class ReviewList extends React.Component {
           </div>
           <br></br>
           {this.props.reviews.length > this.state.numReviewsDisplayed ? <button onClick = {this.addTwoReviewsToDisplay} className = 'more-reviews-button' data-testid = "more-reviews-button">MORE REVIEWS</button> : ''}
-          <button className = 'add-review-button' onClick = {this.props.showAddReviewModal}>ADD A REVIEW +</button>
+          <button className = 'add-review-button' data-testid = "add-review-button" onClick = {this.props.showAddReviewModal}>ADD A REVIEW +</button>
         </div>
         )
     }

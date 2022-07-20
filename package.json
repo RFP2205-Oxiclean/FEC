@@ -4,7 +4,7 @@
   "description": "Dependencies for our project",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest /src/__tests__",
+    "test": "npx jest",
     "start": "webpack-dev-server .",
     "build": "webpack ."
   },

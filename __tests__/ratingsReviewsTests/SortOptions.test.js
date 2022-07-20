@@ -38,11 +38,13 @@ describe('SortOptions test', () => {
     expect(sortDropdown.textContent).toContain('reviews, sorted by relevance')
   })
 
-  it('should invoke a function to handle a new sort selection with the selected option', () => {
+  it('should invoke a function to handle a new sort selection', () => {
     const handleSortReviewsChangeSpy = jest.fn();
     const {getByTestId} = render(<SortDropdown handleSortReviewsChange = {handleSortReviewsChangeSpy}/>)
     fireEvent.change(getByTestId('sort-options'), {target: {value: 'newest'}})
     const optionNewest = getByTestId('select-option-newest');
-    expect(optionNewest).toBeTruthy();
+    expect(handleSortReviewsChangeSpy).toHaveBeenCalled();
   })
+
+
 })

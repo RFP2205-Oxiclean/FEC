@@ -38,6 +38,12 @@ class RatingsReviews extends React.Component {
     this.showAddReviewModal = this.showAddReviewModal.bind(this);
     this.closeAddReviewModal = this.closeAddReviewModal.bind(this);
     this.addReview = this.addReview.bind(this);
+
+    //HTTP Request
+    this.getProductInformation = this.getProductInformation.bind(this);
+    this.getReviewList = this.getReviewList.bind(this);
+    this.getMetadata = this.getMetadata.bind(this);
+
   }
 
   componentDidMount() {
@@ -214,7 +220,7 @@ class RatingsReviews extends React.Component {
     });
   }
 
-  /* Methods to filter and sort reviews to pass down to ReviewList */
+  /* Method to filter and sort reviews to pass down to ReviewList */
   filterReviews() {
     var filteredReviews = [];
 
@@ -237,12 +243,16 @@ class RatingsReviews extends React.Component {
       return filteredReviews;
     }
   }
+  invokeAllHTTPFunctions() {
+    this.getProductInformation();
+    this.getRatingsList();
+    this.getMetadata();
+  }
 
   render() {
     let filteredReviews = this.filterReviews();
-    {console.log(filteredReviews)}
     return (
-      <div>
+      <div data-testid = 'ratings-reviews'>
         <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
         <div className="ratings-reviews-master-container">
           {this.state.displayAddReviewModal && (
@@ -270,9 +280,11 @@ class RatingsReviews extends React.Component {
             showAddReviewModal={this.showAddReviewModal}
           />
         </div>
+        <button data-testid = 'get-information'className = 'jest-test-button' onClick = {this.invokeAllHTTPFunctions}>Get Product Information</button>
       </div>
     );
   }
+
 }
 
 export default RatingsReviews;
