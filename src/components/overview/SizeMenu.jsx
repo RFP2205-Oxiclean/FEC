@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, selectQuantity, noItems }) => {
+const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, selectQuantity }) => {
   let [defaultValue, setDefaultValue] = useState("Out of Stock!");
 
   useEffect(() => {
     let flag = false;
     stock?.forEach(function (stockObj) {
-      if (stockObj.quantity !== null && stock.quantity !== 0 && stock.id !== null && stock.id !== "null") {
+      if (stockObj.quantity !== null && stock.quantity !== 0) {
         flag = true;
         setDefaultValue("Select a Size!");
       }
     });
-    if (noItems) {
-      console.log("fires");
-      setDefaultValue("Out of Stock!");
-    }
-  }, [stock, noItems]);
+  }, [stock]);
 
   return (
     <select
-      className="overview-select"
       onChange={(e) => {
         setPrompt(false);
         selectSize(e.target.value);
@@ -32,15 +27,8 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       }}
       style={{ float: "left", width: "150px" }}>
       <option hidden>{defaultValue}</option>
-      {stock?.length === 0 ? (
-        <option disabled hidden>
-          "Out of Stock!"
-        </option>
-      ) : (
-        <></>
-      )}
       {stock?.map(function (stockObj, i) {
-        if (stockObj.quantity === 0 || stockObj.quantity === null) {
+        if (stockObj.quantity === 0) {
           return (
             <option disabled key={stockObj.id + stockObj.size}>
               {stockObj.quantity !== 0 ? stockObj.size : "Out of Stock!"}

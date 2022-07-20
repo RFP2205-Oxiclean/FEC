@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 
 const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, backup }) => {
   let [defaultImage, setDefaultImage] = useState(createCloudinaryThumbnailURL(image));
@@ -14,26 +14,12 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
     }
   };
 
-  if (active) {
-    return (
-      <div
-        onClick={() => {
-          handleClick();
-        }}
-        data-testid="overview-overlay-thumbnail-active"
-        className={active ? "overview-overlay-thumbnail-active" : "overview-overlay-thumbnail"}>
-        <img onError={handleError()} height="60" width="60" src={defaultImage}></img>
-      </div>
-    );
-  }
-
   return (
     <div
       onClick={() => {
         handleClick();
       }}
-      data-testid="overview-overlay-thumbnail"
-      className="overview-overlay-thumbnail">
+      className={active ? "overview-overlay-thumbnail-active" : "overview-overlay-thumbnail"}>
       <img onError={handleError()} height="60" width="60" src={defaultImage}></img>
     </div>
   );

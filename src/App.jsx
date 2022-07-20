@@ -40,7 +40,7 @@ class App extends React.Component {
         </div>
 
         <div className="questions-and-answers">
-          <QuestionsAndAnswers product_id={this.state.displayedProductId} setAverageRating={this.setAverageRating} />
+          <QuestionsAndAnswers product_id={this.state.displayedProductId}/>
         </div>
 
         <div className="ratings-reviews">

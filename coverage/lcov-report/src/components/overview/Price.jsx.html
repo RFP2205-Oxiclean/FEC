@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -83,26 +83,18 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -113,22 +105,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 &nbsp;
-const Price = ({ styleInfo }) =&gt; {
-  if (styleInfo.sale_price) {
-    return (
-      &lt;div data-testid="price1" className="overview-expanded-product-info-prices"&gt;
-        &lt;span data-testid="original-price-struck" className="overview-expanded-product-info-price-struck"&gt;
-          {styleInfo.original_price}
-        &lt;/span&gt;
-        &lt;span data-testid="sale-price" className="overview-expanded-product-info-different-price"&gt;
-          {styleInfo.sale_price}
-        &lt;/span&gt;
+const Price = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> styleInfo }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (styleInfo.sale_price) {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div className="overview-expanded-product-info-prices"&gt;
+        &lt;span className="overview-expanded-product-info-price-struck"&gt;{styleInfo.original_price}&lt;/span&gt;
+        &lt;span className="overview-expanded-product-info-different-price"&gt;{styleInfo.sale_price}&lt;/span&gt;
       &lt;/div&gt;
     );
   } else {
-    return (
-      &lt;div data-testid="price2" className="overview-expanded-product-info-prices"&gt;
-        &lt;span data-testid="original-price"&gt;{styleInfo.original_price}&lt;/span&gt;
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div className="overview-expanded-product-info-prices"&gt;
+        &lt;span&gt;{styleInfo.original_price}&lt;/span&gt;
       &lt;/div&gt;
     );
   }
@@ -142,7 +130,7 @@ export default Price;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-20T08:42:35.156Z
+                at 2022-07-20T06:53:05.831Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

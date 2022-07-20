@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
 import OverlayThumbnail from "./OverlayThumbnail.jsx";
 import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
-import usePrevious from "../../components/commonComponents/usePreviousHook.jsx";
+import usePrevious from "/src/components/commonComponents/usePreviousHook.jsx";
 import { CSSTransition } from "react-transition-group";
 
 const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex }) => {
@@ -92,20 +92,28 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     setDisplayArr(newDisplay);
   };
 
+  let myDebugger = function () {
+    console.log(displayArr);
+    console.log(displayArr[displayArr.length - 1] + 1);
+    console.log(photos.length);
+  };
+
   return (
-    <div className="overview-thumbnail-container" data-testid="thumbnail-container">
+    <div className="overview-thumbnail-container">
       <ThumbnailDecrement displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
             return (
-              <OverlayThumbnail
-                image={photos[i].thumbnail_url}
-                active={activeThumbnailIndex === photos[i].trueIndex}
-                key={photos[i].thumbnail_url + photos[i].thumbnail_url}
-                trueIndex={photos[i]?.trueIndex}
-                setActiveThumbnailIndex={setActiveThumbnailIndex}
-                backup={photos[i].url}></OverlayThumbnail>
+              <CSSTransition in={true} appear={true} timeout={300} classNames="fade" key={photos[i].thumbnail_url}>
+                <OverlayThumbnail
+                  image={photos[i].thumbnail_url}
+                  active={activeThumbnailIndex === photos[i].trueIndex}
+                  key={photos[i].thumbnail_url + photos[i].thumbnail_url}
+                  trueIndex={photos[i]?.trueIndex}
+                  setActiveThumbnailIndex={setActiveThumbnailIndex}
+                  backup={photos[i].url}></OverlayThumbnail>
+              </CSSTransition>
             );
           }
         }
