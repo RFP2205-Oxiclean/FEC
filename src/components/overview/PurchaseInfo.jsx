@@ -18,6 +18,9 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
     stock?.forEach(function (stockObj) {
       setNoItems(false);
       if (stockObj.quantity !== 0 && stockObj.quantity !== null) {
+        flag = true;
+      }
+      if (!flag) {
         setNoItems(true);
       }
     });
