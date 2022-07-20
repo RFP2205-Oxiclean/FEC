@@ -1,9 +1,11 @@
-import React from "react";
-import StarRatingUserInput from "./StarRatingUserInput.jsx";
-import { url, API_KEY, IMG_API_KEY } from "/config/config.js";
-import axios from "axios";
-import { Image } from "cloudinary-react";
-import CharacteristicsInputs from "./CharacteristicsInputs.jsx";
+import React from 'react';
+import StarRatingUserInput from './StarRatingUserInput.jsx'
+import {url, API_KEY, IMG_API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
+import axios from 'axios';
+import {Image} from 'cloudinary-react'
+import CharacteristicsInputs from './CharacteristicsInputs.jsx'
+
+
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -277,9 +279,10 @@ class AddReviewModal extends React.Component {
     return false;
   }
 
+
   render() {
     return (
-      <div className="modal-background">
+      <div className="modal-background" data-testid = 'add-review-modal'>
         <div className="modal-container">
           <div>
             <button className="exit-modal-button" onClick={this.props.closeModal}>
@@ -293,7 +296,7 @@ class AddReviewModal extends React.Component {
           <StarRatingUserInput handleRatingChange={this.handleRatingChange} />
           {/* Recommendation Radio buttons */}
           <br></br>
-          <form onChange={this.handleRecommendationChange}>
+          <form data-testid = 'addReview-recommendation-change'onChange={this.handleRecommendationChange}>
             Do you recommend this product?&nbsp;&nbsp;
             <input type="radio" id="modal-recommend-yes" text="yes" value="true" name="modal-recommendation" />
             <label htmlFor="modal-recommend-yes">Yes</label>
@@ -302,19 +305,22 @@ class AddReviewModal extends React.Component {
           </form>
           {/* Characteristics Radio Buttons */}
           <CharacteristicsInputs
-            metadata={this.props.metadata}
-            handleComfortSelect={this.handleComfortSelect}
-            handleFitSelect={this.handleFitSelect}
-            handleLengthSelect={this.handleLengthSelect}
-            handleQualitySelect={this.handleQualitySelect}
-            handleSizeSelect={this.handleSizeSelect}
-            handleWidthSelect={this.handleWidthSelect}
-            characteristicsState={this.state.characteristics}
-          />
+           metadata = {this.props.metadata}
+           handleComfortSelect = {this.handleComfortSelect}
+           handleFitSelect = {this.handleFitSelect}
+           handleLengthSelect = {this.handleLengthSelect}
+           handleQualitySelect = {this.handleQualitySelect}
+           handleSizeSelect = {this.handleSizeSelect}
+           handleWidthSelect = {this.handleWidthSelect}
+           characteristicsState = {this.state.characteristics}
+           />
+
+
+
           {/* Review summary and body */}
           <form>
             <br></br>
-            Review Summary: <input onChange={this.handleReviewSummaryChange} maxLength="60" placeholder="Example: Best purchase ever!" size="40" />
+            Review Summary: <input data-testid = 'addReview-summary-change' onChange={this.handleReviewSummaryChange} maxLength="60" placeholder="Example: Best purchase ever!" size="40" />
           </form>
           <br></br>
           Review Body:
@@ -326,6 +332,7 @@ class AddReviewModal extends React.Component {
               placeholder="Why did you like the product or not?"
               font="Times New Roman"
               minLength="50"
+              data-testid = 'addReview-body-change'
             />
             <div>{this.remainingCharacters()}</div>
           </form>
@@ -341,6 +348,7 @@ class AddReviewModal extends React.Component {
                   name="filename"
                   text={"Submit Photo(s)"}
                   onChange={this.handlePictureAdd}
+                  data-testid='addReview-picture-add'
                   multiple
                 />
               </div>
@@ -367,7 +375,7 @@ class AddReviewModal extends React.Component {
           <br></br>
           {/* Email field */}
           <form className="modal-email-field">
-            Email: <input onChange={this.handleEmailChange} type="text" maxLength="60" placeholder="Example: jackson11@email.com" />
+            Email: <input data-testid='addReview-email-input'onChange={this.handleEmailChange} type="text" maxLength="60" placeholder="Example: jackson11@email.com" />
             <br></br>
             <small>
               <i>For authentication reasons, you will not be emailed</i>
@@ -375,7 +383,7 @@ class AddReviewModal extends React.Component {
           </form>
           <br></br>
           <form>
-            <button className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
+            <button data-testid = 'addReview-submit-button' className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
           </form>
