@@ -3,6 +3,7 @@ import { getProductById, getStylesById, prefetch, getStars } from "../../control
 import ImageCarousel from "./ImageCarousel.jsx";
 import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
+import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
   let [rating, setRating] = useState(0);
@@ -22,6 +23,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
   let [stock, setStock] = useState({});
+  let [previousImage, setPreviousImage] = useState(null);
 
   useEffect(() => {
     getProductById(product_id).then((data) => {
@@ -78,6 +80,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     console.log("productInfo: ", productInfo);
     console.log(stock);
     console.log(hoverIndex);
+    console.log("current: ", getDisplayImage());
+    console.log("previous: ", previousImage);
     addToCart(1394865, 1).then((response) => {
       console.log(response);
     });
@@ -170,6 +174,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        setPreviousImage={setPreviousImage}
+        usePrevious={usePrevious}
         rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
         incrementThumbnailIndex={incrementThumbnailIndex}
@@ -190,7 +196,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       <div className="overview-bottom-info">
         <BottomInformation></BottomInformation>
       </div>
-      <div style={{ visibility: "hidden", position: "absolute", top: "0", marginTop: "300px" }}>
+      <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);

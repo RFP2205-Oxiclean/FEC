@@ -3,7 +3,6 @@ import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
 import OverlayThumbnail from "./OverlayThumbnail.jsx";
 import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
-import usePrevious from "../../components/commonComponents/usePreviousHook.jsx";
 import { CSSTransition } from "react-transition-group";
 
 const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex }) => {
@@ -11,7 +10,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   let [hideDown, setHideDown] = useState(true);
   let [hideUp, setHideUp] = useState(false);
   let [displayArr, setDisplayArr] = useState([]);
-  let prevActiveIndex = usePrevious(activeThumbnailIndex);
 
   useEffect(() => {
     // if (activeThumbnailIndex > 6) {

@@ -26,6 +26,45 @@
 } */
 
 
+
+.overview-nice-select-options, .overview-nice-select, .overview-hidden-select {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid black;
+  line-height: 26px;
+  height: 25px;
+  outline: 0;
+  padding-right: 10px;
+  width: 150px;
+  border-top: none;
+  cursor: default;
+}
+
+.overview-hidden-select {
+  visibility: hidden;
+  height: 25px;
+}
+
+.overview-nice-select {
+  border-top: 1px solid black;
+}
+
+.overview-nice-select-options:hover, .overview-nice-select:hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.magnifying-glass-container {
+  display: flex;
+  cursor: url(magnifyingGlass.svg), auto;
+}
+
+.magnifying-glass-container-no-cursor {
+  display: flex;
+  cursor: none;
+}
+
 .overview-image-container {
   position: relative;
   overflow: hidden;
@@ -403,7 +442,23 @@ img {
   text-align: center;
 }
 
+.image-fade-in {
+  animation: fadeIn 1.0s;
+}
 
+.image-fade-out {
+  animation: fadeOut .3s;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;};
+  100% {opacity: 1;};
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1.0;};
+  100% {opacity: .5;};
+}
 
 select {
   background-color: #ffffff;
@@ -448,6 +503,44 @@ select:active {
   transition: visibility 0s .3s, opacity .3s linear;
 }
 
+.fade-out {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 0;
+
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms linear;
+}
+
+.fade-exit-done {
+  opacity: 0;
+}
+
+.fade-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transform: opacity 1000ms linear;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 0;
+  transform: opacity 1000ms linear;
+}
+
 /* .select-prompt-fadeOut::after {
   opacity: 0;
 } */
@@ -489,28 +582,6 @@ select:active {
   border: 1px solid #8ca4c8;
   box-shadow: -10px 8px 5px -2px rgb(148, 147, 147);
 }
-
-.fade-appear {
-  opacity: 0;
-}
-
-.fade-appear.fade-appear-active {
-  opacity: 1;
-  transition: opacity 2000ms linear;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-  transition: opacity 300ms linear;
-}
-
-.fade-enter {
-  opacity: 1;
-}
-
 
 .related-items {
   height: 25%;

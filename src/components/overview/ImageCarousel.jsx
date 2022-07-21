@@ -3,6 +3,7 @@ import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
 import ThumbnailContainer from "./ThumbnailContainer.jsx";
 import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
 import CollapseButton from "./CollapseButton.jsx";
+import MagnifyingGlass from "./MagnifyingGlass.jsx";
 
 const ImageCarousel = ({
   image,
@@ -27,6 +28,12 @@ const ImageCarousel = ({
     callback();
   };
 
+  useEffect(() => {
+    console.log("is called whenever display image changes");
+  }, [activeDisplayIndex, activeThumbnailIndex]);
+
+  let fadeOut = function () {};
+
   return (
     <div className="overview-image-container" data-testid="image-carousel">
       <button
@@ -41,7 +48,7 @@ const ImageCarousel = ({
         className="scroll-left">
         Left
       </button>
-      <img data-testid="display-image" src={createCloudinaryDisplayURL(image)}></img>
+      <MagnifyingGlass image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
       <ThumbnailContainer
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}

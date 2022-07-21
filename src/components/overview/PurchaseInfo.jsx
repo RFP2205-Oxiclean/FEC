@@ -5,13 +5,16 @@ import AddToCart from "./AddToCart.jsx";
 import { addToCart } from "../../controllers.js";
 import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
+import NiceSelectMenu from "./NiceSelectMenu.jsx";
 
-const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
+const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
+  let [sizeOpen, setSizeOpen] = useState(false);
+  let [selectedSize, setSelectedSize] = useState(null);
 
   useEffect(() => {
     let flag = false;
@@ -26,10 +29,14 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
     });
   }, [stock]);
 
+  let myDebugger = function () {
+    console.log(selectedSize);
+  };
+
   return (
     <div data-testid="purchase-info" className="overview-purchase-info">
       <div style={{ display: "inline-block", textAlign: "center", width: "100%" }}>
-        <span className="purchase-style-name">{activeStyle.name}</span>
+        <span className="purchase-style-name">{styleInfo.name}</span>
       </div>
       <div>
         <div data-testid="select-prompts">
@@ -44,13 +51,29 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) => {
           )}
         </div>
         <div className="purchase-buttons-container1">
+          <button
+            onClick={() => {
+              myDebugger();
+            }}>
+            selectedSize
+          </button>
+          <NiceSelectMenu
+            disableCondition={"Out of Stock!"}
+            defaultValue={selectedSize !== null ? selectedSize : "Select a Size!"}
+            setSelectedSize={setSelectedSize}
+            sizeOpen={sizeOpen}
+            setSizeOpen={setSizeOpen}
+            isOpen={false}
+            defaultValue={selectedSize ? selectedSize : "Select a Size!"}
+            options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
+          {/*
           <SizeMenu
             stock={stock}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
             setStockId={setStockId}
-            selectQuantity={selectQuantity}></SizeMenu>
+            selectQuantity={selectQuantity}></SizeMenu> */}
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div className="purchase-buttons-container2">

@@ -27,13 +27,15 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
                 position: "absolute",
                 top: "0",
                 right: "0",
+                marginTop: "-12px",
+                marginRight: "-12px",
                 zIndex: "3",
-                background: "white",
-                color: "green",
-                marginTop: "-3px",
+                background: "transparent",
+                fontSize: "25px",
+                color: "black",
                 borderRadius: "50%",
               }}
-              className="fa-solid fa-square-check"></i>
+              className="fa-solid fa-check"></i>
             <img src={createCloudinaryThumbnailURL(styleObject?.photos[0].thumbnail_url)}></img>
           </div>
         </div>

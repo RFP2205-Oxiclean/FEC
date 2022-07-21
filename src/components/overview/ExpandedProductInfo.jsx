@@ -58,11 +58,11 @@ const ExpandedProductInfo = ({
         </div>
         <div className="overview-category">{productInfo?.category}</div>
         <div className="overview-expanded-product-info">
-          <Price styleInfo={styleInfo}></Price>
+          <Price activeStyle={styleObjects[activeDisplayIndex]} styleInfo={styleInfo}></Price>
           <span className="overview-expanded-product-info-name">{productInfo.name}</span>
         </div>
         <div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}>
-          <span className="overview-expanded-product-info-style">{styleInfo.name}</span>
+          <span className="overview-expanded-product-info-style">{styleObjects[activeDisplayIndex].name}</span>
         </div>
         <StylesContainer
           setActiveDisplayIndex={setActiveDisplayIndex}
@@ -70,6 +70,7 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          styleInfo={styleInfo}
           handleAddToCart={handleAddToCart}
           stock={stock[styleObjects[activeDisplayIndex].style_id]}
           activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
