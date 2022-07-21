@@ -19,7 +19,6 @@ class AnswerList extends React.Component {
             loadMoreState: 'nonexistant',
             answersToLoad : 2,
             loadMoreStateList : ['nonexistant','decrease','increase'],
-            sellerStatus:false,
         }
     }
 

@@ -9,93 +9,135 @@ class QuestionList extends React.Component {
         super(props);
         this.questionsToLoad  = 2;
         this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        this.state = this.initialStateValues();
-        this.loadInitialQuestions();
-    }
+        this.loadedQuestions = this.sortedByHelpful.slice(0,this.questionsToLoad);
 
-    initialStateValues () {
-        let initState = {
-            oldQuestions: JSON.stringify(this.sortedByHelpful),
-            loadedQuestions : [],
-            loadMoreStateList : ['nonexistant','decrease','increase'],
-        }
-        initState.loadMoreState = this.getCurrentState();
-        return initState
+        this.loadMoreStateList = ['nonexistant','decrease','increase'];
+        this.state = {
+            oldQuestions : [],
+            oldLength : 0
+        };
+        this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
+        this.state.oldQuestions = this.createArrayOfQuestionIds(this.props.questions)
+        this.state.loadMoreState = this.getCurrentState();
+        //console.log(this.state.loadMoreState,"lm on creation")
     }
 
     getCurrentState() {
-        if (this.props.questions.length > 0 && this.props.questions.length - this.questionsToLoad > 0 ) {
-            return 'increase';
-        } else if (this.props.questions.length === this.questionsToLoad ) {
-            return 'nonexistant';
+        console.log("insie gcs")
+        if (this.props.questions.length > 0 && this.props.questions.length - this.state.amountOfQuestionsLoaded > 0 ) {
+            return this.loadMoreStateList[2];
+        } else if (this.props.questions.length <= this.questionsToLoad ) {
+            //console.log(this.props.questions, this.state.amountOfQuestionsLoaded , "WHY ")
+            return this.loadMoreStateList[0];
+            console.log("no chacne")
+        } else {
+            //console.log(this.props.questions, this.state.amountOfQuestionsLoaded, 'before 1' )
+            return this.loadMoreStateList[1];
         }
     }
 
     sortQuestionsByHelpfulness(questions) {
-        let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness));
+        let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness)); //refactor without js sort
         return result;
     }
 
-    loadInitialQuestions () {
-        for(let i = 0; i < this.questionsToLoad; i++) {
-            this.state.loadedQuestions.push(this.sortedByHelpful[i]);
+    createArrayOfQuestionIds (listData) {
+        let result = [];
+        for(let i = 0; i < listData.length; i++) {
+            result.push(listData[i].question_id);
         }
+        //console.log(result, 'restuls')
+        return result;
+    }
+
+    compareArraysOfIds (one,two) {
+        let result = true;
+        //console.log(one ,two, "what is going on")
+        if (one === undefined && two !== undefined) {
+            return false;
+        } else if (two === undefined && one !== undefined) {
+            return false;
+        } else if (one === undefined && two === undefined) {
+            return true;
+        } else if (one.length !== two.length) {
+            return false;
+        } else {
+            for (let i = 0 ; i < one.length; i++) {
+                if (one[i] !== two[i]) {
+                    result = false;
+                    return result;
+                }
+            }
+        }
+        //console.log(one ,two, "what is going on")
+        return result;
     }
 
 
-    componentDidUpdate() {
-        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        let propsString = JSON.stringify(this.sortedByHelpful);
-            if(propsString  !== this.state.oldQuestions) {
-                this.state.oldQuestions = propsString;
-                this.loadInitialQuestions();
-                this.setState(JSON.parse(JSON.stringify(this.state)));
-                console.log(this.props.questions)
-           }
-    }
-
-    loadMoreGone() {
-        this.state.loadMoreState = this.state.loadMoreStateList[0];
-        this.state.loadedQuestions = this.sortedByHelpful;
-        this.setState(JSON.parse(JSON.stringify(this.state)));
-    }
-
-    loadMoreDecrease() {
-        this.state.loadMoreState = this.state.loadMoreStateList[1];
-        this.state.loadedQuestions = this.sortedByHelpful;
-        this.setState(JSON.parse(JSON.stringify(this.state)));
-    }
-
-    resetState() {
-        this.state = this.initialStateValues();
-        this.setState(JSON.parse(JSON.stringify(this.state)));
-        this.loadMoreQuestions();
-    }
-
-    loadMoreIncrease() {
-        let newSlice = this.sortedByHelpful.slice(0,this.state.loadedQuestions.length + this.questionsToLoad);
-        this.state.loadMoreState = this.state.loadMoreStateList[2];
-        this.state.loadedQuestions = newSlice;
-        this.setState(JSON.parse(JSON.stringify(this.state)));
+    componentDidUpdate(){
+        if(!this.compareArraysOfIds(this.state.oldQuestions, this.createArrayOfQuestionIds(this.props.questions))){ //check to see that questions have updated, or dont change state,
+            //has to check if questions have changed
+            this.resetState();
+            //this.loadMoreQuestions();
+            //this.state.loadMoreState = this.getCurrentState();
+            //this.setState(JSON.parse(JSON.stringify(this.state)));
+            //console.log(this.state.loadMoreState, "lm state")
+        } else if (this.state.oldLength !== this.state.amountOfQuestionsLoaded) { // question expansion has changed
+            this.state.oldLength = this.state.amountOfQuestionsLoaded;
+            this.state.loadMoreState = this.getCurrentState();
+            this.setState(JSON.parse(JSON.stringify(this.state)));
+        }
+        //do check and resete
     }
 
 
-
-
-    // main function
-    loadMoreQuestions(initialStep) {
+// main function
+    loadMoreQuestions() {
         if (this.sortedByHelpful.length <= this.questionsToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length <= this.questionsToLoad) { // decrease
-            if (this.state.loadMoreState !== this.state.loadMoreStateList[1]) {
+        } else if (this.sortedByHelpful.length - this.loadedQuestions.length <= this.questionsToLoad) { // decrease
+            if (this.state.loadMoreState !== this.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.sortedByHelpful.length - this.state.loadedQuestions.length > this.questionsToLoad) { //increase
+        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded > this.questionsToLoad) { //increase
             this.loadMoreIncrease();
         }
     }
+
+    loadMoreGone() {
+        this.loadedQuestions = this.sortedByHelpful;
+        this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+    loadMoreDecrease() {
+        this.loadedQuestions = this.sortedByHelpful;
+        this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+    resetState() {
+        this.state.oldQuestions = this.createArrayOfQuestionIds(this.props.questions);
+        this.state.amountOfQuestionsLoaded = this.questionsToLoad;
+        this.state.loadMoreState = this.getCurrentState();
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
+        this.loadedQuestions = this.sortedByHelpful.slice(0,this.questionsToLoad);
+    }
+    //hellper
+    loadMoreIncrease() {
+        let newSlice = this.sortedByHelpful.slice(0,this.state.amountOfQuestionsLoaded + this.questionsToLoad);
+        this.loadedQuestions = newSlice;
+        this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
+        this.setState(JSON.parse(JSON.stringify(this.state)));
+    }
+
+
+
+
+
 
 
 
@@ -107,15 +149,14 @@ class QuestionList extends React.Component {
                 <div className="qc-wrapper">
                     <div id="question-container">
                         <ul id="question-list">
-                            {this.state.loadedQuestions.map((question, index)=> {
-                                return <Question question={question} key={index} data-testid="individual-question" productId={this.props.productId} product={this.props.product}/>
+                            {this.loadedQuestions.map((question)=> { //use id from questions rather than index
+                                return <Question question={question} key={question.question_id} data-testid="individual-question" productId={this.props.productId} product={this.props.product}/>
                             })}
                         </ul>
                     </div>
-                    <MoreQuestions data-testid="more-questions button" loadMoreStateList={this.state.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)}/>
+                    <MoreQuestions  loadMoreStateList={this.loadMoreStateList} loadMoreState={this.state.loadMoreState} clickHandler={this.loadMoreQuestions.bind(this)} />
                     <AddQuestion data-testid="add-question-button" productId={this.props.productId} product={this.props.product} />
                 </div>
-
             </div>
             )
     }

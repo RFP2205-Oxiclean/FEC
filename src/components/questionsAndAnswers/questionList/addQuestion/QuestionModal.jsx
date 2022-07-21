@@ -14,10 +14,20 @@ class QuestionModal extends React.Component {
         }
     }
 
+    validateEmail() { // add more details later
+      if (this.state.email.length < 4 || this.state.email.indexOf('@') === -1
+      || this.state.email.indexOf(' ') !== -1 || this.state.email.indexOf('.') === -1
+      || this.state.email.indexOf('.') === this.state.email.length-1
+      ){
+        return true;
+      }
+      return false;
+    }
+
     authenticateOrError () {
       if(!this.state.name.length) {
         alert("Invalid Username")
-      } else if (this.state.email.length < 1 || this.state.email.indexOf('@') === -1) {
+      } else if (this.validateEmail()) {
         alert("Invalid Email")
       } else if (!this.state.input) {
         alert("You need to enter a answer")
@@ -51,21 +61,23 @@ class QuestionModal extends React.Component {
                     <div className="modal-container" >
                       <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler} data-testid="q-exit" />
                       <h1>Ask your Question</h1>
+                      {console.log(this.props.product, "this is what youre looking for ")}
                       <h3>About the {this.props.product.name}</h3>
+
                       <form className="form">
-                          <textarea className="user-input" type="text" maxLength="1000" placeholder="Please, enter your question here..." onChange={(event)=>this.onInputChangeState('input',event.target.value)} />
+                          <textarea className="user-input" data-testid="text-input" type="text" maxLength="1000" placeholder="Please, enter your question here..." onChange={(event)=>this.onInputChangeState('input',event.target.value)} />
                           <div className="name-wrap">
-                              NickName : <input className="user-name" type="text" maxLength="60" placeholder="Example: jackson11!" onChange={(event)=>this.onInputChangeState('name',event.target.value)} />
+                              NickName : <input className="user-name" type="text" maxLength="60" data-testid="user-name-input" placeholder="Example: jackson11!" onChange={(event)=>this.onInputChangeState('name',event.target.value)} />
                               <b className="disclaimer-n">For privacy reasons, do not use your full name or email address</b>
                           </div>
 
                           <div className="email-wrap">
-                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Why did you like the product or not?" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
+                              Email : <input className="user-email" type="email" maxLength="60" data-testid="email-input" placeholder="Jackson11@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
                               <b className="disclaimer-e">For authentication reasons, you will not be emailed</b>
                           </div>
 
 
-                          <input className="user-submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
+                          <input className="user-submit" type="button" value="Submit" data-testid="submit" onClick={this.authenticateOrError.bind(this)}  />
 
                       </form>
                     </div>

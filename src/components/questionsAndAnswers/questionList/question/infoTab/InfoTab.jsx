@@ -25,7 +25,7 @@ class InfoTab extends React.Component {
     render() { // &nbsp; is a whitespace character
         let yesData = this.props.activeHelpful ? this.props.question.question_helpfulness : this.props.question.question_helpfulness + 1;
         let yes = <p className="helpful-event"  >Yes ({yesData})</p>;
-        let add = <p className="add-answer-event " onClick={this.toggleModal.bind(this)}>Add Answer</p>;
+        let add = <p className="add-answer-event " data-testid="add-answer-button" onClick={this.toggleModal.bind(this)}>Add Answer</p>;
         let answerModal = this.state.activeModal ? <AnswerModal question={this.props.question} clickHandler={this.toggleModal.bind(this)} product={this.props.product} /> : null
 
             return (

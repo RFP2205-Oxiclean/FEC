@@ -23,7 +23,7 @@ class Photo extends React.Component {
         }
 
         return (
-            <div className="photo-container" onClick={this.toggleModal.bind(this)}>
+            <div className="photo-container" data-testid="individual-answer-photo" onClick={this.toggleModal.bind(this)}>
                 <img src={this.props.url} className="photo" />
                 {modal}
             </div>)

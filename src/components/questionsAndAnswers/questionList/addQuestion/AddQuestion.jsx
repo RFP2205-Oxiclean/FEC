@@ -25,7 +25,7 @@ class AddQuestion extends React.Component {
        let modal = this.state.activeModal ? <QuestionModal data={this.props.data} clickHandler={this.toggleModal.bind(this)} product={this.props.product} productId={this.props.productId}/> : null
       return (
         <div className="button-wrapper">
-            <div className="interactive-buttons add-a" onClick={this.toggleModal.bind(this)}>ADD A QUESTION +</div>
+            <div className="interactive-buttons add-a" data-testid="add-question-button" onClick={this.toggleModal.bind(this)}>ADD A QUESTION +</div>
             {modal}
         </div>
 

@@ -7,6 +7,10 @@ import {render, fireEvent, screen} from '@testing-library/react'
 import QuestionList from './../../src/components/questionsAndAnswers/questionList/QuestionList.jsx';
 
 
+
+const default_questions = 2;
+
+
 //these are fake questions to check without wasting get requests
 
 let fakeQuestions = [{
@@ -147,34 +151,113 @@ let fakeQuestions = [{
 
 
 
-it('Should only load 2 questions on creation', () => {
-  render (<div className="who">
-        <QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />
-      </div>);
+it('Should only load up to default questions on creation', () => {
+  render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
 
-  expect(screen.getAllByTestId("individual-question").length).toBe(2);
+  expect(screen.queryAllByTestId("individual-question").length).toBe(default_questions);
+  expect(screen.queryAllByText("COLLAPSE QUESTIONS").length).toBe(0)
+    expect(screen.queryAllByText("MORE ANSWERED QUESTIONS").length).toBe(1)
+});
+
+it('The expand questions button should not exist if there are less than the default load amount', () => {
+  render (<QuestionList questions={fakeQuestions.slice(0,2)} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+
+  expect(screen.queryAllByTestId("individual-question").length).toBe(default_questions);
+  expect(screen.queryAllByText("COLLAPSE QUESTIONS").length).toBe(0);
+  expect(screen.queryAllByText("MORE ANSWERED QUESTIONS").length).toBe(0);
 
 });
 
-it('Should load 3 questions on update', () => {
+it('Should expand to all questions on update, and change buttom from increase to collapse', () => {
 
-  render (<div className="who">
-        <QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />
-      </div>);
+  render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
 
-    fireEvent.click()
-  expect().toBe(3);
+    fireEvent.click(screen.getByTestId("more-questions-button"))
+    expect(screen.queryAllByTestId("individual-question").length).toBe(3);
+    expect(screen.queryAllByText("COLLAPSE QUESTIONS").length).toBe(1);
+    expect(screen.queryAllByText("MORE ANSWERED QUESTIONS").length).toBe(0);
 
 });
 
 
 
 
+it('It should display a photo modal on image click in answers', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("photo-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("individual-answer-photo")[1]);
+    expect(screen.queryAllByTestId("photo-modal").length).toBe(1);
+  });
+
+  it('It should display an answer modal on clicking add answer', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-answer-button")[0]);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(1);
+  });
+
+  it('It should have an input for username, photos, text and email in answer modal', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-answer-button")[0]);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(1);
+    expect(screen.queryAllByTestId("user-name-input").length).toBe(1);
+    expect(screen.queryAllByTestId("email-input").length).toBe(1);
+    expect(screen.queryAllByTestId("text-input").length).toBe(1);
+    expect(screen.queryAllByTestId("photo-upload-input").length).toBe(1);
+  });
 
 
+  it('Answer modal form should fail to submit due to authentication error ', () => {
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-answer-button")[0]);
+    expect(screen.queryAllByTestId("answer-modal").length).toBe(1);
+    fireEvent.change(screen.queryAllByTestId("email-input")[0], {target: {value : 'abc'}})
+    fireEvent.click(screen.queryAllByTestId("submit")[0]);
+    setTimeout(100,()=>{
+        expect(screen.queryAllByTestId("answer-modal").length).toBe(1);
+    } )
 
 
+  });
 
+
+  it('It should display a question modal on clicking add question', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("question-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-question-button")[0]);
+    expect(screen.queryAllByTestId("question-modal").length).toBe(1);
+  });
+
+
+  it('It should have an input for username, email and input in the question modal', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("question-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-question-button")[0]);
+    expect(screen.queryAllByTestId("question-modal").length).toBe(1);
+    expect(screen.queryAllByTestId("user-name-input").length).toBe(1);
+    expect(screen.queryAllByTestId("email-input").length).toBe(1);
+    expect(screen.queryAllByTestId("text-input").length).toBe(1);
+    expect(screen.queryAllByTestId("photo-upload-input").length).toBe(0);
+  });
+
+  it('Question Modal Form should fail to submit due to auithentication', () => {
+
+    render (<QuestionList questions={fakeQuestions} productId={fakeProductInfo.id} product={fakeProductInfo} />);
+    expect(screen.queryAllByTestId("question-modal").length).toBe(0);
+    fireEvent.click(screen.queryAllByTestId("add-question-button")[0]);
+    fireEvent.change(screen.queryAllByTestId("email-input")[0], {target: {value : 'abc'}})
+    fireEvent.click(screen.queryAllByTestId("submit")[0]);
+    setTimeout(100,()=>{
+        expect(screen.queryAllByTestId("question-modal").length).toBe(1);
+    } )
+  });
 
 
 
