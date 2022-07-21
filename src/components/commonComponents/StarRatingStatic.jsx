@@ -5,7 +5,7 @@ const StarRatingStatic = (props) => {
 };
 
 export function StarRatingStatic2(props) {
-  return <div className="stars2" style={{ fontSize: "25px", "--rating": props.rating }}></div>;
+  return <div className="stars2" style={{ fontSize: "20px", "--rating": props.rating }}></div>;
 }
 
 export default StarRatingStatic;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProductById, getStylesById, prefetch, getStars } from "../../controllers.js";
+import { getProductById, getStylesById, prefetch, getStars, getReviewList } from "../../controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
 import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
@@ -28,10 +28,14 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   const [expanded, setExpanded] = useState(false);
   const [magnified, setMagnified] = useState(false);
   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
+  let [reviewListLength, setReviewListLength] = useState(0);
 
   let pingCart = function () {};
 
   useEffect(() => {
+    getReviewList(product_id).then((response) => {
+      setReviewListLength(response.data.results.length);
+    });
     getProductById(product_id).then((data) => {
       setProductInfo(data);
     });
@@ -80,8 +84,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     // console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
     console.log("styleObjects: ", styleObjects);
     console.log("productInfo ", productInfo);
-    console.log(getCart());
-    console.log(addToCartPrompt);
+    // console.log(getCart());
+    // console.log(addToCartPrompt);
+    console.log("reviewListLength: ", reviewListLength);
     // console.log("photoObjects");
     // console.log("activeThumbnailIndices: ", activeThumbnailIndices);
     // console.log("activeDisplayIndex: ", activeDisplayIndex);
@@ -179,9 +184,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       })
       .then(() => {
         setAddToCartPrompt(true);
-        setTimeout(() => {
-          setAddToCartPrompt(false);
-        }, 5000);
       })
       .catch((err) => console.log("failed to post"));
   };
@@ -189,6 +191,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}
         setMagnified={setMagnified}

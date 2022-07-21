@@ -14,8 +14,8 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
-  // let [sizeOpen, setSizeOpen] = useState(false);
-  // let [selectedSize, setSelectedSize] = useState(null);
+  let [sizeOpen, setSizeOpen] = useState(false);
+  let [selectedSize, setSelectedSize] = useState(null);
   let [defaultSizeValue, setDefaultSizeValue] = useState("Select a Size!");
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
           {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
-          {/* <NiceSelectMenu
+          <NiceSelectMenu
             disableCondition={"Out of Stock!"}
             defaultValue={defaultSizeValue}
             selectHook={setSelectedSize}
@@ -62,15 +62,15 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
             sizeOpen={sizeOpen}
             defaultValue={selectedSize ? selectedSize : "Select a Size!"}
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
-          <NiceSelectMenu width={80}></NiceSelectMenu> */}
-          <SizeMenu
+          <NiceSelectMenu width={80}></NiceSelectMenu>
+          {/* <SizeMenu
             stock={stock}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
+          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu> */}
         </div>
         <div className="purchase-buttons-container2">
           <div>

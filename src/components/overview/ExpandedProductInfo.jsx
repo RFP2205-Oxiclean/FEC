@@ -23,6 +23,7 @@ const ExpandedProductInfo = ({
   setCollapsePanel,
   magnified,
   setAddToCartPrompt,
+  reviewListLength,
 }) => {
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
@@ -52,13 +53,17 @@ const ExpandedProductInfo = ({
         <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-right"></i>
       </div>
       <div className={"overview-expanded-product-panel"}>
-        <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
-          <StarRatingStatic2 rating={rating}></StarRatingStatic2>
-          <a href="#top-of-reviews" style={{ color: "rgb(92 92 211)", fontWeight: "bold", marginLeft: "10px", marginTop: "auto" }}>
-            Read All Reviews
-          </a>
-          {/* <a id="facebook_ads_example">This is the Facebook ad example I want to link to.</a> */}
-        </div>
+        {reviewListLength !== 0 ? (
+          <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
+            <StarRatingStatic2 rating={rating}></StarRatingStatic2>
+            <a href="#top-of-reviews" style={{ color: "rgb(92 92 211)", marginLeft: "10px", marginTop: "auto" }}>
+              Read All Reviews ({reviewListLength})
+            </a>
+          </div>
+        ) : (
+          <div></div>
+        )}
+
         <div className="overview-category">{productInfo?.category}</div>
         <div className="overview-expanded-product-info">
           <Price activeStyle={styleObjects[activeDisplayIndex]} styleInfo={styleInfo}></Price>
