@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
 
-const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, backup, collapsePanel, expanded }) => {
+const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, backup, collapsePanel }) => {
   let [defaultImage, setDefaultImage] = useState(createCloudinaryThumbnailURL(image));
 
   let handleClick = function () {
@@ -16,8 +16,6 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
 
   if (collapsePanel) {
     if (active) {
-      console.log(collapsePanel);
-      console.log(expanded);
       return <div className="overview-small-icon-active"></div>;
     } else {
       return (

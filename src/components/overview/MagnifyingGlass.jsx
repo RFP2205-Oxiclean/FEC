@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 
-const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, setCollapsePanel, enabled, setEnabled }) => {
+const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, setCollapsePanel, magnified, setMagnified }) => {
   let [left, setLeft] = useState(0);
   let [top, setTop] = useState(0);
   let [containerCoords, setContainerCoords] = useState([0, 0]);
@@ -30,20 +30,20 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
         }
       }}>
       <div
-        className={enabled ? "overview-image-container-minus" : ""}
+        className={magnified ? "overview-image-container-minus" : ""}
         onMouseDown={(e) => {
           if (e.button === 0) {
             if (collapsePanel) {
-              setEnabled(!enabled);
+              setMagnified(!magnified);
             }
           } else if (e.button === 1) {
             setCollapsePanel(false);
             setExpanded(false);
-            setEnabled(false);
+            setMagnified(false);
           }
         }}
         onMouseLeave={() => {
-          setEnabled(false);
+          setMagnified(false);
         }}
         onMouseMove={(e) => {
           getCoords(e);
@@ -51,10 +51,10 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
         onMouseEnter={(e) => {
           setContainerCoords([e.currentTarget.getBoundingClientRect().top, e.currentTarget.getBoundingClientRect().left]);
         }}>
-        <div style={enabled ? { opacity: 0.8 } : { opacity: 1 }}>
+        <div style={magnified ? { opacity: 0.8 } : { opacity: 1 }}>
           <img src={image}></img>
         </div>
-        {enabled ? (
+        {magnified ? (
           <div
             className="magnifying-glass"
             style={{

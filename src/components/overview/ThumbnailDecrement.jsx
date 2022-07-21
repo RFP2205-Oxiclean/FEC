@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ThumbnailDecrement = ({ callback, displayArr }) => {
+const ThumbnailDecrement = ({ callback, displayArr, magnified }) => {
   let [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const ThumbnailDecrement = ({ callback, displayArr }) => {
   return (
     <div
       data-testid="thumbnail-decrement"
-      style={hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }}
+      style={magnified || hidden ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }}
       className="thumbnail-decrement">
       <button
         onClick={() => {

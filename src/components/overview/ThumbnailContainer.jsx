@@ -5,7 +5,7 @@ import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
 import { CSSTransition } from "react-transition-group";
 
-const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex, collapsePanel, expanded, enabled }) => {
+const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex, collapsePanel, expanded, magnified }) => {
   let [startEnd, setStartEnd] = useState([0, 7]);
   let [hideDown, setHideDown] = useState(true);
   let [hideUp, setHideUp] = useState(false);
@@ -61,13 +61,27 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     setDisplayArr(newDisplay);
   };
 
-  if (enabled) {
+  if (magnified) {
     return;
   }
 
   return (
     <div className={collapsePanel ? "overview-collapse-thumbnail-container" : "overview-thumbnail-container"} data-testid="thumbnail-container">
-      <ThumbnailDecrement displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
+      <button
+        className={magnified ? "overview-hidden" : "scroll-left"}
+        onClick={() => {
+          console.log(magnified);
+          decrementThumbnailIndex();
+        }}
+        style={
+          activeThumbnailIndex === 0
+            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
+            : { position: "absolute", top: "50%", left: "15%" }
+        }
+        className="scroll-left">
+        Left
+      </button>
+      <ThumbnailDecrement magnified={magnified} displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
@@ -85,7 +99,7 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
           }
         }
       })}
-      <ThumbnailIncrement end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
+      <ThumbnailIncrement magnified={magnified} end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
     </div>
   );
 };

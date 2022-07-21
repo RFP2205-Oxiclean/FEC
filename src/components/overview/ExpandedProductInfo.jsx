@@ -19,18 +19,20 @@ const ExpandedProductInfo = ({
   activeThumbnailIndex,
   incrementThumbnailIndex,
   rating,
-  callHiding,
   collapsePanel,
   setCollapsePanel,
+  magnified,
 }) => {
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
       <div
+        className={magnified ? "overview-hidden" : "scroll-right"}
         onClick={() => {
+          console.log(magnified);
           incrementThumbnailIndex();
         }}
         style={
-          end === activeThumbnailIndex
+          end === activeThumbnailIndex || magnified
             ? { visibility: "hidden", position: "absolute" }
             : {
                 position: "absolute",

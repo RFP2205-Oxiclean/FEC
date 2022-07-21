@@ -21,58 +21,36 @@ const ImageCarousel = ({
   incrementThumbnailIndex,
   decrementThumbnailIndex,
   rating,
+  magnified,
+  collapsePanel,
+  expanded,
+  setMagnified,
+  setCollapsePanel,
+  setExpanded,
 }) => {
-  let [collapsePanel, setCollapsePanel] = useState(false);
-  let [expanded, setExpanded] = useState(false);
-  const [enabled, setEnabled] = useState(false);
-  let callHiding = function (callback) {
-    callback();
-  };
-
-  useEffect(() => {
-    if (collapsePanel) {
-      setExpanded(false);
-    }
-  }, [collapsePanel]);
-
-  useEffect(() => {
-    console.log("is called whenever display image changes");
-  }, [activeDisplayIndex, activeThumbnailIndex]);
-
   return (
     <div className={expanded ? "overview-image-container-minus" : "overview-image-container"} data-testid="image-carousel">
-      <button
-        onClick={() => {
-          decrementThumbnailIndex();
-        }}
-        style={
-          activeThumbnailIndex === 0
-            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
-            : { position: "absolute", top: "50%", left: "15%" }
-        }
-        className="scroll-left">
-        Left
-      </button>
       <MagnifyingGlass
-        setEnabled={setEnabled}
-        enabled={enabled}
+        decrementThumbnailIndex={decrementThumbnailIndex}
+        setMagnified={setMagnified}
+        magnified={magnified}
         setCollapsePanel={setCollapsePanel}
         collapsePanel={collapsePanel}
         expanded={expanded}
         setExpanded={setExpanded}
         image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
       <ThumbnailContainer
-        enabled={enabled}
+        magnified={magnified}
         collapsePanel={collapsePanel}
         expanded={expanded}
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        magnified={magnified}
         expanded={expanded}
         collapsePanel={collapsePanel}
         setCollapsePanel={setCollapsePanel}
-        callHiding={callHiding}
         rating={rating}
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
@@ -86,6 +64,7 @@ const ImageCarousel = ({
         productInfo={productInfo}
         styleObjects={styleObjects}></ExpandedProductInfo>
       <CollapseButton
+        magnified={magnified}
         setIsHiding={() => {
           setCollapsePanel(!collapsePanel);
         }}></CollapseButton>

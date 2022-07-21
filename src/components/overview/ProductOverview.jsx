@@ -24,6 +24,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [hoverIndex, setHoverIndex] = useState(null);
   let [stock, setStock] = useState({});
   let [previousImage, setPreviousImage] = useState(null);
+  const [collapsePanel, setCollapsePanel] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [magnified, setMagnified] = useState(false);
 
   useEffect(() => {
     getProductById(product_id).then((data) => {
@@ -174,6 +177,12 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        collapsePanel={collapsePanel}
+        setMagnified={setMagnified}
+        setExpanded={setExpanded}
+        magnified={magnified}
+        expanded={magnified}
+        setCollapsePanel={setCollapsePanel}
         setPreviousImage={setPreviousImage}
         usePrevious={usePrevious}
         rating={rating}
