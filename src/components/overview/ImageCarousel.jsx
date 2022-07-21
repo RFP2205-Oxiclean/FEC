@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { createCloudinaryDisplayURL } from "/src/services/Cloudinary.js";
+import React, { useState, useEffect, useRef } from "react";
+import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
 import ThumbnailContainer from "./ThumbnailContainer.jsx";
 import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
+import CollapseButton from "./CollapseButton.jsx";
 
 const ImageCarousel = ({
   image,
@@ -18,9 +19,16 @@ const ImageCarousel = ({
   handleAddToCart,
   incrementThumbnailIndex,
   decrementThumbnailIndex,
+  rating,
 }) => {
+  let [collapsePanel, setCollapsePanel] = useState(false);
+
+  let callHiding = function (callback) {
+    callback();
+  };
+
   return (
-    <div className="overview-image-container">
+    <div className="overview-image-container" data-testid="image-carousel">
       <button
         onClick={() => {
           decrementThumbnailIndex();
@@ -33,12 +41,16 @@ const ImageCarousel = ({
         className="scroll-left">
         Left
       </button>
-      <img src={createCloudinaryDisplayURL(image)}></img>
+      <img data-testid="display-image" src={createCloudinaryDisplayURL(image)}></img>
       <ThumbnailContainer
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        collapsePanel={collapsePanel}
+        setCollapsePanel={setCollapsePanel}
+        callHiding={callHiding}
+        rating={rating}
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
         end={photoObjects.length - 1}
@@ -50,6 +62,10 @@ const ImageCarousel = ({
         styleInfo={styleInfo}
         productInfo={productInfo}
         styleObjects={styleObjects}></ExpandedProductInfo>
+      <CollapseButton
+        setIsHiding={() => {
+          setCollapsePanel(!collapsePanel);
+        }}></CollapseButton>
     </div>
   );
 };

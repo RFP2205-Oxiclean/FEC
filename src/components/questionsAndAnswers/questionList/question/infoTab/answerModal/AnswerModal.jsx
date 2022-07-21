@@ -162,9 +162,9 @@ class AnswerModal extends React.Component {
                           </div>
 
 
-                          <div className="upload-msg">Upload up to 5 photos below:</div><input className="user-photos" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFiles(event.target.files)} onClick={this.clearPhotos.bind(this)}/>
+                          <div className="upload-msg">Upload up to 5 photos below:</div><input className="submit-photos-button" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFiles(event.target.files)} onClick={this.clearPhotos.bind(this)}/>
                           <PhotoList photos={this.state.photos}/>
-                          <input className="user-submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
+                          <input className="small-interactive-buttons" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
                       </form>
                   </div>
             </div>

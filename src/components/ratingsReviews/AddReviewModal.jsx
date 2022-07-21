@@ -1,11 +1,9 @@
-import React from 'react';
-import StarRatingUserInput from './StarRatingUserInput.jsx'
-import {url, API_KEY, IMG_API_KEY} from '/Users/jasonchiou/HR/FEC/config/config.js'
-import axios from 'axios';
-import {Image} from 'cloudinary-react'
-import CharacteristicsInputs from './CharacteristicsInputs.jsx'
-
-
+import React from "react";
+import StarRatingUserInput from "./StarRatingUserInput.jsx";
+import { url, API_KEY, IMG_API_KEY } from "/config/config.js";
+import axios from "axios";
+import { Image } from "cloudinary-react";
+import CharacteristicsInputs from "./CharacteristicsInputs.jsx";
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -279,13 +277,12 @@ class AddReviewModal extends React.Component {
     return false;
   }
 
-
   render() {
     return (
-      <div className="modal-background" data-testid = 'add-review-modal'>
-        <div className="modal-container">
+      <div className="modal-background" data-testid="add-review-modal">
+        <div className="addreview-modal-container">
           <div>
-            <button className="exit-modal-button" onClick={this.props.closeModal}>
+            <button className="modal-exit" onClick={this.props.closeModal}>
               &times;
             </button>
           </div>
@@ -296,7 +293,7 @@ class AddReviewModal extends React.Component {
           <StarRatingUserInput handleRatingChange={this.handleRatingChange} />
           {/* Recommendation Radio buttons */}
           <br></br>
-          <form data-testid = 'addReview-recommendation-change'onChange={this.handleRecommendationChange}>
+          <form data-testid="addReview-recommendation-change" onChange={this.handleRecommendationChange}>
             Do you recommend this product?&nbsp;&nbsp;
             <input type="radio" id="modal-recommend-yes" text="yes" value="true" name="modal-recommendation" />
             <label htmlFor="modal-recommend-yes">Yes</label>
@@ -305,22 +302,27 @@ class AddReviewModal extends React.Component {
           </form>
           {/* Characteristics Radio Buttons */}
           <CharacteristicsInputs
-           metadata = {this.props.metadata}
-           handleComfortSelect = {this.handleComfortSelect}
-           handleFitSelect = {this.handleFitSelect}
-           handleLengthSelect = {this.handleLengthSelect}
-           handleQualitySelect = {this.handleQualitySelect}
-           handleSizeSelect = {this.handleSizeSelect}
-           handleWidthSelect = {this.handleWidthSelect}
-           characteristicsState = {this.state.characteristics}
-           />
-
-
-
+            metadata={this.props.metadata}
+            handleComfortSelect={this.handleComfortSelect}
+            handleFitSelect={this.handleFitSelect}
+            handleLengthSelect={this.handleLengthSelect}
+            handleQualitySelect={this.handleQualitySelect}
+            handleSizeSelect={this.handleSizeSelect}
+            handleWidthSelect={this.handleWidthSelect}
+            characteristicsState={this.state.characteristics}
+          />
           {/* Review summary and body */}
           <form>
             <br></br>
-            Review Summary: <input data-testid = 'addReview-summary-change' onChange={this.handleReviewSummaryChange} maxLength="60" placeholder="Example: Best purchase ever!" size="40" />
+            Review Summary:{" "}
+            <input
+              data-testid="addReview-summary-change"
+              onChange={this.handleReviewSummaryChange}
+              maxLength="60"
+              placeholder="Example: Best purchase ever!"
+              size="40"
+              className="addReview-summary"
+            />
           </form>
           <br></br>
           Review Body:
@@ -332,7 +334,7 @@ class AddReviewModal extends React.Component {
               placeholder="Why did you like the product or not?"
               font="Times New Roman"
               minLength="50"
-              data-testid = 'addReview-body-change'
+              data-testid="addReview-body-change"
             />
             <div>{this.remainingCharacters()}</div>
           </form>
@@ -340,7 +342,7 @@ class AddReviewModal extends React.Component {
           <form>
             <br></br>
             {this.state.photos.length < 5 ? (
-              <div>
+              <div className = 'submit-photos-section'>
                 Submit Photos (optional): <br></br>
                 <input
                   className="submit-photos-button"
@@ -348,7 +350,7 @@ class AddReviewModal extends React.Component {
                   name="filename"
                   text={"Submit Photo(s)"}
                   onChange={this.handlePictureAdd}
-                  data-testid='addReview-picture-add'
+                  data-testid="addReview-picture-add"
                   multiple
                 />
               </div>
@@ -357,16 +359,20 @@ class AddReviewModal extends React.Component {
             )}
           </form>
           <span>
-            {this.state.photosForDisplay[0] && <img className="thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
-            {this.state.photosForDisplay[1] && <img className="thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
-            {this.state.photosForDisplay[2] && <img className="thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
-            {this.state.photosForDisplay[3] && <img className="thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
-            {this.state.photosForDisplay[4] && <img className="thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
+            {this.state.photosForDisplay[0] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
+            {this.state.photosForDisplay[1] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
+            {this.state.photosForDisplay[2] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
+            {this.state.photosForDisplay[3] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
+            {this.state.photosForDisplay[4] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
           </span>
           <br></br>
           {/* Nickname field */}
-          <form className="modal-nickname-field">
-            Nickname: <input onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!" />
+          <form >
+            Nickname:
+            <input
+              onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!"
+              className="user-name"
+            />
             <br />
             <small>
               <i>For privacy reasons, do not use your full name or email address</i>
@@ -375,7 +381,15 @@ class AddReviewModal extends React.Component {
           <br></br>
           {/* Email field */}
           <form className="modal-email-field">
-            Email: <input data-testid='addReview-email-input'onChange={this.handleEmailChange} type="text" maxLength="60" placeholder="Example: jackson11@email.com" />
+            Email:{" "}
+            <input
+              className = 'user-email'
+              data-testid="addReview-email-input"
+              onChange={this.handleEmailChange}
+              type="text"
+              maxLength="60"
+              placeholder="Example: jackson11@email.com"
+            />
             <br></br>
             <small>
               <i>For authentication reasons, you will not be emailed</i>
@@ -383,7 +397,7 @@ class AddReviewModal extends React.Component {
           </form>
           <br></br>
           <form>
-            <button data-testid = 'addReview-submit-button' className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
+            <button data-testid="addReview-submit-button" className="small-interactive-buttons" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
           </form>

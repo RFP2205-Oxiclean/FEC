@@ -61,12 +61,16 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     return active;
   }
 
+  var roundToQuarterDecimal =(num) => {
+    return (Math.round(num * 4) / 4).toFixed(2)
+  }
+
   return (
     <div className = "ratings-section-container" data-testid = 'ratings-section'>
       {console.log('metadata: ', metadata)}
       {metadata.ratings!== undefined ? <div>
       <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
-        <StarRatingStatic rating = {roundedAverage}/>
+        <StarRatingStatic rating = {roundToQuarterDecimal(roundedAverage)}/>
         <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
       </div>
 

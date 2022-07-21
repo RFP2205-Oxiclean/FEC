@@ -60,12 +60,12 @@ class QuestionModal extends React.Component {
                           </div>
 
                           <div className="email-wrap">
-                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Why did you like the product or not?" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
+                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Example: jackson11@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
                               <b className="disclaimer-e">For authentication reasons, you will not be emailed</b>
                           </div>
 
 
-                          <input className="user-submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
+                          <input className="small-interactive-buttons" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
 
                       </form>
                     </div>

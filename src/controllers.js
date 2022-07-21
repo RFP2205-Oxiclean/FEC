@@ -70,7 +70,7 @@ export function prefetch(styleObjects, product_id) {
 }
 
 export function addToCart(id, quantity) {
-  if (quantity > 0 && id !== 0) {
+  if (quantity > 0 && id) {
     let arr = Array(parseInt(quantity)).fill(0);
     return Promise.all(
       arr.map((el) => {
@@ -93,4 +93,51 @@ export function addToCart(id, quantity) {
       reject();
     });
   }
+}
+
+let cachedStars = {};
+
+export function getStars(product_id) {
+  if (cachedStars[product_id]) {
+    return new Promise((resolve, reject) => {
+      resolve(cachedStars[product_id]);
+    });
+  }
+  return controllerAxios2({
+    method: "GET",
+    url: `${url}/reviews/meta`,
+    params: {
+      product_id: product_id,
+    },
+    headers: {
+      Authorization: API_KEY,
+    },
+  }).then((response) => {
+    let metadata = response.data;
+    let sum =
+      parseInt(metadata.ratings[1]) +
+      2 * parseInt(metadata.ratings[2]) +
+      3 * parseInt(metadata.ratings[3]) +
+      4 * parseInt(metadata.ratings[4]) +
+      5 * parseInt(metadata.ratings[5]);
+
+    var totalRatings =
+      parseInt(metadata.ratings[1]) +
+      parseInt(metadata.ratings[2]) +
+      parseInt(metadata.ratings[3]) +
+      parseInt(metadata.ratings[4]) +
+      parseInt(metadata.ratings[5]);
+
+    var roundedAverage = Math.round((sum / totalRatings) * 10) / 10;
+
+    cachedStars[product_id] = roundedAverage;
+    return cachedStars[product_id];
+
+    // /* finding the recommended % */
+    // let totalRecommendations = parseInt(metadata.recommended.false) + parseInt(metadata.recommended.true);
+    // let numberRecommended = parseInt(metadata.recommended.true);
+
+    // var percentRecommended = Math.round((numberRecommended / totalRecommendations) * 100);
+    // return percentRecommended;
+  });
 }

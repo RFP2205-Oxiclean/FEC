@@ -20,6 +20,7 @@ class ReviewListEntry extends React.Component {
     this.showFullImage = this.showFullImage.bind(this);
     this.showThumbnailPhotos = this.showThumbnailPhotos.bind(this);
     this.closeImageModal = this.closeImageModal.bind(this);
+    this.roundToQuarterDecimal = this.roundToQuarterDecimal.bind(this);
   }
 
   checkBodyLongerThan250() {
@@ -68,7 +69,7 @@ class ReviewListEntry extends React.Component {
       if (this.state.showRemainingReviewBody === false) {
         return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
         <br></br>
-        <span><button className = 'show-more-review-body-button' onClick = {this.showRemainingReviewBody}>Show More</button></span>
+        <span><button className = 'small-interactive-buttons' onClick = {this.showRemainingReviewBody}>Show More</button></span>
           </div>
       } else {
         return <div>{this.props.review.body}</div>
@@ -111,6 +112,14 @@ class ReviewListEntry extends React.Component {
       imageToShow: null
     })
   }
+
+  roundToQuarterDecimal(num) {
+    console.log(num);
+    console.log(Math.round(num * 4) / 4).toFixed(2)
+    return (Math.round(num * 4) / 4).toFixed(2);
+  }
+
+
 
 
   debugReviewListEntry = (e) => {

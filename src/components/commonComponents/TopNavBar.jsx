@@ -2,13 +2,25 @@ import React from 'react';
 
 const TopNavBar = (props) => {
   return (
-    <p>
-      <a className = 'top-nav-left-bar'>SALE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WOMEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STYLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STORES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEARCH</a>
-      <a className = 'top-nav-title'>ATELIER</a>
-      <a className = 'top-nav-right-bar'>COUNTRY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGN IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WISHLIST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BAG (0)</a>
-
-    <hr></hr>
-    </p>
+    <div className = 'top-nav-bar'>
+      <span className = 'top-nav-left-bar'>
+        <span className = 'top-nav-left-bar-word'>SALE</span>
+        <span className = 'top-nav-left-bar-word'>WOMEN </span>
+        <span className = 'top-nav-left-bar-word'>MEN</span>
+        <span className = 'top-nav-left-bar-word'>STYLES</span>
+        <span className = 'top-nav-left-bar-word'>STORES</span>
+        <span className = 'top-nav-left-bar-word'>SEARCH</span>
+      </span>
+      <span className = 'top-nav-title-bar'>
+        <span className = 'top-nav-title-word'>ATELIER</span>
+      </span>
+      <span className = 'top-nav-right-bar'>
+        <span className = 'top-nav-right-bar-word'>COUNTRY</span>
+        <span className = 'top-nav-right-bar-word'>SIGN IN</span>
+        <span className = 'top-nav-right-bar-word'>WISHLIST</span>
+        <span className = 'top-nav-right-bar-word'>BAG (0)</span>
+      </span>
+    </div>
   )
 }
 

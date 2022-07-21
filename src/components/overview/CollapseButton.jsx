@@ -3,7 +3,8 @@ import React, { useState } from "react";
 const CollapseButton = ({ setIsHiding, isHiding }) => {
   return (
     <button
-      className="collapse-button"
+      data-testid="collapseButton"
+      className="small-interactive-collapse-button"
       onClick={() => {
         setIsHiding(!isHiding);
       }}>

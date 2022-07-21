@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, toggleShakeCart, setPrompt, size }) => {
+const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, setPrompt, size }) => {
   let [hidden, setHidden] = useState(false);
 
   let handleClick = function () {
@@ -16,7 +16,6 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
       setPrompt(true);
     }
     handleAddToCart(stockId, quantity);
-    toggleShakeCart();
     flag = false;
     stock.forEach(function (stockObj) {
       if (stockObj.quantity > 0) {
@@ -47,6 +46,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
 
   return (
     <div
+      data-testid="add-to-cart"
       onClick={() => {
         handleClick();
       }}
