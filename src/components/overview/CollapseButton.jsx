@@ -4,7 +4,7 @@ const CollapseButton = ({ setIsHiding, isHiding }) => {
   return (
     <button
       data-testid="collapseButton"
-      className="collapse-button"
+      className="small-interactive-collapse-button"
       onClick={() => {
         setIsHiding(!isHiding);
       }}>

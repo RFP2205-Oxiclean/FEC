@@ -6,6 +6,7 @@
 
 .product-overview {
   height: 100%;
+  font-family: 'Cormorant SC', serif;
 }
 
 /* .product-overview>div {
@@ -205,7 +206,7 @@
   margin-top: auto;
   align-self: center;
   padding-left: 0;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-align: center;
   font-size: 45px;
   width: 100%;
@@ -519,7 +520,7 @@ select:active {
 .questions-and-answers {
   width: 100%;
   box-sizing: border-box;
-  font-family: arial;
+  font-family: 'Cormorant SC', serif;
   position: relative;
   overflow: hidden;
 }
@@ -528,7 +529,7 @@ select:active {
 .questions-and-answers #qa-container .qa-title
 {
   color: #565656;
-  font-family: Arial;
+  font-family: 'Cormorant SC', serif;
   font-size: 15px;
   padding: 15px 0px;
   margin: 0;
@@ -538,6 +539,9 @@ select:active {
 .questions-and-answers #qa-container {
   width: 100%;
   box-sizing: border-box;
+  max-width: 60%;
+  margin: auto;
+
 }
 
 .questions-and-answers #qa-container .qa-nav-bar{
@@ -546,6 +550,7 @@ select:active {
   padding: 15px;
   font-size: 16px;
   font-weight: bold;
+  /* font-family: 'Cormorant SC', serif; */
 }
 
 ::placeholder {
@@ -579,25 +584,84 @@ select:active {
   display: none;
 }
 
-.questions-and-answers .qc-wrapper {
+.qc-wrapper {
   position:relative;
   max-height:50%;
 }
 
-.questions-and-answers .interactive-buttons:hover {
+.interactive-buttons:hover {
+  background-color: black !important;
   cursor:pointer;
+  color: white;
+  transition-duration: .2s;
+
 }
 
 .questions-and-answers .button-wrapper {
   display:inline;
 }
 
-.questions-and-answers  .interactive-buttons.load-more, .questions-and-answers  .interactive-buttons.add-a {
+.interactive-buttons.load-more, .interactive-buttons.add-a {
   padding: 14px;
   border: 1px solid;
   display: inline-block;
   margin-right:15px;
   font-weight:bold;
+  font-family: 'Cormorant SC', serif;
+  background-color: white;
+}
+
+.small-interactive-buttons, .submit-photos-button::-webkit-file-upload-button, .user-photos::-webkit-file-upload-button {
+  padding: 5px;
+  border: 1px solid !important;
+  display: inline-block;
+  margin-right: 15px;
+  font-weight:bold;
+  font-family: 'Cormorant SC', serif;
+  background-color: white;
+  cursor: pointer;
+}
+
+.questions-and-answers .modal .small-interactive-buttons {
+  clear: both;
+  padding: 3px;
+  float: right;
+  margin: 5px;
+}
+
+.small-interactive-buttons:hover, .submit-photos-button::-webkit-file-upload-button:hover, .small-interactive-collapse-button:hover {
+  background-color: black !important;
+  cursor:pointer;
+  color:white;
+  transition-duration: .2s;
+}
+
+.submit-photos-button {
+  font-family: 'Cormorant SC', serif;
+}
+
+.small-interactive-collapse-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-top: 15px;
+  z-index: 2;
+  padding: 5px;
+  border: 1px solid;
+  display: inline-block;
+  font-weight:bold;
+  font-family: 'Cormorant SC', serif;
+  background-color: white;
+  cursor: pointer;
+}
+
+.jest-test-button {
+  display: none;
+}
+
+.addReview-summary::placeholder {
+  font-family: 'Cormorant SC', serif;
 }
 
 .questions-and-answers #question-container {
@@ -620,7 +684,7 @@ select:active {
 
 
 .questions-and-answers #question-list li {
-  min-height: 100px;
+  min-height: 60px;
   box-sizing: border-box;
   padding-bottom: 10px;
 }
@@ -758,6 +822,7 @@ select:active {
   cursor:pointer;
 }
 
+
 .questions-and-answers .modal-container {
   display: inline-block;
   opacity: 1.0;
@@ -766,7 +831,6 @@ select:active {
   position: relative;
   border-radius: 2px;
   border-width: 2px;
-  border-style: dashed;
   max-height: 95%;
   max-width:1000px;
 }
@@ -783,11 +847,32 @@ select:active {
   justify-content: center; /* align horizontal */
   align-items: center; /* align vertical */
 }
-.questions-and-answers .modal-exit {
+.questions-and-answers .addreview-modal-container .modal-exit {
   position: relative;
-  float: right;
   margin: 5px;
+
 }
+
+.modal-exit {
+  float:right;
+  margin-top: 5px;
+  padding: 5px;
+  border: 1px solid !important;
+  margin-right: 15px;
+  font-weight:bold;
+  font-family: 'Cormorant SC', serif;
+  background-color: white;
+  cursor: pointer;
+  width: 30px;
+}
+
+.modal-exit:hover {
+  background-color: black !important;
+  cursor:pointer;
+  color:white;
+  transition-duration: .2s;
+}
+
 .questions-and-answers .modal .name-wrap {
   float: left;
   max-width: 42%;
@@ -798,7 +883,7 @@ select:active {
   margin: 10px 20px 10px 0px;
   max-width: 42%;
 }
-.questions-and-answers .modal .user-photos {
+.questions-and-answers .modal .submit-photos-button {
   display:block;
   clear:both;
   margin-left:10px;
@@ -858,18 +943,27 @@ select:active {
 .questions-and-answers .modal-container .user-input {
   resize: none;
   box-sizing: border-box;
-  box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
-  -moz-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
-  -webkit-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  /* box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555); */
+  /* -moz-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555);
+  -webkit-box-shadow:0px 0px 5px 2px inset rgba(0, 0, 0, 0.555); */
   left:5%;
   width:80%;
   min-height:200px;
   position:relative;
   border-radius:2px;
-  border-width:2px;
-  border-style:dashed;
+  border-width:1px;
   display:block;
+  font-family: 'Cormorant SC', serif;
 }
+
+.user-name, .user-email {
+  font-family: 'Cormorant SC', serif;
+}
+
+.user-email {
+  width: 190px;
+}
+
 
 .questions-and-answers .modal-container .upload-msg {
   clear:both;
@@ -882,6 +976,8 @@ select:active {
 
 .ratings-reviews {
   height: 25%;
+
+
 }
 
 .review-summary {
@@ -975,7 +1071,7 @@ select:active {
 }
 
 .review-list {
-  height: 400px;
+  height: 660px;
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -1001,9 +1097,9 @@ select:active {
   z-index: 1000;
 } */
 
-.modal-container {
+.addreview-modal-container {
   width: 35%;
-  height: 90%;
+  height: 70%;
   border-radius: 12px;
   top: 2.5%;
   left: 35%;
@@ -1051,15 +1147,9 @@ select:active {
   height: 100px;
   width: 400px;
   resize: none;
-  font-family: Arial, Helvetica;
+  font-family: 'Cormorant SC', serif;
 }
 
-.thumbnail-image {
-  Display: flex;
-  Align-Items: left;
-  justify-content: center;
-  z-index: 1001
-}
 
 div.radio-box {
   width: 100px;
@@ -1100,12 +1190,15 @@ div.radio-box {
   font-size: 20px;
 }
 
-.thumbnail-image {
+.addreview-thumbnail-image {
   margin-top: 5px;
   margin-left: 5px;
-  outline: black;
+  border: 2px solid grey;
   height: 100px;
-  align-self: left;
+  Display: flex;
+  justify-content: center;
+  z-index: 1001
+
   /* display: block; */
 }
 
@@ -1124,6 +1217,7 @@ div.radio-box {
   border: 2px solid #959DA5;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 
@@ -1148,8 +1242,10 @@ div.radio-box {
 
 
 .full-size-image {
-  width: 80%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 90%
 }
 
 .ratings-section-container {
@@ -1164,12 +1260,12 @@ div.radio-box {
 .review-list-container {
   width: 45%;
   margin-right: 20%;
-  min-height: 300px;
+  min-height: 60vh;
 }
 
 
 .ratings-reviews-master-container {
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Cormorant SC', serif;
   display: flex;
   padding: 0px;
   margin-left: 15%;
@@ -1179,20 +1275,20 @@ div.radio-box {
 
 .ratings-reviews-title {
   margin-left: 17.5%;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Cormorant SC', serif;
   font-size: 20px;
 }
 
 .sort-dropdown-container {
 
   font-style: italic, bold;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }
 
 .sort-options {
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Cormorant SC', serif;
   font-size: 25px;
-  font-style: italic;
+
   border: none;
   text-decoration: underline;
   font-weight: bold;
@@ -1206,14 +1302,30 @@ div.radio-box {
   font-size: 20px;
 }
 
+.sort-dropdown-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.keyword-searchbar {
+  margin-right: 5px;
+  font-size: 15px;
+  font-family: 'Cormorant SC', serif;
+  font-weight: bold;
+  width: 70%;
+}
+
+
+
+
+
 /* .more-reviews-button {
   font-size: 20px;
   margin-right: 5px;
 } */
 
 
-/* CSS */
-.more-reviews-button, .add-review-button, .add-to-cart {
+/* .more-reviews-button, .add-review-button, .add-to-cart {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -1223,7 +1335,7 @@ div.radio-box {
   color: #24292E;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Cormorant SC', serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -1238,9 +1350,9 @@ div.radio-box {
   white-space: nowrap;
   word-wrap: break-word;
   margin-right: 5px;
-}
+} */
 
-.more-reviews-button:hover, .add-review-button:hover{
+/* .more-reviews-button:hover, .add-review-button:hover{
   background-color: #F3F4F6;
   text-decoration: none;
   transition-duration: 0.1s;
@@ -1271,20 +1383,12 @@ div.radio-box {
   display: none;
 }
 
-.sort-dropdown-title {
-  font-size: 25px;
-  font-weight: bold;
-}
+
 
 .modal-characteristic-title {
   margin-bottom: 5px;
 }
 
-.keyword-searchbar {
-  margin-right: 5px;
-  font-size: 15px;
-  border-radius: 8px;
-}
 
 
 .show-more-review-body-button, .keyword-search-clear-button, .clear-filters-button, .submit-photos-button::-webkit-file-upload-button {
@@ -1297,7 +1401,7 @@ div.radio-box {
   color: #24292E;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Cormorant SC', serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 10px;
@@ -1343,7 +1447,7 @@ div.radio-box {
 
 .show-more-review-body-button:-webkit-details-marker, .keyword-search-clear-button:-webkit-details-marker, .clear-filters-button:-webkit-details-marker, .submit-photos-button::-webkit-file-upload-button:-webkit-details-marker {
   display: none;
-}
+} */
 
 .show-more-review-body-button {
   z-index: 4;
@@ -1413,21 +1517,60 @@ div.radio-box {
   font-style: italic;
 }
 
+.top-nav-bar {
+  height: 40px;
+  width: 1400px;
+  margin: auto;
+  font-family: 'Cormorant SC', serif;
+  display:flex;
+  margin-bottom: 15px;
 
+}
 
 .top-nav-right-bar {
-  float: right;
-  cursor: pointer;
-}
-.top-nav-title {
-  display: inline-block;
-  margin-left: 15%;
-  text-align: center;
+  width: 40%;
+  display: flex;
+  flex-grow: 4;
+  margin-right: 0;
+  height: 100%;
+
+  text-decoration: underline;
 }
 
-.top-nav-bar {
-  margin-left: 15%;
-  margin-right: 15%;
+.top-nav-right-bar-word {
+  margin: auto;
+  display: flex;
+  cursor: pointer;
+}
+.top-nav-title-bar {
+  width: 20%;
+  height: 100%;
+  margin: auto;
+  text-decoration: none !important;
+  text-align: center;
+
+}
+
+.top-nav-title-word {
+  cursor:pointer;
+  text-align: center;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.top-nav-left-bar {
+  width: 40%;
+  display: flex;
+  height: 100%;
+  flex-grow: 6;
+  text-decoration: underline;
+
+}
+
+.top-nav-left-bar-word {
+  margin: auto;
+  display: flex;
+  cursor: pointer;
 }
 
 .total-num-ratings {

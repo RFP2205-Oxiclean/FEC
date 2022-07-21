@@ -280,9 +280,9 @@ class AddReviewModal extends React.Component {
   render() {
     return (
       <div className="modal-background" data-testid="add-review-modal">
-        <div className="modal-container">
+        <div className="addreview-modal-container">
           <div>
-            <button className="exit-modal-button" onClick={this.props.closeModal}>
+            <button className="modal-exit" onClick={this.props.closeModal}>
               &times;
             </button>
           </div>
@@ -321,6 +321,7 @@ class AddReviewModal extends React.Component {
               maxLength="60"
               placeholder="Example: Best purchase ever!"
               size="40"
+              className="addReview-summary"
             />
           </form>
           <br></br>
@@ -341,7 +342,7 @@ class AddReviewModal extends React.Component {
           <form>
             <br></br>
             {this.state.photos.length < 5 ? (
-              <div>
+              <div className = 'submit-photos-section'>
                 Submit Photos (optional): <br></br>
                 <input
                   className="submit-photos-button"
@@ -358,16 +359,20 @@ class AddReviewModal extends React.Component {
             )}
           </form>
           <span>
-            {this.state.photosForDisplay[0] && <img className="thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
-            {this.state.photosForDisplay[1] && <img className="thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
-            {this.state.photosForDisplay[2] && <img className="thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
-            {this.state.photosForDisplay[3] && <img className="thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
-            {this.state.photosForDisplay[4] && <img className="thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
+            {this.state.photosForDisplay[0] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
+            {this.state.photosForDisplay[1] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
+            {this.state.photosForDisplay[2] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
+            {this.state.photosForDisplay[3] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
+            {this.state.photosForDisplay[4] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
           </span>
           <br></br>
           {/* Nickname field */}
-          <form className="modal-nickname-field">
-            Nickname: <input onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!" />
+          <form >
+            Nickname:
+            <input
+              onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!"
+              className="user-name"
+            />
             <br />
             <small>
               <i>For privacy reasons, do not use your full name or email address</i>
@@ -378,6 +383,7 @@ class AddReviewModal extends React.Component {
           <form className="modal-email-field">
             Email:{" "}
             <input
+              className = 'user-email'
               data-testid="addReview-email-input"
               onChange={this.handleEmailChange}
               type="text"
@@ -391,7 +397,7 @@ class AddReviewModal extends React.Component {
           </form>
           <br></br>
           <form>
-            <button data-testid="addReview-submit-button" className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
+            <button data-testid="addReview-submit-button" className="small-interactive-buttons" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
           </form>

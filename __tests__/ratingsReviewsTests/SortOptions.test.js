@@ -46,5 +46,4 @@ describe('SortOptions test', () => {
     expect(handleSortReviewsChangeSpy).toHaveBeenCalled();
   })
 
-
 })
