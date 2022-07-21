@@ -16,14 +16,16 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
 
   if (collapsePanel) {
     if (active) {
-      return <div className="overview-small-icon-active"></div>;
+      return <div className="overview-small-icon-active">{trueIndex}</div>;
     } else {
       return (
         <div
           onClick={() => {
             handleClick();
           }}
-          className="overview-small-icon"></div>
+          className="overview-small-icon">
+          {trueIndex}
+        </div>
       );
     }
   }

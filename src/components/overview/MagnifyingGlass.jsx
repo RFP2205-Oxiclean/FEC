@@ -37,9 +37,15 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
               setMagnified(!magnified);
             }
           } else if (e.button === 1) {
-            setCollapsePanel(false);
-            setExpanded(false);
-            setMagnified(false);
+            if (collapsePanel) {
+              setCollapsePanel(false);
+              setExpanded(false);
+              setMagnified(false);
+            } else if (!collapsePanel) {
+              setCollapsePanel(true);
+              setExpanded(true);
+              setMagnified(true);
+            }
           }
         }}
         onMouseLeave={() => {
@@ -63,13 +69,13 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
               top: top - 240,
               height: "480px",
               width: "480px",
-              opacity: "1",
               border: "2px solid black",
               backgroundImage: `url(${image})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: `${1100 * 2.5}px ${733 * 2.5}px`,
               backgroundPositionX: `${-left * 2.5 + 240}px`,
               backgroundPositionY: `${-top * 2.5 + 240}px`,
+              pointerEvents: "none",
             }}></div>
         ) : (
           <div></div>

@@ -40,6 +40,7 @@ const ImageCarousel = ({
         setExpanded={setExpanded}
         image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
       <ThumbnailContainer
+        decrementThumbnailIndex={decrementThumbnailIndex}
         magnified={magnified}
         collapsePanel={collapsePanel}
         expanded={expanded}

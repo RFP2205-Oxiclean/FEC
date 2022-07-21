@@ -13,15 +13,28 @@ const ThumbnailIncrement = ({ callback, startEnd, end, displayArr, magnified }) 
 
   return (
     <div
-      data-testid="thumbnail-increment"
-      style={hidden || magnified ? { visibility: "hidden" } : { display: "flex", justifyContent: "center" }}
-      className={"thumbnail-increment"}>
-      <button
-        onClick={() => {
-          callback();
-        }}>
-        Down
-      </button>
+      className={magnified ? "overview-hidden" : "scroll-down"}
+      onClick={() => {
+        callback();
+      }}
+      style={
+        hidden || magnified
+          ? { visibility: "hidden" }
+          : {
+              display: "flex",
+              top: "50%",
+              height: "35px",
+              width: "35px",
+              overflow: "visible",
+              fontSize: "30px",
+              borderRadius: "20%",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "10px",
+              justifyContent: "center",
+            }
+      }>
+      <i style={{ color: "black" }} className="fa-solid fa-angles-down"></i>
     </div>
   );
 };

@@ -8,13 +8,13 @@ import QuestionsAndAnswers from "./components/questionsAndAnswers/QuestionsAndAn
 import RatingsReviews from "./components/ratingsReviews/RatingsReviews.jsx";
 // import RelatedItems from './components/relatedItems/RelatedItems.jsx'
 
-import TopNavBar from './components/commonComponents/TopNavBar.jsx'
+import TopNavBar from "./components/commonComponents/TopNavBar.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedProductId: 40344,
+      displayedProductId: 40349,
       averageRating: null,
     };
   }
@@ -26,12 +26,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app" data-testid = 'app'>
+      <div className="app" data-testid="app">
         {/* <h1>
                     Welcome to React App thats build using Webpack and Babel separately
                 </h1> */}
-        <div className = "top-nav-bar">
-            <TopNavBar />
+        <div className="top-nav-bar">
+          <TopNavBar />
         </div>
         <div className="product-overview">
           <ProductOverview handleSubmit={this.handleSubmit.bind(this)} product_id={this.state.displayedProductId} />
@@ -42,9 +42,7 @@ class App extends React.Component {
         </div>
 
         <div className="ratings-reviews">
-          <RatingsReviews
-            product_id={this.state.displayedProductId}
-            data-testid = "RatingsReviews"/>
+          <RatingsReviews product_id={this.state.displayedProductId} data-testid="RatingsReviews" />
         </div>
       </div>
     );

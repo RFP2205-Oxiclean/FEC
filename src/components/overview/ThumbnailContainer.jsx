@@ -5,7 +5,15 @@ import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
 import { CSSTransition } from "react-transition-group";
 
-const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex, collapsePanel, expanded, magnified }) => {
+const ThumbnailContainer = ({
+  photos,
+  activeThumbnailIndex,
+  setActiveThumbnailIndex,
+  collapsePanel,
+  expanded,
+  magnified,
+  decrementThumbnailIndex,
+}) => {
   let [startEnd, setStartEnd] = useState([0, 7]);
   let [hideDown, setHideDown] = useState(true);
   let [hideUp, setHideUp] = useState(false);
@@ -66,21 +74,32 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
   }
 
   return (
+    // <div style={{ position: "absolute", top: "0", left: "0", width: "200px" }}>
     <div className={collapsePanel ? "overview-collapse-thumbnail-container" : "overview-thumbnail-container"} data-testid="thumbnail-container">
-      <button
+      {/* <div
         className={magnified ? "overview-hidden" : "scroll-left"}
         onClick={() => {
-          console.log(magnified);
           decrementThumbnailIndex();
         }}
         style={
-          activeThumbnailIndex === 0
-            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
-            : { position: "absolute", top: "50%", left: "15%" }
-        }
-        className="scroll-left">
-        Left
-      </button>
+          0 === activeThumbnailIndex || magnified
+            ? { visibility: "hidden", position: "absolute" }
+            : {
+                position: "absolute",
+                display: "flex",
+                top: "50%",
+                left: "130%",
+                height: "35px",
+                width: "35px",
+                overflow: "visible",
+                marginLeft: "-50px",
+                fontSize: "40px",
+                borderRadius: "20%",
+                alignItems: "center",
+              }
+        }>
+        <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-left"></i>
+      </div> */}
       <ThumbnailDecrement magnified={magnified} displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {
@@ -101,6 +120,7 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
       })}
       <ThumbnailIncrement magnified={magnified} end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
     </div>
+    // </div>
   );
 };
 

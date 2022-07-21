@@ -206,7 +206,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         <BottomInformation></BottomInformation>
       </div>
       <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
-        <input
+        {/* <input
           onChange={(e) => {
             setEntry(e.target.value);
           }}></input>
@@ -222,7 +222,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
             masterState();
           }}>
           Master State
-        </button>
+        </button> */}
       </div>
     </div>
   );
