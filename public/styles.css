@@ -41,6 +41,13 @@
   cursor: default;
 }
 
+.collapse-button:hover {
+  background-color: black !important;
+  cursor:pointer;
+  color:white;
+  transition-duration: .2s;
+}
+
 
 .overview-nice-select-options, .overview-nice-select, .overview-hidden-select {
   position: relative;
@@ -1147,6 +1154,7 @@ select:active {
 
 .review-summary {
   overflow-wrap: break-word;
+  display: flex;
   font-size: 20px;
   font-weight: bold;
 }
@@ -1237,7 +1245,6 @@ select:active {
 
 .review-list {
   height: 660px;
-  overflow: hidden;
   overflow-y: scroll;
 }
 
@@ -1248,6 +1255,10 @@ select:active {
 
 .star-rating-user-input-radio {
   display: none;
+}
+.review-list-entry {
+  box-sizing: border-box;
+  padding-right: 15px;
 }
 
 /* .modal-background {
@@ -1315,6 +1326,11 @@ select:active {
   font-family: 'Cormorant SC', serif;
 }
 
+.review-body, .review-summary {
+  overflow-wrap: break-word;
+  width: 100%;
+  display: inline-block;
+}
 
 div.radio-box {
   width: 100px;

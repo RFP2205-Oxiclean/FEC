@@ -64,15 +64,15 @@ class ReviewListEntry extends React.Component {
   //Conditionally renders the review body. If the body is longer than 250 char, show a show-more button and display only the first 250 char by default. Once button is clicked, show the full review.
   reviewBodyRender() {
     if (this.props.review.body.length < 250) {
-      return <div>{this.props.review.body}</div>
+      return <div className = 'review-body'>{this.props.review.body}</div>
     } else {
       if (this.state.showRemainingReviewBody === false) {
-        return <div>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
+        return <div className = 'review-body'>{this.props.review.body.slice(0,250)}... &nbsp;&nbsp; &nbsp;
         <br></br>
         <span><button className = 'small-interactive-buttons' onClick = {this.showRemainingReviewBody}>Show More</button></span>
           </div>
       } else {
-        return <div>{this.props.review.body}</div>
+        return <div className = 'review-body'>{this.props.review.body}</div>
       }
     }
   }
@@ -90,7 +90,7 @@ class ReviewListEntry extends React.Component {
       return (
         <div className = "thumbnail-container">
           {this.props.review.photos.map((photo, index) =>
-            <img data-testid = 'review-thumbnail-image' className = 'review-thumbnail-image' src = {photo.url} onClick = {this.showFullImage} key = {photo.id}></img>
+            <img data-testid = 'review-thumbnail-image' className = 'review-thumbnail-image' src = {photo.url} alt = {'https://via.placeholder.com/200'}onClick = {this.showFullImage} key = {photo.id}></img>
           )}
         </div>
       )
@@ -130,8 +130,8 @@ class ReviewListEntry extends React.Component {
 
   render() {
     return (
-      <div data-testid = "review-tile">
-        <div>
+      <div data-testid = "review-tile" className = 'review-list-entry'>
+        <div >
           {this.state.displayFullImageModal && <ReviewImageModal image = {this.state.imageToShow} closeImageModal = {this.closeImageModal}/>}
           <StarRatingStatic rating= {this.props.review.rating}/>
           <small className = 'review-username-time'>{this.props.review.reviewer_name} &nbsp;|&nbsp;{this.convertDateFormat(new Date(this.props.review.date))}
