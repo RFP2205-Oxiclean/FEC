@@ -15,6 +15,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
   let [stockId, setStockId] = useState(null);
   let [sizeOpen, setSizeOpen] = useState(false);
   let [selectedSize, setSelectedSize] = useState(null);
+  let [defaultSizeValue, setDefaultSizeValue] = useState("Select a Size!");
 
   useEffect(() => {
     let flag = false;
@@ -57,13 +58,14 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
             }}>
             selectedSize
           </button>
+
+          {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
           <NiceSelectMenu
             disableCondition={"Out of Stock!"}
-            defaultValue={selectedSize !== null ? selectedSize : "Select a Size!"}
-            setSelectedSize={setSelectedSize}
-            sizeOpen={sizeOpen}
-            setSizeOpen={setSizeOpen}
-            isOpen={false}
+            defaultValue={defaultSizeValue}
+            selectHook={setSelectedSize}
+            openCallback={setSizeOpen}
+            isOpen={sizeOpen}
             defaultValue={selectedSize ? selectedSize : "Select a Size!"}
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
           {/*

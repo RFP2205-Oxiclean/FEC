@@ -23,19 +23,24 @@ const ImageCarousel = ({
   rating,
 }) => {
   let [collapsePanel, setCollapsePanel] = useState(false);
-
+  let [expanded, setExpanded] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   let callHiding = function (callback) {
     callback();
   };
 
   useEffect(() => {
+    if (collapsePanel) {
+      setExpanded(false);
+    }
+  }, [collapsePanel]);
+
+  useEffect(() => {
     console.log("is called whenever display image changes");
   }, [activeDisplayIndex, activeThumbnailIndex]);
 
-  let fadeOut = function () {};
-
   return (
-    <div className="overview-image-container" data-testid="image-carousel">
+    <div className={expanded ? "overview-image-container-minus" : "overview-image-container"} data-testid="image-carousel">
       <button
         onClick={() => {
           decrementThumbnailIndex();
@@ -48,12 +53,23 @@ const ImageCarousel = ({
         className="scroll-left">
         Left
       </button>
-      <MagnifyingGlass image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
+      <MagnifyingGlass
+        setEnabled={setEnabled}
+        enabled={enabled}
+        setCollapsePanel={setCollapsePanel}
+        collapsePanel={collapsePanel}
+        expanded={expanded}
+        setExpanded={setExpanded}
+        image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
       <ThumbnailContainer
+        enabled={enabled}
+        collapsePanel={collapsePanel}
+        expanded={expanded}
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        expanded={expanded}
         collapsePanel={collapsePanel}
         setCollapsePanel={setCollapsePanel}
         callHiding={callHiding}

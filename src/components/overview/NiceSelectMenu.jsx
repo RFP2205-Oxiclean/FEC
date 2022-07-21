@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const NiceSelectMenu = ({ options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, setSelectedSize }) => {
+const NiceSelectMenu = ({ options, defaultValue, disableCondition, openCallback, isOpen, selectHook }) => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div
+      onMouseLeave={() => {
+        openCallback(false);
+      }}
+      style={{ display: "flex", flexWrap: "wrap" }}>
       <div
         className="overview-nice-select"
         onClick={() => {
           if (options.length) {
-            setSizeOpen(!sizeOpen);
+            openCallback(!isOpen);
           }
         }}>
         {defaultValue}
@@ -17,12 +21,11 @@ const NiceSelectMenu = ({ options, defaultValue, disableCondition, isOpen, callb
           <div
             style={option === "Out of Stock!" ? { backgroundColor: "rgb(248, 248, 248)" } : {}}
             key={i}
-            className={sizeOpen ? "overview-nice-select-options" : "overview-hidden-select"}
-            onMouseEnter={() => {}}
+            className={isOpen ? "overview-nice-select-options" : "overview-hidden-select"}
             onClick={() => {
               if (option !== disableCondition) {
-                setSelectedSize(option);
-                setSizeOpen(false);
+                selectHook(option);
+                openCallback(false);
               }
               // console.log(sizeOpen);
             }}>
