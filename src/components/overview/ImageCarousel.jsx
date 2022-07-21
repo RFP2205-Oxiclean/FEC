@@ -27,6 +27,7 @@ const ImageCarousel = ({
   setMagnified,
   setCollapsePanel,
   setExpanded,
+  setAddToCartPrompt,
 }) => {
   return (
     <div className={expanded ? "overview-image-container-minus" : "overview-image-container"} data-testid="image-carousel">
@@ -48,6 +49,7 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        setAddToCartPrompt={setAddToCartPrompt}
         magnified={magnified}
         expanded={expanded}
         collapsePanel={collapsePanel}
@@ -65,7 +67,8 @@ const ImageCarousel = ({
         productInfo={productInfo}
         styleObjects={styleObjects}></ExpandedProductInfo>
       <CollapseButton
-        magnified={magnified}
+        collapsePanel={collapsePanel}
+        expanded={expanded}
         setIsHiding={() => {
           setCollapsePanel(!collapsePanel);
         }}></CollapseButton>

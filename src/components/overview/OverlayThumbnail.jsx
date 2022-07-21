@@ -18,7 +18,7 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
     if (active) {
       return (
         <div className="overview-small-icon-active">
-          <span style={{ margin: "auto" }}>{trueIndex}</span>
+          <span style={{ height: "30px", width: "30px", margin: "auto" }}></span>
         </div>
       );
     } else {
@@ -28,7 +28,7 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
             handleClick();
           }}
           className="overview-small-icon">
-          <span style={{ margin: "auto" }}>{trueIndex}</span>
+          <span style={{ margin: "auto" }}></span>
         </div>
       );
     }

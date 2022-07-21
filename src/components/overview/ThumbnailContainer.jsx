@@ -76,7 +76,7 @@ const ThumbnailContainer = ({
   return (
     // <div style={{ position: "absolute", top: "0", left: "0", width: "200px" }}>
     <div className={collapsePanel ? "overview-collapse-thumbnail-container" : "overview-thumbnail-container"} data-testid="thumbnail-container">
-      {/* <div
+      <div
         className={magnified ? "overview-hidden" : "scroll-left"}
         onClick={() => {
           decrementThumbnailIndex();
@@ -99,7 +99,7 @@ const ThumbnailContainer = ({
               }
         }>
         <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-left"></i>
-      </div> */}
+      </div>
       <ThumbnailDecrement magnified={magnified} displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {

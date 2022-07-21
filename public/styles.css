@@ -26,6 +26,20 @@
 } */
 
 
+.add-to-cart, .collapse-button {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid black;
+  line-height: 26px;
+  height: 25px;
+  outline: 0;
+  padding-right: 10px;
+  width: 100px;
+  cursor: default;
+}
+
 
 .overview-nice-select-options, .overview-nice-select, .overview-hidden-select {
   position: relative;
@@ -149,7 +163,7 @@ user-select: none;
   line-height: 1;
 }
 
-.overview-select {
+.overview-select, .add-to-cart, .collapse-button {
   position: relative;
     text-align: center;
     display: inline-block;
@@ -484,13 +498,15 @@ img {
 
 .purchase-buttons-container1 {
   display: inline-block;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
 .purchase-buttons-container2 {
   display: inline-block;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .quantity-selector {
@@ -518,9 +534,8 @@ img {
   100% {opacity: .5;};
 }
 
-select {
+.product-overview> select, .add-to-cart {
   background-color: #ffffff;
-  border: 1px solid #8ca4c8;
   cursor: pointer;
 }
 
@@ -1342,7 +1357,7 @@ div.radio-box {
 
 
 /* CSS */
-.more-reviews-button, .add-review-button, .add-to-cart {
+.more-reviews-button, .add-review-button {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);

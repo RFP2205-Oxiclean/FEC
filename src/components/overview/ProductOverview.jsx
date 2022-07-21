@@ -27,6 +27,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   const [collapsePanel, setCollapsePanel] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [magnified, setMagnified] = useState(false);
+  let [addToCartPrompt, setAddToCartPrompt] = useState(false);
+
+  let pingCart = function () {};
 
   useEffect(() => {
     getProductById(product_id).then((data) => {
@@ -74,17 +77,20 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let masterState = function () {
-    console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
+    // console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
     console.log("styleObjects: ", styleObjects);
-    console.log("photoObjects");
-    console.log("activeThumbnailIndices: ", activeThumbnailIndices);
-    console.log("activeDisplayIndex: ", activeDisplayIndex);
-    console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
-    console.log("productInfo: ", productInfo);
-    console.log(stock);
-    console.log(hoverIndex);
-    console.log("current: ", getDisplayImage());
-    console.log("previous: ", previousImage);
+    console.log("productInfo ", productInfo);
+    console.log(getCart());
+    console.log(addToCartPrompt);
+    // console.log("photoObjects");
+    // console.log("activeThumbnailIndices: ", activeThumbnailIndices);
+    // console.log("activeDisplayIndex: ", activeDisplayIndex);
+    // console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
+    // console.log("productInfo: ", productInfo);
+    // console.log(stock);
+    // console.log(hoverIndex);
+    // console.log("current: ", getDisplayImage());
+    // console.log("previous: ", previousImage);
     addToCart(1394865, 1).then((response) => {
       console.log(response);
     });
@@ -171,12 +177,19 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         copyStock[getActiveDisplayId()] = newStock;
         setStock(copyStock);
       })
+      .then(() => {
+        setAddToCartPrompt(true);
+        setTimeout(() => {
+          setAddToCartPrompt(false);
+        }, 5000);
+      })
       .catch((err) => console.log("failed to post"));
   };
 
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}
         setMagnified={setMagnified}
         setExpanded={setExpanded}
@@ -202,11 +215,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         styleObjects={styleObjects}
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
-      <div className="overview-bottom-info">
-        <BottomInformation></BottomInformation>
-      </div>
+      <BottomInformation description={productInfo?.description}></BottomInformation>
       <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
-        {/* <input
+        <input
           onChange={(e) => {
             setEntry(e.target.value);
           }}></input>
@@ -222,7 +233,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
             masterState();
           }}>
           Master State
-        </button> */}
+        </button>
       </div>
     </div>
   );
