@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>4/9</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>4/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -120,15 +120,15 @@
 const KeywordSearchFilter = (props) =&gt; {
 &nbsp;
 &nbsp;
-  const updateKeyword = (e) =&gt; {
-    e.preventDefault();
-    props.handleKeywordChange(e.target.value)
+  const updateKeyword = <span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    props.handleKeywordChange(e.target.value)</span>
   }
 &nbsp;
-  const clearKeyword = (e) =&gt; {
-    e.preventDefault();
-    document.getElementsByClassName('keyword-searchbar')[0].value = '';
-    props.handleKeywordChange('')
+  const clearKeyword = <span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    document.getElementsByClassName('keyword-searchbar')[0].value = '';</span>
+<span class="cstat-no" title="statement not covered" >    props.handleKeywordChange('')</span>
   }
 &nbsp;
   return (

@@ -29,7 +29,7 @@ const StyleObjectThumbnail = ({ styleObject, activeDisplayIndex, index, setHover
                 right: "0",
                 zIndex: "3",
                 background: "white",
-                color: "green",
+                color: "black",
                 marginTop: "-3px",
                 borderRadius: "50%",
               }}

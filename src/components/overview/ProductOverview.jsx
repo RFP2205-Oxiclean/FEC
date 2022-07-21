@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getProductById, getStylesById, prefetch, getStars } from "../../controllers.js";
+import { getProductById, getStylesById, prefetch, getStars, getReviewList } from "../../controllers.js";
 import ImageCarousel from "./ImageCarousel.jsx";
 import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
+import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
 const ProductOverview = ({ handleSubmit, product_id }) => {
   let [rating, setRating] = useState(0);
@@ -22,8 +23,19 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
   let [stock, setStock] = useState({});
+  let [previousImage, setPreviousImage] = useState(null);
+  const [collapsePanel, setCollapsePanel] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [magnified, setMagnified] = useState(false);
+  let [addToCartPrompt, setAddToCartPrompt] = useState(false);
+  let [reviewListLength, setReviewListLength] = useState(0);
+
+  let pingCart = function () {};
 
   useEffect(() => {
+    getReviewList(product_id).then((response) => {
+      setReviewListLength(response.data.results.length);
+    });
     getProductById(product_id).then((data) => {
       setProductInfo(data);
     });
@@ -69,15 +81,21 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   };
 
   let masterState = function () {
-    console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
+    // console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
     console.log("styleObjects: ", styleObjects);
-    console.log("photoObjects");
-    console.log("activeThumbnailIndices: ", activeThumbnailIndices);
-    console.log("activeDisplayIndex: ", activeDisplayIndex);
-    console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
-    console.log("productInfo: ", productInfo);
-    console.log(stock);
-    console.log(hoverIndex);
+    console.log("productInfo ", productInfo);
+    // console.log(getCart());
+    // console.log(addToCartPrompt);
+    console.log("reviewListLength: ", reviewListLength);
+    // console.log("photoObjects");
+    // console.log("activeThumbnailIndices: ", activeThumbnailIndices);
+    // console.log("activeDisplayIndex: ", activeDisplayIndex);
+    // console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
+    // console.log("productInfo: ", productInfo);
+    // console.log(stock);
+    // console.log(hoverIndex);
+    // console.log("current: ", getDisplayImage());
+    // console.log("previous: ", previousImage);
     addToCart(1394865, 1).then((response) => {
       console.log(response);
     });
@@ -164,12 +182,25 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         copyStock[getActiveDisplayId()] = newStock;
         setStock(copyStock);
       })
+      .then(() => {
+        setAddToCartPrompt(true);
+      })
       .catch((err) => console.log("failed to post"));
   };
 
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        reviewListLength={reviewListLength}
+        setAddToCartPrompt={setAddToCartPrompt}
+        collapsePanel={collapsePanel}
+        setMagnified={setMagnified}
+        setExpanded={setExpanded}
+        magnified={magnified}
+        expanded={magnified}
+        setCollapsePanel={setCollapsePanel}
+        setPreviousImage={setPreviousImage}
+        usePrevious={usePrevious}
         rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
         incrementThumbnailIndex={incrementThumbnailIndex}
@@ -187,10 +218,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         styleObjects={styleObjects}
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
-      <div className="overview-bottom-info">
-        <BottomInformation></BottomInformation>
-      </div>
-      <div style={{ visibility: "hidden", position: "absolute", top: "0", marginTop: "300px" }}>
+      <BottomInformation description={productInfo?.description}></BottomInformation>
+      {/* <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
@@ -208,7 +237,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           Master State
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

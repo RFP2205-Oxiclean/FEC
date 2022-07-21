@@ -171,6 +171,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,7 +243,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) =&gt; {
   return (
     &lt;div data-testid="purchase-info" className="overview-purchase-info"&gt;
       &lt;div style={{ display: "inline-block", textAlign: "center", width: "100%" }}&gt;
-        &lt;span className="purchase-style-name"&gt;{activeStyle.name}&lt;/span&gt;
+        &lt;span className="purchase-style-name"&gt;{styleInfo.name}&lt;/span&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div data-testid="select-prompts"&gt;
@@ -256,7 +257,17 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) =&gt; {
             &lt;/span&gt;
           )}
         &lt;/div&gt;
-        &lt;div className="purchase-buttons-container1"&gt;
+        &lt;div className="purchase-buttons-container1" style={{ display: "flex" }}&gt;
+          {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
+          {/* &lt;NiceSelectMenu
+            disableCondition={"Out of Stock!"}
+            defaultValue={defaultSizeValue}
+            selectHook={setSelectedSize}
+            openCallback={setSizeOpen}
+            sizeOpen={sizeOpen}
+            defaultValue={selectedSize ? selectedSize : "Select a Size!"}
+            options={["Size Select!", "Out of Stock!"]}&gt;&lt;/NiceSelectMenu&gt;
+          &lt;NiceSelectMenu width={80}&gt;&lt;/NiceSelectMenu&gt; */}
           &lt;SizeMenu
             stock={stock}
             selectSize={selectSize}
@@ -278,6 +289,9 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart }) =&gt; {
               quantity={quantity}
               stockId={stockId}&gt;&lt;/AddToCart&gt;
           &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div style={!addToCartPrompt ? { visibility: "hidden" } : <span class="branch-1 cbranch-no" title="branch not covered" >{ fontSize: "bold", float: "right", marginRight: "20px" }}</span>&gt;
+          &lt;span&gt;Added to Cart!&lt;/span&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;

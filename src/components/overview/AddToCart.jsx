@@ -51,7 +51,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
         handleClick();
       }}
       className={hidden ? "invisible-cart" : "add-to-cart"}>
-      Add to Cart
+      Add to Bag
     </div>
   );
 };

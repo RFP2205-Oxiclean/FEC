@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, selectQuantity, noItems }) => {
   let [defaultValue, setDefaultValue] = useState("Out of Stock!");
@@ -15,6 +15,12 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       setDefaultValue("Out of Stock!");
     }
   }, [stock, noItems]);
+
+  let selectRef = useRef(null);
+
+  let otherOpen = function () {
+    selectRef.current.focus();
+  };
 
   let makeOptions = function () {
     stock.map(function (stockObj) {
@@ -34,6 +40,8 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
 
   return (
     <select
+      ref={selectRef}
+      id={"10313"}
       className="overview-select"
       onChange={(e) => {
         setPrompt(false);

@@ -141,3 +141,18 @@ export function getStars(product_id) {
     // return percentRecommended;
   });
 }
+export function getReviewList(product_id) {
+  return controllerAxios2({
+    url: `${url}/reviews`,
+    method: "GET",
+    params: {
+      product_id: product_id,
+      count: 10000,
+    },
+    headers: {
+      Authorization: API_KEY,
+    },
+  }).catch((err) => {
+    console.error("Error in getRatingsReviewsData response: ", err);
+  });
+}

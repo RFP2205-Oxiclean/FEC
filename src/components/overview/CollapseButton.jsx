@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
-const CollapseButton = ({ setIsHiding, isHiding }) => {
+const CollapseButton = ({ setIsHiding, isHiding, expanded, collapsePanel }) => {
   return (
-    <button
+    <div
+      style={{ height: "20px", minHeight: "20px", lineHeight: "22px", position: "absolute", top: 0, marginTop: "5px", marginRight: "10px" }}
       data-testid="collapseButton"
-      className="small-interactive-collapse-button"
+      className={expanded ? "overview-hidden" : "collapse-button"}
       onClick={() => {
         setIsHiding(!isHiding);
       }}>
-      Collapse
-    </button>
+      {!collapsePanel ? "Collapse" : expanded ? "" : "Show"}
+    </div>
   );
 };
 
