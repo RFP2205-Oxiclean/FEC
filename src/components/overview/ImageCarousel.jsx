@@ -30,6 +30,12 @@ const ImageCarousel = ({
   setAddToCartPrompt,
   reviewListLength,
 }) => {
+  let [collapsePanel, setCollapsePanel] = useState(false);
+
+  let callHiding = function (callback) {
+    callback();
+  };
+
   return (
     <div className={expanded ? "overview-image-container-minus" : "overview-image-container"} data-testid="image-carousel">
       <MagnifyingGlass

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
@@ -136,18 +136,13 @@
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,7 +160,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,21 +179,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,7 +216,6 @@ import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
 import ThumbnailContainer from "./ThumbnailContainer.jsx";
 import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
 import CollapseButton from "./CollapseButton.jsx";
-import MagnifyingGlass from "./MagnifyingGlass.jsx";
 &nbsp;
 const ImageCarousel = ({
   image,
@@ -244,25 +233,28 @@ const ImageCarousel = ({
   incrementThumbnailIndex,
   decrementThumbnailIndex,
   rating,
-  magnified,
-  collapsePanel,
-  expanded,
-  setMagnified,
-  setCollapsePanel,
-  setExpanded,
-  setAddToCartPrompt,
 }) =&gt; {
+  let [collapsePanel, setCollapsePanel] = useState(false);
+&nbsp;
+  let callHiding = <span class="fstat-no" title="function not covered" >fu</span>nction (callback) {
+<span class="cstat-no" title="statement not covered" >    callback();</span>
+  };
+&nbsp;
   return (
-    &lt;div className={expanded ? <span class="branch-0 cbranch-no" title="branch not covered" >"overview-image-container-minus" </span>: "overview-image-container"} data-testid="image-carousel"&gt;
-      &lt;MagnifyingGlass
-        decrementThumbnailIndex={decrementThumbnailIndex}
-        setMagnified={setMagnified}
-        magnified={magnified}
-        setCollapsePanel={setCollapsePanel}
-        collapsePanel={collapsePanel}
-        expanded={expanded}
-        setExpanded={setExpanded}
-        image={createCloudinaryDisplayURL(image)}&gt;&lt;/MagnifyingGlass&gt;
+    &lt;div className="overview-image-container" data-testid="image-carousel"&gt;
+      &lt;button
+        onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >          decrementThumbnailIndex();</span>
+        }}
+        style={
+          activeThumbnailIndex === 0
+            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
+            : { position: "absolute", top: "50%", left: "15%" }
+        }
+        className="scroll-left"&gt;
+        Left
+      &lt;/button&gt;
+      &lt;img data-testid="display-image" src={createCloudinaryDisplayURL(image)}&gt;&lt;/img&gt;
       &lt;ThumbnailContainer
         decrementThumbnailIndex={decrementThumbnailIndex}
         magnified={magnified}
@@ -272,11 +264,9 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}&gt;&lt;/ThumbnailContainer&gt;
       &lt;ExpandedProductInfo
-        setAddToCartPrompt={setAddToCartPrompt}
-        magnified={magnified}
-        expanded={expanded}
         collapsePanel={collapsePanel}
         setCollapsePanel={setCollapsePanel}
+        callHiding={callHiding}
         rating={rating}
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
@@ -290,8 +280,6 @@ const ImageCarousel = ({
         productInfo={productInfo}
         styleObjects={styleObjects}&gt;&lt;/ExpandedProductInfo&gt;
       &lt;CollapseButton
-        collapsePanel={collapsePanel}
-        expanded={expanded}
         setIsHiding={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >          setCollapsePanel(!collapsePanel);</span>
         }}&gt;&lt;/CollapseButton&gt;
@@ -307,7 +295,7 @@ export default ImageCarousel;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-21T16:53:29.200Z
+                at 2022-07-21T16:55:23.329Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

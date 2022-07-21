@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
@@ -144,12 +144,7 @@
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,8 +152,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,11 +173,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,21 +246,18 @@ const ExpandedProductInfo = ({
   activeThumbnailIndex,
   incrementThumbnailIndex,
   rating,
+  callHiding,
   collapsePanel,
   setCollapsePanel,
-  magnified,
-  setAddToCartPrompt,
 }) =&gt; {
   return (
     &lt;div data-testid="collapse-and-info-container" className={collapsePanel ? <span class="branch-0 cbranch-no" title="branch not covered" >"collapse-and-info-container-slide-in" </span>: "collapse-and-info-container"}&gt;
       &lt;div
-        className={magnified ? <span class="branch-0 cbranch-no" title="branch not covered" >"overview-hidden" </span>: "scroll-right"}
         onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >          console.log(magnified);</span>
 <span class="cstat-no" title="statement not covered" >          incrementThumbnailIndex();</span>
         }}
         style={
-          end === activeThumbnailIndex || magnified
+          end === activeThumbnailIndex
             ? <span class="branch-0 cbranch-no" title="branch not covered" >{ visibility: "hidden", position: "absolute" }</span>
             : {
                 position: "absolute",
@@ -298,11 +285,11 @@ const ExpandedProductInfo = ({
         &lt;/div&gt;
         &lt;div className="overview-category"&gt;{productInfo?.category}&lt;/div&gt;
         &lt;div className="overview-expanded-product-info"&gt;
-          &lt;Price activeStyle={styleObjects[activeDisplayIndex]} styleInfo={styleInfo}&gt;&lt;/Price&gt;
+          &lt;Price styleInfo={styleInfo}&gt;&lt;/Price&gt;
           &lt;span className="overview-expanded-product-info-name"&gt;{productInfo.name}&lt;/span&gt;
         &lt;/div&gt;
         &lt;div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}&gt;
-          &lt;span className="overview-expanded-product-info-style"&gt;{styleObjects[activeDisplayIndex].name}&lt;/span&gt;
+          &lt;span className="overview-expanded-product-info-style"&gt;{styleInfo.name}&lt;/span&gt;
         &lt;/div&gt;
         &lt;StylesContainer
           setActiveDisplayIndex={setActiveDisplayIndex}
@@ -310,8 +297,6 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}&gt;&lt;/StylesContainer&gt;
         &lt;PurchaseInfo
-          setAddToCartPrompt={setAddToCartPrompt}
-          styleInfo={styleInfo}
           handleAddToCart={handleAddToCart}
           stock={stock[styleObjects[activeDisplayIndex].style_id]}
           activeStyle={styleObjects[activeDisplayIndex]}&gt;&lt;/PurchaseInfo&gt;
@@ -328,7 +313,7 @@ export default ExpandedProductInfo;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-21T16:53:29.200Z
+                at 2022-07-21T16:55:23.329Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
