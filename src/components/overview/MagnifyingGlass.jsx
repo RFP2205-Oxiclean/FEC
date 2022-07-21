@@ -58,7 +58,7 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
           setContainerCoords([e.currentTarget.getBoundingClientRect().top, e.currentTarget.getBoundingClientRect().left]);
         }}>
         <div style={magnified ? { opacity: 0.8 } : { opacity: 1 }}>
-          <img src={image}></img>
+          <img draggable="false" src={image}></img>
         </div>
         {magnified ? (
           <div

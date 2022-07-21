@@ -16,7 +16,11 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
 
   if (collapsePanel) {
     if (active) {
-      return <div className="overview-small-icon-active">{trueIndex}</div>;
+      return (
+        <div className="overview-small-icon-active">
+          <span style={{ margin: "auto" }}>{trueIndex}</span>
+        </div>
+      );
     } else {
       return (
         <div
@@ -24,7 +28,7 @@ const OverlayThumbnail = ({ image, active, setActiveThumbnailIndex, trueIndex, b
             handleClick();
           }}
           className="overview-small-icon">
-          {trueIndex}
+          <span style={{ margin: "auto" }}>{trueIndex}</span>
         </div>
       );
     }

@@ -23,8 +23,20 @@ const ExpandedProductInfo = ({
   setCollapsePanel,
   magnified,
 }) => {
+  let [sizeOpen, setSizeOpen] = useState(false);
+  let [selectedSize, setSelectedSize] = useState(null);
+  let [selectedQuantity, setSelectedQuantity] = useState(null);
+  let [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
+    <div
+      data-testid="collapse-and-info-container"
+      onMouseLeave={() => {
+        if (sizeOpen) {
+          setSizeOpen(false);
+        }
+      }}
+      className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
       <div
         className={magnified ? "overview-hidden" : "scroll-right"}
         onClick={() => {
@@ -72,6 +84,10 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          setSizeOpen={setSizeOpen}
+          selectedSize={selectedSize}
+          setSelectedSize={setSelectedSize}
+          isOpen={sizeOpen}
           styleInfo={styleInfo}
           handleAddToCart={handleAddToCart}
           stock={stock[styleObjects[activeDisplayIndex].style_id]}

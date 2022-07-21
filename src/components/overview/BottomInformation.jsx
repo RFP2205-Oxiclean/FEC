@@ -2,7 +2,7 @@ import React from "react";
 
 const BottomInformation = (props) => {
   return (
-    <div className="">
+    <div className="bottom-info">
       <div style={{ display: "flex", width: "140px", float: "right", paddingTop: "10px" }}>
         <div
           className="i-tag-container"
