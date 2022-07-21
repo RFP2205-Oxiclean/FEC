@@ -4,7 +4,6 @@ import renderer from "react-test-renderer";
 import { getProductById, getProductStylesById } from "../src/controllers.js";
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import CollapsePanelButton from "../src/components/overview/CollapsePanelButton.jsx";
 import { createRoot } from "react-dom/client";
 
 it("function getProductById returns an object", () => {

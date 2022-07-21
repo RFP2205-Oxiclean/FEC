@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { createCloudinaryDisplayURL } from "/src/services/Cloudinary.js";
+import React, { useState, useEffect, useRef } from "react";
+import { createCloudinaryDisplayURL } from "../../services/Cloudinary.js";
 import ThumbnailContainer from "./ThumbnailContainer.jsx";
 import ExpandedProductInfo from "./ExpandedProductInfo.jsx";
+import CollapseButton from "./CollapseButton.jsx";
+import MagnifyingGlass from "./MagnifyingGlass.jsx";
 
 const ImageCarousel = ({
   image,
@@ -18,27 +20,49 @@ const ImageCarousel = ({
   handleAddToCart,
   incrementThumbnailIndex,
   decrementThumbnailIndex,
+  rating,
+  magnified,
+  collapsePanel,
+  expanded,
+  setMagnified,
+  setCollapsePanel,
+  setExpanded,
+  setAddToCartPrompt,
+  reviewListLength,
 }) => {
+  // let [collapsePanel, setCollapsePanel] = useState(false);
+
+  let callHiding = function (callback) {
+    callback();
+  };
+
   return (
-    <div className="overview-image-container">
-      <button
-        onClick={() => {
-          decrementThumbnailIndex();
-        }}
-        style={
-          activeThumbnailIndex === 0
-            ? { visibility: "hidden", position: "absolute", top: "50%", left: "15%" }
-            : { position: "absolute", top: "50%", left: "15%" }
-        }
-        className="scroll-left">
-        Left
-      </button>
-      <img src={createCloudinaryDisplayURL(image)}></img>
+    <div className={expanded ? "overview-image-container-minus" : "overview-image-container"} data-testid="image-carousel">
+      <MagnifyingGlass
+        decrementThumbnailIndex={decrementThumbnailIndex}
+        setMagnified={setMagnified}
+        magnified={magnified}
+        setCollapsePanel={setCollapsePanel}
+        collapsePanel={collapsePanel}
+        expanded={expanded}
+        setExpanded={setExpanded}
+        image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
       <ThumbnailContainer
+        decrementThumbnailIndex={decrementThumbnailIndex}
+        magnified={magnified}
+        collapsePanel={collapsePanel}
+        expanded={expanded}
         setActiveThumbnailIndex={setActiveThumbnailIndex}
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        reviewListLength={reviewListLength}
+        setAddToCartPrompt={setAddToCartPrompt}
+        magnified={magnified}
+        expanded={expanded}
+        collapsePanel={collapsePanel}
+        setCollapsePanel={setCollapsePanel}
+        rating={rating}
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
         end={photoObjects.length - 1}
@@ -50,6 +74,12 @@ const ImageCarousel = ({
         styleInfo={styleInfo}
         productInfo={productInfo}
         styleObjects={styleObjects}></ExpandedProductInfo>
+      <CollapseButton
+        collapsePanel={collapsePanel}
+        expanded={expanded}
+        setIsHiding={() => {
+          setCollapsePanel(!collapsePanel);
+        }}></CollapseButton>
     </div>
   );
 };

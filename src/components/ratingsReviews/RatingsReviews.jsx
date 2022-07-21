@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { url, API_KEY } from "./../../../config/config.js";
+import { url, API_KEY } from "/config/config.js";
 import ReviewList from "./ReviewList.jsx";
 import RatingsSection from "./RatingsSection.jsx";
 import AddReviewModal from "./AddReviewModal.jsx";
@@ -38,6 +38,11 @@ class RatingsReviews extends React.Component {
     this.showAddReviewModal = this.showAddReviewModal.bind(this);
     this.closeAddReviewModal = this.closeAddReviewModal.bind(this);
     this.addReview = this.addReview.bind(this);
+
+    //HTTP Request
+    this.getProductInformation = this.getProductInformation.bind(this);
+    this.getReviewList = this.getReviewList.bind(this);
+    this.getMetadata = this.getMetadata.bind(this);
   }
 
   componentDidMount() {
@@ -124,7 +129,6 @@ class RatingsReviews extends React.Component {
   //On success, calls getReviewsList and getRatingsList to update with the latest info
   addReview(review) {
     let endPoint = `${url}/reviews`;
-    console.log("review to be posted: ", review);
     newAxios
       .post(endPoint, review)
       .then((response) => {
@@ -210,13 +214,12 @@ class RatingsReviews extends React.Component {
 
   /* Closes the Add Review Modal (passed down as prop) */
   closeAddReviewModal() {
-    console.log("closing modal");
     this.setState({
       displayAddReviewModal: false,
     });
   }
 
-  /* Methods to filter and sort reviews to pass down to ReviewList */
+  /* Method to filter and sort reviews to pass down to ReviewList */
   filterReviews() {
     var filteredReviews = [];
 
@@ -236,14 +239,21 @@ class RatingsReviews extends React.Component {
           filteredReviews.push(this.state.reviews[i]);
         }
       }
+      return filteredReviews;
     }
+  }
+  invokeAllHTTPFunctions() {
+    this.getProductInformation();
+    this.getRatingsList();
+    this.getMetadata();
   }
 
   render() {
     let filteredReviews = this.filterReviews();
     return (
-      <div>
+      <div data-testid="ratings-reviews">
         <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
+        <a id="top-of-reviews"></a>
         <div className="ratings-reviews-master-container">
           {this.state.displayAddReviewModal && (
             <AddReviewModal
@@ -270,6 +280,9 @@ class RatingsReviews extends React.Component {
             showAddReviewModal={this.showAddReviewModal}
           />
         </div>
+        <button data-testid="get-information" className="jest-test-button" onClick={this.invokeAllHTTPFunctions}>
+          Get Product Information
+        </button>
       </div>
     );
   }

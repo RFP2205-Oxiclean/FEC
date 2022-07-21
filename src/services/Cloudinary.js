@@ -33,17 +33,20 @@ const createCloudinaryDisplayURL = function (url) {
   if (!cached_urls[url]) {
     let image = Cloud.image(url);
     image.setDeliveryType("fetch");
-    image.resize(
-      pad()
-        .height(733)
-        .width(1100)
-        // .gravity(autoGravity())
-        .background(predominantGradient())
-    );
-    // .adjust(improve());
+    image
+      .resize(
+        pad()
+          .height(733)
+          .width(1100)
+          // .gravity(autoGravity())
+          .background(predominantGradient())
+      )
+      .adjust(improve());
     cached_urls[url] = image.toURL();
   }
   return cached_urls[url];
 };
+
+const cached_large_urls = {};
 
 export { createCloudinaryThumbnailURL, createCloudinaryDisplayURL };

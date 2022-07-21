@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { createCloudinaryThumbnailURL } from "/src/services/Cloudinary.js";
+import { createCloudinaryThumbnailURL } from "../../services/Cloudinary.js";
 import OverlayThumbnail from "./OverlayThumbnail.jsx";
 import ThumbnailDecrement from "./ThumbnailDecrement.jsx";
 import ThumbnailIncrement from "./ThumbnailIncrement.jsx";
-import usePrevious from "/src/components/commonComponents/usePreviousHook.jsx";
 import { CSSTransition } from "react-transition-group";
 
-const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIndex }) => {
+const ThumbnailContainer = ({
+  photos,
+  activeThumbnailIndex,
+  setActiveThumbnailIndex,
+  collapsePanel,
+  expanded,
+  magnified,
+  decrementThumbnailIndex,
+}) => {
   let [startEnd, setStartEnd] = useState([0, 7]);
   let [hideDown, setHideDown] = useState(true);
   let [hideUp, setHideUp] = useState(false);
   let [displayArr, setDisplayArr] = useState([]);
-  let prevActiveIndex = usePrevious(activeThumbnailIndex);
 
   useEffect(() => {
-    // if (activeThumbnailIndex > 6) {
-    //   let x = Array(7).fill(0);
-    //   let newArr = x.map(function (el, i) {
-    //     return activeDisplayIndex - 6 + i;
-    //   });
-    //   setDisplayArr(newArr);
-    // } else {
-    //   let x = Array(Math.min(photos?.length, 6)).fill(0);
-    //   let newArr = x.map(function (el, i) {
-    //     return i;
-    //   });
-    //   setDisplayArr(newArr);
-    // }
     if (photos.length > 7) {
       setHideDown(true);
     }
@@ -36,14 +29,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
         return i;
       });
     setDisplayArr(fullArr.slice(0, 7));
-
-    // if (activeThumbnailIndex < 7) {
-    //   setStartEnd([0, Math.min(7, photos?.length)]);
-    // } else if (activeThumbnailIndex + 7 <= photos.length) {
-    //   setStartEnd([activeThumbnailIndex, activeThumbnailIndex + 7]);
-    // } else if (activeThumbnailIndex + 7 > photos.length) {
-    //   setStartEnd([Math.max(0, photos.length - 7), photos.length]);
-    // }
   }, [photos]);
 
   useEffect(() => {
@@ -70,14 +55,6 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     }
   }, [activeThumbnailIndex]);
 
-  // let upScrollClick = function () {
-  //   setStartEnd([startEnd[0] - 1, startEnd[1] - 1]);
-  // };
-
-  // let downScrollClick = function () {
-  //   setStartEnd([startEnd[0] + 1, startEnd[1] + 1]);
-  // };
-
   let handleScrollDown = function () {
     let newDisplay = displayArr.map(function (n) {
       return n + 1;
@@ -92,34 +69,58 @@ const ThumbnailContainer = ({ photos, activeThumbnailIndex, setActiveThumbnailIn
     setDisplayArr(newDisplay);
   };
 
-  let myDebugger = function () {
-    console.log(displayArr);
-    console.log(displayArr[displayArr.length - 1] + 1);
-    console.log(photos.length);
-  };
+  if (magnified) {
+    return;
+  }
 
   return (
-    <div className="overview-thumbnail-container">
-      <ThumbnailDecrement displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
+    // <div style={{ position: "absolute", top: "0", left: "0", width: "200px" }}>
+    <div className={collapsePanel ? "overview-collapse-thumbnail-container" : "overview-thumbnail-container"} data-testid="thumbnail-container">
+      <div
+        className={magnified ? "overview-hidden" : "scroll-left"}
+        onClick={() => {
+          decrementThumbnailIndex();
+        }}
+        style={
+          0 === activeThumbnailIndex || magnified
+            ? { visibility: "hidden", position: "absolute" }
+            : {
+                position: "absolute",
+                display: "flex",
+                top: "50%",
+                left: "130%",
+                height: "35px",
+                width: "35px",
+                overflow: "visible",
+                marginLeft: "-50px",
+                fontSize: "40px",
+                borderRadius: "20%",
+                alignItems: "center",
+              }
+        }>
+        <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-left"></i>
+      </div>
+      <ThumbnailDecrement magnified={magnified} displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {
         for (let i = 0; i < photos.length; i++) {
           if (photos[i].trueIndex === trueIndex) {
             return (
-              <CSSTransition in={true} appear={true} timeout={300} classNames="fade" key={photos[i].thumbnail_url}>
-                <OverlayThumbnail
-                  image={photos[i].thumbnail_url}
-                  active={activeThumbnailIndex === photos[i].trueIndex}
-                  key={photos[i].thumbnail_url + photos[i].thumbnail_url}
-                  trueIndex={photos[i]?.trueIndex}
-                  setActiveThumbnailIndex={setActiveThumbnailIndex}
-                  backup={photos[i].url}></OverlayThumbnail>
-              </CSSTransition>
+              <OverlayThumbnail
+                expanded={expanded}
+                collapsePanel={collapsePanel}
+                image={photos[i].thumbnail_url}
+                active={activeThumbnailIndex === photos[i].trueIndex}
+                key={photos[i].thumbnail_url + photos[i].thumbnail_url}
+                trueIndex={photos[i]?.trueIndex}
+                setActiveThumbnailIndex={setActiveThumbnailIndex}
+                backup={photos[i].url}></OverlayThumbnail>
             );
           }
         }
       })}
-      <ThumbnailIncrement end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
+      <ThumbnailIncrement magnified={magnified} end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
     </div>
+    // </div>
   );
 };
 

@@ -5,7 +5,7 @@ import RatingsBarComponent from './RatingsBarComponent.jsx'
 import RatingsGraph from './RatingsGraph.jsx'
 import ProductBreakdown from './ProductBreakdown.jsx';
 
-const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFilterClear, setAverageRating}) => {
+const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFilterClear}) => {
 
 
 
@@ -61,14 +61,19 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     return active;
   }
 
-
+  var roundToQuarterDecimal =(num) => {
+    return (Math.round(num * 4) / 4).toFixed(2)
+  }
 
   return (
-    <div className = "ratings-section-container">
+    <div className = "ratings-section-container" data-testid = 'ratings-section'>
+      {console.log('metadata: ', metadata)}
       {metadata.ratings!== undefined ? <div>
-      <div id = 'average-rating'>{roundedAverage}&nbsp;
-        <StarRatingStatic rating = {roundedAverage}/>
+      <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
+        <StarRatingStatic rating = {roundToQuarterDecimal(roundedAverage)}/>
+        <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
       </div>
+
       <br></br>
       <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
       </div>
@@ -86,7 +91,6 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
           <button className = 'clear-filters-button'onClick = {handleFilterClear}>Clear Filters</button>
         </div>
       }
-
     </div> : ''}
     </div>
 

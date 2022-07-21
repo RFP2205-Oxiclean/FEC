@@ -3,6 +3,7 @@ import StarRatingUserInput from "./StarRatingUserInput.jsx";
 import { url, API_KEY, IMG_API_KEY } from "/config/config.js";
 import axios from "axios";
 import { Image } from "cloudinary-react";
+import CharacteristicsInputs from "./CharacteristicsInputs.jsx";
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -58,7 +59,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleSizeSelect(e) {
-    console.log("size selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -67,7 +67,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleWidthSelect(e) {
-    console.log("width selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -76,7 +75,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleComfortSelect(e) {
-    console.log("comfort selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -85,7 +83,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleQualitySelect(e) {
-    console.log("quality selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -94,7 +91,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleLengthSelect(e) {
-    console.log("length selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -103,7 +99,6 @@ class AddReviewModal extends React.Component {
   }
 
   handleFitSelect(e) {
-    console.log("fit selected: ", e.target.value);
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
     characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(e.target.value);
     this.setState({
@@ -127,8 +122,6 @@ class AddReviewModal extends React.Component {
 
   handlePictureAdd(e) {
     e.preventDefault();
-    console.log("handle picture add was invoked");
-    console.log(e.target.files);
     const photosCopy = this.state.photos.slice();
     const photosForDisplayCopy = this.state.photosForDisplay.slice();
     for (let key in e.target.files) {
@@ -149,7 +142,6 @@ class AddReviewModal extends React.Component {
   }
 
   submitImagesToCloudinary() {
-    console.log("Attempting to submit images to cloudinary", this.state.photos);
     const url = `https://api.cloudinary.com/v1_1/dky0ccpc4/image/upload`;
     return Promise.all(
       this.state.photos.map((photo, index) => {
@@ -285,24 +277,12 @@ class AddReviewModal extends React.Component {
     return false;
   }
 
-  sizeDefinitions = ["None selected", "A size too small", "Half a size too small", "Perfect", "Half a size too big", "A size too wide"];
-
-  widthDefinitions = ["None selected", "Too narrow", "Slightly narrow", "Perfect", "Slightly wide", "Too wide"];
-
-  comfortDefinitons = ["None selected", "Uncomfortable", "Slightly uncomfortable", "Ok", "Comfortable", "Perfect"];
-
-  qualityDefinitions = ["None selected", "Poor", "Below average", "What I expected", "Pretty great", "Perfect"];
-
-  lengthDefinitions = ["None selected", "Runs short", "Runs slightly short", "Perfect", "Runs slightly long", "Runs long"];
-
-  fitDefinitions = ["None selected", "Runs tight", "Runs slightly tight", "Perfect", "Runs slightly long", "Runs long"];
-
   render() {
     return (
-      <div className="modal-background">
-        <div className="modal-container">
+      <div className="modal-background" data-testid="add-review-modal">
+        <div className="addreview-modal-container">
           <div>
-            <button className="exit-modal-button" onClick={this.props.closeModal}>
+            <button className="modal-exit" onClick={this.props.closeModal}>
               &times;
             </button>
           </div>
@@ -313,7 +293,7 @@ class AddReviewModal extends React.Component {
           <StarRatingUserInput handleRatingChange={this.handleRatingChange} />
           {/* Recommendation Radio buttons */}
           <br></br>
-          <form onChange={this.handleRecommendationChange}>
+          <form data-testid="addReview-recommendation-change" onChange={this.handleRecommendationChange}>
             Do you recommend this product?&nbsp;&nbsp;
             <input type="radio" id="modal-recommend-yes" text="yes" value="true" name="modal-recommendation" />
             <label htmlFor="modal-recommend-yes">Yes</label>
@@ -321,202 +301,28 @@ class AddReviewModal extends React.Component {
             <label htmlFor="modal-recommend-no">No</label>
           </form>
           {/* Characteristics Radio Buttons */}
-          <br></br>
-          {this.props.metadata.characteristics["Size"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Size: <i>{this.sizeDefinitions[this.state.characteristics[`${this.props.metadata.characteristics["Size"].id}`]]}</i>
-              </span>
-              <form className="modal-size-form" onChange={this.handleSizeSelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>A size too small</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>A size too big</label>
-                </div>
-              </form>
-              <hr></hr>{" "}
-            </div>
-          ) : (
-            ""
-          )}
-          {this.props.metadata.characteristics["Width"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Width: <i>{this.widthDefinitions[this.state.characteristics[`${this.props.metadata.characteristics["Width"].id}`]]}</i>
-              </span>
-              <form onChange={this.handleWidthSelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>Too narrow</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>Too wide</label>
-                </div>
-              </form>
-              <hr></hr>
-            </div>
-          ) : (
-            ""
-          )}
-          {this.props.metadata.characteristics["Comfort"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Comfort: <i>{this.comfortDefinitons[this.state.characteristics[`${this.props.metadata.characteristics["Comfort"].id}`]]}</i>
-              </span>
-              <form onChange={this.handleComfortSelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>Uncomfortable</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>Perfect</label>
-                </div>
-              </form>
-              <br></br>
-            </div>
-          ) : (
-            ""
-          )}
-          {this.props.metadata.characteristics["Quality"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Quality: <i>{this.qualityDefinitions[this.state.characteristics[`${this.props.metadata.characteristics["Quality"].id}`]]}</i>
-              </span>
-              <form onChange={this.handleQualitySelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>Poor</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>Perfect</label>
-                </div>
-              </form>
-              <br></br>
-            </div>
-          ) : (
-            ""
-          )}
-          {this.props.metadata.characteristics["Length"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Length: <i> {this.lengthDefinitions[this.state.characteristics[`${this.props.metadata.characteristics["Length"].id}`]]}</i>
-              </span>
-              <form onChange={this.handleLengthSelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>Runs short</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>Runs long</label>
-                </div>
-              </form>
-              <br></br>
-            </div>
-          ) : (
-            ""
-          )}
-          {this.props.metadata.characteristics["Fit"] ? (
-            <div>
-              <span className="modal-characteristic-title">
-                Fit: <i>{this.fitDefinitions[this.state.characteristics[`${this.props.metadata.characteristics["Fit"].id}`]]}</i>
-              </span>
-              <form onChange={this.handleFitSelect}>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="1" />
-                  <label>Runs tight</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="2" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="3" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="4" />
-                  <label>&nbsp;</label>
-                </div>
-                <div className="radio-box">
-                  <input type="radio" name="size" value="5" />
-                  <label>Runs long</label>
-                </div>
-              </form>
-            </div>
-          ) : (
-            ""
-          )}
+          <CharacteristicsInputs
+            metadata={this.props.metadata}
+            handleComfortSelect={this.handleComfortSelect}
+            handleFitSelect={this.handleFitSelect}
+            handleLengthSelect={this.handleLengthSelect}
+            handleQualitySelect={this.handleQualitySelect}
+            handleSizeSelect={this.handleSizeSelect}
+            handleWidthSelect={this.handleWidthSelect}
+            characteristicsState={this.state.characteristics}
+          />
           {/* Review summary and body */}
           <form>
             <br></br>
-            Review Summary: <input onChange={this.handleReviewSummaryChange} maxLength="60" placeholder="Example: Best purchase ever!" size="40" />
+            Review Summary:{" "}
+            <input
+              data-testid="addReview-summary-change"
+              onChange={this.handleReviewSummaryChange}
+              maxLength="60"
+              placeholder="Example: Best purchase ever!"
+              size="40"
+              className="addReview-summary"
+            />
           </form>
           <br></br>
           Review Body:
@@ -528,6 +334,7 @@ class AddReviewModal extends React.Component {
               placeholder="Why did you like the product or not?"
               font="Times New Roman"
               minLength="50"
+              data-testid="addReview-body-change"
             />
             <div>{this.remainingCharacters()}</div>
           </form>
@@ -535,7 +342,7 @@ class AddReviewModal extends React.Component {
           <form>
             <br></br>
             {this.state.photos.length < 5 ? (
-              <div>
+              <div className = 'submit-photos-section'>
                 Submit Photos (optional): <br></br>
                 <input
                   className="submit-photos-button"
@@ -543,6 +350,7 @@ class AddReviewModal extends React.Component {
                   name="filename"
                   text={"Submit Photo(s)"}
                   onChange={this.handlePictureAdd}
+                  data-testid="addReview-picture-add"
                   multiple
                 />
               </div>
@@ -551,16 +359,20 @@ class AddReviewModal extends React.Component {
             )}
           </form>
           <span>
-            {this.state.photosForDisplay[0] && <img className="thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
-            {this.state.photosForDisplay[1] && <img className="thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
-            {this.state.photosForDisplay[2] && <img className="thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
-            {this.state.photosForDisplay[3] && <img className="thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
-            {this.state.photosForDisplay[4] && <img className="thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
+            {this.state.photosForDisplay[0] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
+            {this.state.photosForDisplay[1] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
+            {this.state.photosForDisplay[2] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
+            {this.state.photosForDisplay[3] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
+            {this.state.photosForDisplay[4] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
           </span>
           <br></br>
           {/* Nickname field */}
-          <form className="modal-nickname-field">
-            Nickname: <input onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!" />
+          <form >
+            Nickname:
+            <input
+              onChange={this.handleNicknameChange} type="text" maxLength="60" placeholder="Example: jackson11!"
+              className="user-name"
+            />
             <br />
             <small>
               <i>For privacy reasons, do not use your full name or email address</i>
@@ -569,7 +381,15 @@ class AddReviewModal extends React.Component {
           <br></br>
           {/* Email field */}
           <form className="modal-email-field">
-            Email: <input onChange={this.handleEmailChange} type="text" maxLength="60" placeholder="Example: jackson11@email.com" />
+            Email:{" "}
+            <input
+              className = 'user-email'
+              data-testid="addReview-email-input"
+              onChange={this.handleEmailChange}
+              type="text"
+              maxLength="60"
+              placeholder="Example: jackson11@email.com"
+            />
             <br></br>
             <small>
               <i>For authentication reasons, you will not be emailed</i>
@@ -577,10 +397,9 @@ class AddReviewModal extends React.Component {
           </form>
           <br></br>
           <form>
-            <button className="keyword-search-clear-button" onClick={this.handleReviewSubmit}>
+            <button data-testid="addReview-submit-button" className="small-interactive-buttons" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
-            <button onClick={this.showState.bind(this)}>Show State</button>
           </form>
         </div>
       </div>
