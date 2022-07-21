@@ -219,7 +219,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
       <BottomInformation description={productInfo?.description}></BottomInformation>
-      <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
+      {/* <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
@@ -237,7 +237,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           Master State
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

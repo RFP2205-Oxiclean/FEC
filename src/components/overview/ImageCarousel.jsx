@@ -30,7 +30,7 @@ const ImageCarousel = ({
   setAddToCartPrompt,
   reviewListLength,
 }) => {
-  let [collapsePanel, setCollapsePanel] = useState(false);
+  // let [collapsePanel, setCollapsePanel] = useState(false);
 
   let callHiding = function (callback) {
     callback();
