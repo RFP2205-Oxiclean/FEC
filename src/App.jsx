@@ -6,11 +6,14 @@ import axios from "axios";
 import ProductOverview from "./components/overview/ProductOverview.jsx";
 import QuestionsAndAnswers from "./components/questionsAndAnswers/QuestionsAndAnswers.jsx";
 import RatingsReviews from "./components/ratingsReviews/RatingsReviews.jsx";
+import DarkMode from './components/commonComponents/DarkMode.jsx'
 // import RelatedItems from './components/relatedItems/RelatedItems.jsx'
 import ThemeSwitcher from './components/commonComponents/ThemeSwitcher.jsx';
 
 import {createContext, useState} from 'react';
 export const ThemeContext = createContext(null);
+
+import {createContext, useState} from 'react';
 
 import TopNavBar from "./components/commonComponents/TopNavBar.jsx";
 

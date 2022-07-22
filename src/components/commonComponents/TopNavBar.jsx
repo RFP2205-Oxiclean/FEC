@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const TopNavBar = (props) => {
+
+  const [theme, setTheme] = useState(null)
+
+
+
   return (
     <div className = 'top-nav-bar'>
       <span className = 'top-nav-left-bar'>

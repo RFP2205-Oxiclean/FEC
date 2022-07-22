@@ -5,7 +5,7 @@ import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
 import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
-const ProductOverview = ({ handleSubmit, product_id }) => {
+const ProductOverview = ({ handleSubmit, product_id, handleThemeToggle }) => {
   let [rating, setRating] = useState(0);
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
@@ -72,9 +72,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     });
   }, [product_id]);
 
-  useEffect(() => {
-    prefetch(styleObjects, product_id);
-  }, [styleObjects]);
+  // useEffect(() => {
+  //   prefetch(styleObjects, product_id);
+  // }, [styleObjects]);
 
   let handleClick = function () {
     handleSubmit(entry);
@@ -188,8 +188,29 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       .catch((err) => console.log("failed to post"));
   };
 
+  const switchTheme = (e) => {
+    console.log('switchTheme was invoked!');
+    console.log(e);
+    if (e.target.checked) {
+      document.documentElement.setAttribute('data-theme', 'dark')
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light')
+    }
+  }
+
+  // const toggleSwitch = document.querySelector('.theme-switch input[type = "checkbox"]')
+  // toggleSwitch.addEventListener('change', switchTheme, false)
+
+
   return (
     <div data-testid="product-overview" className="product-overview">
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+        <em>Enable Dark Mode!</em>
+      </div>
       <ImageCarousel
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
