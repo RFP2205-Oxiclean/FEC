@@ -8,7 +8,7 @@ import { url, API_KEY } from "../../../config/config.js";
 import NiceSelectMenu from "./NiceSelectMenu.jsx";
 import NiceQMenu from "./NiceQMenu.jsx";
 
-const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) => {
+const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock, stock }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
@@ -103,7 +103,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
           )}
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
-          {/* <NiceSelectMenu
+          <NiceSelectMenu
             stockId={stockId}
             setStockId={setStockId}
             selectSize={selectSize}
@@ -113,7 +113,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
             defaultValue={defaultValue}
             activeStock={activeStock}
             setDefaultValue={setDefaultValue}></NiceSelectMenu>
-          <NiceQMenu activeStock={activeStock} stockId={stockId} selectQuantity={selectQuantity} options={options}></NiceQMenu> */}
+          <NiceQMenu activeStock={activeStock} stockId={stockId} selectQuantity={selectQuantity} options={options}></NiceQMenu>
           {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
           {/* <NiceSelectMenu
             disableCondition={"Out of Stock!"}
@@ -124,26 +124,18 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
             defaultValue={selectedSize ? selectedSize : "Select a Size!"}
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
           <NiceSelectMenu width={80}></NiceSelectMenu> */}
-          <SizeMenu
-            stock={}
+          {/* <SizeMenu
+            stock={stock}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
+          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu> */}
         </div>
         <div className="purchase-buttons-container2">
           <div>
-            {/* <AddToCart
-              size={size}
-              setPrompt={setPrompt}
-              noItems={noItems}
-              stock={activeStock}
-              selectQuantity={selectQuantity}
-              handleAddToCart={handleAddToCart}
-              quantity={quantity}
-              stockId={stockId}></AddToCart> */}
+            <AddToCart size={size} setPrompt={setPrompt} quantity={quantity} stockId={stockId}></AddToCart>
           </div>
         </div>
         <div style={!addToCartPrompt ? { visibility: "hidden" } : { fontSize: "bold", float: "right", marginRight: "20px" }}>
