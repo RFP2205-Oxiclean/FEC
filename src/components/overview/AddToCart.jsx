@@ -50,7 +50,7 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
       onClick={() => {
         handleClick();
       }}
-      className={hidden ? "invisible-cart" : "add-to-cart"}>
+      className="add-to-cart">
       Add to Bag
     </div>
   );

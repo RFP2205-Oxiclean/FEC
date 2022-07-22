@@ -3,7 +3,15 @@ import React from "react";
 const BottomInformation = ({ description }) => {
   return (
     <div className="overview-bottom-info">
-      <div style={{ width: "80%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", margin: "auto" }}>
+      <div
+        style={{
+          width: "80%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+        }}>
         <span style={{ fontSize: "25px", paddingLeft: "100px", paddingRight: "100px", overflowWrap: "break-word" }}>{description}</span>
       </div>
       <div
