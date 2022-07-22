@@ -1453,9 +1453,10 @@ div.radio-box {
 }
 
 .ratings-reviews-title {
-  margin-left: 14%;
+  margin-left: 14.5%;
   font-family: 'Cormorant SC', serif;
   font-size: 20px;
+  margin-top: 3%;
 }
 
 .sort-dropdown-container {
