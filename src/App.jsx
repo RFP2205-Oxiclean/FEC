@@ -21,12 +21,8 @@ function App() {
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
-    setLocalStorage();
   };
 
-  const setLocalStorage = () => {
-    localStorage.setItem('Theme', theme);
-  }
 
   const handleSubmit =(id) => {
     id = parseInt(id);
