@@ -7,32 +7,8 @@ class Photo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            photo: undefined,
-            modalActive: false
+            modalActive: false,
         }
-    }
-
-    componentDidMount() {
-        this.getImage();
-    }
-
-    componentDidUpdate() {
-
-    }
-
-    getImage() {
-      if (this.props.url !== undefined) {
-            let endPoint = this.props.url;
-            axios.get(endPoint, {
-              responseType:'arraybuffer',
-          })
-          .then((res)=>{
-              this.state.photo = Buffer.from(res.data,'binary').toString('base64');
-              this.setState(JSON.parse(JSON.stringify(this.state)))
-          })
-          .catch((err)=>console.error(err))
-          }
-
     }
 
     toggleModal () {
@@ -43,12 +19,12 @@ class Photo extends React.Component {
     render() {
         let modal = null;
         if (this.state.modalActive) {
-            modal = <ImageModal photo={this.state.photo} clickHandler={this.toggleModal.bind(this)} />
+            modal = <ImageModal photo={this.props.url} clickHandler={this.toggleModal.bind(this)} />
         }
 
         return (
-            <div className="photo-container" onClick={this.toggleModal.bind(this)}>
-                <img src={'data:image/jpeg;base64, '+this.state.photo} className="photo" />
+            <div className="photo-container" data-testid="individual-answer-photo" onClick={this.toggleModal.bind(this)}>
+                <img src={this.props.url} className="photo" />
                 {modal}
             </div>)
     }

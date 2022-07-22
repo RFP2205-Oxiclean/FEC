@@ -116,10 +116,7 @@ class AnswerModal extends React.Component {
     }
 
     sendForm() {
-        console.log(this.state.input,
-            this.state.name,
-            this.state.email,
-            this.state.photos[0], 'request')
+
         let endPoint = `${url}/qa/questions/${this.props.question.question_id}/answers`
         let newAxios = axios.create({
           headers : {'Authorization' : API_KEY}
@@ -144,27 +141,27 @@ class AnswerModal extends React.Component {
 
     render() {
         return (
-            <div className="modal" >
+            <div className="modal" data-testid="answer-modal" >
                   <div className="modal-container" >
-                      <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler}/>
+                      <input type="button" className="modal-exit" data-testid="a-exit" value="X" onClick={this.props.clickHandler}/>
                       <h1>Submit your Answer</h1>
                       <h3>{this.props.product.name} : {this.props.question.question_body}</h3>
                       <form className="form">
-                          <textarea className="user-input" type="text" maxLength="1000" placeholder="Please, enter your answer here..." onChange={(event)=>this.onInputChangeState('input',event.target.value)} />
+                          <textarea className="user-input" data-testid="text-input" type="text" maxLength="1000" placeholder="Please, enter your answer here..." onChange={(event)=>this.onInputChangeState('input',event.target.value)} />
                           <div className="name-wrap">
-                              NickName : <input className="user-name" type="text" maxLength="60" placeholder="Example: jackson541!" onChange={(event)=>this.onInputChangeState('name',event.target.value)} />
+                              NickName : <input className="user-name" type="text" data-testid="user-name-input" maxLength="60" placeholder="Example: jackson541!" onChange={(event)=>this.onInputChangeState('name',event.target.value)} />
                               <b className="disclaimer-n">For privacy reasons, do not use your full name or email address</b>
                           </div>
 
                           <div className="email-wrap">
-                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Example: jack@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
+                              Email : <input className="user-email" type="email" maxLength="60" data-testid="email-input" placeholder="Example: jack@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
                               <b className="disclaimer-e">For authentication reasons, you will not be emailed</b>
                           </div>
 
 
                           <div className="upload-msg">Upload up to 5 photos below:</div><input className="submit-photos-button" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFiles(event.target.files)} onClick={this.clearPhotos.bind(this)}/>
                           <PhotoList photos={this.state.photos}/>
-                          <input className="small-interactive-buttons" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
+                          <input className="small-interactive-buttons" data-testid="submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
                       </form>
                   </div>
             </div>
