@@ -1,4 +1,6 @@
-
+body {
+  margin : 0px !important;
+}
 
 .app > div {
   border: 5px;
@@ -825,11 +827,25 @@ select:active {
   margin: 0;
 }
 
+#dark .questions-and-answers #qa-container .qa-title
+{
+  color: whitesmoke;
+  font-family: 'Cormorant SC', serif;
+  font-size: 15px;
+  padding: 15px 0px;
+  margin: 0;
+}
+
 
 .questions-and-answers #qa-container {
   width: 100%;
   box-sizing: border-box;
   margin: auto;
+}
+
+#dark .questions-and-answers .modal-container {
+  color:whitesmoke;
+  background-color:#202124;
 }
 
 
@@ -841,6 +857,7 @@ select:active {
   font-weight: bold;
   font-family: 'Cormorant SC', serif !important;
 }
+
 
 ::placeholder {
   color:black;
@@ -902,6 +919,7 @@ select:active {
   font-weight:bold;
   font-family: 'Cormorant SC', serif;
   background-color: white;
+  margin-top: 10px;
 }
 
 #dark .interactive-buttons.load-more, #dark .interactive-buttons.add-a {
@@ -979,6 +997,10 @@ select:active {
   width: 100%;
   overflow: scroll;
   max-height: 50vh;
+}
+
+#dark .questions-and-answers #question-container {
+  color:Whitesmoke;
 }
 
 .questions-and-answers ul {
@@ -1378,9 +1400,6 @@ select:active {
   line-height: 1;
 }
 
-.rating-bar-label {
-  text-decoration: underline;
-}
 
 .rating-bar-label:hover {
   cursor: pointer;
@@ -1603,6 +1622,7 @@ div.radio-box {
 .review-list-container {
   width: 60%;
   min-height: 60vh;
+  margin-top:8%;
 }
 
 
@@ -1611,7 +1631,6 @@ div.radio-box {
   display: flex;
   padding: 0px;
   margin:auto;
-  margin-top: 2.5%;
   width: 100%;
   padding-bottom: 5%;
   box-sizing: border-box;
@@ -1689,6 +1708,16 @@ div.radio-box {
 
 #dark .keyword-searchbar::placeholder {
   color: white;
+}
+
+#dark .qa-nav-bar::placeholder {
+  color: white;
+}
+
+#dark .qa-nav-bar {
+  background-color: #202124;
+  box-shadow: 0 0 3px white;
+  margin-left: 1px;
 }
 
 
@@ -2015,18 +2044,18 @@ div.radio-box {
   height: 20px;
   width: 20px;
   left: 4px;
-  bottom: 3px;
+  bottom: 2px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #5a5b5c;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #5a5b5c;
 }
 
 input:checked + .slider:before {
