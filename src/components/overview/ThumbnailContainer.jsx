@@ -98,7 +98,7 @@ const ThumbnailContainer = ({
                 alignItems: "center",
               }
         }>
-        <i style={{ color: "black", opacity: ".7" }} className="fa-solid fa-angles-left"></i>
+        <i style={{ paddingLeft: "5px", color: "black", opacity: ".7" }} className="fa-solid fa-angles-left"></i>
       </div>
       <ThumbnailDecrement magnified={magnified} displayArr={displayArr} callback={handleScrollUp}></ThumbnailDecrement>
       {displayArr?.map(function (trueIndex) {

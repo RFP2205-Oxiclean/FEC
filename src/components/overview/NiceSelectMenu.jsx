@@ -1,25 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, activeStock }) => {
-  useEffect(() => {
-    activeStock?.forEach(function (stockObj) {});
-  }, [sizes]);
-
   return (
     <div
+      data-testid="select-menu"
       onClick={() => {
         open(!isOpen);
       }}
       className="select-menu">
       {defaultValue}
       {isOpen ? (
-        sizes.map(function (size, i) {
+        sizes?.map(function (size, i) {
           return (
             <div
               onClick={() => {
                 setDefaultValue(size);
                 open(false);
               }}
+              data-testid="select-menu-option1"
               key={i}
               className="select-menu-option1">
               {size}

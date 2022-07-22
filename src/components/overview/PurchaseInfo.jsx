@@ -23,10 +23,11 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
   // S Menu receives sizes
 
   useEffect(() => {
+    let newSizes = [];
     for (let k in activeStock) {
-      sizes?.push(activeStock[k].size);
+      newSizes.push(activeStock[k].size);
     }
-    setSizes(sizes);
+    setSizes(newSizes);
   }, [activeStock]);
 
   let myDebugger = function () {
@@ -93,6 +94,10 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
         <div style={!addToCartPrompt ? { visibility: "hidden" } : { fontSize: "bold", float: "right", marginRight: "20px" }}>
           <span>Added to Cart!</span>
         </div>
+        <button
+          onClick={() => {
+            console.log(sizes);
+          }}></button>
       </div>
     </div>
   );
