@@ -758,6 +758,7 @@ select:active {
   font-family: 'Cormorant SC', serif !important;
 }
 
+
 ::placeholder {
   color:black;
 }
@@ -818,6 +819,7 @@ select:active {
   font-weight:bold;
   font-family: 'Cormorant SC', serif;
   background-color: white;
+  margin-top: 10px;
 }
 
 #dark .interactive-buttons.load-more, #dark .interactive-buttons.add-a {
