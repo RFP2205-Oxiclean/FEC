@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, activeStock }) => {
+const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, activeStock, stockId, setStockId }) => {
   return (
-    <div
-      data-testid="select-menu"
-      onClick={() => {
-        open(!isOpen);
-      }}
-      className="select-menu">
-      {defaultValue}
+    <div className="select-menu">
+      <div
+        onClick={() => {
+          open(!isOpen);
+        }}
+        className="select-menu-header">
+        {defaultValue}
+      </div>
       {isOpen ? (
-        sizes?.map(function (size, i) {
+        sizes.map(function (sizeObject, i) {
           return (
             <div
+              key={sizeObject.stockId}
               onClick={() => {
-                setDefaultValue(size);
+                setStockId(sizeObject.stockId);
+                setDefaultValue(sizeObject.size);
                 open(false);
               }}
-              data-testid="select-menu-option1"
-              key={i}
-              className="select-menu-option1">
-              {size}
+              className={stockId === sizeObject.stockId ? "select-menu-option-selected" : "select-menu-option"}>
+              {sizeObject.size}
             </div>
           );
         })
@@ -32,6 +33,55 @@ const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, ac
 };
 
 export default NiceSelectMenu;
+
+//   // <div style={{ position: "absolute" }}>
+//   <div
+//     data-testid="select-menu"
+//     onClick={() => {
+//       open(!isOpen);
+//     }}
+//     className="select-menu">
+//     {defaultValue}
+//     {/* </div> */}
+//     {isOpen ? (
+//       sizes?.map(function (size, i) {
+//         return (
+//           <div
+//             onClick={() => {
+//               setDefaultValue(size);
+//               open(false);
+//             }}
+//             data-testid="select-menu-option1"
+//             key={i}
+//             className="select-menu-option1">
+//             {size}
+//           </div>
+//         );
+//       })
+//     ) : (
+//       <></>
+//     )}
+//   </div>
+// );
+
+// {isOpen ? (
+//   sizes?.map(function (size, i) {
+//     return (
+//       <div
+//         onClick={() => {
+//           setDefaultValue(size);
+//           open(false);
+//         }}
+//         data-testid="select-menu-option1"
+//         key={i}
+//         className="select-menu-option1">
+//         {size}
+//       </div>
+//     );
+//   })
+// ) : (
+//   <></>
+// )}
 
 {
   /* <div style={{ display: "flex", flexWrap: "wrap", width: width }}>

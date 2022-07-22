@@ -6,6 +6,7 @@ import { addToCart } from "../../controllers.js";
 import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 import NiceSelectMenu from "./NiceSelectMenu.jsx";
+import NiceQMenu from "./NiceQMenu.jsx";
 
 const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) => {
   let [quantity, selectQuantity] = useState(null);
@@ -18,20 +19,70 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
   let [selectedSize, setSelectedSize] = useState(null);
   let [sizes, setSizes] = useState(null);
   let [defaultValue, setDefaultValue] = useState("Select a Size!");
+  let [options, setOptions] = useState([]);
+  let [activeStockUnit, setActiveStockUnit] = useState({});
 
   // Q Menu receives activeStock
   // S Menu receives sizes
 
+  console.log(activeStock);
+
   useEffect(() => {
     let newSizes = [];
-    for (let k in activeStock) {
-      newSizes.push(activeStock[k].size);
+    if (activeStock) {
+      let flag = false;
+      for (let k in activeStock) {
+        console.log("firing");
+        if (activeStock[k].quantity !== null && activeStock[k].quantity[k] !== 0) {
+          flag = true;
+        }
+        newSizes.push({ ...activeStock[k], stockId: k });
+      }
+      if (!flag) {
+        setDefaultValue("Out of stock!");
+      }
     }
     setSizes(newSizes);
   }, [activeStock]);
 
+  useEffect(() => {
+    // if (size) {
+    //   let flag = false;
+    //   console.log("setting options");
+    //   for (let k in activeStock) {
+    //     if (activeStock[k].size === size) {
+    //       let flag = true;
+    //       let count = activeStock[k].quantity;
+    //       let newOptions = Array(count).fill(0);
+    //       newOptions = newOptions.map(function (e, i) {
+    //         return i + 1;
+    //       });
+    //       console.log("setting options");
+    //       setOptions(newOptions);
+    //     }
+    //   }
+    // }
+    // if (stockId) {
+    //   activeStock.forEach(function (stockUnit) {
+    //     if (stockUnit.id === stockId) {
+    //       setActiveStockUnit(stockUnit);
+    //     }
+    //   });
+    // }
+    if (stockId) {
+      setActiveStockUnit(activeStock[stockId]);
+      let newOptions = Array(activeStock[stockId].quantity)
+        .fill(0)
+        .map(function (e, i) {
+          return i + 1;
+        });
+      setOptions(newOptions);
+    }
+  }, [stockId]);
+
   let myDebugger = function () {
-    console.log(activeStock);
+    console.log(size);
+    console.log(quantity);
   };
 
   return (
@@ -53,12 +104,16 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
           <NiceSelectMenu
+            stockId={stockId}
+            setStockId={setStockId}
+            selectSize={selectSize}
             sizes={sizes}
             isOpen={sizeOpen}
             open={setSizeOpen}
             defaultValue={defaultValue}
             activeStock={activeStock}
             setDefaultValue={setDefaultValue}></NiceSelectMenu>
+          <NiceQMenu activeStock={activeStock} stockId={stockId} selectQuantity={selectQuantity} options={options}></NiceQMenu>
           {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
           {/* <NiceSelectMenu
             disableCondition={"Out of Stock!"}
@@ -70,7 +125,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
           <NiceSelectMenu width={80}></NiceSelectMenu> */}
           {/* <SizeMenu
-            stock={stock}
+            stock={activeStock}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
@@ -84,7 +139,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
               size={size}
               setPrompt={setPrompt}
               noItems={noItems}
-              stock={stock}
+              stock={activeStock}
               selectQuantity={selectQuantity}
               handleAddToCart={handleAddToCart}
               quantity={quantity}
@@ -96,6 +151,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
         </div>
         <button
           onClick={() => {
+            console.log(quantity);
             console.log(sizes);
           }}></button>
       </div>
