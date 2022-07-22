@@ -1462,8 +1462,9 @@ select:active {
   z-index: 1000;
 }
 
+
 #dark .addreview-modal-container {
-  background-color: black;
+  background-color: #202124;
   color: white;
 }
 
@@ -1506,11 +1507,6 @@ select:active {
   overflow-wrap: break-word;
   width: 100%;
   display: inline-block;
-}
-
-#dark .modal-review-body, #dark .modal-review-summary {
-  background-color: #202124;
-  color: white !important;
 }
 
 div.radio-box {
