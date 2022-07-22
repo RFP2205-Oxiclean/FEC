@@ -732,13 +732,14 @@ select:active {
   margin: auto;
 }
 
+
 .questions-and-answers #qa-container .qa-nav-bar{
   width: 100%;
   box-sizing: border-box;
   padding: 15px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  /* font-family: 'Cormorant SC', serif; */
+  font-family: 'Cormorant SC', serif !important;
 }
 
 ::placeholder {
@@ -995,7 +996,9 @@ select:active {
 }
 
 .questions-and-answers .answer-list .photo-container .qa-image-modal {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     height: 100%;
     width: 100%;
