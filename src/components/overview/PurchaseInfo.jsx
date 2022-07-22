@@ -7,7 +7,7 @@ import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 import NiceSelectMenu from "./NiceSelectMenu.jsx";
 
-const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
+const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
@@ -16,23 +16,21 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
   let [sizeOpen, setSizeOpen] = useState(false);
   let [selectedSize, setSelectedSize] = useState(null);
-  let [defaultSizeValue, setDefaultSizeValue] = useState("Select a Size!");
+  let [sizes, setSizes] = useState(null);
+  let [defaultValue, setDefaultValue] = useState("Select a Size!");
+
+  // Q Menu receives activeStock
+  // S Menu receives sizes
 
   useEffect(() => {
-    let flag = false;
-    stock?.forEach(function (stockObj) {
-      setNoItems(false);
-      if (stockObj.quantity !== 0 && stockObj.quantity !== null) {
-        flag = true;
-      }
-      if (!flag) {
-        setNoItems(true);
-      }
-    });
-  }, [stock]);
+    for (let k in activeStock) {
+      sizes?.push(activeStock[k].size);
+    }
+    setSizes(sizes);
+  }, [activeStock]);
 
   let myDebugger = function () {
-    console.log(selectedSize);
+    console.log(activeStock);
   };
 
   return (
@@ -53,6 +51,13 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
           )}
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
+          <NiceSelectMenu
+            sizes={sizes}
+            isOpen={sizeOpen}
+            open={setSizeOpen}
+            defaultValue={defaultValue}
+            activeStock={activeStock}
+            setDefaultValue={setDefaultValue}></NiceSelectMenu>
           {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
           {/* <NiceSelectMenu
             disableCondition={"Out of Stock!"}
@@ -63,18 +68,18 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
             defaultValue={selectedSize ? selectedSize : "Select a Size!"}
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
           <NiceSelectMenu width={80}></NiceSelectMenu> */}
-          <SizeMenu
+          {/* <SizeMenu
             stock={stock}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
+          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu> */}
         </div>
         <div className="purchase-buttons-container2">
           <div>
-            <AddToCart
+            {/* <AddToCart
               size={size}
               setPrompt={setPrompt}
               noItems={noItems}
@@ -82,7 +87,7 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, styleInfo }) => {
               selectQuantity={selectQuantity}
               handleAddToCart={handleAddToCart}
               quantity={quantity}
-              stockId={stockId}></AddToCart>
+              stockId={stockId}></AddToCart> */}
           </div>
         </div>
         <div style={!addToCartPrompt ? { visibility: "hidden" } : { fontSize: "bold", float: "right", marginRight: "20px" }}>

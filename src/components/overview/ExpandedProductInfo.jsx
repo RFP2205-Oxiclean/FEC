@@ -24,6 +24,7 @@ const ExpandedProductInfo = ({
   magnified,
   setAddToCartPrompt,
   reviewListLength,
+  activeStock,
 }) => {
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
@@ -69,7 +70,7 @@ const ExpandedProductInfo = ({
           <Price activeStyle={styleObjects[activeDisplayIndex]} styleInfo={styleInfo}></Price>
           <span className="overview-expanded-product-info-name">{productInfo.name}</span>
         </div>
-        <div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}>
+        <div style={{ textAlign: "center", justifyContent: "center", maxHeight: "10%" }}>
           <span className="overview-expanded-product-info-style">{styleObjects[activeDisplayIndex].name}</span>
         </div>
         <StylesContainer
@@ -78,6 +79,7 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          activeStock={activeStock}
           setAddToCartPrompt={setAddToCartPrompt}
           styleInfo={styleInfo}
           handleAddToCart={handleAddToCart}

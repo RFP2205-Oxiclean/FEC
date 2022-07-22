@@ -1,8 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const NiceSelectMenu = ({ options, defaultValue, disableCondition, openCallback, isOpen, selectHook, width, sizeOpen }) => {
+const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, activeStock }) => {
+  useEffect(() => {
+    activeStock?.forEach(function (stockObj) {});
+  }, [sizes]);
+
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: width }}>
+    <div
+      onClick={() => {
+        open(!isOpen);
+      }}
+      className="select-menu">
+      {defaultValue}
+      {isOpen ? (
+        sizes.map(function (size, i) {
+          return (
+            <div
+              onClick={() => {
+                setDefaultValue(size);
+                open(false);
+              }}
+              key={i}
+              className="select-menu-option1">
+              {size}
+            </div>
+          );
+        })
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
+
+export default NiceSelectMenu;
+
+{
+  /* <div style={{ display: "flex", flexWrap: "wrap", width: width }}>
       <div
         className="overview-nice-select"
         onClick={() => {
@@ -29,8 +63,5 @@ const NiceSelectMenu = ({ options, defaultValue, disableCondition, openCallback,
           </div>
         );
       })}
-    </div>
-  );
-};
-
-export default NiceSelectMenu;
+    </div> */
+}

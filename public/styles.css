@@ -137,6 +137,31 @@ user-select: none;
 
 }
 
+.select-menu {
+  cursor: default;
+  margin-bottom: 5px;
+  height: 18px;
+  line-height: 20px;
+  font-size: 15px;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
+  position: absolute;
+  border: 1px solid black;
+}
+
+.select-menu-option1 {
+  font-size: 14px;
+  height: 18px;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  border-top: none;
+}
+
+.select-menu-option1:hover {
+  background: rgb(245, 245, 245)
+}
 
 .stars2-user-input {
   cursor: pointer;
@@ -328,12 +353,12 @@ user-select: none;
 }
 
 .overview-expanded-product-info-style {
-  max-width: 75%;
   font-size: 25px;
   display: inline-block;
   font-weight: bold;
   color: red;
   margin-top: auto;
+  max-height: 6%;
 }
 
 .overview-styles-container {
