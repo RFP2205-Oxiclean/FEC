@@ -44,7 +44,7 @@ class CharacteristicsInputs extends React.Component {
                 </div>
 
               </form>
-              <hr></hr> </div>: ''}
+              <br></br></div>: ''}
 
               {this.props.metadata.characteristics['Width'] ? <div><span className = 'modal-characteristic-title'>Width: <i>{this.widthDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Width'].id}`]]}</i></span>
               <form onChange = {this.props.handleWidthSelect}>
@@ -65,7 +65,7 @@ class CharacteristicsInputs extends React.Component {
                 </div>
 
               </form>
-              <hr></hr></div> : ''}
+              <br></br></div> : ''}
 
               {this.props.metadata.characteristics['Comfort'] ? <div><span className = 'modal-characteristic-title'>Comfort: <i>{this.comfortDefinitons[this.props.characteristicsState[`${this.props.metadata.characteristics['Comfort'].id}`]]}</i></span>
               <form onChange = {this.props.handleComfortSelect}>

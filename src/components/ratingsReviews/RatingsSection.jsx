@@ -24,23 +24,24 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
       var percentRecommended = Math.round(numberRecommended / totalRecommendations * 100);
 
-
     }
 
+  /* Adds a filter for the clicked label OR bar (hence the || operator) */
   const starFilterClicked = (e) => {
     e.preventDefault();
-    if (e.target.id === '5-star-filter' || e.target.parentNode.id === '5-star-filter') {
+    if (e.target.parentNode.id === '5-star-filter' || e.target. id === '5-star-filter') {
       handleFilterByRating(5);
-    } else if (e.target.id === '4-star-filter'|| e.target.parentNode.id === '4-star-filter') {
+    } else if (e.target.parentNode.id === '4-star-filter' || e.target.id === '4-star-filter') {
       handleFilterByRating(4);
-    } else if (e.target.id === '3-star-filter'|| e.target.parentNode.id === '3-star-filter') {
+    } else if (e.target.parentNode.id === '3-star-filter' || e.target.id === '3-star-filter') {
       handleFilterByRating(3);
-    } else if (e.target.id === '2-star-filter'|| e.target.parentNode.id === '2-star-filter') {
+    } else if (e.target.parentNode.id === '2-star-filter' || e.target.id === '2-star-filter') {
       handleFilterByRating(2);
-    } else if (e.target.id === '1-star-filter'|| e.target.parentNode.id === '1-star-filter') {
+    } else if (e.target.parentNode.id === '1-star-filter' || e.target.id === '1-star-filter') {
       handleFilterByRating(1);
     }
   }
+
 
   var filterOn = () => {
     for (let rating in filterRatings) {
@@ -67,31 +68,32 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
   return (
     <div className = "ratings-section-container" data-testid = 'ratings-section'>
-      {console.log('metadata: ', metadata)}
-      {metadata.ratings!== undefined ? <div>
-      <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
-        <StarRatingStatic rating = {roundToQuarterDecimal(roundedAverage)}/>
-        <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
-      </div>
-
-      <br></br>
-      <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
-      </div>
-      <br></br>
-      <RatingsGraph starFilterClicked = {starFilterClicked} metadata = {metadata} totalRatings = {totalRatings}/>
-
-      <ProductBreakdown characteristics = {metadata.characteristics}/>
-      <br></br>
-      {!filterOn() ? '' :
-        <div>Filters:
-          {activeFilters().map((rating, index) => {
-            return <span key = {index}> {rating} </span>
-          })
-          } ★ reviews&nbsp;
-          <button className = 'clear-filters-button'onClick = {handleFilterClear}>Clear Filters</button>
+      {metadata.ratings!== undefined ?
+      <div>
+        <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
+          <StarRatingStatic rating = {roundToQuarterDecimal(roundedAverage)}/>
+          <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
         </div>
-      }
-    </div> : ''}
+
+        <br></br>
+        <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
+        </div>
+        <br></br>
+        <RatingsGraph starFilterClicked = {starFilterClicked} metadata = {metadata} totalRatings = {totalRatings}/>
+
+        <ProductBreakdown characteristics = {metadata.characteristics}/>
+        <br></br>
+        {!filterOn() ? '' :
+          <div>Filters:
+            {activeFilters().map((rating, index) => {
+              return <span key = {index}> {rating} </span>
+            })
+            } ★ reviews&nbsp;&nbsp;
+            <button className = 'small-interactive-buttons'onClick = {handleFilterClear}>Clear Filters</button>
+          </div>
+        }
+      </div>
+      : ''}
     </div>
 
   )

@@ -1169,10 +1169,6 @@ select:active {
   cursor: pointer;
 }
 
-.average-rating {
-  font-size: 50px;
-  font-weight: bold;
-}
 
 .stars-user-input {
   cursor: pointer;
@@ -1244,12 +1240,14 @@ select:active {
 }
 
 .review-list {
-  height: 660px;
+  height: auto;
+  max-height: 660px;
   overflow-y: scroll;
 }
 
 #average-rating {
   font-size: 60px;
+  font-family:'Times New Roman', Times, serif;
   font-weight: bold;
 }
 
@@ -1274,8 +1272,8 @@ select:active {
 } */
 
 .addreview-modal-container {
-  width: 35%;
-  height: 70%;
+  width: auto;
+  height: auto;
   border-radius: 12px;
   top: 2.5%;
   left: 35%;

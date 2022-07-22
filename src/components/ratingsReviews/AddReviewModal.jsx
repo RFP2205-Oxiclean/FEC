@@ -127,7 +127,6 @@ class AddReviewModal extends React.Component {
     for (let key in e.target.files) {
       if (key < 5 && photosCopy.length < 5) {
         const formData = new FormData();
-        console.log(e.target.files[key]);
         formData.append("file", e.target.files[key]);
         formData.append("upload_preset", "vg1vzwft");
         photosCopy.push(formData);
@@ -149,7 +148,6 @@ class AddReviewModal extends React.Component {
           axios
             .post(url, photo)
             .then((response) => {
-              console.log("posted this image");
               this.addImageURL(response.data.secure_url);
               resolve();
             })
@@ -358,12 +356,12 @@ class AddReviewModal extends React.Component {
               ""
             )}
           </form>
+           {/* Thumbnail photos */}
           <span>
-            {this.state.photosForDisplay[0] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
-            {this.state.photosForDisplay[1] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
-            {this.state.photosForDisplay[2] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
-            {this.state.photosForDisplay[3] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
-            {this.state.photosForDisplay[4] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
+            {this.state.photosForDisplay.map((url, index) => {
+              return <img className = 'addreview-thumbnail-image' src={url} height="100px" align="left"/>
+            })
+            }
           </span>
           <br></br>
           {/* Nickname field */}
