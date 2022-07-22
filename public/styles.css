@@ -1,4 +1,6 @@
-
+body {
+  margin : 0px !important;
+}
 
 .app > div {
   border: 5px;
@@ -725,11 +727,25 @@ select:active {
   margin: 0;
 }
 
+#dark .questions-and-answers #qa-container .qa-title
+{
+  color: whitesmoke;
+  font-family: 'Cormorant SC', serif;
+  font-size: 15px;
+  padding: 15px 0px;
+  margin: 0;
+}
+
 
 .questions-and-answers #qa-container {
   width: 100%;
   box-sizing: border-box;
   margin: auto;
+}
+
+#dark .questions-and-answers .modal-container {
+  color:whitesmoke;
+  background-color:#202124;
 }
 
 
@@ -879,6 +895,10 @@ select:active {
   width: 100%;
   overflow: scroll;
   max-height: 50vh;
+}
+
+#dark .questions-and-answers #question-container {
+  color:Whitesmoke;
 }
 
 .questions-and-answers ul {
