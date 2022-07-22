@@ -3,21 +3,35 @@ import React from "react";
 const BottomInformation = ({ description }) => {
   return (
     <div className="overview-bottom-info">
-      <div style={{ width: "95%", height: "100%", display: "inline-block", justifyContent: "center", alignItems: "center", float: "left" }}>
+      <div
+        style={{
+          width: "80%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+        }}>
         <span style={{ fontSize: "25px", paddingLeft: "100px", paddingRight: "100px", overflowWrap: "break-word" }}>{description}</span>
       </div>
-      <div style={{ width: "5%", height: "100%", display: "flex", flexDirection: "column", marginTop: "5px", marginLeft: "5px" }}>
+      <div
+        style={{
+          position: "absolute",
+          right: "0",
+          width: "5%",
+          height: "100%",
+          display: "border-box",
+          flexDirection: "column",
+          padding: "10px",
+          marginLeft: "auto",
+        }}>
         <div style={{ width: "100%", height: "40px" }}>
           <div
             className="i-tag-container"
             style={{
-              paddingLeft: "15px",
               display: "flex",
-              width: "15%",
-              height: "100%",
-              fontSize: "30px",
+              fontSize: "20px",
               justifyContent: "center",
-              marginRight: "4px",
               color: "#1DA1F2",
             }}>
             <i className="fab fa-twitter"></i>
@@ -27,13 +41,9 @@ const BottomInformation = ({ description }) => {
           <div
             className="i-tag-container"
             style={{
-              paddingLeft: "15px",
               display: "flex",
-              width: "15%",
-              height: "100%",
-              fontSize: "30px",
+              fontSize: "20px",
               justifyContent: "center",
-              marginRight: "4px",
               color: "#3b5998",
             }}>
             <i className="fa-brands fa-facebook-f"></i>
@@ -43,13 +53,9 @@ const BottomInformation = ({ description }) => {
           <div
             className="i-tag-container"
             style={{
-              paddingLeft: "15px",
               display: "flex",
-              width: "15%",
-              height: "100%",
-              fontSize: "30px",
+              fontSize: "20px",
               justifyContent: "center",
-              marginRight: "4px",
               color: "#E60023",
             }}>
             <i className="fa-brands fa-pinterest"></i>

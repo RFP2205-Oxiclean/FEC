@@ -43,25 +43,32 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       let activeThumbnails = {};
       let newStock = {};
       data.forEach((styleObj) => {
+        console.log(styleObj);
         activeThumbnails[styleObj.style_id] = 0;
         styleObj.photos.forEach(function (photoObj, i) {
           photoObj.trueIndex = i;
         });
         // consolidate stock
-        let stockArr = [];
-        for (let k in styleObj.skus) {
-          let flag = false;
-          stockArr.forEach(function (sizePair, i) {
-            if (styleObj.skus[k].size === stockArr[i].size) {
-              flag = true;
-              stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
-            }
-          });
-          if (!flag) {
-            stockArr.push({ ...styleObj.skus[k], id: k });
-          }
+        let x = {};
+        for (let stockId in styleObj.skus) {
+          styleObj.skus[stockId] = { ...styleObj.skus[stockId], style_id: styleObj.style_id };
+          x = { ...x, [[stockId]]: styleObj.skus[stockId] };
         }
-        newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
+        newStock[styleObj.style_id] = x;
+        // for (let k in styleObj.skus) {
+        //   console.log(styleObj.skus);
+        //   let flag = false;
+        //   stockArr.forEach(function (sizePair, i) {
+        //     if (styleObj.skus[k].size === stockArr[i].size) {
+        //       flag = true;
+        //       stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
+        //     }
+        //   });
+        //   if (!flag) {
+        //     stockArr.push({ ...styleObj.skus[k], id: k });
+        //   }
+        // }
+        // newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
       });
       setActiveThumbnailIndices(activeThumbnails);
       setStock(newStock);
@@ -72,9 +79,9 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     });
   }, [product_id]);
 
-  useEffect(() => {
-    prefetch(styleObjects, product_id);
-  }, [styleObjects]);
+  // useEffect(() => {
+  //   prefetch(styleObjects, product_id);
+  // }, [styleObjects]);
 
   let handleClick = function () {
     handleSubmit(entry);
@@ -92,7 +99,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     // console.log("activeDisplayIndex: ", activeDisplayIndex);
     // console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
     // console.log("productInfo: ", productInfo);
-    // console.log(stock);
+    console.log(stock);
     // console.log(hoverIndex);
     // console.log("current: ", getDisplayImage());
     // console.log("previous: ", previousImage);
@@ -102,6 +109,10 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     getStars(40344).then((data) => {
       console.log(data);
     });
+  };
+
+  let getActiveStock = function () {
+    return stock[styleObjects[activeDisplayIndex].style_id];
   };
 
   let getActiveThumbnailIndex = function () {
@@ -191,6 +202,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        activeStock={getActiveStock()}
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}

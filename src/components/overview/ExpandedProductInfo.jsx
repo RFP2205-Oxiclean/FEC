@@ -24,6 +24,7 @@ const ExpandedProductInfo = ({
   magnified,
   setAddToCartPrompt,
   reviewListLength,
+  activeStock,
 }) => {
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
@@ -56,7 +57,16 @@ const ExpandedProductInfo = ({
         {reviewListLength !== 0 ? (
           <div style={{ display: "flex", marginTop: "15px" }} className="overview-stars-container">
             <StarRatingStatic2 rating={rating}></StarRatingStatic2>
-            <a href="#top-of-reviews" style={{ color: "rgb(92 92 211)", marginLeft: "10px", marginTop: "auto" }}>
+            <a
+              href="#top-of-reviews"
+              style={{
+                textUnderlineOffset: "1px",
+                color: "rgb(92 92 211)",
+                marginLeft: "5px",
+                marginTop: "auto",
+                textAlign: "center",
+                textOverflow: "visible",
+              }}>
               Read All Reviews ({reviewListLength})
             </a>
           </div>
@@ -69,7 +79,7 @@ const ExpandedProductInfo = ({
           <Price activeStyle={styleObjects[activeDisplayIndex]} styleInfo={styleInfo}></Price>
           <span className="overview-expanded-product-info-name">{productInfo.name}</span>
         </div>
-        <div style={{ textAlign: "center", justifyContent: "center", minHeight: "9%" }}>
+        <div style={{ textAlign: "center", justifyContent: "center", maxHeight: "10%" }}>
           <span className="overview-expanded-product-info-style">{styleObjects[activeDisplayIndex].name}</span>
         </div>
         <StylesContainer
@@ -78,6 +88,7 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          activeStock={activeStock}
           setAddToCartPrompt={setAddToCartPrompt}
           styleInfo={styleInfo}
           handleAddToCart={handleAddToCart}

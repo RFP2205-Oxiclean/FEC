@@ -29,6 +29,7 @@ const ImageCarousel = ({
   setExpanded,
   setAddToCartPrompt,
   reviewListLength,
+  activeStock,
 }) => {
   // let [collapsePanel, setCollapsePanel] = useState(false);
 
@@ -56,6 +57,7 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        activeStock={activeStock}
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         magnified={magnified}

@@ -23,13 +23,15 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
   };
 
   let makeOptions = function () {
-    stock.map(function (stockObj) {
-      if (stockObj.quantity === 0) {
-        return <option>Out of Stock!</option>;
-      } else {
-        return <option>{stockObj.size}</option>;
-      }
-    });
+    if (stock) {
+      stock?.map(function (stockObj) {
+        if (stockObj.quantity === 0) {
+          return <option>Out of Stock!</option>;
+        } else {
+          return <option>{stockObj.size}</option>;
+        }
+      });
+    }
 
     return (
       <option disabled key={stockObj.id + stockObj.size}>
@@ -47,7 +49,7 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
         setPrompt(false);
         selectSize(e.target.value);
         selectQuantity(1);
-        stock.forEach(function (stockObj) {
+        stock?.forEach(function (stockObj) {
           if (stockObj.size === e.target.value) {
             setStockId(stockObj.id);
           }
@@ -62,17 +64,7 @@ const SizeMenu = ({ stock, selectSize, setPrompt, setNoItems, setStockId, select
       ) : (
         <></>
       )}
-      {stock?.map(function (stockObj, i) {
-        if (stockObj.quantity === 0 || stockObj.quantity === null) {
-          return (
-            <option disabled key={stockObj.id + stockObj.size}>
-              {stockObj.quantity !== 0 ? stockObj.size : "Out of Stock!"}
-            </option>
-          );
-        } else {
-          return <option key={stockObj.id + stockObj.size}>{stockObj.size}</option>;
-        }
-      })}
+      {makeOptions()}
     </select>
   );
 };
