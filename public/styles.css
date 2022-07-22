@@ -691,6 +691,8 @@ select:active {
 
 .questions-and-answers {
   width: 100%;
+  max-width:1100px;
+  margin:0 auto;
   box-sizing: border-box;
   font-family: 'Cormorant SC', serif;
   position: relative;
@@ -711,9 +713,7 @@ select:active {
 .questions-and-answers #qa-container {
   width: 100%;
   box-sizing: border-box;
-  max-width: 60%;
   margin: auto;
-
 }
 
 .questions-and-answers #qa-container .qa-nav-bar{

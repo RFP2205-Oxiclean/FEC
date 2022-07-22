@@ -4,6 +4,7 @@ import SearchBar from "./searchBar/SearchBar.jsx";
 import AnswerList from "./questionList/answerList/AnswerList.jsx";
 import QuestionList from "./questionList/QuestionList.jsx";
 import { url, API_KEY } from "../../../config/config.js";
+import AddQuestion from './questionList/addQuestion/AddQuestion.jsx';
 //axios.defaults.headers.common['Authorization'] = API_KEY;
 
 class QuestionsAndAnswers extends React.Component {
@@ -13,12 +14,38 @@ class QuestionsAndAnswers extends React.Component {
     this.state = {
       questions: [],
       allQuestions: [],
+      product : null,
       page: null,
     };
   }
 
   componentDidMount() {
-    this.getAllQuestions(this.props.product_id);
+    if (this.props.fakeData === undefined) {
+     this.getAllQuestions(this.props.product_id);
+    this.getProductInformation(this.props.product_id);
+    } else {
+      this.state.questions = this.props.fake_questions;
+      this.state.product = this.props.fake_product;
+      this.displayUnfilteredQuestions("");
+    }
+  }
+
+
+  getProductInformation(id) {
+    let endPoint = `${url}/products/${this.props.product_id}`
+        let newAxios = axios.create({
+            headers : {'Authorization' : API_KEY}
+       })
+        newAxios.get(endPoint, {headers : {
+            'Authorization' : API_KEY
+        }})
+        .then((res) => {
+          this.state.product = res.data;
+          this.setState(JSON.parse(JSON.stringify(this.state)));
+        })
+        .catch((err) => {
+            console.error('Error in get Product Information', err);
+        })
   }
 
   getAllQuestions(id) {
@@ -41,6 +68,7 @@ class QuestionsAndAnswers extends React.Component {
       })
       .catch((err) => {
         console.error("error in getting all questions", err);
+        alert("your was rejected, please check all fields for erroneous inputs")
       });
   }
 
@@ -62,11 +90,13 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   render() {
+    let questionList = this.state.questions.length > 0 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} product={this.state.product} /> : <AddQuestion productId={this.state.product_id} product={this.state.product} />
     return (
       <div id="qa-container">
         <h1 className="qa-title">QUESTIONS & ANSWERS</h1>
-        <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} />
-        <QuestionList questions={this.state.questions} productId={this.props.product_id} />
+        <SearchBar eventHandler={this.displayUnfilteredQuestions.bind(this)} product={this.state.product}/>
+        {questionList}
+
       </div>
     );
   }
