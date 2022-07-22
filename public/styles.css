@@ -132,6 +132,47 @@ user-select: none;
   flex-wrap: wrap;
 } */
 
+.select-menu {
+  position: absolute;
+  float: left;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  justify-content: center;
+  width: 120px;
+}
+
+.q-menu-container {
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+  justify-content: center;
+  text-align: "center";
+  margin-right: 80px;
+
+}
+
+.select-menu-header, .q-option {
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  min-height: 20px;
+}
+
+.select-menu-option, .select-menu-option-selected {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid black;
+}
+
+
+.select-menu-option:hover, .select-menu-selected {
+  background: rgb(245, 245, 245)
+}
+
 .overview-image-container-minus {
   cursor: url(minusIcon.svg), auto;  position: relative;
   overflow: hidden;

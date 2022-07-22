@@ -103,7 +103,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
           )}
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
-          <NiceSelectMenu
+          {/* <NiceSelectMenu
             stockId={stockId}
             setStockId={setStockId}
             selectSize={selectSize}
@@ -113,7 +113,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
             defaultValue={defaultValue}
             activeStock={activeStock}
             setDefaultValue={setDefaultValue}></NiceSelectMenu>
-          <NiceQMenu activeStock={activeStock} stockId={stockId} selectQuantity={selectQuantity} options={options}></NiceQMenu>
+          <NiceQMenu activeStock={activeStock} stockId={stockId} selectQuantity={selectQuantity} options={options}></NiceQMenu> */}
           {/* options, defaultValue, disableCondition, isOpen, callback, setSizeOpen, sizeOpen, selectHook, hookState */}
           {/* <NiceSelectMenu
             disableCondition={"Out of Stock!"}
@@ -124,14 +124,14 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock }) 
             defaultValue={selectedSize ? selectedSize : "Select a Size!"}
             options={["Size Select!", "Out of Stock!"]}></NiceSelectMenu>
           <NiceSelectMenu width={80}></NiceSelectMenu> */}
-          {/* <SizeMenu
-            stock={activeStock}
+          <SizeMenu
+            stock={}
             selectSize={selectSize}
             setPrompt={setPrompt}
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu> */}
+          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div className="purchase-buttons-container2">
           <div>
