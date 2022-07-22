@@ -6,150 +6,78 @@ class CharacteristicsInputs extends React.Component {
     this.state = {
       characteristics: {}
     }
+    this.onChangeRouter = this.onChangeRouter.bind(this);
   }
 
-  sizeDefinitions = ['None selected', 'A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'];
+  characteristicTypes = ['Size', 'Width', 'Comfort', 'Quality', 'Length', 'Fit'];
 
-  widthDefinitions = ['None selected', 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'];
+  charDefinitions= {
+    Size: ['None selected', 'A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
+    Width: ['None selected', 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['None selected', 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['None selected', 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['None selected', 'Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['None selected', 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+  }
 
-  comfortDefinitons = ['None selected', 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'];
-
-  qualityDefinitions = ['None selected', 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
-
-  lengthDefinitions = ['None selected', 'Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'];
-
-  fitDefinitions = ['None selected', 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'];
+  onChangeRouter(e) {
+    if (e.target.name === 'Size') {
+      this.props.handleSizeSelect(e.target.value)
+    } else if (e.target.name === 'Width') {
+      this.props.handleWidthSelect(e.target.value)
+    } else if (e.target.name === 'Comfort') {
+      this.props.handleComfortSelect(e.target.value)
+    } else if (e.target.name === 'Quality') {
+      this.props.handleQualitySelect(e.target.value)
+    } else if (e.target.name === 'Length') {
+      this.props.handleLengthSelect(e.target.value)
+    } else if (e.target.name === 'Width') {
+      this.props.handleWidthSelect(e.target.value)
+    } else if (e.target.name === 'Fit') {
+      this.props.handleFitSelect(e.target.value);
+    }
+  }
 
 
   render() {
     return (
       <div className = 'characteristics-inputs-container'>
         <br></br>
-              {this.props.metadata.characteristics['Size'] ? <div><span className = 'modal-characteristic-title'>Size: <i>{this.sizeDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Size'].id}`]]}</i></span>
-              <form className = "modal-size-form" onChange = {this.props.handleSizeSelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>A size too small</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>A size too big</label>
-                </div>
+        {this.characteristicTypes.map((char, index) => {
+          return (
+            <div key = {index}>
+              {this.props.metadata.characteristics[char] ?
+              <div>
+                <span
+                  className = 'modal-characteristic-title'>{char}:&nbsp;
+                  <i>
+                    {this.charDefinitions[char][this.props.characteristicsState[this.props.metadata.characteristics[char].id]]}
+                  </i>
+                </span>
+                <form className = "modal-size-form" onChange = {this.onChangeRouter}>
+                  <div className = "radio-box">
+                    <input type = "radio" name = {char} value ="1"/><label>{this.charDefinitions[char][1]}</label>
+                  </div>
+                  <div className = "radio-box">
+                    <input type = "radio" name = {char} value ="2"/><label>&nbsp;</label>
+                  </div>
+                  <div className = "radio-box">
+                    <input type = "radio" name = {char} value ="3"/><label>&nbsp;</label>
+                  </div>
+                  <div className = "radio-box">
+                    <input type = "radio" name = {char} value ="4"/><label>&nbsp;</label>
+                  </div>
+                  <div className = "radio-box">
+                    <input type = "radio" name = {char} value ="5"/><label>{this.charDefinitions[char][5]}</label>
+                  </div>
 
-              </form>
-              <hr></hr> </div>: ''}
+                </form>
+                </div>: ''}
+            </div>
+          )
+        })}
 
-              {this.props.metadata.characteristics['Width'] ? <div><span className = 'modal-characteristic-title'>Width: <i>{this.widthDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Width'].id}`]]}</i></span>
-              <form onChange = {this.props.handleWidthSelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>Too narrow</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>Too wide</label>
-                </div>
-
-              </form>
-              <hr></hr></div> : ''}
-
-              {this.props.metadata.characteristics['Comfort'] ? <div><span className = 'modal-characteristic-title'>Comfort: <i>{this.comfortDefinitons[this.props.characteristicsState[`${this.props.metadata.characteristics['Comfort'].id}`]]}</i></span>
-              <form onChange = {this.props.handleComfortSelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>Uncomfortable</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>Perfect</label>
-                </div>
-
-              </form>
-              <br></br></div> : ''}
-
-              {this.props.metadata.characteristics['Quality'] ? <div><span className = 'modal-characteristic-title'>Quality: <i>{this.qualityDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Quality'].id}`]]}</i></span>
-              <form onChange = {this.props.handleQualitySelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>Poor</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>Perfect</label>
-                </div>
-
-              </form>
-              <br></br></div> : ''}
-
-              {this.props.metadata.characteristics['Length'] ? <div><span className = 'modal-characteristic-title'>Length: <i> {this.lengthDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Length'].id}`]]}</i></span>
-              <form onChange = {this.props.handleLengthSelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>Runs short</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>Runs long</label>
-                </div>
-
-              </form>
-              <br></br></div> : ''}
-
-              {this.props.metadata.characteristics['Fit'] ? <div><span className = 'modal-characteristic-title'>Fit: <i>{this.fitDefinitions[this.props.characteristicsState[`${this.props.metadata.characteristics['Fit'].id}`]]}</i></span>
-              <form onChange = {this.props.handleFitSelect}>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="1"/><label>Runs tight</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="2"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="3"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="4"/><label>&nbsp;</label>
-                </div>
-                <div className = "radio-box">
-                  <input type = "radio" name = "size" value ="5"/><label>Runs long</label>
-                </div>
-
-              </form></div> : ''}
-              </div>
+      </div>
     )
   }
 

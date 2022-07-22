@@ -23,6 +23,10 @@ class ReviewListEntry extends React.Component {
     this.roundToQuarterDecimal = this.roundToQuarterDecimal.bind(this);
   }
 
+  componentDidMount() {
+    this.checkBodyLongerThan250();
+  }
+
   checkBodyLongerThan250() {
     let longBody = false;
     if (this.props.review.body.length > 250) {
@@ -90,7 +94,15 @@ class ReviewListEntry extends React.Component {
       return (
         <div className = "thumbnail-container">
           {this.props.review.photos.map((photo, index) =>
-            <img data-testid = 'review-thumbnail-image' className = 'review-thumbnail-image' src = {photo.url} alt = {'https://via.placeholder.com/200'}onClick = {this.showFullImage} key = {photo.id}></img>
+            <img
+              data-testid = 'review-thumbnail-image'
+              className = 'review-thumbnail-image'
+              src = {photo.url}
+              alt = 'Image not found'
+              onError={(e) => {
+              e.target.src="https://picsum.photos/200";
+            }}
+            onClick = {this.showFullImage} key = {photo.id}></img>
           )}
         </div>
       )

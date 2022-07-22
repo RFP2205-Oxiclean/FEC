@@ -19,6 +19,7 @@ class AddReviewModal extends React.Component {
       photosURLs: [],
       nickname: "",
       email: "",
+      reviewSuccess: false
     };
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleReviewSummaryChange = this.handleReviewSummaryChange.bind(this);
@@ -58,49 +59,49 @@ class AddReviewModal extends React.Component {
     });
   }
 
-  handleSizeSelect(e) {
+  handleSizeSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleWidthSelect(e) {
+  handleWidthSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleComfortSelect(e) {
+  handleComfortSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleQualitySelect(e) {
+  handleQualitySelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleLengthSelect(e) {
+  handleLengthSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleFitSelect(e) {
+  handleFitSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
@@ -127,7 +128,6 @@ class AddReviewModal extends React.Component {
     for (let key in e.target.files) {
       if (key < 5 && photosCopy.length < 5) {
         const formData = new FormData();
-        console.log(e.target.files[key]);
         formData.append("file", e.target.files[key]);
         formData.append("upload_preset", "vg1vzwft");
         photosCopy.push(formData);
@@ -149,7 +149,6 @@ class AddReviewModal extends React.Component {
           axios
             .post(url, photo)
             .then((response) => {
-              console.log("posted this image");
               this.addImageURL(response.data.secure_url);
               resolve();
             })
@@ -227,7 +226,7 @@ class AddReviewModal extends React.Component {
           return;
         } else {
           console.log("Images were uploaded and review passes criteria, attempting to POST the review to server");
-          setTimeout(this.submitReviewToServer, 750);
+          setTimeout(this.submitReviewToServer, 500);
           return;
         }
       })
@@ -237,6 +236,9 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewToServer() {
+    this.setState({
+      reviewSuccess: true
+    })
     let endPoint = `${url}/reviews`;
     let review = {
       product_id: this.props.product_id,
@@ -313,7 +315,6 @@ class AddReviewModal extends React.Component {
           />
           {/* Review summary and body */}
           <form>
-            <br></br>
             Review Summary:{" "}
             <input
               data-testid="addReview-summary-change"
@@ -321,7 +322,7 @@ class AddReviewModal extends React.Component {
               maxLength="60"
               placeholder="Example: Best purchase ever!"
               size="40"
-              className="addReview-summary"
+              className="modal-review-summary"
             />
           </form>
           <br></br>
@@ -358,12 +359,19 @@ class AddReviewModal extends React.Component {
               ""
             )}
           </form>
+           {/* Thumbnail photos */}
           <span>
-            {this.state.photosForDisplay[0] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[0]} height="100px" align="left" />}
-            {this.state.photosForDisplay[1] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[1]} height="100px" align="left" />}
-            {this.state.photosForDisplay[2] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[2]} height="100px" align="left" />}
-            {this.state.photosForDisplay[3] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[3]} height="100px" align="left" />}
-            {this.state.photosForDisplay[4] && <img className="addreview-thumbnail-image" src={this.state.photosForDisplay[4]} height="100px" align="left" />}
+            {this.state.photosForDisplay.map((url, index) => {
+              return (
+                <img
+                  className = 'addreview-thumbnail-image'
+                  src={url}
+                  height="100px"
+                  align="left"
+                  key={index}
+                />
+            )})
+            }
           </span>
           <br></br>
           {/* Nickname field */}
@@ -400,6 +408,8 @@ class AddReviewModal extends React.Component {
             <button data-testid="addReview-submit-button" className="small-interactive-buttons" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
+
+            {this.state.reviewSuccess ? <span> Review successfully submitted!</span> : ''}
           </form>
         </div>
       </div>
