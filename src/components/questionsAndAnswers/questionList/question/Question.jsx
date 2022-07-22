@@ -35,17 +35,14 @@ import { API_KEY, url } from "../../../../../config/config.js";
 
     }
 
-    sendAnswer(){
-
-    }
 
     render () {
        return (
-            <li className="question">
+            <li className="question" data-testid="individual-question">
                 <div className="question-content">
                     <p className="q-id">Q:</p>
                     <p className="q-text">{this.props.question.question_body}</p>
-                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId} activeHelpful={this.state.activeHelpful} />
+                    <InfoTab question={this.props.question} sendHelpful={this.sendHelpful.bind(this)} productId={this.props.productId} activeHelpful={this.state.activeHelpful} product={this.props.product} />
                 </div>
                 <AnswerList answers={this.props.question.answers}  />
                 <hr />

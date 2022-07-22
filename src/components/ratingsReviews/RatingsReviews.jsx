@@ -106,6 +106,7 @@ class RatingsReviews extends React.Component {
         },
       })
       .then((response) => {
+        console.log(response.data);
         this.updateMetadataState(response.data);
       })
       .catch((err) => {
@@ -133,7 +134,7 @@ class RatingsReviews extends React.Component {
       .post(endPoint, review)
       .then((response) => {
         console.log("successfully posted review to server");
-        this.closeAddReviewModal();
+        setTimeout(this.closeAddReviewModal, 400)
         this.getReviewList();
       })
       .catch((err) => {
@@ -251,10 +252,12 @@ class RatingsReviews extends React.Component {
   render() {
     let filteredReviews = this.filterReviews();
     return (
-      <div data-testid="ratings-reviews">
-        <h1 className="ratings-reviews-title">RATINGS & REVIEWS</h1>
+      <div className = 'centering-wrapper'>
+      <div data-testid="ratings-reviews" className="ratings-reviews-master-container">
         <a id="top-of-reviews"></a>
-        <div className="ratings-reviews-master-container">
+
+
+
           {this.state.displayAddReviewModal && (
             <AddReviewModal
               product_id={this.props.product_id}
@@ -264,7 +267,7 @@ class RatingsReviews extends React.Component {
               addReview={this.addReview}
             />
           )}
-
+          <br></br>
           <RatingsSection
             metadata={this.state.metadata}
             handleFilterByRating={this.handleFilterByRating}
@@ -279,10 +282,10 @@ class RatingsReviews extends React.Component {
             handleReportReview={this.handleReportReview}
             showAddReviewModal={this.showAddReviewModal}
           />
-        </div>
         <button data-testid="get-information" className="jest-test-button" onClick={this.invokeAllHTTPFunctions}>
           Get Product Information
         </button>
+      </div>
       </div>
     );
   }

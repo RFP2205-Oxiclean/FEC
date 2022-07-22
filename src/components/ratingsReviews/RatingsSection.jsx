@@ -11,9 +11,11 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
 
     if (metadata.ratings !== undefined) {
       /*finding the average rating */
-      let sum = parseInt(metadata.ratings[1]) + (2 * parseInt(metadata.ratings[2])) + (3 * parseInt(metadata.ratings[3])) + (4 * parseInt(metadata.ratings[4])) + (5 * parseInt(metadata.ratings[5]));
+      let sum = (parseInt(metadata.ratings[1] || 0)) + (2 * ((parseInt(metadata.ratings[2] || 0)) || 0)) + (3 * ((parseInt(metadata.ratings[3] || 0)) || 0)) + (4 * ((parseInt(metadata.ratings[4] || 0)) || 0)) + (5 * ((parseInt(metadata.ratings[5] || 0)) || 0));
+      console.log(sum);
 
-      var totalRatings = parseInt(metadata.ratings[1]) + parseInt(metadata.ratings[2]) +    parseInt(metadata.ratings[3]) + parseInt(metadata.ratings[4]) + parseInt(metadata.ratings[5])
+      var totalRatings = ((parseInt(metadata.ratings[1] || 0)) || 0) + (parseInt(metadata.ratings[2] || 0)) +    (parseInt(metadata.ratings[3] || 0)) + (parseInt(metadata.ratings[4] || 0)) + (parseInt(metadata.ratings[5] || 0))
+      console.log(totalRatings);
 
       var roundedAverage = Math.round(sum / totalRatings * 10) / 10
 
@@ -65,18 +67,19 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     return (Math.round(num * 4) / 4).toFixed(2)
   }
 
+  if (metadata.ratings === undefined) {
+    return <div> nothing to show here</div>
+  }
   return (
-    <div className = "ratings-section-container" data-testid = 'ratings-section'>
-      {console.log('metadata: ', metadata)}
-      {metadata.ratings!== undefined ? <div>
-      <div><span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage}&nbsp;</span>
+
+      <div className = "ratings-section-container" data-testid = 'ratings-section'>
+        <h1>Ratings & Reviews</h1>
+        <span id = 'average-rating' data-testid = 'average-rating'>{roundedAverage.toFixed(1)}&nbsp;</span>
         <StarRatingStatic rating = {roundToQuarterDecimal(roundedAverage)}/>
         <span><i id = 'total-num-ratings'>({totalRatings} ratings)</i></span>
-      </div>
-
       <br></br>
-      <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
-      </div>
+        <div id = 'percent-recommended'>{percentRecommended}% of reviews recommend this product
+        </div>
       <br></br>
       <RatingsGraph starFilterClicked = {starFilterClicked} metadata = {metadata} totalRatings = {totalRatings}/>
 
@@ -88,10 +91,9 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
             return <span key = {index}> {rating} </span>
           })
           } ★ reviews&nbsp;
-          <button className = 'clear-filters-button'onClick = {handleFilterClear}>Clear Filters</button>
+          <button className = 'small-interactive-buttons'onClick = {handleFilterClear}>Clear Filters</button>
         </div>
       }
-    </div> : ''}
     </div>
 
   )

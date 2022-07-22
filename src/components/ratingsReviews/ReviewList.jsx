@@ -104,6 +104,7 @@ class ReviewList extends React.Component {
     } else if (reviewsToDisplay.length === 0 && this.state.searchKeyword.length < 3) {
       return (
         <div className="review-list-container">
+          <div>No reviews to display</div>
           <button className="interactive-buttons add-a" onClick={this.props.showAddReviewModal}>ADD A REVIEW +</button>
         </div>
       );

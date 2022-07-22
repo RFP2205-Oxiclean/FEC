@@ -249,7 +249,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           Master State
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
