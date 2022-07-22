@@ -12,10 +12,9 @@ const RatingsSection = ({metadata, handleFilterByRating, filterRatings, handleFi
     if (metadata.ratings !== undefined) {
       /*finding the average rating */
       let sum = (parseInt(metadata.ratings[1] || 0)) + (2 * ((parseInt(metadata.ratings[2] || 0)) || 0)) + (3 * ((parseInt(metadata.ratings[3] || 0)) || 0)) + (4 * ((parseInt(metadata.ratings[4] || 0)) || 0)) + (5 * ((parseInt(metadata.ratings[5] || 0)) || 0));
-      console.log(sum);
+
 
       var totalRatings = ((parseInt(metadata.ratings[1] || 0)) || 0) + (parseInt(metadata.ratings[2] || 0)) +    (parseInt(metadata.ratings[3] || 0)) + (parseInt(metadata.ratings[4] || 0)) + (parseInt(metadata.ratings[5] || 0))
-      console.log(totalRatings);
 
       var roundedAverage = Math.round(sum / totalRatings * 10) / 10
 

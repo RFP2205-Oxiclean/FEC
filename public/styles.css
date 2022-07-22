@@ -2,6 +2,7 @@
 
 .app > div {
   border: 5px;
+
 }
 
 .product-overview {
@@ -301,6 +302,11 @@ user-select: none;
   /* transform: translate(102%, 0) */
 }
 
+#dark .overview-expanded-product-panel {
+  background: #363636;
+  color: white;
+}
+
 .overview-category {
   position: relative;
   display: flex;
@@ -452,6 +458,16 @@ img {
   margin-right: 20px;
   margin-top: 15px;
   z-index: 2;
+}
+
+#dark .collapse-button {
+  background-color: #202124;
+  color: white !important;
+}
+
+#dark .collapse-button:hover {
+  background-color: white;
+  color: black;
 }
 
 .thumbnail-scroll-button-up {
@@ -766,7 +782,11 @@ select:active {
   cursor:pointer;
   color: white;
   transition-duration: .2s;
+}
 
+#dark .interactive-buttons.load-more:hover, #dark .interactive-buttons.add-a:hover {
+  background-color: white !important;
+  color: black;
 }
 
 .questions-and-answers .button-wrapper {
@@ -783,6 +803,11 @@ select:active {
   background-color: white;
 }
 
+#dark .interactive-buttons.load-more, #dark .interactive-buttons.add-a {
+  background-color: black;
+  color: white;
+}
+
 .small-interactive-buttons, .submit-photos-button::-webkit-file-upload-button, .user-photos::-webkit-file-upload-button {
   padding: 5px;
   border: 1px solid !important;
@@ -792,6 +817,16 @@ select:active {
   font-family: 'Cormorant SC', serif;
   background-color: white;
   cursor: pointer;
+}
+
+#dark .small-interactive-buttons, #dark .submit-photos-button::-webkit-file-upload-button, #dark.user-photos::-webkit-file-upload-button {
+  background-color: black;
+  color: white;
+}
+
+#dark .small-interactive-buttons:hover, #dark .submit-photos-button::-webkit-file-upload-button:hover, #dark.user-photos::-webkit-file-upload-button:hover {
+  background-color: white !important;
+  color: black;
 }
 
 .questions-and-answers .modal .small-interactive-buttons {
@@ -1045,6 +1080,16 @@ select:active {
   transition-duration: .2s;
 }
 
+#dark .modal-exit {
+  background-color: black;
+  color: white;
+}
+
+#dark .modal-exit:hover {
+  background-color: white !important;
+  color: black;
+}
+
 .questions-and-answers .modal .name-wrap {
   float: left;
   max-width: 42%;
@@ -1295,6 +1340,11 @@ select:active {
   z-index: 1000;
 }
 
+#dark .addreview-modal-container {
+  background-color: black;
+  color: white;
+}
+
 .review-image-thumbnail {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -1334,6 +1384,11 @@ select:active {
   overflow-wrap: break-word;
   width: 100%;
   display: inline-block;
+}
+
+#dark .modal-review-body, #dark .modal-review-summary {
+  background-color: #202124;
+  color: white !important;
 }
 
 div.radio-box {
@@ -1460,6 +1515,20 @@ div.radio-box {
   justify-content: center;
 }
 
+#dark .ratings-reviews-master-container {
+    font-family: 'Cormorant SC', serif;
+    display: flex;
+    padding: 0px;
+    margin:auto;
+    margin-top: 2.5%;
+    width: 100%;
+    padding-bottom: 5%;
+    box-sizing: border-box;
+    justify-content: center;
+    color: white;
+
+}
+
 .ratings-reviews-title {
   font-family: 'Cormorant SC', serif;
   font-size: 20px;
@@ -1480,6 +1549,11 @@ div.radio-box {
   border: none;
   text-decoration: underline;
   font-weight: bold;
+}
+
+#dark .sort-options {
+  background-color: #202124;
+  color: white;
 }
 
 .bars {
@@ -1503,6 +1577,16 @@ div.radio-box {
   width: 70%;
 }
 
+#dark .keyword-searchbar {
+  background-color: #202124;
+  color: white;
+  border: white;
+  box-shadow: 0 0 3px white
+}
+
+#dark .keyword-searchbar::placeholder {
+  color: white;
+}
 
 
 
@@ -1725,7 +1809,10 @@ div.radio-box {
   font-family: 'Cormorant SC', serif;
   display:flex;
   margin-bottom: 15px;
+}
 
+#dark .top-nav-bar {
+  color: white;
 }
 
 .top-nav-right-bar {
@@ -1780,4 +1867,76 @@ div.radio-box {
 
 .ratings-bar-num-ratings {
   text-decoration: none;
+}
+
+#light {
+  background-color: white;
+}
+
+#dark {
+  background-color: #202124;
+}
+
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 55px;
+  height: 25px;
+  top: 15px;
+  left: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
