@@ -713,9 +713,7 @@ select:active {
 .questions-and-answers #qa-container {
   width: 100%;
   box-sizing: border-box;
-  max-width: 60%;
   margin: auto;
-
 }
 
 .questions-and-answers #qa-container .qa-nav-bar{
@@ -766,14 +764,9 @@ select:active {
 .interactive-buttons:hover {
   background-color: black !important;
   cursor:pointer;
-<<<<<<< HEAD
-  color:white;
-  background-color:black;
-=======
   color: white;
   transition-duration: .2s;
 
->>>>>>> 7ddfcd6bdc00ad81ce42d6f7fff53503a5fda42e
 }
 
 .questions-and-answers .button-wrapper {
@@ -786,9 +779,6 @@ select:active {
   display: inline-block;
   margin-right:15px;
   font-weight:bold;
-<<<<<<< HEAD
-  margin-top:10px;
-=======
   font-family: 'Cormorant SC', serif;
   background-color: white;
 }
@@ -844,7 +834,6 @@ select:active {
 
 .addReview-summary::placeholder {
   font-family: 'Cormorant SC', serif;
->>>>>>> 7ddfcd6bdc00ad81ce42d6f7fff53503a5fda42e
 }
 
 .questions-and-answers #question-container {

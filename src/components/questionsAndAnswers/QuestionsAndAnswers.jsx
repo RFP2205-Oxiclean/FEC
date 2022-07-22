@@ -41,9 +41,7 @@ class QuestionsAndAnswers extends React.Component {
         }})
         .then((res) => {
           this.state.product = res.data;
-          console.log(res.data)
           this.setState(JSON.parse(JSON.stringify(this.state)));
-          console.log(this.state.product)
         })
         .catch((err) => {
             console.error('Error in get Product Information', err);
@@ -92,7 +90,6 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   render() {
-    //console.log(this.state.questions)
     let questionList = this.state.questions.length > 0 ? <QuestionList questions={this.state.questions} productId={this.props.product_id} product={this.state.product} /> : <AddQuestion productId={this.state.product_id} product={this.state.product} />
     return (
       <div id="qa-container">

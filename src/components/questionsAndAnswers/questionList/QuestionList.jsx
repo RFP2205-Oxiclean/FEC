@@ -19,19 +19,14 @@ class QuestionList extends React.Component {
         this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
         this.state.oldQuestions = this.createArrayOfQuestionIds(this.props.questions)
         this.state.loadMoreState = this.getCurrentState();
-        //console.log(this.state.loadMoreState,"lm on creation")
     }
 
     getCurrentState() {
-        console.log("insie gcs")
         if (this.props.questions.length > 0 && this.props.questions.length - this.state.amountOfQuestionsLoaded > 0 ) {
             return this.loadMoreStateList[2];
         } else if (this.props.questions.length <= this.questionsToLoad ) {
-            //console.log(this.props.questions, this.state.amountOfQuestionsLoaded , "WHY ")
             return this.loadMoreStateList[0];
-            console.log("no chacne")
         } else {
-            //console.log(this.props.questions, this.state.amountOfQuestionsLoaded, 'before 1' )
             return this.loadMoreStateList[1];
         }
     }
@@ -46,13 +41,11 @@ class QuestionList extends React.Component {
         for(let i = 0; i < listData.length; i++) {
             result.push(listData[i].question_id);
         }
-        //console.log(result, 'restuls')
         return result;
     }
 
     compareArraysOfIds (one,two) {
         let result = true;
-        //console.log(one ,two, "what is going on")
         if (one === undefined && two !== undefined) {
             return false;
         } else if (two === undefined && one !== undefined) {
@@ -69,7 +62,6 @@ class QuestionList extends React.Component {
                 }
             }
         }
-        //console.log(one ,two, "what is going on")
         return result;
     }
 
@@ -78,10 +70,7 @@ class QuestionList extends React.Component {
         if(!this.compareArraysOfIds(this.state.oldQuestions, this.createArrayOfQuestionIds(this.props.questions))){ //check to see that questions have updated, or dont change state,
             //has to check if questions have changed
             this.resetState();
-            //this.loadMoreQuestions();
-            //this.state.loadMoreState = this.getCurrentState();
-            //this.setState(JSON.parse(JSON.stringify(this.state)));
-            //console.log(this.state.loadMoreState, "lm state")
+
         } else if (this.state.oldLength !== this.state.amountOfQuestionsLoaded) { // question expansion has changed
             this.state.oldLength = this.state.amountOfQuestionsLoaded;
             this.state.loadMoreState = this.getCurrentState();

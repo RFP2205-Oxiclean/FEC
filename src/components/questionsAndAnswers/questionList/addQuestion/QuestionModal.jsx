@@ -61,7 +61,6 @@ class QuestionModal extends React.Component {
                     <div className="modal-container" >
                       <input type="button" className="modal-exit" value="X" onClick={this.props.clickHandler} data-testid="q-exit" />
                       <h1>Ask your Question</h1>
-                      {console.log(this.props.product, "this is what youre looking for ")}
                       <h3>About the {this.props.product.name}</h3>
 
                       <form className="form">
@@ -72,20 +71,12 @@ class QuestionModal extends React.Component {
                           </div>
 
                           <div className="email-wrap">
-<<<<<<< HEAD
-                              Email : <input className="user-email" type="email" maxLength="60" data-testid="email-input" placeholder="Jackson11@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
-=======
-                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Example: jackson11@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} />
->>>>>>> 7ddfcd6bdc00ad81ce42d6f7fff53503a5fda42e
+                              Email : <input className="user-email" type="email" maxLength="60" placeholder="Example: jackson11@email.com" onChange={(event)=>this.onInputChangeState('email',event.target.value)} data-testid="email-input"  />
                               <b className="disclaimer-e">For authentication reasons, you will not be emailed</b>
                           </div>
 
 
-<<<<<<< HEAD
-                          <input className="user-submit" type="button" value="Submit" data-testid="submit" onClick={this.authenticateOrError.bind(this)}  />
-=======
-                          <input className="small-interactive-buttons" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
->>>>>>> 7ddfcd6bdc00ad81ce42d6f7fff53503a5fda42e
+                          <input className="small-interactive-buttons" type="button" data-testid="submit" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
 
                       </form>
                     </div>

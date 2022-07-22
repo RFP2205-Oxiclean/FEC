@@ -116,10 +116,7 @@ class AnswerModal extends React.Component {
     }
 
     sendForm() {
-        console.log(this.state.input,
-            this.state.name,
-            this.state.email,
-            this.state.photos[0], 'request')
+
         let endPoint = `${url}/qa/questions/${this.props.question.question_id}/answers`
         let newAxios = axios.create({
           headers : {'Authorization' : API_KEY}
@@ -162,15 +159,9 @@ class AnswerModal extends React.Component {
                           </div>
 
 
-<<<<<<< HEAD
-                          <div className="upload-msg">Upload up to 5 photos below:</div><input className="user-photos" data-testid="photo-upload-input" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFiles(event.target.files)} onClick={this.clearPhotos.bind(this)}/>
-                          <PhotoList photos={this.state.photos}/>
-                          <input className="user-submit" type="button" value="Submit" data-testid="submit"  onClick={this.authenticateOrError.bind(this)}  />
-=======
                           <div className="upload-msg">Upload up to 5 photos below:</div><input className="submit-photos-button" type="file" accepts="image/*" multiple onChange={(event)=>this.loadFiles(event.target.files)} onClick={this.clearPhotos.bind(this)}/>
                           <PhotoList photos={this.state.photos}/>
-                          <input className="small-interactive-buttons" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
->>>>>>> 7ddfcd6bdc00ad81ce42d6f7fff53503a5fda42e
+                          <input className="small-interactive-buttons" data-testid="submit" type="button" value="Submit" onClick={this.authenticateOrError.bind(this)}  />
                       </form>
                   </div>
             </div>
