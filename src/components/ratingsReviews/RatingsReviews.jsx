@@ -106,7 +106,6 @@ class RatingsReviews extends React.Component {
         },
       })
       .then((response) => {
-        console.log(response.data);
         this.updateMetadataState(response.data);
       })
       .catch((err) => {
@@ -255,8 +254,6 @@ class RatingsReviews extends React.Component {
       <div className = 'centering-wrapper'>
       <div data-testid="ratings-reviews" className="ratings-reviews-master-container">
         <a id="top-of-reviews"></a>
-
-
 
           {this.state.displayAddReviewModal && (
             <AddReviewModal
