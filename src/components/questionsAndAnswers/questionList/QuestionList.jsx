@@ -8,8 +8,7 @@ class QuestionList extends React.Component {
     constructor(props) {
         super(props);
         this.questionsToLoad  = 2;
-        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        this.loadedQuestions = this.sortedByHelpful.slice(0,this.questionsToLoad);
+        this.loadedQuestions = this.props.questions.slice(0,this.questionsToLoad);
 
         this.loadMoreStateList = ['nonexistant','decrease','increase'];
         this.state = {
@@ -31,10 +30,10 @@ class QuestionList extends React.Component {
         }
     }
 
-    sortQuestionsByHelpfulness(questions) {
-        let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness)); //refactor without js sort
-        return result;
-    }
+    // sortQuestionsByHelpfulness(questions) {
+    //     let result = questions.sort((a,b) => (b.question_helpfulness - a.question_helpfulness)); //refactor without js sort
+    //     return result;
+    // }
 
     createArrayOfQuestionIds (listData) {
         let result = [];
@@ -82,27 +81,27 @@ class QuestionList extends React.Component {
 
 // main function
     loadMoreQuestions() {
-        if (this.sortedByHelpful.length <= this.questionsToLoad) { //dont exist
+        if (this.props.questions.length <= this.questionsToLoad) { //dont exist
                 this.loadMoreGone();
-        } else if (this.sortedByHelpful.length - this.loadedQuestions.length <= this.questionsToLoad) { // decrease
+        } else if (this.props.questions.length - this.loadedQuestions.length <= this.questionsToLoad) { // decrease
             if (this.state.loadMoreState !== this.loadMoreStateList[1]) {
                 this.loadMoreDecrease();
             } else {
                 this.resetState();
             }
-        } else if (this.sortedByHelpful.length - this.state.amountOfQuestionsLoaded > this.questionsToLoad) { //increase
+        } else if (this.props.questions.length - this.state.amountOfQuestionsLoaded > this.questionsToLoad) { //increase
             this.loadMoreIncrease();
         }
     }
 
     loadMoreGone() {
-        this.loadedQuestions = this.sortedByHelpful;
+        this.loadedQuestions = this.props.questions;
         this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
 
     loadMoreDecrease() {
-        this.loadedQuestions = this.sortedByHelpful;
+        this.loadedQuestions = this.props.questions;
         this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
     }
@@ -112,12 +111,11 @@ class QuestionList extends React.Component {
         this.state.amountOfQuestionsLoaded = this.questionsToLoad;
         this.state.loadMoreState = this.getCurrentState();
         this.setState(JSON.parse(JSON.stringify(this.state)));
-        this.sortedByHelpful = this.sortQuestionsByHelpfulness(this.props.questions);
-        this.loadedQuestions = this.sortedByHelpful.slice(0,this.questionsToLoad);
+        this.loadedQuestions = this.props.questions.slice(0,this.questionsToLoad);
     }
     //hellper
     loadMoreIncrease() {
-        let newSlice = this.sortedByHelpful.slice(0,this.state.amountOfQuestionsLoaded + this.questionsToLoad);
+        let newSlice = this.props.questions.slice(0,this.state.amountOfQuestionsLoaded + this.questionsToLoad);
         this.loadedQuestions = newSlice;
         this.state.amountOfQuestionsLoaded = this.loadedQuestions.length;
         this.setState(JSON.parse(JSON.stringify(this.state)));
@@ -138,7 +136,7 @@ class QuestionList extends React.Component {
                 <div className="qc-wrapper">
                     <div id="question-container">
                         <ul id="question-list">
-                            {this.loadedQuestions.map((question)=> { //use id from questions rather than index
+                            {this.loadedQuestions.map((question)=> {
                                 return <Question question={question} key={question.question_id} data-testid="individual-question" productId={this.props.productId} product={this.props.product}/>
                             })}
                         </ul>
