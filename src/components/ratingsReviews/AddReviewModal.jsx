@@ -19,6 +19,7 @@ class AddReviewModal extends React.Component {
       photosURLs: [],
       nickname: "",
       email: "",
+      reviewSuccess: false
     };
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleReviewSummaryChange = this.handleReviewSummaryChange.bind(this);
@@ -225,7 +226,7 @@ class AddReviewModal extends React.Component {
           return;
         } else {
           console.log("Images were uploaded and review passes criteria, attempting to POST the review to server");
-          setTimeout(this.submitReviewToServer, 750);
+          setTimeout(this.submitReviewToServer, 500);
           return;
         }
       })
@@ -235,6 +236,9 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewToServer() {
+    this.setState({
+      reviewSuccess: true
+    })
     let endPoint = `${url}/reviews`;
     let review = {
       product_id: this.props.product_id,
@@ -318,7 +322,7 @@ class AddReviewModal extends React.Component {
               maxLength="60"
               placeholder="Example: Best purchase ever!"
               size="40"
-              className="addReview-summary"
+              className="modal-review-summary"
             />
           </form>
           <br></br>
@@ -358,8 +362,15 @@ class AddReviewModal extends React.Component {
            {/* Thumbnail photos */}
           <span>
             {this.state.photosForDisplay.map((url, index) => {
-              return <img className = 'addreview-thumbnail-image' src={url} height="100px" align="left"/>
-            })
+              return (
+                <img
+                  className = 'addreview-thumbnail-image'
+                  src={url}
+                  height="100px"
+                  align="left"
+                  key={index}
+                />
+            )})
             }
           </span>
           <br></br>
@@ -397,6 +408,8 @@ class AddReviewModal extends React.Component {
             <button data-testid="addReview-submit-button" className="small-interactive-buttons" onClick={this.handleReviewSubmit}>
               Submit Review
             </button>
+
+            {this.state.reviewSuccess ? <span> Review successfully submitted!</span> : ''}
           </form>
         </div>
       </div>

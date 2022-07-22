@@ -33,9 +33,13 @@ const ProductBreakdown = ({characteristics}) => {
       {characteristicsNamesArray().map((name, index) => {
         return (
           <div key = {index}> <br></br>{name}<br></br>
+            <div className = 'product-breakdown-container'>
             <input className = 'product-breakdown-slider' type = "range" value = {characteristicsValuesArray()[index] * 10} readOnly/>
             <i className = 'left-characteristic-desc'>{characteristicsDescriptions[name][0]}</i>
             <i className = 'right-characteristic-desc'>{characteristicsDescriptions[name][1]}</i>
+            </div>
+
+
             <br></br>
           </div>)
       })}

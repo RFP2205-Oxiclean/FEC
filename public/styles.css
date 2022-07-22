@@ -1128,7 +1128,7 @@ select:active {
   font-family: 'Cormorant SC', serif;
 }
 
-.user-name, .user-email {
+.user-name, .user-email, .modal-review-summary {
   font-family: 'Cormorant SC', serif;
 }
 
@@ -1257,6 +1257,11 @@ select:active {
 .review-list-entry {
   box-sizing: border-box;
   padding-right: 15px;
+}
+
+.centering-wrapper {
+  width: 1100px;
+  margin:auto;
 }
 
 /* .modal-background {
@@ -1430,7 +1435,7 @@ div.radio-box {
 
 .ratings-section-container {
   float: left;
-  width: auto;
+  width: 40%;
   margin-right: 2.5%;
   position: relative;
   top: -5%;
@@ -1438,7 +1443,7 @@ div.radio-box {
 }
 
 .review-list-container {
-  width: 40%;
+  width: 60%;
   min-height: 60vh;
 }
 
@@ -1661,7 +1666,7 @@ div.radio-box {
 
 .product-breakdown-slider {
   -webkit-appearance: none;
-  width: 100%;
+  width: 80%;
   cursor: auto;
 
 }
@@ -1685,14 +1690,27 @@ div.radio-box {
   width: 8px;
 }
 
+.product-breakdown-container {
+  position: relative;
+  width: 100%;
+}
+
 .left-characteristic-desc {
   float: left;
   font-size: 12px;
+  /* margin-left:15%; */
+  position: absolute;
+  left: 0;
+  bottom: -10px;
 }
 
 .right-characteristic-desc {
   float: right;
   font-size: 12px;
+  /* margin-right: 15%; */
+  position: absolute;
+  right: 20%;
+  bottom: -10px;
 }
 
 .review-username-time {

@@ -21,8 +21,6 @@ class CharacteristicsInputs extends React.Component {
   }
 
   onChangeRouter(e) {
-    console.log(e.target.value);
-    console.log(e.target.name);
     if (e.target.name === 'Size') {
       this.props.handleSizeSelect(e.target.value)
     } else if (e.target.name === 'Width') {

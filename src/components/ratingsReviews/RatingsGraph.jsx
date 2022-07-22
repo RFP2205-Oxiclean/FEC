@@ -22,7 +22,7 @@ const RatingsGraph = ({starFilterClicked, metadata, totalRatings}) => {
           >
             {starNum} stars
             <RatingsBarComponent rating = {ratingPercent}/>
-            <i>{`(${metadata.ratings[starNum]})`}</i>
+            <i>{`(${metadata.ratings[starNum] || 0})`}</i>
           <br></br>
           </div>
         )
