@@ -49,6 +49,10 @@ class AnswerList extends React.Component {
 
 
 
+    //optimizations to be done : do not stringify answers, no need to compare to different answers (unless also checking reported and removing).
+
+
+
     componentDidUpdate() {
         this.sortedByHelpful = this.sortAnswersByHelpfulness(this.arrayifyAnswers(this.props.answers));
         let ansString = JSON.stringify(this.sortedByHelpful)
