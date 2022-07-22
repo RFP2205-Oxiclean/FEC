@@ -58,49 +58,49 @@ class AddReviewModal extends React.Component {
     });
   }
 
-  handleSizeSelect(e) {
+  handleSizeSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Size"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleWidthSelect(e) {
+  handleWidthSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Width"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleComfortSelect(e) {
+  handleComfortSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Comfort"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleQualitySelect(e) {
+  handleQualitySelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Quality"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleLengthSelect(e) {
+  handleLengthSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Length"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
   }
 
-  handleFitSelect(e) {
+  handleFitSelect(value) {
     var characteristicsCopy = JSON.parse(JSON.stringify(this.state.characteristics));
-    characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(e.target.value);
+    characteristicsCopy[`${this.props.metadata.characteristics["Fit"].id}`] = parseInt(value);
     this.setState({
       characteristics: characteristicsCopy,
     });
@@ -311,7 +311,6 @@ class AddReviewModal extends React.Component {
           />
           {/* Review summary and body */}
           <form>
-            <br></br>
             Review Summary:{" "}
             <input
               data-testid="addReview-summary-change"

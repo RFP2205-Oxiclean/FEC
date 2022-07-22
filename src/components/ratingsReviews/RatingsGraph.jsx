@@ -4,11 +4,6 @@ import RatingsBarComponent from './RatingsBarComponent.jsx'
 const RatingsGraph = ({starFilterClicked, metadata, totalRatings}) => {
 
   /* finding the percent of each rating */
-  var oneRatingPercent = parseInt(metadata.ratings[1]) / totalRatings;
-  var twoRatingPercent = parseInt(metadata.ratings[2]) / totalRatings;
-  var threeRatingPercent = parseInt(metadata.ratings[3]) / totalRatings;
-  var fourRatingPercent = parseInt(metadata.ratings[4]) / totalRatings;
-  var fiveRatingPercent = parseInt(metadata.ratings[5]) / totalRatings;
   var stars = [5, 4, 3, 2, 1];
 
   return (
@@ -32,7 +27,7 @@ const RatingsGraph = ({starFilterClicked, metadata, totalRatings}) => {
           </div>
         )
       })}
-      </div>
+    </div>
   )
 }
 
