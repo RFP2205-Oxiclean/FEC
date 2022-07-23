@@ -32,13 +32,13 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
   let [cart, setCart] = useState({ style_id: { stock_id: null } });
   let [activeStockUnitId, setActiveStockUnitId] = useState(null);
 
-  // if (!Number.isInteger(parseInt(product_id))) {
-  //   product_id = 0;
-  // } else if (product_id < 40344) {
-  //   product_id = 40344;
-  // } else if (product_id > 41354) {
-  //   product_id = 40344;
-  // }
+  if (!Number.isInteger(parseInt(product_id))) {
+    product_id = 0;
+  } else if (product_id < 40344) {
+    product_id = 40344;
+  } else if (product_id > 41354) {
+    product_id = 40344;
+  }
 
   useEffect(() => {
     if (!product_id) {
