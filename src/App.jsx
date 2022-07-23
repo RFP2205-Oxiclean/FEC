@@ -23,11 +23,6 @@ function App() {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
 
-  const handleSubmit = (id) => {
-    id = parseInt(id);
-    handleSubmit({ displayedProductId: id });
-  };
-
   return (
     <ThemeContext.Provider value={theme}>
       <div className="app" data-testid="app" id={theme}>

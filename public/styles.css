@@ -145,6 +145,11 @@ user-select: none;
   flex-wrap: wrap;
 } */
 
+#dark .overview-select {
+  color: white;
+  background: #363636;
+}
+
 .select-menu {
   position: absolute;
   float: left;
@@ -184,6 +189,12 @@ user-select: none;
   border: 1px solid black;
   justify-content: center;
   text-align: "center";
+}
+
+#dark q-menu-contaer {
+  color: white;
+  background: #363636;
+  background:
 }
 
 .product-overview > option:hover {

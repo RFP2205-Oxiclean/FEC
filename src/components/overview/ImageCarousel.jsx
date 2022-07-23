@@ -17,7 +17,6 @@ const ImageCarousel = ({
   setHoverIndex,
   setActiveDisplayIndex,
   stock,
-  handleAddToCart,
   incrementThumbnailIndex,
   decrementThumbnailIndex,
   rating,
@@ -37,6 +36,12 @@ const ImageCarousel = ({
 }) => {
   // let [collapsePanel, setCollapsePanel] = useState(false);
 
+  if (image === null || image === undefined) {
+    image = "https://http.cat/404";
+  } else {
+    image = createCloudinaryDisplayURL(image);
+  }
+
   let callHiding = function (callback) {
     callback();
   };
@@ -51,7 +56,7 @@ const ImageCarousel = ({
         collapsePanel={collapsePanel}
         expanded={expanded}
         setExpanded={setExpanded}
-        image={createCloudinaryDisplayURL(image)}></MagnifyingGlass>
+        image={image}></MagnifyingGlass>
       <ThumbnailContainer
         decrementThumbnailIndex={decrementThumbnailIndex}
         magnified={magnified}
@@ -76,7 +81,6 @@ const ImageCarousel = ({
         incrementThumbnailIndex={incrementThumbnailIndex}
         activeThumbnailIndex={activeThumbnailIndex}
         end={photoObjects.length - 1}
-        handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}

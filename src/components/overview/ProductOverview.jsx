@@ -32,7 +32,18 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
   let [cart, setCart] = useState({ style_id: { stock_id: null } });
   let [activeStockUnitId, setActiveStockUnitId] = useState(null);
 
+  // if (!Number.isInteger(parseInt(product_id))) {
+  //   product_id = 0;
+  // } else if (product_id < 40344) {
+  //   product_id = 40344;
+  // } else if (product_id > 41354) {
+  //   product_id = 40344;
+  // }
+
   useEffect(() => {
+    if (!product_id) {
+      return;
+    }
     getReviewList(product_id).then((response) => {
       setReviewListLength(response.data.results.length);
     });
@@ -54,26 +65,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
           stockArr.push({ ...styleObj.skus[k], id: k, style_id: styleObj.style_id });
         }
         newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
-        // let x = {};
-        // for (let stockId in styleObj.skus) {
-        //   styleObj.skus[stockId] = { ...styleObj.skus[stockId], style_id: styleObj.style_id };
-        //   x = { ...x, [[stockId]]: styleObj.skus[stockId] };
-        // }
-        // newStock[styleObj.style_id] = x;
-        // // for (let k in styleObj.skus) {
-        // //   console.log(styleObj.skus);
-        // //   let flag = false;
-        // //   stockArr.forEach(function (sizePair, i) {
-        // //     if (styleObj.skus[k].size === stockArr[i].size) {
-        // //       flag = true;
-        // //       stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
-        // //     }
-        // //   });
-        // //   if (!flag) {
-        // //     stockArr.push({ ...styleObj.skus[k], id: k });
-        // //   }
-        // // }
-        // // newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
       });
       setActiveThumbnailIndices(activeThumbnails);
       setStock(newStock);
@@ -90,30 +81,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
 
   let handleClick = function () {
     handleSubmit(entry);
-  };
-
-  let masterState = function () {
-    // console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
-    console.log("styleObjects: ", styleObjects);
-    console.log("productInfo ", productInfo);
-    // console.log(getCart());
-    // console.log(addToCartPrompt);
-    console.log("reviewListLength: ", reviewListLength);
-    // console.log("photoObjects");
-    // console.log("activeThumbnailIndices: ", activeThumbnailIndices);
-    // console.log("activeDisplayIndex: ", activeDisplayIndex);
-    // console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
-    // console.log("productInfo: ", productInfo);
-    console.log(stock);
-    // console.log(hoverIndex);
-    // console.log("current: ", getDisplayImage());
-    // console.log("previous: ", previousImage);
-    addToCart(1394865, 1).then((response) => {
-      console.log(response);
-    });
-    getStars(40344).then((data) => {
-      console.log(data);
-    });
   };
 
   let getActiveStock = function () {
@@ -182,22 +149,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
     setActiveThumbnailIndices(newIndices);
   };
 
-  let handleAddToCart = () => {};
-
-  // addToCart(stockId, quantity)
-  //   .then(() => {
-  //     let copyStock = { ...stock };
-  // let newStock = stock[getActiveDisplayId()].slice();
-  // for (let i = 0; i < newStock.length; i++) {
-  //   if (newStock[i].id === stockId) {
-  //     newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
-  //   }
-  // }
-  // copyStock[getActiveDisplayId()] = newStock;
-  // setStock(copyStock);
-  //   })
-  //   .catch((err) => console.log("failed to post"));
-
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
@@ -219,7 +170,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
         rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
         incrementThumbnailIndex={incrementThumbnailIndex}
-        handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}
@@ -244,13 +194,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
             setProductId(parseInt(entry));
           }}>
           New Product
-        </button>
-        <button
-          data-testid="master-state-change"
-          onClick={() => {
-            masterState();
-          }}>
-          Master State
         </button>
       </div>
     </div>

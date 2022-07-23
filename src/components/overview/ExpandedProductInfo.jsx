@@ -15,7 +15,6 @@ const ExpandedProductInfo = ({
   setHoverIndex,
   setActiveDisplayIndex,
   stock,
-  handleAddToCart,
   end,
   activeThumbnailIndex,
   incrementThumbnailIndex,
@@ -108,7 +107,6 @@ const ExpandedProductInfo = ({
           activeStock={activeStock}
           setAddToCartPrompt={setAddToCartPrompt}
           styleInfo={styleInfo}
-          handleAddToCart={handleAddToCart}
           stock={stock[styleObjects[activeDisplayIndex].style_id]}
           activeStyle={styleObjects[activeDisplayIndex]}></PurchaseInfo>
       </div>

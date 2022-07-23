@@ -33,8 +33,6 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options }) => {
     }
   };
 
-  console.log(makeOptions());
-
   return (
     <select
       data-testid="q-menu"
