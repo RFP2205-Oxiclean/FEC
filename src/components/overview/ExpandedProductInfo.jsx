@@ -25,6 +25,8 @@ const ExpandedProductInfo = ({
   setAddToCartPrompt,
   reviewListLength,
   activeStock,
+  setActiveStockUnitId,
+  activeStockUnitId,
 }) => {
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
@@ -88,6 +90,8 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          activeStockUnitId={activeStockUnitId}
+          setActiveStockUnitId={setActiveStockUnitId}
           activeStock={activeStock}
           setAddToCartPrompt={setAddToCartPrompt}
           styleInfo={styleInfo}

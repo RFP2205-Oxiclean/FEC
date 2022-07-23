@@ -29,8 +29,8 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   const [magnified, setMagnified] = useState(false);
   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
   let [reviewListLength, setReviewListLength] = useState(0);
-
-  let pingCart = function () {};
+  let [cart, setCart] = useState({ style_id: { stock_id: null } });
+  let [activeStockUnitId, setActiveStockUnitId] = useState(null);
 
   useEffect(() => {
     getReviewList(product_id).then((response) => {
@@ -177,32 +177,20 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     setActiveThumbnailIndices(newIndices);
   };
 
-  let handleAddToCart = function (stockId, quantity) {
-    if (!stockId || !quantity) {
-      return;
-    }
-    addToCart(stockId, quantity)
-      .then(() => {
-        let copyStock = { ...stock };
-        let newStock = stock[getActiveDisplayId()].slice();
-        for (let i = 0; i < newStock.length; i++) {
-          if (newStock[i].id === stockId) {
-            newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
-          }
-        }
-        copyStock[getActiveDisplayId()] = newStock;
-        setStock(copyStock);
-      })
-      .then(() => {
-        setAddToCartPrompt(true);
-      })
-      .catch((err) => console.log("failed to post"));
+  let handleAddToCart = function (stockId, newStockObject) {
+    console.log("called handleAddToCart");
+    let copyStock = { ...stock };
+    copyStock[getActiveDisplayId()][stockId] = newStockObject;
+    console.log(copyStock);
+    setStock(copyStock);
   };
 
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
-        activeStock={getActiveStock()}
+        activeStockUnitId={activeStockUnitId}
+        setActiveStockUnitId={setActiveStockUnitId}
+        activeStock={stock[getActiveDisplayId()]}
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}
@@ -231,7 +219,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
       <BottomInformation description={productInfo?.description}></BottomInformation>
-      {/* <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
+      <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
@@ -249,7 +237,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           }}>
           Master State
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
+const QMenu = ({ size, selectQuantity, stockId, noItems }) => {
   let [disabled, setDisabled] = useState(false);
 
   let makeOptions = function () {

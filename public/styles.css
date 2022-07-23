@@ -29,6 +29,13 @@ body {
 
 } */
 
+/* .product-overview select option:checked {
+  background-color: rgb(230, 230, 230);
+}
+
+.product-overview select option:hover {
+  background-color: rgb(230, 230, 230);
+} */
 
 .add-to-cart, .collapse-button {
   position: relative;
@@ -86,7 +93,7 @@ user-select: none;
 }
 
 .overview-nice-select-options:hover, .overview-nice-select:hover {
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(200, 200, 200);
 }
 
 .magnifying-glass-container {
@@ -164,7 +171,6 @@ user-select: none;
   line-height: 26px;
   height: 20px;
   outline: 0;
-  padding-right: 10px;
   width: 70px;
   border-top: none;
   cursor: default;
@@ -173,7 +179,16 @@ user-select: none;
   border: 1px solid black;
   justify-content: center;
   text-align: "center";
-  margin-right: 30px;
+  margin-right: 25px;
+}
+
+.product-overview > option:hover {
+  background-color: rgb(245, 245, 245);
+
+}
+
+.q-menu-option:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .select-menu-header, .q-option {
@@ -194,14 +209,14 @@ user-select: none;
 
 .select-menu-option, .select-menu-option-selected {
   width: 100%;
-  background:
+  background: white;
   text-align: center;
   font-size: 14px;
   border-top: 1px solid black;
 }
 
 
-.select-menu-option:hover, .select-menu-selected {
+.select-menu-option:hover, .select-menu-option-selected {
   background: rgb(245, 245, 245)
 }
 
@@ -252,16 +267,11 @@ user-select: none;
     line-height: 33px;
     padding-left: 5px;
     padding-right: 5px;
-    margin-right: 12px;
     margin-bottom: 12px;
     min-width: 35px;
     min-height: 35px;
     outline: 0;
 }
-
-.overview-select {
-  font-size: 16px;
-  font-family: 'Cormorant SC', serif;}
 
 
 

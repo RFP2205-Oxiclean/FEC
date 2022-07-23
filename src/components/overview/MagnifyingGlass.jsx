@@ -64,14 +64,13 @@ const MagnifyingGlass = ({ image, zoom, setExpanded, expanded, collapsePanel, se
           <div
             className="magnifying-glass"
             style={{
+              backgroundImage: `url(${image})`,
               position: "absolute",
               left: left - 240,
               top: top - 240,
               height: "480px",
               width: "480px",
               border: "2px solid black",
-              backgroundImage: `url(${image})`,
-              backgroundRepeat: "no-repeat",
               backgroundSize: `${1100 * 2.5}px ${733 * 2.5}px`,
               backgroundPositionX: `${-left * 2.5 + 240}px`,
               backgroundPositionY: `${-top * 2.5 + 240}px`,

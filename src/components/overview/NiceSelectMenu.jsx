@@ -1,6 +1,63 @@
 import React, { useState, useEffect, useRef } from "react";
+// { stock, isOpen, open, activeStock, stockId, setStockId, setActiveStockUnitId }
+const NiceSelectMenu = ({ stockObjects }) => {
+  let [defaultValue, setDefaultValue] = useState(null);
+  let [sizes, setSizes] = useState([]);
+  let [defaultValue, setDefaultValue] = useState("");
 
-const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, activeStock, stockId, setStockId }) => {
+  for (let k in stockObjects) {
+  }
+
+  // useEffect(() => {
+  //   let newSizes = [];
+  //   if (activeStock && !stockId) {
+  //     let flag = false;
+  //     for (let k in activeStock) {
+  //       console.log("firing");
+  //       if (activeStock[k].quantity !== null && activeStock[k].quantity[k] !== 0) {
+  //         flag = true;
+  //         setDefaultValue("Select a Size!");
+  //       }
+  //       newSizes.push({ ...activeStock[k], stockId: k });
+  //     }
+  //     if (!flag) {
+  //       setDefaultValue("Out of stock!");
+  //     }
+  //   }
+  //   setSizes(newSizes);
+  // }, [activeStock]);
+
+  //   return (
+  //     <div className="select-menu">
+  //       <div
+  //         onClick={() => {
+  //           open(!isOpen);
+  //         }}
+  //         className="select-menu-header">
+  //         {defaultValue}
+  //       </div>
+  //       {isOpen ? (
+  //         sizes.map(function (sizeObject, i) {
+  //           return (
+  //             <div
+  //               key={sizeObject.stockId}
+  //               onClick={() => {
+  //                 setActiveStockUnitId(sizeObject.stockId);
+  //                 setDefaultValue(sizeObject.size);
+  //                 open(false);
+  //               }}
+  //               className={stockId === sizeObject.stockId ? "select-menu-option-selected" : "select-menu-option"}>
+  //               {sizeObject.size}
+  //             </div>
+  //           );
+  //         })
+  //       ) : (
+  //         <></>
+  //       )}
+  //     </div>
+  //   );
+  // };
+
   return (
     <div className="select-menu">
       <div
@@ -16,7 +73,7 @@ const NiceSelectMenu = ({ sizes, isOpen, open, defaultValue, setDefaultValue, ac
             <div
               key={sizeObject.stockId}
               onClick={() => {
-                setStockId(sizeObject.stockId);
+                setActiveStockUnitId(sizeObject.stockId);
                 setDefaultValue(sizeObject.size);
                 open(false);
               }}
