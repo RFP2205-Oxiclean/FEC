@@ -28,6 +28,7 @@ const ExpandedProductInfo = ({
   setActiveStockUnitId,
   activeStockUnitId,
   bag,
+  setStock,
 }) => {
   let [isOpen, setSizeOpen] = useState(false);
 
@@ -98,6 +99,7 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          setStock={setStock}
           bag={bag}
           setBag={setBag}
           isOpen={isOpen}

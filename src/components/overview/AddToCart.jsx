@@ -16,6 +16,9 @@ const AddToCart = ({
   setSizeOpen,
   bag,
   setBag,
+  setDefaultValue,
+  selectSize,
+  setStock,
 }) => {
   let [hidden, setHidden] = useState(false);
 
@@ -25,6 +28,21 @@ const AddToCart = ({
       setSizeOpen(true);
       setPrompt(true);
       return;
+    } else {
+      let newStock = stock.map(function (stockObj) {
+        return Object.assign({}, stockObj);
+      });
+      newStock.forEach(function (stockObj) {
+        if (parseInt(stockObj.id) === parseInt(stockId)) {
+          console.log("found id");
+          console.log(stockObj.quantity);
+          console.log(quantity);
+          console.log("newStock: ", newStock);
+          stockObj.quantity = stockObj.quantity = parseInt(quantity);
+          console.log("newStock: ", newStock);
+        }
+      });
+      console.log("newStock: ", newStock);
     }
     myAxios
       .post(
@@ -59,6 +77,7 @@ const AddToCart = ({
       data-testid="add-to-cart"
       onClick={(e) => {
         handleClick(e);
+        selectSize("");
       }}
       className={hidden ? "invisible-cart" : "add-to-cart"}>
       Add to Cart

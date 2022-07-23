@@ -33,6 +33,7 @@ const ImageCarousel = ({
   setActiveStockUnitId,
   setBag,
   bag,
+  setStock,
 }) => {
   // let [collapsePanel, setCollapsePanel] = useState(false);
 
@@ -66,6 +67,7 @@ const ImageCarousel = ({
         photos={photoObjects}
         activeThumbnailIndex={activeThumbnailIndex}></ThumbnailContainer>
       <ExpandedProductInfo
+        setStock={setStock}
         bag={bag}
         setBag={setBag}
         activeStockUnitId={activeStockUnitId}

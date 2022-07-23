@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options }) => {
+const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options, setDefaultValue }) => {
   let [disabled, setDisabled] = useState(false);
 
   let makeOptions = function () {
@@ -41,6 +41,7 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options }) => {
       disabled={!size}
       onChange={(e) => {
         selectQuantity(parseInt(e.target.value));
+        setDefaultValue("Out of Stock!");
       }}
       style={{ float: "right", width: "100px" }}>
       {makeOptions()?.map(function (count, i) {

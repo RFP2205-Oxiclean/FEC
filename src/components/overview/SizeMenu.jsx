@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 
-const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, stockId, selectQuantity, noItems, isOpen, setSizeOpen }) => {
-  let [defaultValue, setDefaultValue] = useState("Out of Stock!");
-
+const SizeMenu = ({
+  size,
+  stock,
+  selectSize,
+  setPrompt,
+  setNoItems,
+  setStockId,
+  stockId,
+  selectQuantity,
+  noItems,
+  isOpen,
+  setSizeOpen,
+  activeStock,
+  defaultValue,
+  setDefaultValue,
+}) => {
   useEffect(() => {
     let flag = false;
     stock?.forEach(function (stockObj) {
@@ -14,11 +27,7 @@ const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, 
     if (noItems) {
       setDefaultValue("Out of Stock!");
     }
-  }, [stock, noItems]);
-
-  useEffect(() => {
-    console.log("attempting open");
-  }, [isOpen]);
+  }, [stock, noItems, activeStock, size]);
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
@@ -44,7 +53,6 @@ const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, 
                   selectSize(stock[i].size);
                   selectQuantity(1);
                   setSizeOpen(false);
-                  setDefaultValue(e.target.value);
                   setStockId(parseInt(stock[i].id));
                 }}
                 className={stockId === sizeObject.id ? "select-menu-option-active" : "select-menu-option"}>

@@ -152,6 +152,7 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        setStock={setStock}
         bag={bag}
         setBag={setBag}
         activeStockUnitId={activeStockUnitId}

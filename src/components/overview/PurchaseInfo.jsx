@@ -19,13 +19,14 @@ import { addToCart } from "../../controllers.js";
 import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 
-const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) => {
+const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag, setStock }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
   let [goodPrompt, setGoodPrompt] = useState(false);
+  let [defaultValue, setDefaultValue] = useState("Out of Stock!");
 
   let setBuyPrompt = function () {
     setGoodPrompt(true);
@@ -66,6 +67,8 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
         </div>
         <div className="purchase-buttons-container1">
           <SizeMenu
+            defaultValue={defaultValue}
+            setDefaultValue={setDefaultValue}
             activeStyle={activeStyle}
             size={size}
             setSizeOpen={setSizeOpen}
@@ -76,11 +79,21 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu activeStyle={activeStyle} stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
+          <QMenu
+            setDefaultValue={setDefaultValue}
+            activeStyle={activeStyle}
+            stock={stock}
+            selectQuantity={selectQuantity}
+            size={size}
+            stockId={stockId}
+            noItems={noItems}></QMenu>
         </div>
         <div style={{ display: "flex", paddingTop: "40px" }}>
-          <span style={{ position: "absolute", color: "red" }}>{goodPrompt ? "Added to Cart!" : ""}</span>
+          <span style={{ position: "absolute", color: "red", fontSize: "24px" }}>{goodPrompt ? "Added to Cart!" : ""}</span>
           <AddToCart
+            setStock={setStock}
+            selectSize={selectSize}
+            setDefaultValue={setDefaultValue}
             activeStyle={activeStyle}
             setBag={setBag}
             bag={bag}
