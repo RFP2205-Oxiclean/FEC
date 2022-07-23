@@ -35,11 +35,11 @@ function App() {
         </div>
 
         <div className="questions-and-answers">
-          <QuestionsAndAnswers product_id={displayedProductId} />
+          <QuestionsAndAnswers key={displayedProductId} product_id={displayedProductId} />
         </div>
 
         <div className="ratings-reviews">
-          <RatingsReviews product_id={displayedProductId} data-testid="RatingsReviews" />
+          <RatingsReviews key={displayedProductId} product_id={displayedProductId} data-testid="RatingsReviews" />
         </div>
       </div>
     </ThemeContext.Provider>
