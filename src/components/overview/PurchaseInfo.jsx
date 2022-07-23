@@ -26,7 +26,7 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag, se
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
   let [goodPrompt, setGoodPrompt] = useState(false);
-  let [defaultValue, setDefaultValue] = useState("Out of Stock!");
+  let [defaultValue, setDefaultValue] = useState("Select a Size!");
 
   let setBuyPrompt = function () {
     setGoodPrompt(true);
@@ -66,19 +66,25 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag, se
           )}
         </div>
         <div className="purchase-buttons-container1">
-          <SizeMenu
-            defaultValue={defaultValue}
-            setDefaultValue={setDefaultValue}
-            activeStyle={activeStyle}
-            size={size}
-            setSizeOpen={setSizeOpen}
-            isOpen={isOpen}
-            stock={stock}
-            selectSize={selectSize}
-            setPrompt={setPrompt}
-            setNoItems={setNoItems}
-            setStockId={setStockId}
-            selectQuantity={selectQuantity}></SizeMenu>
+          {noItems ? (
+            <div style={{ position: "relative", width: "100%" }}>
+              <div className="select-menu">Out of Stock!</div>
+            </div>
+          ) : (
+            <SizeMenu
+              defaultValue={defaultValue}
+              setDefaultValue={setDefaultValue}
+              activeStyle={activeStyle}
+              size={size}
+              setSizeOpen={setSizeOpen}
+              isOpen={isOpen}
+              stock={stock}
+              selectSize={selectSize}
+              setPrompt={setPrompt}
+              setNoItems={setNoItems}
+              setStockId={setStockId}
+              selectQuantity={selectQuantity}></SizeMenu>
+          )}
           <QMenu
             setDefaultValue={setDefaultValue}
             activeStyle={activeStyle}
@@ -107,10 +113,10 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag, se
             quantity={quantity}
             stockId={stockId}></AddToCart>
         </div>
-        <button
+        {/* <button
           onClick={() => {
             console.log(stock);
-          }}></button>
+          }}></button> */}
       </div>
     </div>
   );

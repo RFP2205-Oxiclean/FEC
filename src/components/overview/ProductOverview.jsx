@@ -54,7 +54,6 @@ const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
       let activeThumbnails = {};
       let newStock = {};
       data.forEach((styleObj) => {
-        console.log(styleObj);
         activeThumbnails[styleObj.style_id] = 0;
         styleObj.photos.forEach(function (photoObj, i) {
           photoObj.trueIndex = i;

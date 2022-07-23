@@ -32,17 +32,6 @@ const AddToCart = ({
       let newStock = stock.map(function (stockObj) {
         return Object.assign({}, stockObj);
       });
-      newStock.forEach(function (stockObj) {
-        if (parseInt(stockObj.id) === parseInt(stockId)) {
-          console.log("found id");
-          console.log(stockObj.quantity);
-          console.log(quantity);
-          console.log("newStock: ", newStock);
-          stockObj.quantity = stockObj.quantity = parseInt(quantity);
-          console.log("newStock: ", newStock);
-        }
-      });
-      console.log("newStock: ", newStock);
     }
     myAxios
       .post(

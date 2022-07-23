@@ -16,18 +16,18 @@ const SizeMenu = ({
   defaultValue,
   setDefaultValue,
 }) => {
-  useEffect(() => {
-    let flag = false;
-    stock?.forEach(function (stockObj) {
-      if (stockObj.quantity !== null && stock.quantity !== 0 && stock.id !== null && stock.id !== "null") {
-        flag = true;
-        setDefaultValue("Select a Size!");
-      }
-    });
-    if (noItems) {
-      setDefaultValue("Out of Stock!");
-    }
-  }, [stock, noItems, activeStock, size]);
+  // useEffect(() => {
+  //   let flag = false;
+  //   activeStock?.forEach(function (stockObj) {
+  //     if (stockObj.quantity !== null && stock.quantity !== 0 && stock.id !== null && stock.id !== "null") {
+  //       flag = true;
+  //       setDefaultValue("Select a Size!");
+  //     }
+  //   });
+  //   if (noItems) {
+  //     setDefaultValue("Out of Stock!");
+  //   }
+  // }, [noItems]);
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
@@ -35,7 +35,6 @@ const SizeMenu = ({
         <div
           onClick={(e) => {
             e.stopPropagation();
-            console.log("trying to open");
             setSizeOpen(!isOpen);
             setPrompt(false);
           }}
