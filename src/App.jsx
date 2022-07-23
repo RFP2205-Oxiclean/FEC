@@ -16,7 +16,7 @@ import TopNavBar from "./components/commonComponents/TopNavBar.jsx";
 
 function App() {
 
-  const [displayedProductId, setProductId] = useState(40344);
+  const [displayedProductId, setProductId] = useState(40346);
   const [theme, setTheme] = useState('light');
 
   const toggleTheme = () => {

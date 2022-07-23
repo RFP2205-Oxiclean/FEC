@@ -904,7 +904,7 @@ select:active {
 
 #dark .interactive-buttons.load-more:hover, #dark .interactive-buttons.add-a:hover {
   background-color: white !important;
-  color: black;
+  color: rgb(45, 45, 45);
 }
 
 .questions-and-answers .button-wrapper {
@@ -923,7 +923,7 @@ select:active {
 }
 
 #dark .interactive-buttons.load-more, #dark .interactive-buttons.add-a {
-  background-color: black;
+  background-color: rgb(45, 45, 45);
   color: white;
 }
 
@@ -939,7 +939,7 @@ select:active {
 }
 
 #dark .small-interactive-buttons, #dark .submit-photos-button::-webkit-file-upload-button, #dark.user-photos::-webkit-file-upload-button {
-  background-color: black;
+  background-color: rgb(45, 45, 45);
   color: white;
 }
 
@@ -1206,7 +1206,7 @@ select:active {
 }
 
 #dark .modal-exit {
-  background-color: black;
+  background-color: rgb(45, 45, 45);
   color: white;
 }
 
@@ -1712,8 +1712,8 @@ div.radio-box {
 
 #dark .qa-nav-bar {
   background-color: #202124;
-  box-shadow: 0 0 3px white;
-  margin-left: 1px;
+  box-shadow:inset 0 0 2px white;
+  color: white;
 }
 
 
