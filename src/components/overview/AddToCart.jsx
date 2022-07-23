@@ -44,14 +44,13 @@ const AddToCart = ({ activeStock, size, quantity, handleAddToCart, noItems, stoc
 
   let handleClick = function () {
     let copyObject = { ...activeStock[stockId] };
-    // console.log(stockId, quantity);
+    console.log(copyObject);
+    console.log(stockId, quantity);
     if (stockId && quantity) {
       copyObject.quantity = copyObject.quantity - quantity;
       if (copyObject.quantity > 0) {
         selectQuantity(1);
-        setStockId(null);
       } else {
-        setStockId(null);
         selectQuantity(0);
       }
     }

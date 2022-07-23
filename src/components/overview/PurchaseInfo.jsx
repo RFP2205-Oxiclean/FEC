@@ -7,66 +7,64 @@ import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 import NiceSelectMenu from "./NiceSelectMenu.jsx";
 import NiceQMenu from "./NiceQMenu.jsx";
-
-// const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock, stock, setActiveStockUnitId, activeStockUnitId }) => {
-//   let [quantity, selectQuantity] = useState(null);
-//   let [size, selectSize] = useState(null);
-//   let [prompt, setPrompt] = useState(false);
-//   let [noItems, setNoItems] = useState(true);
-//   let [stockId, setStockId] = useState(null);
-//   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
+// const PurchaseInfo = ({ activeStyle, styleInfo }) => {
 //   let [sizeOpen, setSizeOpen] = useState(false);
-//   let [selectedSize, setSelectedSize] = useState(null);
-//   let [defaultValue, setDefaultValue] = useState("Select a Size!");
-//   let [options, setOptions] = useState([]);
+//   let [prompt, setPrompt] = useState(false);
 
-//   useEffect(() => {
-//     for (let stockObj in activeStock) {
-//       if (stockObj.quantity !== 0 && stockObj !== null) {
-//         setNoItems(false);
-//       }
-//     }
-//   }, [activeStock, activeStockUnitId]);
-
-//   console.log(activeStock);
-
-// useEffect(() => {
-//   // if (size) {
-//   //   let flag = false;
-//   //   console.log("setting options");
-//   //   for (let k in activeStock) {
-//   //     if (activeStock[k].size === size) {
-//   //       let flag = true;
-//   //       let count = activeStock[k].quantity;
-//   //       let newOptions = Array(count).fill(0);
-//   //       newOptions = newOptions.map(function (e, i) {
-//   //         return i + 1;
-//   //       });
-//   //       console.log("setting options");
-//   //       setOptions(newOptions);
-//   //     }
-//   //   }
-//   // }
-//   // if (stockId) {
-//   //   activeStock.forEach(function (stockUnit) {
-//   //     if (stockUnit.id === stockId) {
-//   //       setActiveStockUnit(stockUnit);
-//   //     }
-//   //   });
-//   // }
-//   if (stockId) {
-//     setActiveStockUnit(activeStock[stockId]);
-//     let newOptions = Array(activeStock[stockId].quantity)
-//       .fill(0)
-//       .map(function (e, i) {
-//         return i + 1;
-//       });
-//     setOptions(newOptions);
-//   }
-// }, [stockId, stock]);
-const PurchaseInfo = ({ activeStyle }) => {
-  let [sizeOpen, setSizeOpen] = useState(false);
+const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock, stock, setActiveStockUnitId, activeStockUnitId }) => {
+  let [quantity, selectQuantity] = useState(null);
+  let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
+  let [noItems, setNoItems] = useState(true);
+  let [stockId, setStockId] = useState(null);
+  let [addToCartPrompt, setAddToCartPrompt] = useState(false);
+  let [sizeOpen, setSizeOpen] = useState(false);
+  let [selectedSize, setSelectedSize] = useState(null);
+  let [defaultValue, setDefaultValue] = useState("Select a Size!");
+  let [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    for (let stockObj in activeStock) {
+      if (stockObj.quantity !== 0 && stockObj !== null) {
+        setNoItems(false);
+      }
+    }
+  }, [activeStock, activeStockUnitId]);
+
+  // useEffect(() => {
+  //   // if (size) {
+  //   //   let flag = false;
+  //   //   console.log("setting options");
+  //   //   for (let k in activeStock) {
+  //   //     if (activeStock[k].size === size) {
+  //   //       let flag = true;
+  //   //       let count = activeStock[k].quantity;
+  //   //       let newOptions = Array(count).fill(0);
+  //   //       newOptions = newOptions.map(function (e, i) {
+  //   //         return i + 1;
+  //   //       });
+  //   //       console.log("setting options");
+  //   //       setOptions(newOptions);
+  //   //     }
+  //   //   }
+  //   // }
+  //   // if (stockId) {
+  //   //   activeStock.forEach(function (stockUnit) {
+  //   //     if (stockUnit.id === stockId) {
+  //   //       setActiveStockUnit(stockUnit);
+  //   //     }
+  //   //   });
+  //   // }
+  //   if (stockId) {
+  //     setActiveStockUnit(activeStock[stockId]);
+  //     let newOptions = Array(activeStock[stockId].quantity)
+  //       .fill(0)
+  //       .map(function (e, i) {
+  //         return i + 1;
+  //       });
+  //     setOptions(newOptions);
+  //   }
+  // }, [stockId, stock]);
 
   return (
     <div
@@ -93,16 +91,20 @@ const PurchaseInfo = ({ activeStyle }) => {
           )}
         </div>
         <div className="purchase-buttons-container1" style={{ display: "flex" }}>
-          <NiceSelectMenu stockObjects={activeStyle.skus}></NiceSelectMenu>
-          {/* <NiceSelectMenu
+          <NiceSelectMenu
+            handleAddToCart={handleAddToCart}
+            activeStockUnitId={activeStockUnitId}
+            selectQuantity={selectQuantity}
+            setDefaultValue={setDefaultValue}
             setActiveStockUnitId={setActiveStockUnitId}
             stockId={stockId}
             setStockId={setStockId}
             selectSize={selectSize}
+            defaultValue={defaultValue}
             isOpen={sizeOpen}
             open={setSizeOpen}
             activeStock={activeStock}></NiceSelectMenu>
-          <NiceQMenu
+          {/* <NiceQMenu
             activeStockUnitId={activeStockUnitId}
             setOptions={setOptions}
             selectQuantity={selectQuantity}
@@ -129,7 +131,7 @@ const PurchaseInfo = ({ activeStyle }) => {
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu> */}
         </div>
         <div className="purchase-buttons-container2">
-          <div>
+          {/* <div>
             <AddToCart
               setStockId={setStockId}
               selectQuantity={selectQuantity}
@@ -139,17 +141,17 @@ const PurchaseInfo = ({ activeStyle }) => {
               quantity={quantity}
               noItems={noItems}
               activeStock={activeStock}></AddToCart>
-          </div>
+          </div> */}
         </div>
-        <div style={!addToCartPrompt ? { visibility: "hidden" } : { fontSize: "bold", float: "right", marginRight: "20px" }}>
+        {/* <div style={!addToCartPrompt ? { visibility: "hidden" } : { fontSize: "bold", float: "right", marginRight: "20px" }}>
           <span>Added to Cart!</span>
-        </div>
+        </div> */}
         <button
           style={{ position: "absolute", marginBottom: "100px" }}
           onClick={() => {
-            console.log(stockId);
-            console.log(activeStock);
-            console.log("activeStockUnit, ", activeStockUnit);
+            // console.log(stockId);
+            // console.log(activeStock);
+            // console.log("activeStockUnit, ", activeStockUnit);
             // console.log(quantity);
             // console.log(sizes);
           }}>

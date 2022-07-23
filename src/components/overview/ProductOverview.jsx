@@ -22,7 +22,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [productInfo, setProductInfo] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
-  let [stock, setStock] = useState({});
+  let [stock, setStock] = useState({ style_id: { stock_id: { quantity: "", size: "", style_id: "" } } });
   let [previousImage, setPreviousImage] = useState(null);
   const [collapsePanel, setCollapsePanel] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -190,7 +190,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       <ImageCarousel
         activeStockUnitId={activeStockUnitId}
         setActiveStockUnitId={setActiveStockUnitId}
-        activeStock={stock[getActiveDisplayId()]}
+        activeStock={stock[styleObjects[activeDisplayIndex].style_id]}
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}

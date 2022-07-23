@@ -19,20 +19,30 @@ const NiceQMenu = ({ stock, activeStock, stockId, selectQuantity, activeStockUni
   //   }
   // }, [options]);
 
-  if (activeStockUnitId) {
-    let newOptions = Array(activeStock[activeStockUnitId].quantity).fill(0);
-    newOptions = options.map(function (e, i) {
-      return i + 1;
-    });
-    setOptions(newOptions);
-  }
+  // if (activeStockUnitId) {
+  //   let newOptions = Array(activeStock[activeStockUnitId].quantity).fill(0);
+  //   newOptions = options.map(function (e, i) {
+  //     return i + 1;
+  //   });
+  //   setOptions(newOptions);
+  // }
+  useEffect(() => {
+    if (stockId) {
+      let count = Math.min(15, activeStock[stockId].quantity);
+      let newOptions = new Array(count).fill(0).map(function (e, i) {
+        return i + 1;
+      });
+      setOptions(newOptions);
+    }
+  }, [stockId]);
 
   return (
     <select
       onChange={(e) => {
         console.log(e.target.value);
 
-        selectQuantity(e.target.value);
+        selectQuantity(parseInt(e.target.value));
+        setOptions(options.slice(0, options.length - parseInt(e.target.value)));
       }}
       className="q-menu-container">
       {!options.length ? (
