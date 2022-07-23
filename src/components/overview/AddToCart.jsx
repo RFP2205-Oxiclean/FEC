@@ -39,7 +39,6 @@ const AddToCart = ({
         }
       )
       .then(() => {
-        console.log(bag);
         setBuyPrompt(true);
         setBag(bag + parseInt(quantity));
       })

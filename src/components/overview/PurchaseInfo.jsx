@@ -45,7 +45,7 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
         setNoItems(true);
       }
     });
-  }, [stock]);
+  }, [stock, activeStyle]);
 
   return (
     <div data-testid="purchase-info" className="overview-purchase-info">
@@ -66,6 +66,7 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
         </div>
         <div className="purchase-buttons-container1">
           <SizeMenu
+            activeStyle={activeStyle}
             size={size}
             setSizeOpen={setSizeOpen}
             isOpen={isOpen}
@@ -75,11 +76,12 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
             setNoItems={setNoItems}
             setStockId={setStockId}
             selectQuantity={selectQuantity}></SizeMenu>
-          <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
+          <QMenu activeStyle={activeStyle} stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div style={{ display: "flex", paddingTop: "40px" }}>
           <span style={{ position: "absolute", color: "red" }}>{goodPrompt ? "Added to Cart!" : ""}</span>
           <AddToCart
+            activeStyle={activeStyle}
             setBag={setBag}
             bag={bag}
             setSizeOpen={setSizeOpen}
@@ -92,6 +94,10 @@ const PurchaseInfo = ({ activeStyle, stock, isOpen, setSizeOpen, setBag, bag }) 
             quantity={quantity}
             stockId={stockId}></AddToCart>
         </div>
+        <button
+          onClick={() => {
+            console.log(stock);
+          }}></button>
       </div>
     </div>
   );

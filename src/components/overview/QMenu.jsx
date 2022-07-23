@@ -44,7 +44,6 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options }) => {
       }}
       style={{ float: "right", width: "100px" }}>
       {makeOptions()?.map(function (count, i) {
-        console.log(parseInt(count) + i);
         return <option key={stockId + i}>{count}</option>;
       })}
     </select>
