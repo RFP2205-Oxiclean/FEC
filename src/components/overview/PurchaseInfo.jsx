@@ -29,6 +29,7 @@ const PurchaseInfo = ({ activeStyle, handleAddToCart, styleInfo, activeStock, st
         setNoItems(false);
       }
     }
+    setDefaultValue("Select a Size!");
   }, [activeStock, activeStockUnitId]);
 
   // useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const NiceQMenu = ({ stock, activeStock, stockId, selectQuantity, activeStockUnitId }) => {
-  let [options, setOptions] = useState([]);
+const NiceQMenu = ({ stock, activeStock, stockId, selectQuantity, activeStockUnitId, options, quantity }) => {
+  // let [options, setOptions] = useState([]);
   // useEffect(() => {
   //   if (stockId) {
   //     let newOptions = Array(activeStock[stockId].quantity).fill(0);
@@ -26,15 +26,15 @@ const NiceQMenu = ({ stock, activeStock, stockId, selectQuantity, activeStockUni
   //   });
   //   setOptions(newOptions);
   // }
-  useEffect(() => {
-    if (stockId) {
-      let count = Math.min(15, activeStock[stockId].quantity);
-      let newOptions = new Array(count).fill(0).map(function (e, i) {
-        return i + 1;
-      });
-      setOptions(newOptions);
-    }
-  }, [stockId]);
+  // useEffect(() => {
+  //   if (stockId) {
+  //     let count = Math.min(15, activeStock[stockId].quantity);
+  //     let newOptions = new Array(count).fill(0).map(function (e, i) {
+  //       return i + 1;
+  //     });
+  //     setOptions(newOptions);
+  //   }
+  // }, [stockId]);
 
   return (
     <select
@@ -42,11 +42,16 @@ const NiceQMenu = ({ stock, activeStock, stockId, selectQuantity, activeStockUni
         console.log(e.target.value);
 
         selectQuantity(parseInt(e.target.value));
-        setOptions(options.slice(0, options.length - parseInt(e.target.value)));
+        if (options.length - parseInt(e.target.value) > 0) {
+          selectQuantity(1);
+        } else {
+          selectQuantity("-");
+        }
+        // setOptions(options.slice(0, options.length - parseInt(e.target.value)));
       }}
       className="q-menu-container">
       {!options.length ? (
-        <option hidden>{"-"}</option>
+        <option hidden>{quantity > 0 ? "-" : quantity}</option>
       ) : (
         options.map(function (option) {
           return <option key={stockId + option}>{option}</option>;
