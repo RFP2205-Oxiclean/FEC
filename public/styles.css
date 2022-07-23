@@ -211,6 +211,10 @@ user-select: none;
   min-height: 20px;
 }
 
+#dark .select-menu-option, .select-menu-option-selected {
+  background: #363636;
+}
+
 .select-menu-option, .select-menu-option-selected {
   width: 100%;
   background: white;
@@ -260,6 +264,11 @@ user-select: none;
   font-size: 25px;
   font-family: Times;
   line-height: 1;
+}
+
+#dark .overview-select {
+  background: #363636;
+  box-shadow: 1px solid white;
 }
 
 .overview-select, .add-to-cart, .collapse-button {
@@ -716,6 +725,7 @@ select:active {
   opacity: 0;
   transition: visibility 0s .3s, opacity .3s linear;
 }
+
 
 .fade-out {
   opacity: 1;

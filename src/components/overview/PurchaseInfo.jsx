@@ -19,12 +19,20 @@ import { addToCart } from "../../controllers.js";
 import axios from "axios";
 import { url, API_KEY } from "../../../config/config.js";
 
-const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, isOpen, setSizeOpen }) => {
+const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, isOpen, setSizeOpen, setBag, bag }) => {
   let [quantity, selectQuantity] = useState(null);
   let [size, selectSize] = useState(null);
   let [prompt, setPrompt] = useState(false);
   let [noItems, setNoItems] = useState(false);
   let [stockId, setStockId] = useState(null);
+  let [goodPrompt, setGoodPrompt] = useState(false);
+
+  let setBuyPrompt = function () {
+    setGoodPrompt(true);
+    setTimeout(() => {
+      setGoodPrompt(false);
+    }, 4000);
+  };
 
   useEffect(() => {
     let flag = false;
@@ -70,11 +78,12 @@ const PurchaseInfo = ({ activeStyle, stock, handleAddToCart, isOpen, setSizeOpen
           <QMenu stock={stock} selectQuantity={selectQuantity} size={size} stockId={stockId} noItems={noItems}></QMenu>
         </div>
         <div style={{ display: "flex", paddingTop: "40px" }}>
-          <button
-            onClick={() => {
-              console.log(quantity, size);
-            }}></button>
+          <span style={{ position: "absolute", color: "red" }}>{goodPrompt ? "Added to Cart!" : ""}</span>
           <AddToCart
+            setBag={setBag}
+            bag={bag}
+            setSizeOpen={setSizeOpen}
+            setBuyPrompt={setBuyPrompt}
             size={size}
             setPrompt={setPrompt}
             noItems={noItems}

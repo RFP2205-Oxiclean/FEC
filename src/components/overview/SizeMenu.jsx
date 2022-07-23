@@ -89,6 +89,10 @@ const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, 
     }
   }, [stock, noItems]);
 
+  useEffect(() => {
+    console.log("attempting open");
+  }, [isOpen]);
+
   // return (
   //   <select
   //     className="overview-select"
@@ -128,7 +132,8 @@ const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, 
     <div style={{ position: "relative", width: "100%" }}>
       <div className="select-menu">
         <div
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             console.log("trying to open");
             setSizeOpen(!isOpen);
             setPrompt(false);
@@ -144,16 +149,11 @@ const SizeMenu = ({ size, stock, selectSize, setPrompt, setNoItems, setStockId, 
                 key={sizeObject.id + i}
                 onClick={(e) => {
                   setPrompt(false);
-                  selectSize(e.target.value);
-                  console.log(e.target.value);
+                  selectSize(stock[i].size);
                   selectQuantity(1);
                   setSizeOpen(false);
                   setDefaultValue(e.target.value);
-                  stock.forEach(function (stockObj) {
-                    if (stockObj.size === e.target.value) {
-                      setStockId(stockObj.id);
-                    }
-                  });
+                  setStockId(parseInt(stock[i].id));
                 }}
                 className={stockId === sizeObject.id ? "select-menu-option-active" : "select-menu-option"}>
                 {sizeObject.size}

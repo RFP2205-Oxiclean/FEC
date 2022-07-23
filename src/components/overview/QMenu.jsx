@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
+const QMenu = ({ stock, size, selectQuantity, stockId, noItems, options }) => {
   let [disabled, setDisabled] = useState(false);
 
   let makeOptions = function () {
+    if (options) {
+      let x = Math.min(options, 15).fill(0);
+      x = x.map(function (n, i) {
+        return i + 1;
+      });
+    }
+
     if (size && stockId) {
       let quantity = null;
       for (let i = 0; i < stock.length; i++) {
-        if (stock[i].id === stockId) {
+        if (parseInt(stock[i].id) === stockId) {
           quantity = stock[i].quantity;
           break;
         }
@@ -26,6 +33,8 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
     }
   };
 
+  console.log(makeOptions());
+
   return (
     <select
       data-testid="q-menu"
@@ -37,7 +46,8 @@ const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
       }}
       style={{ float: "right", width: "100px" }}>
       {makeOptions()?.map(function (count, i) {
-        return <option key={stockId + makeOptions().length + i}>{count}</option>;
+        console.log(parseInt(count) + i);
+        return <option key={stockId + i}>{count}</option>;
       })}
     </select>
   );

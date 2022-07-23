@@ -25,7 +25,7 @@ const BottomInformation = ({ description }) => {
           padding: "10px",
           marginLeft: "auto",
         }}>
-        <div style={{ width: "100%", height: "40px" }}>
+        <div style={{ width: "100%", height: "40px", display: "flex" }}>
           <div
             className="i-tag-container"
             style={{

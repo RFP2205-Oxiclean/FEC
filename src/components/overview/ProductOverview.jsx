@@ -5,7 +5,7 @@ import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
 import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
-const ProductOverview = ({ handleSubmit, product_id }) => {
+const ProductOverview = ({ handleSubmit, product_id, bag, setBag }) => {
   let [rating, setRating] = useState(0);
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
@@ -22,7 +22,7 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [productInfo, setProductInfo] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
-  let [stock, setStock] = useState({ style_id: { stock_id: { quantity: "", size: "", style_id: "" } } });
+  let [stock, setStock] = useState({ style_id: { stock_id: { quantity: "", size: "", style_id: "", id: "" } } });
   let [previousImage, setPreviousImage] = useState(null);
   const [collapsePanel, setCollapsePanel] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -182,28 +182,27 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     setActiveThumbnailIndices(newIndices);
   };
 
-  let handleAddToCart = function (stockId, quantity) {
-    if (!stockId || !quantity) {
-      return;
-    }
-    addToCart(stockId, quantity)
-      .then(() => {
-        let copyStock = { ...stock };
-        let newStock = stock[getActiveDisplayId()].slice();
-        for (let i = 0; i < newStock.length; i++) {
-          if (newStock[i].id === stockId) {
-            newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
-          }
-        }
-        copyStock[getActiveDisplayId()] = newStock;
-        setStock(copyStock);
-      })
-      .catch((err) => console.log("failed to post"));
-  };
+  let handleAddToCart = () => {};
+
+  // addToCart(stockId, quantity)
+  //   .then(() => {
+  //     let copyStock = { ...stock };
+  // let newStock = stock[getActiveDisplayId()].slice();
+  // for (let i = 0; i < newStock.length; i++) {
+  //   if (newStock[i].id === stockId) {
+  //     newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
+  //   }
+  // }
+  // copyStock[getActiveDisplayId()] = newStock;
+  // setStock(copyStock);
+  //   })
+  //   .catch((err) => console.log("failed to post"));
 
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
+        bag={bag}
+        setBag={setBag}
         activeStockUnitId={activeStockUnitId}
         setActiveStockUnitId={setActiveStockUnitId}
         activeStock={stock[styleObjects[activeDisplayIndex].style_id]}

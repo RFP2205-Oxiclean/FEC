@@ -7,6 +7,7 @@ import StylesContainer from "./StylesContainer.jsx";
 import PurchaseInfo from "./PurchaseInfo.jsx";
 
 const ExpandedProductInfo = ({
+  setBag,
   productInfo,
   styleInfo,
   styleObjects,
@@ -27,11 +28,17 @@ const ExpandedProductInfo = ({
   activeStock,
   setActiveStockUnitId,
   activeStockUnitId,
+  bag,
 }) => {
   let [isOpen, setSizeOpen] = useState(false);
 
   return (
-    <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
+    <div
+      onClick={() => {
+        setSizeOpen(false);
+      }}
+      data-testid="collapse-and-info-container"
+      className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
       <div
         className={magnified ? "overview-hidden" : "scroll-right"}
         onClick={() => {
@@ -92,6 +99,8 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          bag={bag}
+          setBag={setBag}
           isOpen={isOpen}
           setSizeOpen={setSizeOpen}
           activeStockUnitId={activeStockUnitId}
