@@ -99,12 +99,7 @@ const NiceSelectMenu = ({
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
-      <NiceQMenu
-        options={options}
-        activeStock={activeStock}
-        stockId={stockId}
-        selectQuantity={selectQuantity}
-        activeStockUnitId={activeStockUnitId}></NiceQMenu>
+
       <div className="select-menu">
         <div
           onClick={(e) => {
@@ -133,7 +128,10 @@ const NiceSelectMenu = ({
           <></>
         )}
       </div>
-      <AddToCart
+    </div>
+  );
+};
+ {/* <AddToCart
         activeStock={activeStock}
         size={size}
         quantity={quantity}
@@ -141,11 +139,7 @@ const NiceSelectMenu = ({
         noItems={noItems}
         stockId={stockId}
         selectQuantity={selectQuantity}
-        setStockId={setStockId}></AddToCart>
-    </div>
-  );
-};
-
+        setStockId={setStockId}></AddToCart> */}
 //   return (
 //     <div>
 //       <div className="select-menu">
@@ -166,7 +160,12 @@ const NiceSelectMenu = ({
 //                   setDefaultValue(sizeObject.size);
 //                   open(false);
 //                 }}
-//                 className={stockId === sizeObject.stockId ? "select-menu-option-selected" : "select-menu-option"}>
+//                 className={stockId === sizeObject.st      {/* <NiceQMenu
+        options={options}
+        activeStock={activeStock}
+        stockId={stockId}
+        selectQuantity={selectQuantity}
+        activeStockUnitId={activeStockUnitId}></NiceQMenu> */}ockId ? "select-menu-option-selected" : "select-menu-option"}>
 //                 {sizeObject.size}
 //               </div>
 //             );

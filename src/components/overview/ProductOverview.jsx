@@ -49,26 +49,31 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
           photoObj.trueIndex = i;
         });
         // consolidate stock
-        let x = {};
-        for (let stockId in styleObj.skus) {
-          styleObj.skus[stockId] = { ...styleObj.skus[stockId], style_id: styleObj.style_id };
-          x = { ...x, [[stockId]]: styleObj.skus[stockId] };
+        let stockArr = [];
+        for (let k in styleObj.skus) {
+          stockArr.push({ ...styleObj.skus[k], id: k, style_id: styleObj.style_id });
         }
-        newStock[styleObj.style_id] = x;
-        // for (let k in styleObj.skus) {
-        //   console.log(styleObj.skus);
-        //   let flag = false;
-        //   stockArr.forEach(function (sizePair, i) {
-        //     if (styleObj.skus[k].size === stockArr[i].size) {
-        //       flag = true;
-        //       stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
-        //     }
-        //   });
-        //   if (!flag) {
-        //     stockArr.push({ ...styleObj.skus[k], id: k });
-        //   }
+        newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
+        // let x = {};
+        // for (let stockId in styleObj.skus) {
+        //   styleObj.skus[stockId] = { ...styleObj.skus[stockId], style_id: styleObj.style_id };
+        //   x = { ...x, [[stockId]]: styleObj.skus[stockId] };
         // }
-        // newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
+        // newStock[styleObj.style_id] = x;
+        // // for (let k in styleObj.skus) {
+        // //   console.log(styleObj.skus);
+        // //   let flag = false;
+        // //   stockArr.forEach(function (sizePair, i) {
+        // //     if (styleObj.skus[k].size === stockArr[i].size) {
+        // //       flag = true;
+        // //       stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
+        // //     }
+        // //   });
+        // //   if (!flag) {
+        // //     stockArr.push({ ...styleObj.skus[k], id: k });
+        // //   }
+        // // }
+        // // newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
       });
       setActiveThumbnailIndices(activeThumbnails);
       setStock(newStock);
@@ -177,12 +182,23 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     setActiveThumbnailIndices(newIndices);
   };
 
-  let handleAddToCart = function (stockId, newStockObject) {
-    console.log("called handleAddToCart");
-    let copyStock = { ...stock };
-    copyStock[getActiveDisplayId()][stockId] = newStockObject;
-    console.log(copyStock);
-    setStock(copyStock);
+  let handleAddToCart = function (stockId, quantity) {
+    if (!stockId || !quantity) {
+      return;
+    }
+    addToCart(stockId, quantity)
+      .then(() => {
+        let copyStock = { ...stock };
+        let newStock = stock[getActiveDisplayId()].slice();
+        for (let i = 0; i < newStock.length; i++) {
+          if (newStock[i].id === stockId) {
+            newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
+          }
+        }
+        copyStock[getActiveDisplayId()] = newStock;
+        setStock(copyStock);
+      })
+      .catch((err) => console.log("failed to post"));
   };
 
   return (

@@ -51,6 +51,11 @@ body {
   cursor: default;
 }
 
+.add-to-cart {
+  position: static;
+  margin-left: auto;
+}
+
 .collapse-button:hover {
   background-color: black !important;
   cursor:pointer;
@@ -266,15 +271,11 @@ user-select: none;
   line-height: 33px;
   padding-left: 5px;
   padding-right: 5px;
-  margin-bottom: 12px;
   min-width: 35px;
   min-height: 35px;
   outline: 0;
 }
 
-.add-to-cart {
-  margin-top: 80px;
-}
 
 
 
@@ -704,11 +705,13 @@ select:active {
 
 .select-prompt-fadeIn {
   animation: fadeIn .5s;
-  padding-left: 10px;
+  color: red;
+  padding-left: 4px;
 }
 
 .select-prompt-fadeOut {
-  padding-left: 10px;
+  padding-left: 4px;
+  color: red;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s .3s, opacity .3s linear;

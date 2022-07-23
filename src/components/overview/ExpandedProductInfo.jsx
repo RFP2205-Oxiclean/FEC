@@ -28,6 +28,8 @@ const ExpandedProductInfo = ({
   setActiveStockUnitId,
   activeStockUnitId,
 }) => {
+  let [isOpen, setSizeOpen] = useState(false);
+
   return (
     <div data-testid="collapse-and-info-container" className={collapsePanel ? "collapse-and-info-container-slide-in" : "collapse-and-info-container"}>
       <div
@@ -90,6 +92,8 @@ const ExpandedProductInfo = ({
           activeDisplayIndex={activeDisplayIndex}
           styleObjects={styleObjects}></StylesContainer>
         <PurchaseInfo
+          isOpen={isOpen}
+          setSizeOpen={setSizeOpen}
           activeStockUnitId={activeStockUnitId}
           setActiveStockUnitId={setActiveStockUnitId}
           activeStock={activeStock}

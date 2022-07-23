@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const QMenu = ({ size, selectQuantity, stockId, noItems }) => {
+const QMenu = ({ stock, size, selectQuantity, stockId, noItems }) => {
   let [disabled, setDisabled] = useState(false);
 
   let makeOptions = function () {
@@ -37,11 +37,7 @@ const QMenu = ({ size, selectQuantity, stockId, noItems }) => {
       }}
       style={{ float: "right", width: "100px" }}>
       {makeOptions()?.map(function (count, i) {
-        return (
-          <option data-testid="default-q-menu" key={i}>
-            {count}
-          </option>
-        );
+        return <option key={stockId + makeOptions().length + i}>{count}</option>;
       })}
     </select>
   );
