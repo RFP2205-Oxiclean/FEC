@@ -5,7 +5,7 @@ import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
 import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
-const ProductOverview = ({ handleSubmit, product_id }) => {
+const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
   let [rating, setRating] = useState(0);
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
@@ -22,17 +22,28 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
   let [productInfo, setProductInfo] = useState({});
   let [activeDisplayIndex, setActiveDisplayIndex] = useState(0);
   let [hoverIndex, setHoverIndex] = useState(null);
-  let [stock, setStock] = useState({});
+  let [stock, setStock] = useState({ style_id: { stock_id: { quantity: "", size: "", style_id: "", id: "" } } });
   let [previousImage, setPreviousImage] = useState(null);
   const [collapsePanel, setCollapsePanel] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [magnified, setMagnified] = useState(false);
   let [addToCartPrompt, setAddToCartPrompt] = useState(false);
   let [reviewListLength, setReviewListLength] = useState(0);
+  let [cart, setCart] = useState({ style_id: { stock_id: null } });
+  let [activeStockUnitId, setActiveStockUnitId] = useState(null);
 
-  let pingCart = function () {};
+  if (!Number.isInteger(parseInt(product_id))) {
+    product_id = 0;
+  } else if (product_id < 40344) {
+    product_id = 40344;
+  } else if (product_id > 41354) {
+    product_id = 40344;
+  }
 
   useEffect(() => {
+    if (!product_id) {
+      return;
+    }
     getReviewList(product_id).then((response) => {
       setReviewListLength(response.data.results.length);
     });
@@ -43,32 +54,16 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
       let activeThumbnails = {};
       let newStock = {};
       data.forEach((styleObj) => {
-        console.log(styleObj);
         activeThumbnails[styleObj.style_id] = 0;
         styleObj.photos.forEach(function (photoObj, i) {
           photoObj.trueIndex = i;
         });
         // consolidate stock
-        let x = {};
-        for (let stockId in styleObj.skus) {
-          styleObj.skus[stockId] = { ...styleObj.skus[stockId], style_id: styleObj.style_id };
-          x = { ...x, [[stockId]]: styleObj.skus[stockId] };
+        let stockArr = [];
+        for (let k in styleObj.skus) {
+          stockArr.push({ ...styleObj.skus[k], id: k, style_id: styleObj.style_id });
         }
-        newStock[styleObj.style_id] = x;
-        // for (let k in styleObj.skus) {
-        //   console.log(styleObj.skus);
-        //   let flag = false;
-        //   stockArr.forEach(function (sizePair, i) {
-        //     if (styleObj.skus[k].size === stockArr[i].size) {
-        //       flag = true;
-        //       stockArr[i].quantity = stockArr[i].quantity + styleObj.skus[k].quantity;
-        //     }
-        //   });
-        //   if (!flag) {
-        //     stockArr.push({ ...styleObj.skus[k], id: k });
-        //   }
-        // }
-        // newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
+        newStock = { ...newStock, [[styleObj.style_id]]: stockArr };
       });
       setActiveThumbnailIndices(activeThumbnails);
       setStock(newStock);
@@ -85,30 +80,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
 
   let handleClick = function () {
     handleSubmit(entry);
-  };
-
-  let masterState = function () {
-    // console.log("prefetch cache: ", prefetch(styleObjects, product_id, true));
-    console.log("styleObjects: ", styleObjects);
-    console.log("productInfo ", productInfo);
-    // console.log(getCart());
-    // console.log(addToCartPrompt);
-    console.log("reviewListLength: ", reviewListLength);
-    // console.log("photoObjects");
-    // console.log("activeThumbnailIndices: ", activeThumbnailIndices);
-    // console.log("activeDisplayIndex: ", activeDisplayIndex);
-    // console.log("activeThumbnailIndex: ", getActiveThumbnailIndex());
-    // console.log("productInfo: ", productInfo);
-    console.log(stock);
-    // console.log(hoverIndex);
-    // console.log("current: ", getDisplayImage());
-    // console.log("previous: ", previousImage);
-    addToCart(1394865, 1).then((response) => {
-      console.log(response);
-    });
-    getStars(40344).then((data) => {
-      console.log(data);
-    });
   };
 
   let getActiveStock = function () {
@@ -177,32 +148,15 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
     setActiveThumbnailIndices(newIndices);
   };
 
-  let handleAddToCart = function (stockId, quantity) {
-    if (!stockId || !quantity) {
-      return;
-    }
-    addToCart(stockId, quantity)
-      .then(() => {
-        let copyStock = { ...stock };
-        let newStock = stock[getActiveDisplayId()].slice();
-        for (let i = 0; i < newStock.length; i++) {
-          if (newStock[i].id === stockId) {
-            newStock[i] = { quantity: newStock[i].quantity - quantity, size: newStock[i].size, id: stockId };
-          }
-        }
-        copyStock[getActiveDisplayId()] = newStock;
-        setStock(copyStock);
-      })
-      .then(() => {
-        setAddToCartPrompt(true);
-      })
-      .catch((err) => console.log("failed to post"));
-  };
-
   return (
     <div data-testid="product-overview" className="product-overview">
       <ImageCarousel
-        activeStock={getActiveStock()}
+        setStock={setStock}
+        bag={bag}
+        setBag={setBag}
+        activeStockUnitId={activeStockUnitId}
+        setActiveStockUnitId={setActiveStockUnitId}
+        activeStock={stock[styleObjects[activeDisplayIndex].style_id]}
         reviewListLength={reviewListLength}
         setAddToCartPrompt={setAddToCartPrompt}
         collapsePanel={collapsePanel}
@@ -216,7 +170,6 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         rating={rating}
         decrementThumbnailIndex={decrementThumbnailIndex}
         incrementThumbnailIndex={incrementThumbnailIndex}
-        handleAddToCart={handleAddToCart}
         stock={stock}
         setActiveDisplayIndex={setActiveDisplayIndex}
         setHoverIndex={setHoverIndex}
@@ -231,25 +184,18 @@ const ProductOverview = ({ handleSubmit, product_id }) => {
         productInfo={productInfo}
         image={getDisplayImage()}></ImageCarousel>
       <BottomInformation description={productInfo?.description}></BottomInformation>
-      {/* <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
+      <div style={{ position: "absolute", top: "0", marginTop: "300px" }}>
         <input
           onChange={(e) => {
             setEntry(e.target.value);
           }}></input>
         <button
           onClick={() => {
-            handleClick(entry);
+            setProductId(parseInt(entry));
           }}>
           New Product
         </button>
-        <button
-          data-testid="master-state-change"
-          onClick={() => {
-            masterState();
-          }}>
-          Master State
-        </button>
-      </div> */}
+      </div>
     </div>
   );
 };

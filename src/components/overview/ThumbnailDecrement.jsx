@@ -13,7 +13,6 @@ const ThumbnailDecrement = ({ callback, displayArr, magnified }) => {
 
   return (
     <div
-      // className={magnified ? "overview-hidden" : "scroll-up"}
       onClick={() => {
         callback();
       }}

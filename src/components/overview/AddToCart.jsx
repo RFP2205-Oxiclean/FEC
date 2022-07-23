@@ -1,38 +1,55 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { url, API_KEY } from "/config/config.js";
+let myAxios = axios.create({});
 
-const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, noItems, setPrompt, size }) => {
+const AddToCart = ({
+  stock,
+  handleAddToCart,
+  stockId,
+  quantity,
+  selectQuantity,
+  noItems,
+  setPrompt,
+  size,
+  setBuyPrompt,
+  setSizeOpen,
+  bag,
+  setBag,
+  setDefaultValue,
+  selectSize,
+  setStock,
+}) => {
   let [hidden, setHidden] = useState(false);
 
-  let handleClick = function () {
-    let flag = false;
-    stock.forEach(function (quantityObj) {
-      if (quantityObj.id === stockId) {
-        if (quantityObj.quantity > 0) {
-          flag = true;
-        }
-      }
-    });
-    if (!flag) {
+  let handleClick = function (e) {
+    if (!size) {
+      e.stopPropagation();
+      setSizeOpen(true);
       setPrompt(true);
+      return;
+    } else {
+      let newStock = stock.map(function (stockObj) {
+        return Object.assign({}, stockObj);
+      });
     }
-    handleAddToCart(stockId, quantity);
-    flag = false;
-    stock.forEach(function (stockObj) {
-      if (stockObj.quantity > 0) {
-        flag = true;
-        setHidden(false);
-      }
-      if (stockObj.id === stockId) {
-        if (stockObj.quantity - quantity > 0) {
-          selectQuantity(1);
-        } else {
-          selectQuantity(0);
+    myAxios
+      .post(
+        `${url}/cart`,
+        {
+          sku_id: stockId,
+        },
+        {
+          headers: {
+            Authorization: API_KEY,
+          },
         }
-      }
-      if (!flag) {
-        setHidden(true);
-      }
-    });
+      )
+      .then(() => {
+        setBuyPrompt(true);
+        setBag(bag + parseInt(quantity));
+      })
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -47,11 +64,12 @@ const AddToCart = ({ stock, handleAddToCart, stockId, quantity, selectQuantity, 
   return (
     <div
       data-testid="add-to-cart"
-      onClick={() => {
-        handleClick();
+      onClick={(e) => {
+        handleClick(e);
+        selectSize("");
       }}
-      className="add-to-cart">
-      Add to Bag
+      className={hidden ? "invisible-cart" : "add-to-cart"}>
+      Add to Cart
     </div>
   );
 };

@@ -8,6 +8,9 @@ let controllerAxios2 = axios.create({});
 let cachedProductById = {};
 
 export function getProductById(id, count = 5) {
+  if (id === 0) {
+    return;
+  }
   if (cachedProductById[id]) {
     return new Promise((resolve, reject) => {
       resolve(cachedProductById[id]);
@@ -23,10 +26,12 @@ export function getProductById(id, count = 5) {
       count: count,
       page: 1,
     },
-  }).then((response) => {
-    cachedProductById[id] = response.data;
-    return cachedProductById[id];
-  });
+  })
+    .then((response) => {
+      cachedProductById[id] = response.data;
+      return cachedProductById[id];
+    })
+    .catch(() => {});
 }
 
 let cachedStylesById = {};
@@ -35,7 +40,7 @@ export function getStylesById(id) {
   if (cachedStylesById[id]) {
     return new Promise((resolve, reject) => {
       resolve(cachedStylesById[id]);
-    });
+    }).catch(() => {});
   }
   return controllerAxios2({
     method: "GET",
@@ -43,10 +48,12 @@ export function getStylesById(id) {
     headers: {
       Authorization: API_KEY,
     },
-  }).then((response) => {
-    cachedStylesById[id] = response.data.results;
-    return cachedStylesById[id];
-  });
+  })
+    .then((response) => {
+      cachedStylesById[id] = response.data.results;
+      return cachedStylesById[id];
+    })
+    .catch(() => {});
 }
 
 let prefetchCache = {};
@@ -112,34 +119,29 @@ export function getStars(product_id) {
     headers: {
       Authorization: API_KEY,
     },
-  }).then((response) => {
-    let metadata = response.data;
-    let sum =
-      parseInt(metadata.ratings[1]) +
-      2 * parseInt(metadata.ratings[2]) +
-      3 * parseInt(metadata.ratings[3]) +
-      4 * parseInt(metadata.ratings[4]) +
-      5 * parseInt(metadata.ratings[5]);
+  })
+    .then((response) => {
+      let metadata = response.data;
+      let sum =
+        parseInt(metadata.ratings[1]) +
+        2 * parseInt(metadata.ratings[2]) +
+        3 * parseInt(metadata.ratings[3]) +
+        4 * parseInt(metadata.ratings[4]) +
+        5 * parseInt(metadata.ratings[5]);
 
-    var totalRatings =
-      parseInt(metadata.ratings[1]) +
-      parseInt(metadata.ratings[2]) +
-      parseInt(metadata.ratings[3]) +
-      parseInt(metadata.ratings[4]) +
-      parseInt(metadata.ratings[5]);
+      var totalRatings =
+        parseInt(metadata.ratings[1]) +
+        parseInt(metadata.ratings[2]) +
+        parseInt(metadata.ratings[3]) +
+        parseInt(metadata.ratings[4]) +
+        parseInt(metadata.ratings[5]);
 
-    var roundedAverage = Math.round((sum / totalRatings) * 10) / 10;
+      var roundedAverage = Math.round((sum / totalRatings) * 10) / 10;
 
-    cachedStars[product_id] = roundedAverage;
-    return cachedStars[product_id];
-
-    // /* finding the recommended % */
-    // let totalRecommendations = parseInt(metadata.recommended.false) + parseInt(metadata.recommended.true);
-    // let numberRecommended = parseInt(metadata.recommended.true);
-
-    // var percentRecommended = Math.round((numberRecommended / totalRecommendations) * 100);
-    // return percentRecommended;
-  });
+      cachedStars[product_id] = roundedAverage;
+      return cachedStars[product_id];
+    })
+    .catch(() => {});
 }
 export function getReviewList(product_id) {
   return controllerAxios2({
@@ -152,7 +154,5 @@ export function getReviewList(product_id) {
     headers: {
       Authorization: API_KEY,
     },
-  }).catch((err) => {
-    console.error("Error in getRatingsReviewsData response: ", err);
   });
 }

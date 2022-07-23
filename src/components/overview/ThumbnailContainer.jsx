@@ -74,7 +74,6 @@ const ThumbnailContainer = ({
   }
 
   return (
-    // <div style={{ position: "absolute", top: "0", left: "0", width: "200px" }}>
     <div className={collapsePanel ? "overview-collapse-thumbnail-container" : "overview-thumbnail-container"} data-testid="thumbnail-container">
       <div
         className={magnified ? "overview-hidden" : "scroll-left"}
@@ -120,7 +119,6 @@ const ThumbnailContainer = ({
       })}
       <ThumbnailIncrement magnified={magnified} end={photos.length} displayArr={displayArr} callback={handleScrollDown}></ThumbnailIncrement>
     </div>
-    // </div>
   );
 };
 
