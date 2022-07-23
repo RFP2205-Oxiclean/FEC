@@ -36,7 +36,7 @@ function App() {
         </div>
         <div className="product-overview">
           <ThemeSwitcher toggleTheme={toggleTheme} />
-          <ProductOverview setBag={setBag} bag={bag} handleSubmit={handleSubmit} product_id={displayedProductId} />
+          <ProductOverview setBag={setBag} bag={bag} setProductId={setProductId} product_id={displayedProductId} />
         </div>
 
         <div className="questions-and-answers">

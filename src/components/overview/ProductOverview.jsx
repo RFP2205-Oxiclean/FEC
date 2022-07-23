@@ -5,7 +5,7 @@ import { addToCart } from "../../controllers.js";
 import BottomInformation from "./BottomInformation.jsx";
 import usePrevious from "../commonComponents/usePreviousHook.jsx";
 
-const ProductOverview = ({ handleSubmit, product_id, bag, setBag }) => {
+const ProductOverview = ({ product_id, bag, setBag, setProductId }) => {
   let [rating, setRating] = useState(0);
   let [entry, setEntry] = useState("");
   let [styleObjects, setStyleObjects] = useState([
@@ -241,7 +241,7 @@ const ProductOverview = ({ handleSubmit, product_id, bag, setBag }) => {
           }}></input>
         <button
           onClick={() => {
-            handleClick(entry);
+            setProductId(parseInt(entry));
           }}>
           New Product
         </button>
